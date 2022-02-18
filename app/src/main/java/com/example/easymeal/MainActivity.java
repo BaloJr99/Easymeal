@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         String str = "Hola";
         String str2 = "Hola2";
         String str3 = "Hola3";
+        String str4 = "Hola4";
         /*Button inicio = findViewById(R.id.inicio);
         inicio.setOnClickListener(new View.OnClickListener() {
             @Override
