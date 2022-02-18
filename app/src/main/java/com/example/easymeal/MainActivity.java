@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         String str = "Hola";
+        String str2 = "Hola2";
         /*Button inicio = findViewById(R.id.inicio);
         inicio.setOnClickListener(new View.OnClickListener() {
             @Override
