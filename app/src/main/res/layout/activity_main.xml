@@ -73,8 +73,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="63dp"
         android:layout_marginBottom="84dp"
-        android:text="INICIAR"
         android:onClick="siguiente"
+        android:text="INICIAR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -88,4 +88,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
+
+    <Button
+        android:id="@+id/btnCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="149dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="168dp"
+        android:layout_marginBottom="23dp"
+        android:text="TestDB"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
