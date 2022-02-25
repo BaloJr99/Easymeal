@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.easymeal.database.DbAyuda;
@@ -14,6 +15,7 @@ import com.example.easymeal.database.DbAyuda;
 public class MainActivity extends AppCompatActivity {
 
     Button btnCreate;
+    TextView tv_registrar;
     public void siguiente(View v){
         Intent intento=new Intent(this,MainActivity2.class);
         startActivity(intento);
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tv_registrar= findViewById(R.id.tv_registrar);
         btnCreate = findViewById(R.id.btnCreate);
         String str = "Hola";
         String str2 = "Hola2";
@@ -45,6 +48,13 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(MainActivity.this,"Base no creada",Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+        tv_registrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentReg = new Intent(MainActivity.this, Registro.class);
+                MainActivity.this.startActivity(intentReg);
             }
         });
     }
