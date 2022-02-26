@@ -27,25 +27,18 @@ public class MainActivity extends AppCompatActivity {
         String str2 = "Hola2";
         String str3 = "Hola3";
         String str4 = "Hola4";
+        DbAyuda Helper = new DbAyuda(MainActivity.this);
+        SQLiteDatabase db = Helper.getWritableDatabase();
         /*Button inicio = findViewById(R.id.inicio);
         inicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (v.getContext(), MainActivity2.class);
                 startActivityForResult(intent, 0);
+
     }
 });*/
-        btnCreate.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                DbAyuda Helper = new DbAyuda(MainActivity.this);
-                SQLiteDatabase db = Helper.getWritableDatabase();
-                if(db != null){
-                    Toast.makeText(MainActivity.this,"Base creada",Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(MainActivity.this,"Base no creada",Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+
+
     }
 }
