@@ -15,22 +15,29 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnCreate;
     TextView tv_registrar;
+
     public void siguiente(View v){
-        Intent intento=new Intent(this,MainActivity2.class);
+        Intent intento=new Intent(this, Menu.class);
         startActivity(intento);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tv_registrar= findViewById(R.id.tv_registrar);
         btnCreate = findViewById(R.id.btnCreate);
-        String str = "Hola";
-        String str2 = "Hola2";
-        String str3 = "Hola3";
-        String str4 = "Hola4";
         DbAyuda Helper = new DbAyuda(MainActivity.this);
         SQLiteDatabase db = Helper.getWritableDatabase();
+
+        Button login = findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), Menu.class);
+                startActivity(intent);
+            }
+        });
         /*Button inicio = findViewById(R.id.inicio);
         inicio.setOnClickListener(new View.OnClickListener() {
             @Override
