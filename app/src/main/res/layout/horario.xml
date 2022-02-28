@@ -24,7 +24,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/spinner38"
         app:layout_constraintEnd_toStartOf="@+id/spinner38"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spinner38" />
+        app:layout_constraintTop_toTopOf="@+id/spinner38"
+        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
     <Spinner
         android:id="@+id/spinner35"
