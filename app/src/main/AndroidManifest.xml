@@ -10,7 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Easymeal">
         <activity
-            android:name=".MainActivity2"
+            android:name=".Tablero"
+            android:exported="false" />
+        <activity
+            android:name=".AcercaNosotros"
+            android:exported="false" />
+        <activity
+            android:name=".Registro"
+            android:exported="false" />
+        <activity
+            android:name=".Menu"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
