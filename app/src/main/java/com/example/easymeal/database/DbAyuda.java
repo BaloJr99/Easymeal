@@ -1,6 +1,7 @@
 package com.example.easymeal.database;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -80,5 +81,13 @@ public class DbAyuda extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE "+TABLE_PREPARACIONES);
         onCreate(sqLiteDatabase);
+    }
+
+    public Cursor selectReceta(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "select * from " + TABLE_RECETA;
+        Cursor cursor = db.rawQuery(query,null);
+
+        return cursor;
     }
 }
