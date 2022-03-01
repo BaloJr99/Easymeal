@@ -17,7 +17,7 @@ public class AcercaNosotros extends AppCompatActivity {
         setContentView(R.layout.activity_acerca_nosotros);
 
         //Asignamos variable
-        dl = findViewById(R.id.drawer_lay);
+        dl = findViewById(R.id.drawer_acerca);
     }
 
     public void ClickMenu(View v){

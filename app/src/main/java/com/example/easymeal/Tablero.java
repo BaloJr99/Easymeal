@@ -1,6 +1,7 @@
 package com.example.easymeal;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
@@ -17,12 +18,17 @@ public class Tablero extends AppCompatActivity {
         setContentView(R.layout.activity_tablero);
 
         //Asignamos Variable
-        dl = findViewById(R.id.drawer_lay);
+        dl = findViewById(R.id.drawer_tablero);
     }
 
     public void ClickMenu(View v){
         //Abrimos Drawer
-        Menu.openDrawer(dl);
+        openDrawer(dl);
+    }
+
+    public static void openDrawer(DrawerLayout drawer) {
+        //Abrimos el drawer layout
+        drawer.openDrawer(GravityCompat.START);
     }
 
     public void ClickLogo(View v){
