@@ -30,22 +30,22 @@ public class AcercaNosotros extends AppCompatActivity {
         Menu.closeDrawer(dl);
     }
 
-    public void ClickHome(View v){
+    public void ClickInicio(View v){
         //Redireccionamos activity a inicio
         Menu.redirectActivity(this, Menu.class);
     }
 
-    public void ClickDashboard(View v){
+    public void ClickRecetas(View v){
         //Redireccionamos actividad a tablero
-        Menu.redirectActivity(this, Tablero.class);
+        Menu.redirectActivity(this, Recetas.class);
     }
 
-    public void AcercaDeNosotros(View v){
+    public void ClickAcercaDe(View v){
         //Recreamos actividad
         recreate();
     }
 
-    public void ClickLogout(View v){
+    public void ClickSalir(View v){
         //Cerramos app
         Menu.logout(this);
     }

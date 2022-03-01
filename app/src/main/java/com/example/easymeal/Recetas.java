@@ -1,9 +1,12 @@
 package com.example.easymeal;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -17,16 +20,64 @@ public class Recetas extends AppCompatActivity{
     ArrayList<String> listItem;
     ArrayAdapter adapter;
 
+    //Inicializamos variable
+    DrawerLayout dl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recetas);
+
+        //Asignamos Variable
+        dl = findViewById(R.id.drawer_recetas);
          db = new DbAyuda(this);
 
          listItem = new ArrayList<>();
 
          viewData();
         
+    }
+
+    public void ClickMenu(View v){
+        //Abrimos Drawer
+        openDrawer(dl);
+    }
+
+    public static void openDrawer(DrawerLayout drawer) {
+        //Abrimos el drawer layout
+        drawer.openDrawer(GravityCompat.START);
+    }
+
+    public void ClickLogo(View v){
+        //Cerramos drawer
+        Menu.closeDrawer(dl);
+    }
+
+    public void ClickInicio(View v){
+        //Redireccionamos activity a inicio
+        Menu.redirectActivity(this, Menu.class);
+    }
+
+    public void ClickRecetas(View v){
+        //Recreamos actividad
+        recreate();
+    }
+
+    public void ClickAcercaDe(View v){
+        //Redireccionamos actividad a acerca de nosotros
+        Menu.redirectActivity(this, AcercaNosotros.class);
+    }
+
+    public void ClickSalir(View v){
+        //Cerramos app
+        Menu.logout(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //Cerramos Drawer
+        Menu.closeDrawer(dl);
     }
 
     private void viewData() {

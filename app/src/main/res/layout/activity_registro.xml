@@ -10,45 +10,45 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="80dp"
-        android:text="Registro de usuario"
+        android:text="@string/registro"
         android:layout_gravity="center"
         android:textSize="25sp"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre"
+        android:hint="@string/nombre"
         android:inputType="text"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Apellido Paterno"
+        android:hint="@string/apellidoP"
         android:inputType="text"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Apellido Materno"
+        android:hint="@string/apellidoM"
         android:inputType="text"
         />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Usuario"
+        android:hint="@string/usuario"
         android:inputType="text"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="@string/contra"
         android:inputType="text"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Edad"
+        android:hint="@string/edad"
         android:inputType="number"
         />
     <ImageView
@@ -58,7 +58,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="REGISTRAR"
+        android:text="@string/registrar"
         android:layout_gravity="center"
         />
 </LinearLayout>

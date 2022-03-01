@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Easymeal">
         <activity
-            android:name=".Tablero"
+            android:name=".Recetas"
             android:exported="false" />
         <activity
             android:name=".AcercaNosotros"

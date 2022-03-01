@@ -63,7 +63,7 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DIA 1"
+        android:text="@string/dia1"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView18"
         app:layout_constraintStart_toStartOf="@+id/spinner37" />
 
@@ -71,7 +71,7 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DIA 4"
+        android:text="@string/dia4"
         app:layout_constraintBottom_toTopOf="@+id/spinner36"
         app:layout_constraintStart_toStartOf="@+id/textView17"
         app:layout_constraintTop_toBottomOf="@+id/spinner41" />
@@ -143,7 +143,7 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DIA 1"
+        android:text="@string/dia1"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView20"
         app:layout_constraintStart_toStartOf="@+id/spinner43" />
 
@@ -162,7 +162,7 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DIA 3"
+        android:text="@string/dia3"
         app:layout_constraintBottom_toTopOf="@+id/spinner42"
         app:layout_constraintStart_toStartOf="@+id/textView19"
         app:layout_constraintTop_toBottomOf="@+id/spinner11" />
@@ -213,7 +213,7 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DIA 1"
+        android:text="@string/dia1"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView9"
         app:layout_constraintStart_toStartOf="@+id/spinner13" />
 
@@ -221,7 +221,7 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DIA 2"
+        android:text="@string/dia2"
         app:layout_constraintBottom_toTopOf="@+id/spinner12"
         app:layout_constraintStart_toStartOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/spinner9" />
@@ -293,7 +293,7 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DIA 1"
+        android:text="@string/dia1"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
         app:layout_constraintStart_toStartOf="@+id/spinner6" />
 
@@ -304,7 +304,7 @@
         android:layout_marginStart="41dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="7dp"
-        android:text="MENU SEMANAL"
+        android:text="@string/menusemanal"
         app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="parent" />
@@ -334,7 +334,7 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DIA 1"
+        android:text="@string/dia1"
         app:layout_constraintBottom_toTopOf="@+id/spinner7"
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
