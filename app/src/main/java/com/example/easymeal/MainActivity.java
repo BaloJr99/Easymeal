@@ -16,17 +16,11 @@ public class MainActivity extends AppCompatActivity {
     Button btnCreate;
     TextView tv_registrar;
 
-    public void siguiente(View v){
-        Intent intento=new Intent(this, Menu.class);
-        startActivity(intento);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tv_registrar= findViewById(R.id.tv_registrar);
-        btnCreate = findViewById(R.id.btnCreate);
         DbAyuda Helper = new DbAyuda(MainActivity.this);
         SQLiteDatabase db = Helper.getWritableDatabase();
 
@@ -38,15 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        /*Button inicio = findViewById(R.id.inicio);
-        inicio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (v.getContext(), MainActivity2.class);
-                startActivityForResult(intent, 0);
 
-    }
-});*/
         tv_registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

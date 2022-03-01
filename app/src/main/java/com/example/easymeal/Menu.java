@@ -22,7 +22,7 @@ public class Menu extends AppCompatActivity {
         setContentView(R.layout.menu);
 
         //Asignamos variable
-        dl = findViewById(R.id.drawer_lay);
+        dl = findViewById(R.id.drawer_menu);
     }
 
     public void ClickMenu(View view){
@@ -30,9 +30,9 @@ public class Menu extends AppCompatActivity {
         openDrawer(dl);
     }
 
-    public static void openDrawer(DrawerLayout dl) {
+    public static void openDrawer(DrawerLayout drawer) {
         //Abrimos el drawer layout
-        dl.openDrawer(GravityCompat.START);
+        drawer.openDrawer(GravityCompat.START);
     }
 
     public void ClickLogo(View view){
@@ -40,11 +40,11 @@ public class Menu extends AppCompatActivity {
         closeDrawer(dl);
     }
 
-    public static void closeDrawer(DrawerLayout dl) {
+    public static void closeDrawer(DrawerLayout drawer) {
         //Cerramos el layout si esta abierto
-        if(dl.isDrawerOpen(GravityCompat.START)){
+        if(drawer.isDrawerOpen(GravityCompat.START)){
             //Cuando este abierto cerramos el drawer
-            dl.closeDrawer(GravityCompat.START);
+            drawer.closeDrawer(GravityCompat.START);
         }
     }
 
