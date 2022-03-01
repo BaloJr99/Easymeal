@@ -48,22 +48,22 @@ public class Menu extends AppCompatActivity {
         }
     }
 
-    public void ClickHome(View view){
+    public void ClickInicio(View view){
         //Recreamos actividad
         recreate();
     }
 
-    public void ClickDashboard(View view){
+    public void ClickRecetas(View view){
         //Redireccionamos actividad a dashboard
-        redirectActivity(this, Tablero.class);
+        redirectActivity(this, Recetas.class);
     }
 
-    public void ClickAboutUs(View view){
+    public void ClickAcercaDe(View view){
         //Redireccionamos actividad a acerca de nosotros
         redirectActivity(this, AcercaNosotros.class);
     }
 
-    public void ClickLogout(View view){
+    public void ClickSalir(View view){
         //Cerramos app
         logout(this);
     }

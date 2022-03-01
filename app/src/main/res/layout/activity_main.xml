@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/logo"
         android:layout_width="212dp"
         android:layout_height="216dp"
         android:layout_gravity="center"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/usuario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
@@ -27,18 +27,18 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="Contraseña"
+        android:hint="@string/contra"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/usuario" />
 
     <Button
         android:id="@+id/login"
@@ -47,10 +47,10 @@
         android:layout_gravity="center"
         android:layout_marginStart="2dp"
         android:layout_marginBottom="28dp"
-        android:text="Login"
+        android:text="@string/login"
         app:layout_constraintBottom_toTopOf="@+id/tv_registrar"
         app:layout_constraintStart_toStartOf="@+id/tv_registrar"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <TextView
         android:id="@+id/tv_registrar"
@@ -59,20 +59,20 @@
         android:layout_gravity="center"
         android:layout_marginEnd="23dp"
         android:layout_marginBottom="23dp"
-        android:text="Registrar"
+        android:text="@string/registrar"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toStartOf="@+id/button2" />
+        app:layout_constraintBottom_toTopOf="@+id/btnSalir"
+        app:layout_constraintEnd_toStartOf="@+id/btnSalir" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnSalir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="283dp"
         android:layout_marginTop="635dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="48dp"
-        android:text="SALIR"
+        android:text="@string/salir"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

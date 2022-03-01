@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Easy Meal"
+        android:text="@string/em"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textAlignment="center"
@@ -36,13 +36,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:onClick="ClickHome">
+        android:onClick="ClickInicio">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Home"
+            android:text="@string/inicio"
             android:padding="12dp"
             android:layout_marginStart="16dp">
         </TextView>
@@ -61,13 +61,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:onClick="ClickDashboard">
+        android:onClick="ClickRecetas">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Dashboard"
+            android:text="@string/recetas"
             android:padding="12dp"
             android:layout_marginStart="16dp">
         </TextView>
@@ -85,14 +85,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:onClick="ClickAboutUs">
+        android:onClick="ClickAcercaDe">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="About Us"
+            android:text="@string/acerca"
             android:padding="12dp"
             android:layout_marginStart="16dp">
 
@@ -112,13 +112,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:onClick="ClickLogout">
+        android:onClick="ClickSalir">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Logout"
+            android:text="@string/salir"
             android:padding="12dp"
             android:layout_marginStart="16dp">
         </TextView>
