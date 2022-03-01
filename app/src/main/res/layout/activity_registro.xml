@@ -10,55 +10,62 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="80dp"
-        android:text="@string/registro"
+        android:text="Registro de usuario"
         android:layout_gravity="center"
         android:textSize="25sp"
         />
     <EditText
+        android:id="@+id/nombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/nombre"
+        android:hint="Nombre"
         android:inputType="text"
         />
     <EditText
+        android:id="@+id/apellidop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/apellidoP"
+        android:hint="Apellido Paterno"
         android:inputType="text"
         />
     <EditText
+        android:id="@+id/apellidom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/apellidoM"
+        android:hint="Apellido Materno"
         android:inputType="text"
         />
 
     <EditText
+        android:id="@+id/user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/usuario"
+        android:hint="Usuario"
         android:inputType="text"
         />
     <EditText
+        android:id="@+id/contra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/contra"
+        android:hint="Password"
         android:inputType="text"
         />
     <EditText
+        android:id="@+id/fechaN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/edad"
-        android:inputType="number"
+        android:hint="Fecha de nacimiento (DD/MM/AAAA)"
+        android:inputType="date"
         />
     <ImageView
         android:layout_width="10dp"
         android:layout_height="35dp"
         />
     <Button
+        android:id="@+id/reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/registrar"
+        android:text="REGISTRAR"
         android:layout_gravity="center"
         />
 </LinearLayout>
