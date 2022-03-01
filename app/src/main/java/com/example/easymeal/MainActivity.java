@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         login = (Button) findViewById(R.id.login);
         usuario = (EditText) findViewById(R.id.usuario);
         pass = (EditText) findViewById(R.id.password);
-        dao=new daoUsuario(this);
+         dao=new daoUsuario(this);
         //btnCreate = findViewById(R.id.btnCreate);
         DbAyuda Helper = new DbAyuda(MainActivity.this);
         SQLiteDatabase db = Helper.getWritableDatabase();
