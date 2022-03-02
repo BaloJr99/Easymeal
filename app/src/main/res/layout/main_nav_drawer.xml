@@ -20,7 +20,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:textAlignment="center"
-        android:textColor="@color/black">
+        android:textColor="@android:color/black">
         </TextView>
 
     <View
@@ -44,7 +44,8 @@
             android:layout_weight="1"
             android:text="@string/inicio"
             android:padding="12dp"
-            android:layout_marginStart="16dp">
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/black">
         </TextView>
 
         <ImageView
@@ -69,7 +70,8 @@
             android:layout_weight="1"
             android:text="@string/recetas"
             android:padding="12dp"
-            android:layout_marginStart="16dp">
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/black">
         </TextView>
 
         <ImageView
@@ -94,7 +96,8 @@
             android:layout_weight="1"
             android:text="@string/acerca"
             android:padding="12dp"
-            android:layout_marginStart="16dp">
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/black">
 
         </TextView>
 
@@ -120,7 +123,8 @@
             android:layout_weight="1"
             android:text="@string/salir"
             android:padding="12dp"
-            android:layout_marginStart="16dp">
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/black">
         </TextView>
 
         <ImageView
