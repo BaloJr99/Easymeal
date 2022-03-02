@@ -1,4 +1,4 @@
-package com.example.easymeal;
+package com.example.easymeal.cl.model.bd;
 
 public class Usuario {
     String username,clave,nombre,apellidoPaterno,apellidoMaterno,fechaNacimiento;

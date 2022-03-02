@@ -1,9 +1,11 @@
-package com.example.easymeal;
+package com.example.easymeal.cl.model.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.easymeal.cl.model.bd.Usuario;
 
 import java.util.ArrayList;
 

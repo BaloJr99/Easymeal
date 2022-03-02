@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.easymeal.cl.model.bd.Usuario;
+import com.example.easymeal.cl.model.dao.daoUsuario;
+
 public class Registro extends AppCompatActivity {
 EditText us,cla,nom,ap,am,fn;
 Button reg;
