@@ -32,7 +32,7 @@ public class daoUsuario {
             cv.put("nombre", u.getNombre());
             cv.put("apellidoPaterno", u.getApellidoPaterno());
             cv.put("apellidoMaterno", u.getApellidoMaterno());
-            cv.put("fechaNacimiento", "1999-05-13");
+            cv.put("fechaNacimiento", u.getFechaNacimiento());
             return (sql.insert("t_usuarios",null,cv)>0);
         }else{
             return false;

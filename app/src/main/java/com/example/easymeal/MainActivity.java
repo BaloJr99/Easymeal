@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.easymeal.cl.model.bd.Usuario;
 import com.example.easymeal.cl.model.dao.daoUsuario;
 import com.example.easymeal.database.DbAyuda;
 
@@ -42,9 +44,7 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), Menu.class);
-                startActivity(intent);
-                /*String u = usuario.getText().toString();
+                String u = usuario.getText().toString();
                 String p = pass.getText().toString();
                 if (u.equals("") && p.equals("")) {
                     Toast.makeText(MainActivity.this, "ERROR:Campos vacíos", Toast.LENGTH_LONG).show();
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 } else {
                     Toast.makeText(MainActivity.this, "Usuario y/o Contrseña incorrectos", Toast.LENGTH_LONG).show();
-                }*/
+                }
             }
         });
         /*Button inicio = findViewById(R.id.inicio);

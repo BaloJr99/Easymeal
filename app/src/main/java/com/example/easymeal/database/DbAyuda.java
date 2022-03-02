@@ -26,11 +26,11 @@ public class DbAyuda extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_PREPARACIONES+"("+
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_PREPARACIONES+"("+
                 "idPreparaciones INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "nombreComida VARCHAR(30) NOT NULL,"+
                 "tipoComida VARCHAR(45) NOT NULL)");
-        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_USUARIOS+"("+
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_USUARIOS+"("+
                 "username VARCHAR(20) NOT NULL,"+
                 "clave VARCHAR(20) NOT NULL,"+
                 "nombre VARCHAR(20) NOT NULL,"+
@@ -38,36 +38,36 @@ public class DbAyuda extends SQLiteOpenHelper {
                 "apellidoMaterno VARCHAR(20),"+
                 "fechaNacimiento DATE NOT NULL,"+
                 "PRIMARY KEY('username'))");
-        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_ALIMENTO+"("+
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_ALIMENTO+"("+
                 "idAlimento INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "nombre VARCHAR(20),"+
                 "cantidad NUMERIC NOT NULL,"+
                 "idPreparaciones INTEGER NOT NULL,"+
                 "FOREIGN KEY(idPreparaciones) REFERENCES t_preparaciones(idPreparaciones))");
-        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_HORARIO+"("+
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_HORARIO+"("+
                 "idHorario INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "comidas INTEGER NOT NULL,"+
                 "fecha DATE NOT NULL,"+
                 "username VARCHAR(20) NOT NULL,"+
                 "FOREIGN KEY(username) REFERENCES t_horario(username))");
-        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_RECETA+"("+
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_RECETA+"("+
                 "idReceta INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "pasos VARCHAR(100),"+
                 "idPreparaciones INTEGER NOT NULL,"+
                 "FOREIGN KEY(idPreparaciones) REFERENCES t_preparaciones(idPreparaciones))");
-        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_INGREDIENTE+"("+
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_INGREDIENTE+"("+
                 "idIngrediente INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "unidadDeMedida VARCHAR(20) NOT NULL,"+
                 "tipo VARCHAR(20),"+
                 "idAlimento INTEGER NOT NULL,"+
                 "FOREIGN KEY(idAlimento) REFERENCES t_alimento(idAlimento))");
-        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_PRODUCTO+"("+
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_PRODUCTO+"("+
                 "idProducto INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "nombreProducto VARCHAR(20) NOT NULL,"+
                 "cantidadAComprar NUMERIC NOT NULL,"+
                 "idIngrediente INTEGER NOT NULL,"+
                 "FOREIGN KEY(idIngrediente) REFERENCES t_ingrediente(idIngrediente))");
-        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_LISTA+"("+
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_LISTA+"("+
                 "idLista INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "fecha DATE NOT NULL,"+
                 "producto VARCHAR(20) NOT NULL,"+
