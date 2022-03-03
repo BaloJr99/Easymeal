@@ -63,6 +63,16 @@ public class Recetas extends AppCompatActivity{
         recreate();
     }
 
+    public void ClickLista(View view){
+        //Redireccionamos actividad a dashboard
+        Menu.redirectActivity(this, ListaMandado.class);
+    }
+
+    public void ClickHorario(View view){
+        //Redireccionamos actividad a dashboard
+        Menu.redirectActivity(this, Horario.class);
+    }
+
     public void ClickAcercaDe(View v){
         //Redireccionamos actividad a acerca de nosotros
         Menu.redirectActivity(this, AcercaNosotros.class);

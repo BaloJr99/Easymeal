@@ -6,7 +6,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.View;
 
-public class AcercaNosotros extends AppCompatActivity {
+public class Horario extends AppCompatActivity {
 
     //Inicializamo variable
     DrawerLayout dl;
@@ -14,10 +14,11 @@ public class AcercaNosotros extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_acerca_nosotros);
+
+        setContentView(R.layout.horario);
 
         //Asignamos variable
-        dl = findViewById(R.id.drawer_acerca);
+        dl = findViewById(R.id.drawer_Horario);
     }
 
     public void ClickMenu(View v){
@@ -42,17 +43,17 @@ public class AcercaNosotros extends AppCompatActivity {
 
     public void ClickAcercaDe(View v){
         //Recreamos actividad
-        recreate();
-    }
-
-    public void ClickHorario(View view){
-        //Redireccionamos actividad a dashboard
-        Menu.redirectActivity(this, Horario.class);
+        Menu.redirectActivity(this, AcercaNosotros.class);
     }
 
     public void ClickLista(View view){
         //Redireccionamos actividad a dashboard
         Menu.redirectActivity(this, ListaMandado.class);
+    }
+
+    public void ClickHorario(View view){
+        //Redireccionamos actividad a dashboard
+        recreate();
     }
 
     public void ClickSalir(View v){

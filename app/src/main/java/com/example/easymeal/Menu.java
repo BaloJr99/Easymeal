@@ -58,6 +58,16 @@ public class Menu extends AppCompatActivity {
         redirectActivity(this, Recetas.class);
     }
 
+    public void ClickLista(View view){
+        //Redireccionamos actividad a dashboard
+        redirectActivity(this, ListaMandado.class);
+    }
+
+    public void ClickHorario(View view){
+        //Redireccionamos actividad a dashboard
+        redirectActivity(this, Horario.class);
+    }
+
     public void ClickAcercaDe(View view){
         //Redireccionamos actividad a acerca de nosotros
         redirectActivity(this, AcercaNosotros.class);
