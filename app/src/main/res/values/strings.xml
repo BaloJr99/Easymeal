@@ -27,4 +27,10 @@
     <string name="borrar">Borrar</string>
     <string name="editar">Editar</string>
     <string name="buscar">Buscar</string>
+    <string name="agregarlista">+ Agregar</string>
+    <string name="generarlista">Generar Lista</string>
+    <string name="descripcion">Descripcion</string>
+    <string name="cantidad">Cantidad</string>
+    <string name="lista">Lista</string>
+    <string name="horario">Horario</string>
 </resources>
