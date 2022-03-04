@@ -83,7 +83,7 @@ public class DbAyuda extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public Cursor selectReceta(){
+    public Cursor selectReceta(){   
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "select * from " + TABLE_RECETA;
         Cursor cursor = db.rawQuery(query,null);

@@ -44,19 +44,19 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String u = usuario.getText().toString();
+                /*String u = usuario.getText().toString();
                 String p = pass.getText().toString();
                 if (u.equals("") && p.equals("")) {
                     Toast.makeText(MainActivity.this, "ERROR:Campos vacíos", Toast.LENGTH_LONG).show();
                 } else if (dao.login(u, p) == 1) {
                     Usuario us = dao.getUsuario(u, p);
-                    Toast.makeText(MainActivity.this, "BIENVENIDO " + us.getNombre(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "BIENVENIDO " + us.getNombre(), Toast.LENGTH_LONG).show();*/
                     Intent intent = new Intent(view.getContext(), Menu.class);
                     startActivity(intent);
-                    finish();
+                    /*finish();
                 } else {
                     Toast.makeText(MainActivity.this, "Usuario y/o Contrseña incorrectos", Toast.LENGTH_LONG).show();
-                }
+                }*/
             }
         });
         /*Button inicio = findViewById(R.id.inicio);
