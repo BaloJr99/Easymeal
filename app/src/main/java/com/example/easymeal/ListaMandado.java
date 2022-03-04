@@ -3,14 +3,17 @@ package com.example.easymeal;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 public class ListaMandado extends AppCompatActivity {
 
 
     //Inicializamo variable
     DrawerLayout dl;
+    Button btnAgregar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +22,17 @@ public class ListaMandado extends AppCompatActivity {
 
         //Asignamos variable
         dl = findViewById(R.id.drawer_listamandado);
+        btnAgregar = findViewById(R.id.agregarlista);
+        btnAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent abrirAgregarLista = new Intent(ListaMandado.this, AgregarLista.class);
+                startActivity(abrirAgregarLista);
+            }
+        });
     }
+
+
 
     public void ClickMenu(View v){
         //Abrimos Drawer
