@@ -33,4 +33,5 @@
     <string name="cantidad">Cantidad</string>
     <string name="lista">Lista</string>
     <string name="horario">Horario</string>
+    <string name="agregarDescripcion">Nueva Descripcion</string>
 </resources>

@@ -8,7 +8,7 @@
     android:id="@+id/drawer_agregar_lista"
     tools:context=".AgregarLista">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -16,17 +16,84 @@
             layout="@layout/main_toolbar">
         </include>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="60dp">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:fontFamily="@font/advent_pro_medium"
+                android:text="@string/descripcion"
+                android:textSize="25sp"
+                android:paddingStart="10dp"
+                android:layout_weight="1.5">
+
+            </TextView>
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:textSize="25sp">
+            </Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="110dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/advent_pro_medium"
+                android:paddingStart="10dp"
+                android:hint="@string/agregarDescripcion"
+                android:textSize="25sp">
+
+            </EditText>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_weight="6"
+                android:text="+"
+                android:textSize="20sp">
+
+            </Button>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/agregar"
+                android:layout_margin="5dp">
+            </Button>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:text="@string/salir">
+            </Button>
+        </LinearLayout>
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/white">
 
-        <include
-            layout="@layout/main_nav_drawer">
-        </include>
+        <include layout="@layout/main_nav_drawer"></include>
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
