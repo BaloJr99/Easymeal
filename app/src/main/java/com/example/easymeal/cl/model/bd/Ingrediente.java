@@ -1,20 +1,23 @@
 package com.example.easymeal.cl.model.bd;
 
 public class Ingrediente {
-    Integer idIngrediente,idAlimento;
-    String unidadDeMedida,tipo;
+    Integer idIngrediente;
+    String unidadDeMedida,descripcion,fechaCaducidad;
+    Float cantidad;
 
     public Ingrediente() {
     }
 
-    public Ingrediente(Integer idIngrediente, Integer idAlimento, String unidadDeMedida, String tipo) {
+    public Ingrediente(Integer idIngrediente, String unidadDeMedida, String descripcion, String fechaCaducidad, float cantidad) {
         this.idIngrediente = idIngrediente;
-        this.idAlimento = idAlimento;
         this.unidadDeMedida = unidadDeMedida;
-        this.tipo = tipo;
+        this.descripcion = descripcion;
+        this.fechaCaducidad = fechaCaducidad;
+        this.cantidad = cantidad;
     }
+
     public boolean isNull(){
-        if(idIngrediente.equals("")&&idAlimento.equals("")&&unidadDeMedida.equals("")&&tipo.equals("")){
+        if(idIngrediente.equals("")&&unidadDeMedida.equals("")&&descripcion.equals("")&&fechaCaducidad.equals("")&&cantidad.equals("")){
             return false;
         }else{
             return true;
@@ -25,8 +28,9 @@ public class Ingrediente {
         return "Ingrediente{ " +
                 "idIngrediente='" + idIngrediente + '\'' +
                 ", unidadDeMedida='" + unidadDeMedida + '\'' +
-                ", tipo='" + tipo + '\'' +
-                ", idAlimento='" + idAlimento + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", fechaCaducidad='" + fechaCaducidad + '\'' +
+                ", cantidad='" + cantidad + '\'' +
                 '}';
     }
 
@@ -38,14 +42,6 @@ public class Ingrediente {
         this.idIngrediente = idIngrediente;
     }
 
-    public Integer getIdAlimento() {
-        return idAlimento;
-    }
-
-    public void setIdAlimento(Integer idAlimento) {
-        this.idAlimento = idAlimento;
-    }
-
     public String getUnidadDeMedida() {
         return unidadDeMedida;
     }
@@ -54,11 +50,27 @@ public class Ingrediente {
         this.unidadDeMedida = unidadDeMedida;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getFechaCaducidad() {
+        return fechaCaducidad;
+    }
+
+    public void setFechaCaducidad(String fechaCaducidad) {
+        this.fechaCaducidad = fechaCaducidad;
+    }
+
+    public float getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(float cantidad) {
+        this.cantidad = cantidad;
     }
 }

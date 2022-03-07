@@ -2,18 +2,18 @@ package com.example.easymeal.cl.model.bd;
 
 public class Preparaciones {
     Integer idPreparaciones;
-    String nombreComida,tipoComida;
+    String tipoComida,fechaPreparacion;
 
     public Preparaciones(){
 
     }
-    public Preparaciones(Integer idPreparaciones, String nombreComida, String tipoComida){
+    public Preparaciones(Integer idPreparaciones, String tipoComida, String fechaPreparacion){
     this.idPreparaciones = idPreparaciones;
-    this.nombreComida = nombreComida;
     this.tipoComida = tipoComida;
+    this.fechaPreparacion = fechaPreparacion;
     }
     public boolean isNull(){
-        if(idPreparaciones.equals("")&&nombreComida.equals("")&&tipoComida.equals("")){
+        if(idPreparaciones.equals("")&&tipoComida.equals("")&&fechaPreparacion.equals("")){
             return false;
         }else{
             return true;
@@ -23,8 +23,8 @@ public class Preparaciones {
     public String toString(){
         return "Preparaciones{ " +
                 "idPreparaciones='" + idPreparaciones + '\'' +
-                ", nombreComida='" + nombreComida + '\'' +
                 ", tipoComida='" + tipoComida + '\'' +
+                ", fechaPreparacion='" + fechaPreparacion + '\'' +
                 '}';
     }
 
@@ -36,12 +36,12 @@ public class Preparaciones {
         this.idPreparaciones = idPreparaciones;
     }
 
-    public String getNombreComida() {
-        return nombreComida;
+    public String getfechaPreparacion() {
+        return fechaPreparacion;
     }
 
-    public void setNombreComida(String nombreComida) {
-        this.nombreComida = nombreComida;
+    public void setfechaPreparacion(String fechaPreparacion) {
+        this.fechaPreparacion = fechaPreparacion;
     }
 
     public String getTipoComida() {
