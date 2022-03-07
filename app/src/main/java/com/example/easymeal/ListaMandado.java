@@ -10,7 +10,6 @@ import android.widget.Button;
 
 public class ListaMandado extends AppCompatActivity {
 
-
     //Inicializamo variable
     DrawerLayout dl;
     Button btnAgregar;
@@ -31,8 +30,6 @@ public class ListaMandado extends AppCompatActivity {
             }
         });
     }
-
-
 
     public void ClickMenu(View v){
         //Abrimos Drawer

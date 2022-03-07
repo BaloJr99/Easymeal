@@ -20,13 +20,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <Button
                 android:id="@+id/agregarlista"
                 android:layout_width="200dp"
                 android:layout_height="45dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="26dp"
-                android:text="@string/agregarlista">
+                android:text="@string/agregarlista"
+                tools:ignore="TouchTargetSizeCheck">
             </Button>
             <TableLayout
                 android:layout_width="match_parent"
@@ -34,28 +36,53 @@
                 android:layout_marginTop="80dp"
                 android:layout_marginBottom="80dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:stretchColumns="1">
+                android:layout_marginRight="10dp">
 
                 <TableRow>
                     <TextView
                         android:text="@string/descripcion"
                         android:textAlignment="center"
-                        android:padding="3dp"/>
+                        android:padding="3dp"
+                        android:layout_weight="10"/>
                     <TextView
                         android:text="@string/cantidad"
-                        android:gravity="right"
-                        android:padding="3dp" />
+                        android:textAlignment="center"
+                        android:padding="3dp"
+                        android:layout_weight="10"/>
+                    <ImageView
+                        android:textAlignment="center"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        tools:ignore="ContentDescription" />
                 </TableRow>
-
+                <TableRow>
+                    <TextView
+                        android:text=""
+                        android:textAlignment="center"
+                        android:padding="3dp"
+                        android:layout_weight="10"/>
+                    <TextView
+                        android:text=""
+                        android:textAlignment="center"
+                        android:padding="3dp"
+                        android:layout_weight="10"/>
+                    <ImageView
+                        android:textAlignment="center"
+                        android:padding="3dp"
+                        android:layout_weight="1"
+                        tools:ignore="ContentDescription"
+                        android:src="@drawable/ic_delete"/>
+                </TableRow>
             </TableLayout>
+
             <Button
                 android:layout_width="200dp"
                 android:layout_height="45dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="26dp"
-                android:text="@string/generarlista">
+                android:text="@string/generarlista"
+                tools:ignore="TouchTargetSizeCheck">
             </Button>
         </RelativeLayout>
     </LinearLayout>
