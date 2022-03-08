@@ -12,17 +12,6 @@
         android:onClick="ClickLogo"
         android:src="@drawable/logo1">
         </ImageView>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/em"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:textColor="@android:color/black">
-        </TextView>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

@@ -7,13 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MenuUsuario extends AppCompatActivity {
+
     DrawerLayout dl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_usuario);
-        dl = findViewById(R.id.drawer_acerca);
+        dl = findViewById(R.id.drawer_usuario);
     }
     public void ClickMenu(View v){
         //Abrimos Drawer
@@ -37,7 +38,7 @@ public class MenuUsuario extends AppCompatActivity {
 
     public void ClickAcercaDe(View v){
         //Recreamos actividad
-        recreate();
+        Menu.redirectActivity(this, AcercaNosotros.class);
     }
 
     public void ClickHorario(View view){
@@ -52,7 +53,7 @@ public class MenuUsuario extends AppCompatActivity {
 
     public void ClickUsuarios (View v){
         //Nos dirijimos al menu de los usuarios
-        Menu.redirectActivity(this,MenuUsuario.class);
+        recreate();
     }
 
     public void ClickSalir(View v){

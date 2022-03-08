@@ -67,6 +67,7 @@
                         android:padding="3dp"
                         android:layout_weight="10"/>
                     <ImageView
+                        android:onClick="ClickEliminar"
                         android:textAlignment="center"
                         android:padding="3dp"
                         android:layout_weight="1"

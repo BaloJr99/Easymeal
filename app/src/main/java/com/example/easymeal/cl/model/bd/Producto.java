@@ -7,10 +7,15 @@ public class Producto {
     public Producto() {
     }
 
+    public Producto(String proveedor) {
+        this.proveedor = proveedor;
+    }
+
     public Producto(Integer idProducto, String proveedor) {
         this.idProducto = idProducto;
         this.proveedor = proveedor;
     }
+
     public boolean isNull(){
         if(idProducto.equals("")&&proveedor.equals("")){
             return false;

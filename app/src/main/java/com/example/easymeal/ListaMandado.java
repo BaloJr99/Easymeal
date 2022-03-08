@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class ListaMandado extends AppCompatActivity {
 
@@ -66,6 +67,11 @@ public class ListaMandado extends AppCompatActivity {
         Menu.redirectActivity(this, Horario.class);
     }
 
+    public void ClickUsuarios (View v){
+        //Nos dirijimos al menu de los usuarios
+        Menu.redirectActivity(this,MenuUsuario.class);
+    }
+
     public void ClickSalir(View v){
         //Cerramos app
         Menu.logout(this);
@@ -76,5 +82,9 @@ public class ListaMandado extends AppCompatActivity {
         super.onPause();
         //Cerramos Drawer
         Menu.closeDrawer(dl);
+    }
+
+    public void ClickEliminar(View view) {
+        Toast.makeText(ListaMandado.this, "Se dio clic a eliminar", Toast.LENGTH_LONG).show();
     }
 }

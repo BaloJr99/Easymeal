@@ -26,6 +26,11 @@ public class Horario extends AppCompatActivity {
         Menu.openDrawer(dl);
     }
 
+    public void ClickUsuarios (View v){
+        //Nos dirijimos al menu de los usuarios
+        Menu.redirectActivity(this,MenuUsuario.class);
+    }
+
     public void ClickLogo(View v){
         //Cerramos drawer
         Menu.closeDrawer(dl);

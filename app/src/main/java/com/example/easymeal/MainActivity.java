@@ -35,40 +35,31 @@ public class MainActivity extends AppCompatActivity {
         login = (Button) findViewById(R.id.login);
         usuario = (EditText) findViewById(R.id.usuario);
         pass = (EditText) findViewById(R.id.password);
-         dao=new daoUsuario(this);
+        dao=new daoUsuario(this);
         //btnCreate = findViewById(R.id.btnCreate);
         DbAyuda Helper = new DbAyuda(MainActivity.this);
         SQLiteDatabase db = Helper.getWritableDatabase();
 
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* String u = usuario.getText().toString();
+                String u = usuario.getText().toString();
                 String p = pass.getText().toString();
                 if (u.equals("") && p.equals("")) {
                     Toast.makeText(MainActivity.this, "ERROR:Campos vacíos", Toast.LENGTH_LONG).show();
                 } else if (dao.login(u, p) == 1) {
                     Usuario us = dao.getUsuario(u, p);
-                    Toast.makeText(MainActivity.this, "BIENVENIDO " + us.getNombre(), Toast.LENGTH_LONG).show();*/
+                    Toast.makeText(MainActivity.this, "BIENVENIDO " + us.getNombre(), Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(view.getContext(), Menu.class);
-                    //intent.putExtra("Username",us.getUsername());
+                    intent.putExtra("Username",us.getUsername());
                     startActivity(intent);
-                    //finish();
-               /* } else {
+                    finish();
+                } else {
                     Toast.makeText(MainActivity.this, "Usuario y/o Contrseña incorrectos", Toast.LENGTH_LONG).show();
-                }*/
+                }
             }
         });
-        /*Button inicio = findViewById(R.id.inicio);
-        inicio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (v.getContext(), MainActivity2.class);
-                startActivityForResult(intent, 0);
 
-    }
-});*/
         tv_registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

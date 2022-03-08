@@ -43,6 +43,11 @@ public class Recetas extends AppCompatActivity{
         openDrawer(dl);
     }
 
+    public void ClickUsuarios (View v){
+        //Nos dirijimos al menu de los usuarios
+        Menu.redirectActivity(this,MenuUsuario.class);
+    }
+
     public static void openDrawer(DrawerLayout drawer) {
         //Abrimos el drawer layout
         drawer.openDrawer(GravityCompat.START);

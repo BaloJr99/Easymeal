@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 public class DbAyuda extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 5;
     private static final String DATABASE_NAME = "easymeal.db";
     private static final String TABLE_PREPARACIONES = "t_preparaciones";
     private static final String TABLE_USUARIOS = "t_usuarios";
@@ -78,10 +78,19 @@ public class DbAyuda extends SQLiteOpenHelper {
                 "FOREIGN KEY(idIngrediente) REFERENCES t_ingrediente(idIngrediente))");
     }
 
-
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE "+TABLE_PREPARACIONES);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS t_alimento");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_PREPARACIONES);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_USUARIOS);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_RECETAPREPARACION);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_HORARIO);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_RECETA);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_INGREDIENTE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_PRODUCTO);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_PRODUCTOINGREDIENTE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_INGREDIENTERECETA);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS t_lista");
         onCreate(sqLiteDatabase);
     }
 

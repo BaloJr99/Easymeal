@@ -72,7 +72,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawer_menu"
+    android:id="@+id/drawer_usuario"
     tools:context=".Menu">
 
     <LinearLayout
@@ -147,7 +147,6 @@
         <include
             layout="@layout/main_nav_drawer">
         </include>
-
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
