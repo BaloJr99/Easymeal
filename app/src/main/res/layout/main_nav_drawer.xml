@@ -161,6 +161,33 @@
 
         </ImageView>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:onClick="ClickUsuarios">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/usuario"
+            android:padding="12dp"
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/black">
+
+        </TextView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="48dp"
+            android:src="@drawable/ic_user">
+
+        </ImageView>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

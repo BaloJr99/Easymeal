@@ -10,12 +10,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.example.easymeal.cl.model.bd.Usuario;
+import com.example.easymeal.cl.model.dao.daoUsuario;
 
 public class Menu extends AppCompatActivity {
 
     //Inicializamos variables
     DrawerLayout dl;
-
+    String username;
+    daoUsuario dao;
+    Usuario u;
+    TextView nombreusuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +31,12 @@ public class Menu extends AppCompatActivity {
 
         //Asignamos variable
         dl = findViewById(R.id.drawer_menu);
+        nombreusuario = findViewById(R.id.username);
+        Bundle b=getIntent().getExtras();
+        username=b.getString("Username");
+        dao = new daoUsuario(this);
+        u=dao.getUsuarioById(username);
+        nombreusuario.setText("BIENVENIDO " + u.getNombre()+" "+u.getApellidoPaterno());
     }
 
     public void ClickMenu(View view){
@@ -76,6 +90,10 @@ public class Menu extends AppCompatActivity {
     public void ClickSalir(View view){
         //Cerramos app
         logout(this);
+    }
+    public void ClickUsuarios (View v){
+        //Nos dirijimos al menu de los usuarios
+        redirectActivity(this,MenuUsuario.class);
     }
 
     public static void logout(Activity activity) {
