@@ -6,20 +6,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.View;
 
-public class AcercaNosotros extends AppCompatActivity {
-
-    //Inicializamo variable
+public class MenuUsuario extends AppCompatActivity {
     DrawerLayout dl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_acerca_nosotros);
-
-        //Asignamos variable
+        setContentView(R.layout.activity_menu_usuario);
         dl = findViewById(R.id.drawer_acerca);
     }
-
     public void ClickMenu(View v){
         //Abrimos Drawer
         Menu.openDrawer(dl);
@@ -64,7 +59,6 @@ public class AcercaNosotros extends AppCompatActivity {
         //Cerramos app
         Menu.logout(this);
     }
-
     @Override
     protected void onPause() {
         super.onPause();

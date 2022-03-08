@@ -17,6 +17,13 @@
         </include>
 
         <TextView
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/inicio"

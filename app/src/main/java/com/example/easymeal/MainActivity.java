@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*String u = usuario.getText().toString();
+               /* String u = usuario.getText().toString();
                 String p = pass.getText().toString();
                 if (u.equals("") && p.equals("")) {
                     Toast.makeText(MainActivity.this, "ERROR:Campos vacíos", Toast.LENGTH_LONG).show();
@@ -52,9 +52,10 @@ public class MainActivity extends AppCompatActivity {
                     Usuario us = dao.getUsuario(u, p);
                     Toast.makeText(MainActivity.this, "BIENVENIDO " + us.getNombre(), Toast.LENGTH_LONG).show();*/
                     Intent intent = new Intent(view.getContext(), Menu.class);
+                    //intent.putExtra("Username",us.getUsername());
                     startActivity(intent);
-                    /*finish();
-                } else {
+                    //finish();
+               /* } else {
                     Toast.makeText(MainActivity.this, "Usuario y/o Contrseña incorrectos", Toast.LENGTH_LONG).show();
                 }*/
             }
