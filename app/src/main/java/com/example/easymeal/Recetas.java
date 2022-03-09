@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.example.easymeal.database.DbAyuda;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
 public class Recetas extends AppCompatActivity{
@@ -26,7 +25,7 @@ public class Recetas extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.recetas);
+        setContentView(R.layout.activity_recetas);
 
         //Asignamos Variable
         dl = findViewById(R.id.drawer_recetas);

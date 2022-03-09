@@ -25,7 +25,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/imgLogo"
                 android:layout_width="102dp"
                 android:layout_height="101dp"
                 android:layout_marginTop="4dp"
@@ -33,12 +33,12 @@
                 android:src="@drawable/logo1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintStart_toEndOf="@+id/tvRecetas"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tvRecetas"
                 android:layout_width="150dp"
                 android:layout_height="53dp"
                 android:layout_marginStart="20dp"
@@ -47,7 +47,7 @@
                 android:text="@string/recetas"
                 android:textColor="@color/black"
                 android:textSize="40sp"
-                app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                app:layout_constraintEnd_toStartOf="@+id/imgLogo"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -71,71 +71,47 @@
             android:layout_width="match_parent"
             android:layout_height="272dp">
 
-            <Spinner
-                android:id="@+id/spinner2"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="169dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
-
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/tvNombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="99dp"
-                android:layout_marginBottom="11dp"
-                android:text="@string/tipo"
-                app:layout_constraintBottom_toTopOf="@+id/textView12"
-                app:layout_constraintEnd_toStartOf="@+id/spinner2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="17dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="26dp"
+                android:layout_marginBottom="14dp"
                 android:text="@string/nombrereceta"
-                app:layout_constraintBottom_toTopOf="@+id/textView11"
-                app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName2"
+                app:layout_constraintBottom_toTopOf="@+id/tvPasos"
+                app:layout_constraintEnd_toStartOf="@+id/fieldNombre"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="4dp"
+                android:id="@+id/fieldNombre"
+                android:layout_width="248dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="14dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="28dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="@string/nombre"
-                app:layout_constraintBottom_toTopOf="@+id/spinner2"
+                app:layout_constraintBottom_toTopOf="@+id/mFieldPasos"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView10"
+                app:layout_constraintStart_toEndOf="@+id/tvNombre"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/tvPasos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="9dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="9dp"
                 android:text="@string/pasos"
-                app:layout_constraintBottom_toTopOf="@+id/editTextTextMultiLine"
+                app:layout_constraintBottom_toTopOf="@+id/mFieldPasos"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                app:layout_constraintTop_toBottomOf="@+id/tvNombre" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine"
+                android:id="@+id/mFieldPasos"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
@@ -143,11 +119,12 @@
                 android:layout_marginBottom="14dp"
                 android:ems="10"
                 android:gravity="start|top"
+                android:hint="pasos"
                 android:inputType="textMultiLine"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                app:layout_constraintTop_toBottomOf="@+id/fieldNombre" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -156,25 +133,25 @@
             android:layout_height="56dp">
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/btnAgregar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/agregar" />
 
             <Button
-                android:id="@+id/button9"
+                android:id="@+id/btnBorrar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/borrar" />
 
             <Button
-                android:id="@+id/button10"
+                android:id="@+id/btnEdit"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="@string/editar" />
 
             <Button
-                android:id="@+id/button11"
+                android:id="@+id/btnBuscar"
                 android:layout_width="111dp"
                 android:layout_height="wrap_content"
                 android:text="@string/buscar" />
@@ -188,8 +165,6 @@
     android:layout_gravity="start"
     android:background="@color/white">
 
-    <include
-        layout="@layout/main_nav_drawer">
-    </include>
-</RelativeLayout>
+        <include layout="@layout/main_nav_drawer"></include>
+    </RelativeLayout>
 </androidx.drawerlayout.widget.DrawerLayout>
