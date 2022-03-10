@@ -4,20 +4,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
+import android.widget.ListView;
 
+
+
+import com.example.easymeal.cl.model.bd.Receta;
 import com.example.easymeal.database.DbAyuda;
 
 import java.util.ArrayList;
 
 public class Recetas extends AppCompatActivity{
     DbAyuda db;
-    ArrayList<String> listItem;
     ArrayAdapter adapter;
+    ListView listaRecetas;
+    ArrayList<String> infoList;
+    ArrayList<Receta> recetasList;
+
+
 
     //Inicializamos variable
     DrawerLayout dl;
@@ -26,15 +35,34 @@ public class Recetas extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recetas);
-
-        //Asignamos Variable
         dl = findViewById(R.id.drawer_recetas);
-         db = new DbAyuda(this);
+        db = new DbAyuda(getApplicationContext());
+        listaRecetas = (ListView) findViewById(R.id.listaRecetas);
+        poblar();
+        adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,infoList);
+        listaRecetas.setAdapter(adapter);
 
-         listItem = new ArrayList<>();
+    }
+    private void poblar(){  //Metodo para poblar el array objeto
+        SQLiteDatabase bd = db.getReadableDatabase();
+        Receta receta = null;
+        recetasList = new ArrayList<Receta>();
+        Cursor cursor = bd.rawQuery("SELECT * FROM "+"t_receta",null);
 
-         viewData();
-        
+        while(cursor.moveToNext()){
+            receta = new Receta();
+            receta.setIdReceta(cursor.getInt(0));
+            receta.setPasos(cursor.getString(1));
+
+            recetasList.add(receta);
+        }
+        crearLista();
+    }
+    private void crearLista(){ //Metodo para poblar la lista
+         infoList = new ArrayList<String>();
+         for(int i=0;i<recetasList.size();i++){
+             infoList.add(String.valueOf(recetasList.get(i).getIdReceta())+"/n Pasos:"+recetasList.get(i).getPasos());
+        }
     }
 
     public void ClickMenu(View v){
@@ -94,15 +122,5 @@ public class Recetas extends AppCompatActivity{
         Menu.closeDrawer(dl);
     }
 
-    private void viewData() {
-        Cursor cursor = db.selectReceta();
-        if(cursor.getCount()==0){
-            Toast.makeText(this,"Sin datos",Toast.LENGTH_SHORT).show();
-        }else{
-          while(cursor.moveToNext()){
-              listItem.add(cursor.getString(1));
-          }
-          adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,listItem);
-        }
-    }
+
 }
