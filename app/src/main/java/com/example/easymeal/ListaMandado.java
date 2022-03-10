@@ -24,8 +24,6 @@ public class ListaMandado extends AppCompatActivity {
         //Asignamos variable
         dl = findViewById(R.id.drawer_listamandado);
         btnAgregar = findViewById(R.id.agregarlista);
-        Bundle b = getIntent().getExtras();
-        username = b.getString("username");
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
