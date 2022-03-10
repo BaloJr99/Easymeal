@@ -93,7 +93,10 @@ public class Menu extends AppCompatActivity {
     }
     public void ClickUsuarios (View v){
         //Nos dirijimos al menu de los usuarios
-        redirectActivity(this,MenuUsuario.class);
+        //redirectActivity(this,MenuUsuario.class);
+        Intent i = new Intent(this,MenuUsuario.class);
+        i.putExtra("Username",username);
+        startActivity(i);
     }
 
     public static void logout(Activity activity) {
