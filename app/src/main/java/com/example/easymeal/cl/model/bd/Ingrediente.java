@@ -23,6 +23,7 @@ public class Ingrediente {
             return true;
         }
     }
+
     @Override
     public String toString(){
         return "Ingrediente{ " +
