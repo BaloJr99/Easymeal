@@ -15,22 +15,18 @@ public class IngredienteDao {
     Ingrediente ing;
     ArrayList<Ingrediente> listaIngredientes;
     SQLiteDatabase sql;
-    String bd="easymeal.db";
+    String bd = "easymeal.db";
 
-    public void IngredienteDao(Context c){
+    public void ingredienteDao(Context c){
         this.c = c;
         sql = c.openOrCreateDatabase(bd,c.MODE_PRIVATE,null);
         ing = new Ingrediente();
     }
 
-    public boolean insertarIngrediente(Usuario u){
+    public boolean insertarIngrediente(Ingrediente i){
         ContentValues cv = new ContentValues();
-        cv.put("username", u.getUsername());
-        cv.put("clave", u.getClave());
-        cv.put("nombre", u.getNombre());
-        cv.put("apellidoPaterno", u.getApellidoPaterno());
-        cv.put("apellidoMaterno", u.getApellidoMaterno());
-        cv.put("fechaNacimiento", u.getFechaNacimiento());
-        return (sql.insert("t_usuarios",null,cv)>0);
+        cv.put("descripcion", i.getDescripcion());
+        cv.put("cantidad", i.getCantidad());
+        return (sql.insert("t_ingrediente",null,cv)>0);
     }
 }

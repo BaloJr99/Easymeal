@@ -24,7 +24,6 @@ public class ProductoDao {
     }
 
     public boolean insertarProducto(Producto p){
-        System.out.println(p.getProveedor());
         ContentValues cv = new ContentValues();
         cv.put("proveedor", p.getProveedor());
         return (sql.insert("t_producto",null,cv) > 0);

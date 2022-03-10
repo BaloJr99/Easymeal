@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 public class DbAyuda extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
     private static final String DATABASE_NAME = "easymeal.db";
     private static final String TABLE_PREPARACIONES = "t_preparaciones";
     private static final String TABLE_USUARIOS = "t_usuarios";
@@ -31,6 +31,7 @@ public class DbAyuda extends SQLiteOpenHelper {
                 "idPreparacion INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "tipoComida VARCHAR(45) NOT NULL,"+
                 "fechaPreparacion DATE NOT NULL)");
+
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_USUARIOS+"("+
                 "username VARCHAR(20) NOT NULL,"+
                 "clave VARCHAR(20) NOT NULL,"+
@@ -39,19 +40,23 @@ public class DbAyuda extends SQLiteOpenHelper {
                 "apellidoMaterno VARCHAR(20),"+
                 "fechaNacimiento DATE NOT NULL,"+
                 "PRIMARY KEY('username'))");
+
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_HORARIO+"("+
                 "idHorario INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "comidas INTEGER NOT NULL,"+
                 "fecha DATE NOT NULL)");
+
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_RECETA+"("+
                 "idReceta INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "pasos VARCHAR(45))");
+
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_INGREDIENTE+"("+
                 "idIngrediente INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "descripcion VARCHAR(45),"+
-                "unidadDeMedida VARCHAR(45) NOT NULL,"+
+                "descripcion VARCHAR(45) NOT NULL,"+
+                "unidadDeMedida VARCHAR(45),"+
                 "cantidad NUMERIC NOT NULL,"+
-                "fechaDeCaducidad DATE NOT NULL)");
+                "fechaDeCaducidad DATE)");
+
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_PRODUCTO+"("+
                 "idProducto INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "proveedor VARCHAR(45) NOT NULL)");
