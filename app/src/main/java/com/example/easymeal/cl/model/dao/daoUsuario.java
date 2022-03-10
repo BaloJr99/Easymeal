@@ -107,6 +107,7 @@ public class daoUsuario {
         return (sql.update("t_usuarios",cv,"username='"+u.getUsername()+"'",null)>0);
     }
     public  boolean deleteUsuario(String user){
+        System.out.println(user);
         return (sql.delete("t_usuarios","username='"+user+"'",null)>0);
     }
 }

@@ -29,9 +29,9 @@ public class Recetas extends AppCompatActivity{
 
         //Asignamos Variable
         dl = findViewById(R.id.drawer_recetas);
-         db = new DbAyuda(this);
+        db = new DbAyuda(this);
 
-         listItem = new ArrayList<>();
+        listItem = new ArrayList<>();
 
          viewData();
         

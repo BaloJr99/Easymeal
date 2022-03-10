@@ -20,7 +20,7 @@ public class Menu extends AppCompatActivity {
 
     //Inicializamos variables
     DrawerLayout dl;
-    String username;
+    static String username;
     daoUsuario dao;
     Usuario u;
     TextView nombreusuario;
@@ -33,7 +33,7 @@ public class Menu extends AppCompatActivity {
         dl = findViewById(R.id.drawer_menu);
         nombreusuario = findViewById(R.id.username);
         Bundle b=getIntent().getExtras();
-        username=b.getString("Username");
+        username=b.getString("username");
         dao = new daoUsuario(this);
         u=dao.getUsuarioById(username);
         nombreusuario.setText("BIENVENIDO " + u.getNombre()+" "+u.getApellidoPaterno());
@@ -92,11 +92,8 @@ public class Menu extends AppCompatActivity {
         logout(this);
     }
     public void ClickUsuarios (View v){
-        //Nos dirijimos al menu de los usuarios
-        //redirectActivity(this,MenuUsuario.class);
-        Intent i = new Intent(this,MenuUsuario.class);
-        i.putExtra("Username",username);
-        startActivity(i);
+       //Nos dirijimos al menu de los usuarios
+       redirectActivity(this,MenuUsuario.class);
     }
 
     public static void logout(Activity activity) {
@@ -133,7 +130,9 @@ public class Menu extends AppCompatActivity {
 
     public static void redirectActivity(Activity activity, Class aClass) {
         //Inicializamos el intento
+        System.out.println("hola " + username);
         Intent intent = new Intent(activity, aClass);
+        intent.putExtra("username", username);
         //Creamos bandera
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //Empezamos activity
