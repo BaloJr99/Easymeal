@@ -14,6 +14,7 @@ public class ListaMandado extends AppCompatActivity {
     //Inicializamo variable
     DrawerLayout dl;
     Button btnAgregar;
+    static String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

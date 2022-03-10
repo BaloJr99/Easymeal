@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     Usuario us = dao.getUsuario(u, p);
                     Toast.makeText(MainActivity.this, "BIENVENIDO " + us.getNombre(), Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(view.getContext(), Menu.class);
-                    intent.putExtra("Username",us.getUsername());
+                    intent.putExtra("username",us.getUsername());
                     startActivity(intent);
                     finish();
                 } else {

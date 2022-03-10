@@ -31,7 +31,7 @@ public class MenuUsuario extends AppCompatActivity {
         editar = (Button) findViewById(R.id.btneditar);
         eliminar = (Button) findViewById(R.id.btneliminar);
         Bundle b=getIntent().getExtras();
-        username=b.getString("Username");
+        username=b.getString("username");
         idusuario.setText(username);
 
         editar.setOnClickListener(new View.OnClickListener() {

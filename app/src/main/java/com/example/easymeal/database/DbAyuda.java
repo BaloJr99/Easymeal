@@ -75,6 +75,7 @@ public class DbAyuda extends SQLiteOpenHelper {
                 "idReceta INTEGER NOT NULL,"+
                 "FOREIGN KEY(idPreparacion) REFERENCES t_preparaciones(idPreparacion),"+
                 "FOREIGN KEY(idReceta) REFERENCES t_receta(idReceta))");
+
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_INGREDIENTERECETA+"("+
                 "idIngredientesReceta INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "cantidad NUMERIC NOT NULL,"+
