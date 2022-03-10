@@ -104,9 +104,9 @@ public class daoUsuario {
         cv.put("apellidoPaterno", u.getApellidoPaterno());
         cv.put("apellidoMaterno", u.getApellidoMaterno());
         //cv.put("fechaNacimiento", u.getFechaNacimiento());
-        return (sql.update("t_usuarios",cv,"username="+u.getUsername(),null)>0);
+        return (sql.update("t_usuarios",cv,"username='"+u.getUsername()+"'",null)>0);
     }
     public  boolean deleteUsuario(String user){
-        return (sql.delete("t_usuarios","username="+user,null)>0);
+        return (sql.delete("t_usuarios","username='"+user+"'",null)>0);
     }
 }

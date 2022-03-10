@@ -3,9 +3,13 @@ package com.example.easymeal;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -20,6 +24,7 @@ public class AgregarLista extends AppCompatActivity {
     DrawerLayout dl;
     EditText etcantidad, etmarca, etdescripcion;
     Spinner scantidad, smarca, sdescripcion;
+    ImageView ivfoto;
     Producto pro;
     Ingrediente ing;
     IngredienteDao ingdao;
@@ -38,6 +43,7 @@ public class AgregarLista extends AppCompatActivity {
         sdescripcion = findViewById(R.id.sDescripcion);
         smarca = findViewById(R.id.sMarca);
         scantidad = findViewById(R.id.sCantidad);
+        ivfoto = findViewById(R.id.ivFoto);
     }
 
     public void ClickMenu(View v){
@@ -137,5 +143,21 @@ public class AgregarLista extends AppCompatActivity {
         etdescripcion.setText("");
         etcantidad.setText("");
         etmarca.setText("");
+    }
+
+    public void ClickFoto(View view) {
+        Intent foto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(foto.resolveActivity(getPackageManager()) != null){
+            startActivityForResult(foto, 1);
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            ivfoto.setImageBitmap(imageBitmap);
+        }
     }
 }

@@ -179,9 +179,11 @@
             android:layout_marginTop="370dp">
 
             <ImageView
+                android:id="@+id/ivFoto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_camara">
+                android:src="@drawable/ic_camara"
+                android:onClick="ClickFoto">
             </ImageView>
         </LinearLayout>
         <LinearLayout
