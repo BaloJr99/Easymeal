@@ -3,13 +3,20 @@ package com.example.easymeal;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.MediaController;
+import android.widget.VideoView;
 
 public class AcercaNosotros extends AppCompatActivity {
 
     //Inicializamo variable
     DrawerLayout dl;
+    VideoView video;
+    MediaController mc;
+    int position = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +25,37 @@ public class AcercaNosotros extends AppCompatActivity {
 
         //Asignamos variable
         dl = findViewById(R.id.drawer_acerca);
+        video = findViewById(R.id.video);
+        playvideo();
+    }
+
+    private void playvideo() {
+        video.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.va));
+        video.start();
+
+        if(this.mc == null){
+            this.mc = new MediaController(AcercaNosotros.this);
+            this.mc.setAnchorView(video);
+            this.video.setMediaController(mc);
+        }
+
+        this.video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                video.seekTo(position);
+                if(position == 0){
+                    video.start();
+                }
+
+                mediaPlayer.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() {
+                    @Override
+                    public void onVideoSizeChanged(MediaPlayer mediaPlayer, int i, int i1) {
+                        mc.setAnchorView(video);
+                    }
+                });
+            }
+
+        });
     }
 
     public void ClickMenu(View v){

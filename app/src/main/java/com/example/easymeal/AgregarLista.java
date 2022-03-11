@@ -5,9 +5,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -17,6 +20,9 @@ import com.example.easymeal.cl.model.bd.Ingrediente;
 import com.example.easymeal.cl.model.bd.Producto;
 import com.example.easymeal.cl.model.dao.ProductoDao;
 import com.example.easymeal.cl.model.dao.IngredienteDao;
+
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 
 public class AgregarLista extends AppCompatActivity {
 
@@ -29,6 +35,8 @@ public class AgregarLista extends AppCompatActivity {
     Ingrediente ing;
     IngredienteDao ingdao;
     ProductoDao prodao;
+    ArrayList<Ingrediente> listaing;
+    ArrayList<Producto> listaprod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +52,8 @@ public class AgregarLista extends AppCompatActivity {
         smarca = findViewById(R.id.sMarca);
         scantidad = findViewById(R.id.sCantidad);
         ivfoto = findViewById(R.id.ivFoto);
+
+        llenarSpinners();
     }
 
     public void ClickMenu(View v){
@@ -127,6 +137,12 @@ public class AgregarLista extends AppCompatActivity {
             ing = new Ingrediente();
             ing.setDescripcion(descripcion);
             ing.setCantidad(Integer.parseInt(cantidad));
+            Bitmap bitmap = ((BitmapDrawable)ivfoto.getDrawable()).getBitmap();
+
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bitmap .compress(Bitmap.CompressFormat.PNG, 100, bos);
+            byte[] img = bos.toByteArray();
+            ing.setImagen(img);
             ingdao.insertarIngrediente(ing);
             Toast.makeText(this, "INSERTADO", Toast.LENGTH_LONG).show();
             limpiarCampos();
@@ -135,14 +151,48 @@ public class AgregarLista extends AppCompatActivity {
         }
     }
 
-    public void llenarSpinners(View view) {
+    public void llenarSpinners() {
+        ingdao = new IngredienteDao();
+        ingdao.ingredienteDao(this);
+        listaing = ingdao.listaIngredientes();
+        prodao = new ProductoDao();
+        prodao.productoDao(this);
+        listaprod = prodao.listaProducto();
 
+        ArrayList<String> listadesc = new ArrayList<>();
+        ArrayList<String> listacant = new ArrayList<>();
+        ArrayList<String> listaprodu = new ArrayList<>();
+        listadesc.add("Seleccione...");
+        listacant.add("Seleccione...");
+        listaprodu.add("Seleccione...");
+
+        for(Ingrediente ingre: listaing){
+            listadesc.add(ingre.getDescripcion());
+            listacant.add(String.valueOf(ingre.getCantidad()));
+        }
+
+        for(Producto produc: listaprod){
+            listaprodu.add(produc.getProveedor());
+        }
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listadesc);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sdescripcion.setAdapter(arrayAdapter);
+
+        arrayAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listacant);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        scantidad.setAdapter(arrayAdapter);
+
+        arrayAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listaprodu);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        smarca.setAdapter(arrayAdapter);
     }
 
     public void limpiarCampos(){
         etdescripcion.setText("");
         etcantidad.setText("");
         etmarca.setText("");
+        ivfoto.setImageBitmap(null);
     }
 
     public void ClickFoto(View view) {

@@ -16,14 +16,13 @@
             layout="@layout/main_toolbar">
         </include>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/acerca"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            android:gravity="center">
-        </TextView>
+        <VideoView
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:id="@+id/video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </VideoView>
     </LinearLayout>
 
     <RelativeLayout

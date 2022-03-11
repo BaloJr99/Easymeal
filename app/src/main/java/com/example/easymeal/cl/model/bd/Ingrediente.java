@@ -1,19 +1,24 @@
 package com.example.easymeal.cl.model.bd;
 
+import java.io.ByteArrayOutputStream;
+import java.util.Arrays;
+
 public class Ingrediente {
     Integer idIngrediente;
     String unidadDeMedida,descripcion,fechaCaducidad;
     Float cantidad;
+    byte[] imagen;
 
     public Ingrediente() {
     }
 
-    public Ingrediente(Integer idIngrediente, String unidadDeMedida, String descripcion, String fechaCaducidad, float cantidad) {
+    public Ingrediente(Integer idIngrediente, String unidadDeMedida, String descripcion, String fechaCaducidad, float cantidad, byte[] imagen) {
         this.idIngrediente = idIngrediente;
         this.unidadDeMedida = unidadDeMedida;
         this.descripcion = descripcion;
         this.fechaCaducidad = fechaCaducidad;
         this.cantidad = cantidad;
+        this.imagen = imagen;
     }
 
     public boolean isNull(){
@@ -25,13 +30,14 @@ public class Ingrediente {
     }
 
     @Override
-    public String toString(){
-        return "Ingrediente{ " +
-                "idIngrediente='" + idIngrediente + '\'' +
+    public String toString() {
+        return "Ingrediente{" +
+                "idIngrediente=" + idIngrediente +
                 ", unidadDeMedida='" + unidadDeMedida + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", fechaCaducidad='" + fechaCaducidad + '\'' +
-                ", cantidad='" + cantidad + '\'' +
+                ", cantidad=" + cantidad +
+                ", imagen=" + Arrays.toString(imagen) +
                 '}';
     }
 
@@ -73,5 +79,13 @@ public class Ingrediente {
 
     public void setCantidad(float cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
     }
 }
