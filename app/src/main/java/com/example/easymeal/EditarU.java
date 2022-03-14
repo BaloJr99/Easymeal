@@ -23,7 +23,6 @@ public class EditarU extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_editar_u);
         user = (EditText) findViewById(R.id.edituser);
         //clave = (EditText) findViewById(R.id.editclave);

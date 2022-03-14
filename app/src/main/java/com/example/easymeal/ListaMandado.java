@@ -10,18 +10,24 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.easymeal.cl.model.bd.Ingrediente;
+import com.example.easymeal.cl.model.dao.IngredienteDao;
+
+import java.util.ArrayList;
+
 public class ListaMandado extends AppCompatActivity {
 
     //Inicializamo variable
     DrawerLayout dl;
     Button btnAgregar;
     static String username;
+    IngredienteDao ingDao;
+    Ingrediente ing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_lista_mandado);
 
         //Asignamos variable
@@ -90,5 +96,15 @@ public class ListaMandado extends AppCompatActivity {
 
     public void ClickEliminar(View view) {
         Toast.makeText(ListaMandado.this, "Se dio clic a eliminar", Toast.LENGTH_LONG).show();
+    }
+
+    public void llenarMandado(){
+        ingDao = new IngredienteDao();
+        ingDao.ingredienteDao(this);
+        ArrayList<Ingrediente> listaIng = ingDao.listaMandado();
+
+        for(Ingrediente listing: listaIng){
+
+        }
     }
 }

@@ -34,7 +34,6 @@ public class IngredienteDao {
 
     public ArrayList<Ingrediente> listaIngredientes(){
         ArrayList<Ingrediente> lista = new ArrayList<>();
-        lista.clear();
         Cursor c = sql.rawQuery("select * from t_ingrediente",null);
         if (c.moveToFirst()){
             do {
@@ -42,6 +41,20 @@ public class IngredienteDao {
                 lista.add(ing);
             } while(c.moveToNext());
         }
+        return lista;
+    }
+
+    public ArrayList<Ingrediente> listaMandado() {
+        ArrayList<Ingrediente> lista = new ArrayList<>();
+        Cursor c = sql.rawQuery("SELECT * FROM t_ingrediente WHERE cantidad = 0", null);
+
+        if (c.moveToFirst()){
+            do {
+                ing = new Ingrediente(c.getInt(0), c.getString(2), c.getString(1), c.getString(4), c.getFloat(3), c.getBlob(5));
+                lista.add(ing);
+            } while(c.moveToNext());
+        }
+
         return lista;
     }
 }

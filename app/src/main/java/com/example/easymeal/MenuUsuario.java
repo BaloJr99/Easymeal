@@ -27,7 +27,6 @@ public class MenuUsuario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_menu_usuario);
         dl = findViewById(R.id.drawer_usuario);
         idusuario = (TextView) findViewById(R.id.idUsuario);
