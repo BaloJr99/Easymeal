@@ -2,27 +2,30 @@ package com.example.easymeal.cl.model.bd;
 
 public class Receta {
     Integer idReceta;
-    String pasos;
+    String nombre,pasos;
 
     public Receta() {
     }
 
-    public Receta(Integer idReceta, String pasos) {
+    public Receta(Integer idReceta, String nombre, String pasos) {
         this.idReceta = idReceta;
+        this.nombre = nombre;
         this.pasos = pasos;
     }
 
     public boolean isNull(){
-        if(idReceta.equals("")&&pasos.equals("")){
+        if(idReceta.equals("")&&nombre.equals("")&&pasos.equals("")){
             return false;
         }else{
             return true;
         }
     }
+
     @Override
-    public String toString(){
-        return "Receta{ " +
-                "idReceta='" + idReceta + '\'' +
+    public String toString() {
+        return "Receta{" +
+                "idReceta=" + idReceta +
+                ", nombre='" + nombre + '\'' +
                 ", pasos='" + pasos + '\'' +
                 '}';
     }
@@ -41,5 +44,13 @@ public class Receta {
 
     public void setPasos(String pasos) {
         this.pasos = pasos;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

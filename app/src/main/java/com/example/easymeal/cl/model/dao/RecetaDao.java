@@ -13,14 +13,15 @@ public class RecetaDao {
     SQLiteDatabase sql;
     String bd = "easymeal.db";
 
-    public void productoDao(Context c){
+    public RecetaDao(Context c){
         this.c = c;
         sql = c.openOrCreateDatabase(bd,c.MODE_PRIVATE,null);
         receta = new Receta();
     }
 
-    public boolean insertarProducto(Receta r){
+    public boolean insertarReceta(Receta r){
         ContentValues cv = new ContentValues();
+        cv.put("nombre", r.getNombre());
         cv.put("pasos", r.getPasos());
         return (sql.insert("t_receta",null,cv) > 0);
     }

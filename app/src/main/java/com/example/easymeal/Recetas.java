@@ -5,17 +5,23 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
-
+import android.widget.Toast;
 
 
 import com.example.easymeal.cl.model.bd.Receta;
+
+import com.example.easymeal.cl.model.dao.RecetaDao;
+
 import com.example.easymeal.database.DbAyuda;
 
 import java.util.ArrayList;
@@ -26,6 +32,9 @@ public class Recetas extends AppCompatActivity{
     ListView listaRecetas;
     ArrayList<String> infoList;
     ArrayList<Receta> recetasList;
+    EditText nom,pasos;
+    Button insertar;
+    RecetaDao dao;
 
 
 
@@ -40,11 +49,33 @@ public class Recetas extends AppCompatActivity{
         setContentView(R.layout.activity_recetas);
         dl = findViewById(R.id.drawer_recetas);
         db = new DbAyuda(getApplicationContext());
+        nom = (EditText) findViewById(R.id.fieldNombre);
+        pasos = (EditText) findViewById(R.id.mFieldPasos);
+        insertar = (Button) findViewById(R.id.btnAgregar);
+        dao = new RecetaDao(this);
         listaRecetas = (ListView) findViewById(R.id.listaRecetas);
         poblar();
         adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,infoList);
         listaRecetas.setAdapter(adapter);
 
+        insertar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Receta c = new Receta();
+                c.setNombre(nom.getText().toString());
+                c.setPasos(pasos.getText().toString());
+                if(!c.isNull()){
+                    Toast.makeText(Recetas.this,"ERROR: CAMPOS VACIOS",Toast.LENGTH_LONG).show();
+                }else if(dao.insertarReceta(c)){
+                    Toast.makeText(Recetas.this,"Registro Exitoso",Toast.LENGTH_LONG).show();
+                    Intent i2 = new Intent(Recetas.this,MainActivity.class);
+                    startActivity(i2);
+                    poblar();
+                }else{
+                    Toast.makeText(Recetas.this,"Receta ya registrada",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
     private void poblar(){  //Metodo para poblar el array objeto
         SQLiteDatabase bd = db.getReadableDatabase();
