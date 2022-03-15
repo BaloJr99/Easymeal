@@ -14,7 +14,7 @@ public class Receta {
     }
 
     public boolean isNull(){
-        if(idReceta.equals("")&&nombre.equals("")&&pasos.equals("")){
+        if(nombre.equals("")&&pasos.equals("")){
             return false;
         }else{
             return true;

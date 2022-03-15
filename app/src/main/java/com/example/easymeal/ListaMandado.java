@@ -6,8 +6,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.example.easymeal.cl.model.bd.Ingrediente;
@@ -23,6 +26,7 @@ public class ListaMandado extends AppCompatActivity {
     static String username;
     IngredienteDao ingDao;
     Ingrediente ing;
+    TableLayout tling;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class ListaMandado extends AppCompatActivity {
         //Asignamos variable
         dl = findViewById(R.id.drawer_listamandado);
         btnAgregar = findViewById(R.id.agregarlista);
+        tling = findViewById(R.id.tling);
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,6 +107,10 @@ public class ListaMandado extends AppCompatActivity {
         ingDao = new IngredienteDao();
         ingDao.ingredienteDao(this);
         ArrayList<Ingrediente> listaIng = ingDao.listaMandado();
+        TableRow.LayoutParams lfila = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        TableRow.LayoutParams ldescripcion = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        TableRow.LayoutParams lcantidad = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        TableRow.LayoutParams leliminar = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         for(Ingrediente listing: listaIng){
 

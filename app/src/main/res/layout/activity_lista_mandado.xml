@@ -31,6 +31,7 @@
                 tools:ignore="TouchTargetSizeCheck">
             </Button>
             <TableLayout
+                android:id="@+id/tling"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="80dp"
@@ -56,16 +57,6 @@
                         tools:ignore="ContentDescription" />
                 </TableRow>
                 <TableRow>
-                    <TextView
-                        android:text=""
-                        android:textAlignment="center"
-                        android:padding="3dp"
-                        android:layout_weight="10"/>
-                    <TextView
-                        android:text=""
-                        android:textAlignment="center"
-                        android:padding="3dp"
-                        android:layout_weight="10"/>
                     <ImageView
                         android:onClick="ClickEliminar"
                         android:textAlignment="center"
@@ -93,9 +84,7 @@
         android:layout_gravity="start"
         android:background="@color/white">
 
-        <include
-            layout="@layout/main_nav_drawer">
-        </include>
+        <include layout="@layout/main_nav_drawer"></include>
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
