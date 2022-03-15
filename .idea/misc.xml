@@ -18,6 +18,7 @@
         <entry key="..\:/Users/baloc/Desktop/Easymeal/app/src/main/res/layout/main_nav_drawer.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/baloc/Desktop/Easymeal/app/src/main/res/layout/main_toolbar.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/baloc/Desktop/Easymeal/app/src/main/res/layout/menu.xml" value="0.33" />
+        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_baseline_list_alt_24.xml" value="0.231" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_dashboard.xml" value="0.1945" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_home.xml" value="0.145" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_horario.xml" value="0.145" />
@@ -26,6 +27,8 @@
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_more.xml" value="0.1945" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_acerca_nosotros.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_agregar_lista.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_editar.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_editar_u.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_lista_mandado.xml" value="0.221025641025641" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_main2.xml" value="0.22447916666666667" />

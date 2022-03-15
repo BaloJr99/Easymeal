@@ -54,7 +54,7 @@ public class IngredienteDao {
                 lista.add(ing);
             } while(c.moveToNext());
         }
-
+        System.out.println(lista);
         return lista;
     }
 }
