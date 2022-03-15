@@ -56,15 +56,6 @@
                         android:layout_weight="1"
                         tools:ignore="ContentDescription" />
                 </TableRow>
-                <TableRow>
-                    <ImageView
-                        android:onClick="ClickEliminar"
-                        android:textAlignment="center"
-                        android:padding="3dp"
-                        android:layout_weight="1"
-                        tools:ignore="ContentDescription"
-                        android:src="@drawable/ic_delete"/>
-                </TableRow>
             </TableLayout>
 
             <Button

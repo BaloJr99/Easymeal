@@ -5,12 +5,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.easymeal.cl.model.bd.Ingrediente;
@@ -24,9 +27,15 @@ public class ListaMandado extends AppCompatActivity {
     DrawerLayout dl;
     Button btnAgregar;
     static String username;
+
     IngredienteDao ingDao;
     Ingrediente ing;
+
     TableLayout tling;
+    TableRow tring;
+
+    TextView tvDescripcion, tvCantidad;
+    ImageView ivEliminar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +47,7 @@ public class ListaMandado extends AppCompatActivity {
         dl = findViewById(R.id.drawer_listamandado);
         btnAgregar = findViewById(R.id.agregarlista);
         tling = findViewById(R.id.tling);
+        llenarMandado();
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,7 +109,7 @@ public class ListaMandado extends AppCompatActivity {
         Menu.closeDrawer(dl);
     }
 
-    public void ClickEliminar(View view) {
+    public void ClickEliminar() {
         Toast.makeText(ListaMandado.this, "Se dio clic a eliminar", Toast.LENGTH_LONG).show();
     }
 
@@ -107,12 +117,39 @@ public class ListaMandado extends AppCompatActivity {
         ingDao = new IngredienteDao();
         ingDao.ingredienteDao(this);
         ArrayList<Ingrediente> listaIng = ingDao.listaMandado();
-        TableRow.LayoutParams lfila = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        TableRow.LayoutParams ldescripcion = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        TableRow.LayoutParams lcantidad = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        TableRow.LayoutParams leliminar = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        TableRow.LayoutParams lfila = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        TableRow.LayoutParams ldescripcion = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 10f);
+        TableRow.LayoutParams lcantidad = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 10f);
+        TableRow.LayoutParams leliminar = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f);
 
         for(Ingrediente listing: listaIng){
+            tring = new TableRow(this);
+            tring.setLayoutParams(lfila);
+
+            tvDescripcion = new TextView(this);
+            tvDescripcion.setText(listing.getDescripcion());
+            tvDescripcion.setLayoutParams(ldescripcion);
+            tvDescripcion.setGravity(Gravity.CENTER);
+            tring.addView(tvDescripcion);
+
+            tvCantidad = new TextView(this);
+            tvCantidad.setText(String.valueOf(listing.getCantidad()));
+            tvCantidad.setLayoutParams(lcantidad);
+            tvCantidad.setGravity(Gravity.CENTER);
+            tring.addView(tvCantidad);
+
+            ivEliminar = new ImageView(this);
+            ivEliminar.setImageResource(R.drawable.ic_delete);
+            ivEliminar.setLayoutParams(leliminar);
+            ivEliminar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ClickEliminar();
+                }
+            });
+            tring.addView(ivEliminar);
+
+            tling.addView(tring);
 
         }
     }

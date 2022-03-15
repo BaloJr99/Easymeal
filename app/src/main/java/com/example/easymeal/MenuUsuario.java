@@ -23,6 +23,7 @@ public class MenuUsuario extends AppCompatActivity {
     TextView idusuario;
     Button editar,eliminar;
     daoUsuario dao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class MenuUsuario extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
         eliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,14 +78,6 @@ public class MenuUsuario extends AppCompatActivity {
     public void ClickMenu(View v){
         //Abrimos Drawer
         Menu.openDrawer(dl);
-        /*int sum=0;
-        Menu.openDrawer(dl);
-        sum++;
-        if(sum == 1) {
-            Intent i = new Intent(this, Menu.class);
-            i.putExtra("Username", username);
-            startActivity(i);
-        }*/
     }
 
     public void ClickLogo(View v){
