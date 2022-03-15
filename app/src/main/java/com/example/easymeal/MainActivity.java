@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         tv_registrar= findViewById(R.id.tv_registrar);
         login = (Button) findViewById(R.id.login);
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     Usuario us = dao.getUsuario(u, p);
                     Toast.makeText(MainActivity.this, "BIENVENIDO " + us.getNombre(), Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(view.getContext(), Menu.class);
-                    intent.putExtra("username",us.getUsername());
+                    intent.putExtra("idUsuario",us.getIdUsuario());
                     startActivity(intent);
                     finish();
                 } else {
