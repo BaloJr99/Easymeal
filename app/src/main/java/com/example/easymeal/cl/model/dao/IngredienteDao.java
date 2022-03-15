@@ -17,6 +17,7 @@ public class IngredienteDao {
     ArrayList<Ingrediente> listaIngredientes;
     SQLiteDatabase sql;
     String bd = "easymeal.db";
+    ContentValues cv = new ContentValues();
 
     public void ingredienteDao(Context c){
         this.c = c;
@@ -25,7 +26,7 @@ public class IngredienteDao {
     }
 
     public boolean insertarIngrediente(Ingrediente i){
-        ContentValues cv = new ContentValues();
+        cv = new ContentValues();
         cv.put("descripcion", i.getDescripcion());
         cv.put("cantidad", i.getCantidad());
         cv.put("imagen", i.getImagen());
@@ -46,15 +47,28 @@ public class IngredienteDao {
 
     public ArrayList<Ingrediente> listaMandado() {
         ArrayList<Ingrediente> lista = new ArrayList<>();
-        Cursor c = sql.rawQuery("SELECT * FROM t_ingrediente WHERE cantidad = 0", null);
+        Cursor c = sql.rawQuery("SELECT * FROM t_lista", null);
 
         if (c.moveToFirst()){
+            System.out.println("Hola");
             do {
-                ing = new Ingrediente(c.getInt(0), c.getString(2), c.getString(1), c.getString(4), c.getFloat(3), c.getBlob(5));
+                ing = new Ingrediente(c.getInt(3), c.getString(1), c.getFloat(2));
                 lista.add(ing);
             } while(c.moveToNext());
+        }else{
+            System.out.println("Hola2");
+            Cursor busqueda = sql.rawQuery("SELECT * FROM t_ingrediente WHERE cantidad = 0", null);
+            if (busqueda.moveToFirst()){
+                do {
+                    cv = new ContentValues();
+                    cv.put("descripcion", busqueda.getString(1));
+                    cv.put("cantidad", busqueda.getFloat(3));
+                    cv.put("idIngrediente", busqueda.getString(0));
+                    sql.insert("t_lista",null,cv);
+                } while(c.moveToNext());
+            }
         }
-        System.out.println(lista);
+
         return lista;
     }
 }

@@ -20,6 +20,7 @@ public class DbAyuda extends SQLiteOpenHelper {
     private static final String TABLE_PRODUCTO = "t_producto";
     private static final String TABLE_PRODUCTOINGREDIENTE = "t_productoIngrediente";
     private static final String TABLE_INGREDIENTERECETA = "t_ingredienteReceta";
+    private static final String TABLE_LISTA = "t_lista";
 
     public DbAyuda(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -83,6 +84,14 @@ public class DbAyuda extends SQLiteOpenHelper {
                 "idReceta INTEGER NOT NULL,"+
                 "idIngrediente INTEGER NOT NULL,"+
                 "FOREIGN KEY(idReceta) REFERENCES t_receta(idReceta),"+
+                "FOREIGN KEY(idIngrediente) REFERENCES t_ingrediente(idIngrediente))");
+
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_LISTA + "("+
+                "idListado INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "descripcion VARCHAR(45) NOT NULL,"+
+                "cantidad NUMERIC NOT NULL, "+
+                "idIngrediente INTEGER NOT NULL, "+
+                "unidadDeMedida VARCHAR(45),"+
                 "FOREIGN KEY(idIngrediente) REFERENCES t_ingrediente(idIngrediente))");
     }
 

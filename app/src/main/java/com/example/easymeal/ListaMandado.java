@@ -16,15 +16,21 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.easymeal.cl.model.bd.Ingrediente;
+import com.example.easymeal.cl.model.dao.IngredienteDao;
+
+import java.util.ArrayList;
+
 public class ListaMandado extends AppCompatActivity {
 
     //Inicializamo variable
     DrawerLayout dl;
     Button btnAgregar;
-    static String username
+    static String username;
 
     IngredienteDao ingDao;
     Ingrediente ing;
+    ArrayList<Ingrediente> listaIng;
 
     TableLayout tling;
     TableRow tring;
@@ -112,7 +118,7 @@ public class ListaMandado extends AppCompatActivity {
     public void llenarMandado(){
         ingDao = new IngredienteDao();
         ingDao.ingredienteDao(this);
-        ArrayList<Ingrediente> listaIng = ingDao.listaMandado();
+        listaIng = ingDao.listaMandado();
         TableRow.LayoutParams lfila = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         TableRow.LayoutParams ldescripcion = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 10f);
         TableRow.LayoutParams lcantidad = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 10f);

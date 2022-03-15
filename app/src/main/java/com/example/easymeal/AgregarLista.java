@@ -54,6 +54,7 @@ public class AgregarLista extends AppCompatActivity {
         smarca = findViewById(R.id.sMarca);
         scantidad = findViewById(R.id.sCantidad);
         ivfoto = findViewById(R.id.ivFoto);
+        ivfoto.setVisibility(View.GONE);
 
         llenarSpinners();
     }

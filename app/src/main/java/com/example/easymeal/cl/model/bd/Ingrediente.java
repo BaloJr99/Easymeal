@@ -21,6 +21,15 @@ public class Ingrediente {
         this.imagen = imagen;
     }
 
+    public Ingrediente(Integer idIngrediente, String descripcion, float cantidad) {
+        this.idIngrediente = idIngrediente;
+        this.unidadDeMedida = unidadDeMedida;
+        this.descripcion = descripcion;
+        this.fechaCaducidad = fechaCaducidad;
+        this.cantidad = cantidad;
+        this.imagen = imagen;
+    }
+
     public boolean isNull(){
         if(idIngrediente.equals("")&&unidadDeMedida.equals("")&&descripcion.equals("")&&fechaCaducidad.equals("")&&cantidad.equals("")){
             return false;
