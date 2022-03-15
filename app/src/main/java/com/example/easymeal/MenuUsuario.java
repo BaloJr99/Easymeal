@@ -20,40 +20,48 @@ public class MenuUsuario extends AppCompatActivity {
 
     DrawerLayout dl;
     String username;
+    int id = 0;
     TextView idusuario;
     Button editar,eliminar;
     daoUsuario dao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //getSupportActionBar().hide();
         setContentView(R.layout.activity_menu_usuario);
         dl = findViewById(R.id.drawer_usuario);
         idusuario = (TextView) findViewById(R.id.idUsuario);
         editar = (Button) findViewById(R.id.btneditar);
         eliminar = (Button) findViewById(R.id.btneliminar);
         Bundle b=getIntent().getExtras();
-        username=b.getString("username");
-        idusuario.setText(username);
+        id=b.getInt("idUsuario");
+        idusuario.setText(String.valueOf(id));
 
         editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MenuUsuario.this,EditarU.class);
-                i.putExtra("Username",username);
+                i.putExtra("idUsuario",id);
                 startActivity(i);
             }
         });
+
         eliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder b= new AlertDialog.Builder(MenuUsuario.this);
+                dao.deleteUsuario();
+            }
+                /*AlertDialog.Builder b= new AlertDialog.Builder(MenuUsuario.this);
                 b.setMessage("¿Seguro que desea eliminar la cuenta?");
                 b.setCancelable(false);
                 b.setPositiveButton("SI", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if (dao.deleteUsuario(username)) {
+                        Bundle b=getIntent().getExtras();
+                        id=b.getInt("idUsuario");
+                        if (dao.deleteUsuario(id)) {
                             Toast.makeText(MenuUsuario.this,"Cuenta Eliminada",Toast.LENGTH_LONG).show();
                             Intent i2 =   new Intent(MenuUsuario.this, MainActivity.class);
                             startActivity(i2);
@@ -70,20 +78,12 @@ public class MenuUsuario extends AppCompatActivity {
                     }
                 });
                 b.show();
-            }
+            }*/
         });
     }
     public void ClickMenu(View v){
         //Abrimos Drawer
         Menu.openDrawer(dl);
-        /*int sum=0;
-        Menu.openDrawer(dl);
-        sum++;
-        if(sum == 1) {
-            Intent i = new Intent(this, Menu.class);
-            i.putExtra("Username", username);
-            startActivity(i);
-        }*/
     }
 
     public void ClickLogo(View v){

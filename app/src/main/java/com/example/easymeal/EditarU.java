@@ -15,6 +15,7 @@ import com.example.easymeal.cl.model.dao.daoUsuario;
 
 public class EditarU extends AppCompatActivity {
     String username;
+    int id;
     EditText user,clave,nombre,apellidoPaterno,apellidoMaterno,fecha;
     Button btneditar;
     daoUsuario dao;
@@ -23,6 +24,7 @@ public class EditarU extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //getSupportActionBar().hide();
         setContentView(R.layout.activity_editar_u);
         user = (EditText) findViewById(R.id.edituser);
         //clave = (EditText) findViewById(R.id.editclave);
@@ -32,11 +34,11 @@ public class EditarU extends AppCompatActivity {
         fecha = (EditText) findViewById(R.id.editfecha);
         btneditar = (Button) findViewById(R.id.btneditar2);
         Bundle b=getIntent().getExtras();
-        username=b.getString("Username");
-        user.setText(username);
+        id=b.getInt("idUsuario");
+        //user.setText(String.valueOf(id));
 
         dao = new daoUsuario(this);
-        u = dao.getUsuarioById(username);
+        u = dao.getUsuarioById(id);
         //clave.setText(u.getClave());
         nombre.setText(u.getNombre());
         apellidoPaterno.setText(u.getApellidoPaterno());
@@ -47,17 +49,18 @@ public class EditarU extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Usuario u = new Usuario();
-                u.setUsername(user.getText().toString());
+                u.setIdUsuario(id);
+                //u.setUsername(user.getText().toString());
                 u.setNombre(nombre.getText().toString());
                 u.setApellidoPaterno(apellidoPaterno.getText().toString());
                 u.setApellidoMaterno(apellidoMaterno.getText().toString());
-               // u.setFechaNacimiento(fecha.getText().toString());
+                u.setFechaNacimiento(fecha.getText().toString());
                 if (!u.isNull()) {
                     Toast.makeText(EditarU.this, "ERROR", Toast.LENGTH_LONG).show();
                 } else if (dao.updateUsuario(u)) {
                     Toast.makeText(EditarU.this, "Actualizacion Exitosa", Toast.LENGTH_LONG).show();
                     Intent i2 = new Intent(EditarU.this, MenuUsuario.class);
-                    i2.putExtra("Username",username);
+                    i2.putExtra("idUsuario",id);
                     startActivity(i2);
                     finish();
                 }

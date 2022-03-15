@@ -2,6 +2,7 @@ package com.example.easymeal.cl.model.bd;
 
 public class Usuario {
     String username,clave,nombre,apellidoPaterno,apellidoMaterno,fechaNacimiento;
+    int idUsuario;
 
     public Usuario() {
 
@@ -26,6 +27,7 @@ public class Usuario {
     @Override
     public String toString(){
         return "Usuario{ " +
+                "IdUsuario="+idUsuario+'\'' +
                 "Username='" + username + '\'' +
                 ", Clave='" + clave + '\'' +
                 ", Nombre='" + nombre + '\'' +
@@ -34,6 +36,10 @@ public class Usuario {
                 ", fechaNacimiento='" + fechaNacimiento + '\'' +
                 '}';
     }
+
+    public int getIdUsuario() { return idUsuario; }
+
+    public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
 
     public String getUsername() {
         return username;
