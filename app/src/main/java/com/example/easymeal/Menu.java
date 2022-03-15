@@ -22,6 +22,7 @@ public class Menu extends AppCompatActivity {
     //Inicializamos variables
     DrawerLayout dl;
     static String username;
+    static int id;
     daoUsuario dao;
     Usuario u;
     TextView nombreusuario;
@@ -29,15 +30,16 @@ public class Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getSupportActionBar().hide();
         setContentView(R.layout.menu);
 
         //Asignamos variable
         dl = findViewById(R.id.drawer_menu);
         nombreusuario = findViewById(R.id.username);
         Bundle b=getIntent().getExtras();
-        username=b.getString("username");
+        id=b.getInt("idUsuario");
         dao = new daoUsuario(this);
-        u=dao.getUsuarioById(username);
+        u=dao.getUsuarioById(id);
         nombreusuario.setText("BIENVENIDO " + u.getNombre()+" "+u.getApellidoPaterno());
     }
 
@@ -134,7 +136,7 @@ public class Menu extends AppCompatActivity {
         //Inicializamos el intento
         System.out.println("hola " + username);
         Intent intent = new Intent(activity, aClass);
-        intent.putExtra("username", username);
+        intent.putExtra("idUsuario", id);
         //Creamos bandera
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //Empezamos activity
