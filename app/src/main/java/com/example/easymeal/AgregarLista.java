@@ -149,7 +149,7 @@ public class AgregarLista extends AppCompatActivity {
             ingdao.ingredienteDao(this);
             ing = new Ingrediente();
             ing.setDescripcion(descripcion);
-            ing.setCantidad(Integer.parseInt(cantidad));
+            ing.setCantidad(Float.parseFloat(cantidad));
             Bitmap bitmap = null;
             byte[] img = null;
 
@@ -160,7 +160,7 @@ public class AgregarLista extends AppCompatActivity {
                 img = bos.toByteArray();
             }
             ing.setImagen(img);
-            ingdao.insertarIngrediente(ing);
+            ingdao.insertarLista(ing);
             Toast.makeText(this, "INSERTADO", Toast.LENGTH_LONG).show();
             limpiarCampos();
         }else{

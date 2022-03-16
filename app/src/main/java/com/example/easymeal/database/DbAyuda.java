@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 public class DbAyuda extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 10;
     private static final String DATABASE_NAME = "easymeal.db";
     private static final String TABLE_PREPARACIONES = "t_preparaciones";
     private static final String TABLE_USUARIOS = "t_usuarios";
@@ -20,7 +20,6 @@ public class DbAyuda extends SQLiteOpenHelper {
     private static final String TABLE_PRODUCTO = "t_producto";
     private static final String TABLE_PRODUCTOINGREDIENTE = "t_productoIngrediente";
     private static final String TABLE_INGREDIENTERECETA = "t_ingredienteReceta";
-    private static final String TABLE_LISTA = "t_lista";
 
     public DbAyuda(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -58,6 +57,8 @@ public class DbAyuda extends SQLiteOpenHelper {
                 "unidadDeMedida VARCHAR(45),"+
                 "cantidad NUMERIC NOT NULL,"+
                 "fechaDeCaducidad DATE, "+
+                "mandado INTEGER NOT NULL, "+
+                "cantidadAcomprar FLOAT NOT NULL, "+
                 "imagen BLOB)");
 
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_PRODUCTO+"("+
@@ -84,14 +85,6 @@ public class DbAyuda extends SQLiteOpenHelper {
                 "idReceta INTEGER NOT NULL,"+
                 "idIngrediente INTEGER NOT NULL,"+
                 "FOREIGN KEY(idReceta) REFERENCES t_receta(idReceta),"+
-                "FOREIGN KEY(idIngrediente) REFERENCES t_ingrediente(idIngrediente))");
-
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_LISTA + "("+
-                "idListado INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "descripcion VARCHAR(45) NOT NULL,"+
-                "cantidad NUMERIC NOT NULL, "+
-                "idIngrediente INTEGER NOT NULL, "+
-                "unidadDeMedida VARCHAR(45),"+
                 "FOREIGN KEY(idIngrediente) REFERENCES t_ingrediente(idIngrediente))");
     }
 
