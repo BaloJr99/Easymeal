@@ -14,7 +14,7 @@ public class Horario {
         this.username = username;
     }
     public boolean isNull(){
-        if(idHorario.equals("")&&comidas.equals("")&&fecha.equals("")&&username.equals("")){
+        if(comidas.equals("")&&fecha.equals("")&&username.equals("")){
             return false;
         }else{
             return true;

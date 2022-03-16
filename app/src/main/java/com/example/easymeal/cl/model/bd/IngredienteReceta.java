@@ -14,7 +14,7 @@ public class IngredienteReceta {
         this.cantidad = cantidad;
     }
     public boolean isNull(){
-        if(idIngredientesReceta.equals("")&&idIngrediente.equals("")&&idReceta.equals("")&&cantidad.equals("")){
+        if(idIngrediente.equals("")&&idReceta.equals("")&&cantidad.equals("")){
             return false;
         }else{
             return true;
