@@ -20,8 +20,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="600dp">
+            android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -85,12 +84,6 @@
                         android:ems="10"
                         android:inputType="number" />
                 </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="200dp">
 
                 <TextView
                     android:id="@+id/txtMartes"
@@ -151,6 +144,301 @@
                         android:ems="10"
                         android:inputType="number" />
                 </LinearLayout>
+                <TextView
+                    android:id="@+id/txtLunes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="    Miercoles" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/miercoles_alm"
+                        android:layout_width="327dp"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cant_miercoles_alm"
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/miercoles_com"
+                        android:layout_width="327dp"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cant_lunes_com"
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/miercoles_cen"
+                        android:layout_width="327dp"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cant_miercoles_cen"
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/txtJueves"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="    Jueves" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/jueves_alm"
+                        android:layout_width="327dp"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cant_jueves_alm"
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/jueves_com"
+                        android:layout_width="327dp"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cant_jueves_com"
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/jueves_cen"
+                        android:layout_width="327dp"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cant_jueves_cen"
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/txtViernes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="    Viernes" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/viernes_alm"
+                        android:layout_width="327dp"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cant_viernes_alm"
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/viernes_com"
+                        android:layout_width="327dp"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cant_viernes_com"
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/viernes_cen"
+                        android:layout_width="327dp"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cant_viernes_cen"
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/txtSabado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="    Sabado" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/sabado_alm"
+                        android:layout_width="327dp"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cant_sabado_alm"
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/sabado_com"
+                        android:layout_width="327dp"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cant_sabado_com"
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/sabado_cen"
+                        android:layout_width="327dp"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cant_sabado_cen"
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/txtDomingo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="    Domingo" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/domingo_alm"
+                        android:layout_width="327dp"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cant_domingo_alm"
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/domingo_com"
+                        android:layout_width="327dp"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cant_domingo_com"
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/domingo_cen"
+                        android:layout_width="327dp"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cant_domingo_cen"
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="number" />
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
@@ -160,9 +448,7 @@
         android:layout_gravity="start"
         android:background="@color/white">
 
-        <include
-            layout="@layout/main_nav_drawer">
-        </include>
+        <include layout="@layout/main_nav_drawer"></include>
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
