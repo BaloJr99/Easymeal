@@ -33,8 +33,9 @@ public class Recetas extends AppCompatActivity{
     ArrayList<String> infoList;
     ArrayList<Receta> recetasList;
     EditText nom,pasos;
-    Button insertar;
+    Button insertar,editar,buscar;
     RecetaDao dao;
+    ArrayList<Receta> busqueda;
 
 
 
@@ -51,6 +52,8 @@ public class Recetas extends AppCompatActivity{
         nom = (EditText) findViewById(R.id.fieldNombre);
         pasos = (EditText) findViewById(R.id.mFieldPasos);
         insertar = (Button) findViewById(R.id.btnAgregar);
+        editar = (Button) findViewById(R.id.btnEdit);
+        buscar = (Button) findViewById(R.id.btnBuscar);
         dao = new RecetaDao(this);
         listaRecetas = (ListView) findViewById(R.id.listaRecetas);
         poblar();
@@ -67,11 +70,42 @@ public class Recetas extends AppCompatActivity{
                     Toast.makeText(Recetas.this,"ERROR: CAMPOS VACIOS",Toast.LENGTH_LONG).show();
                 }else if(dao.insertarReceta(c)){
                     Toast.makeText(Recetas.this,"Registro Exitoso",Toast.LENGTH_LONG).show();
-                    Intent i2 = new Intent(Recetas.this,MainActivity.class);
+                    Intent i2 = new Intent(Recetas.this,Recetas.class);
                     startActivity(i2);
                     poblar();
                 }else{
                     Toast.makeText(Recetas.this,"Receta ya registrada",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Receta c = new Receta();
+                c.setNombre(nom.getText().toString());
+                c.setPasos(pasos.getText().toString());
+                if(!c.isNull()){
+                    Toast.makeText(Recetas.this,"ERROR: CAMPOS VACIOS",Toast.LENGTH_LONG).show();
+                }else if(dao.updateReceta(c)){
+                    Toast.makeText(Recetas.this,"Registro Exitoso",Toast.LENGTH_LONG).show();
+                    Intent i2 = new Intent(Recetas.this,Recetas.class);
+                    startActivity(i2);
+                    poblar();
+                }else{
+                    Toast.makeText(Recetas.this,"Receta ya registrada",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        buscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Receta c = new Receta();
+                if(nom.getText().toString()==""){
+                    Toast.makeText(Recetas.this,"ERROR: CAMPO DE NOMBRE VACIO",Toast.LENGTH_LONG).show();
+                }else{
+                    busqueda = dao.selectReceta(nom.getText().toString());
+                    pasos.setText(busqueda.get(0).getPasos());
+                    poblar();
                 }
             }
         });
@@ -84,8 +118,8 @@ public class Recetas extends AppCompatActivity{
 
         while(cursor.moveToNext()){
             receta = new Receta();
-            receta.setIdReceta(cursor.getInt(0));
-            receta.setPasos(cursor.getString(1));
+            receta.setNombre(cursor.getString(1));
+            receta.setPasos(cursor.getString(2));
 
             recetasList.add(receta);
         }
@@ -94,7 +128,7 @@ public class Recetas extends AppCompatActivity{
     private void crearLista(){ //Metodo para poblar la lista
          infoList = new ArrayList<String>();
          for(int i=0;i<recetasList.size();i++){
-             infoList.add(String.valueOf(recetasList.get(i).getIdReceta())+"/n Pasos:"+recetasList.get(i).getPasos());
+             infoList.add(String.valueOf(recetasList.get(i).getNombre())+"\n Pasos:"+recetasList.get(i).getPasos());
         }
     }
 
