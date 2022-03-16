@@ -51,7 +51,7 @@ public class IngredienteDao {
 
     public ArrayList<Ingrediente> listaMandado() {
         ArrayList<Ingrediente> lista = new ArrayList<>();
-        Cursor c = sql.rawQuery("SELECT * FROM t_ingrediente WHERE mandado = 0", null);
+        Cursor c = sql.rawQuery("SELECT * FROM t_ingrediente WHERE mandado = 1", null);
 
         if (c.moveToFirst()){
             do {

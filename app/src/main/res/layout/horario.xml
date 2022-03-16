@@ -145,7 +145,7 @@
                         android:inputType="number" />
                 </LinearLayout>
                 <TextView
-                    android:id="@+id/txtLunes"
+                    android:id="@+id/txtMiercoles"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="    Miercoles" />
@@ -178,7 +178,7 @@
                         android:layout_height="wrap_content" />
 
                     <EditText
-                        android:id="@+id/cant_lunes_com"
+                        android:id="@+id/cant_miercoles_com"
                         android:layout_width="72dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

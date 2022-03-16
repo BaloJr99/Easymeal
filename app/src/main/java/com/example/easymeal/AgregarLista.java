@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.easymeal.Excepciones.MisExcepciones;
 import com.example.easymeal.cl.model.bd.Ingrediente;
 import com.example.easymeal.cl.model.bd.Producto;
 import com.example.easymeal.cl.model.dao.ProductoDao;
@@ -129,11 +130,8 @@ public class AgregarLista extends AppCompatActivity {
     public void AgregarMarca(View view) {
         String marca = etMarca.getText().toString();
         if(!marca.trim().isEmpty()){
-            prodao = new ProductoDao();
-            prodao.productoDao(this);
-            pro = new Producto();
-            pro.setProveedor(marca);
-            prodao.insertarProducto(pro);
+
+
             Toast.makeText(this, "INSERTADO", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(this, "Escribir el proveedor", Toast.LENGTH_LONG).show();
@@ -142,14 +140,20 @@ public class AgregarLista extends AppCompatActivity {
     }
 
     public void ClickAgregarLista(View view) {
-        String descripcion = etDescripcion.getText().toString();
-        String cantidad = etCantidad.getText().toString();
-        if(!descripcion.trim().isEmpty() && !cantidad.trim().isEmpty()){
+        try {
+
+            String descripcion;
+            String medida;
+            String marca;
+
+            String fechaCaducidad = null;
+
             ingdao = new IngredienteDao();
             ingdao.ingredienteDao(this);
             ing = new Ingrediente();
-            ing.setDescripcion(descripcion);
-            ing.setCantidad(Float.parseFloat(cantidad));
+            prodao = new ProductoDao();
+            prodao.productoDao(this);
+            pro = new Producto();
             Bitmap bitmap = null;
             byte[] img = null;
 
@@ -159,12 +163,69 @@ public class AgregarLista extends AppCompatActivity {
                 bitmap .compress(Bitmap.CompressFormat.PNG, 100, bos);
                 img = bos.toByteArray();
             }
-            ing.setImagen(img);
-            ingdao.insertarLista(ing);
-            Toast.makeText(this, "INSERTADO", Toast.LENGTH_LONG).show();
-            limpiarCampos();
-        }else{
-            Toast.makeText(this, "Hay campos vacíos", Toast.LENGTH_LONG).show();
+
+            if(!camposVacios()){
+                if(sDescripcion.getSelectedItemPosition() == 0){
+                    descripcion = etDescripcion.getText().toString();
+                }else{
+                    descripcion = sDescripcion.getSelectedItem().toString();
+                }
+
+                if(sMedida.getSelectedItemPosition() == 0){
+                    medida = etMedida.getText().toString();
+                }else{
+                    medida = etMedida.getText().toString();
+                }
+
+                if(sMarca.getSelectedItemPosition() == 0){
+                    marca = etMarca.getText().toString();
+                }else{
+                    marca = etMarca.getText().toString();
+                }
+
+                ing.setDescripcion(descripcion);
+                ing.setUnidadDeMedida(medida);
+                pro.setProveedor(marca);
+                ing.setImagen(img);
+                if(tipo.equals("mandado")){
+                    System.out.println("Hola");
+                    ing.setMandado(1);
+                    ing.setCantidadAComprar(Float.valueOf(etCantidad.getText().toString()));
+                    ing.setCantidad(0f);
+                    ing.setFechaCaducidad(null);
+                }else{
+                    System.out.println("Hola2");
+                    ing.setMandado(0);
+                    ing.setCantidadAComprar(0f);
+                    ing.setCantidad(Float.valueOf(etCantidad.getText().toString()));
+                    ing.setFechaCaducidad(fechaCaducidad);
+                }
+                prodao.insertarProducto(pro);
+                ingdao.insertarLista(ing);
+                Toast.makeText(this, "INSERTADO", Toast.LENGTH_LONG).show();
+                limpiarCampos();
+            }
+        } catch (Exception e) {
+            System.out.println("Error");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public boolean camposVacios(){
+        try {
+            if(etDescripcion.getText().toString().trim().isEmpty()||sDescripcion.getSelectedItemPosition() == 0){
+                throw new MisExcepciones(1);
+            }else if(etCantidad.getText().toString().trim().isEmpty()){
+                throw new MisExcepciones(2);
+            }else if(etMarca.getText().toString().trim().isEmpty()||sMarca.getSelectedItemPosition() == 0){
+                throw new MisExcepciones(3);
+            }else if(etMedida.getText().toString().trim().isEmpty()||sMedida.getSelectedItemPosition() == 0){
+                throw new MisExcepciones(4);
+            }
+            return false;
+        } catch (MisExcepciones me) {
+            Toast.makeText(this, me.getMessage(), Toast.LENGTH_LONG);
+            return true;
         }
     }
 
@@ -207,8 +268,9 @@ public class AgregarLista extends AppCompatActivity {
 
     public void limpiarCampos(){
         etDescripcion.setText("");
-        etCantidad.setText("");
+        etCantidad.setText("0.00");
         etMarca.setText("");
+        etMedida.setText("");
         ivFoto.setImageResource(R.drawable.ic_camara);
         ivFoto.setTag("pred");
     }

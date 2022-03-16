@@ -137,7 +137,7 @@ public class ListaMandado extends AppCompatActivity {
             tring.addView(tvDescripcion);
 
             tvCantidad = new TextView(this);
-            tvCantidad.setText(String.valueOf(listing.getCantidad()));
+            tvCantidad.setText(String.valueOf(listing.getCantidadAComprar()));
             tvCantidad.setLayoutParams(lcantidad);
             tvCantidad.setGravity(Gravity.CENTER);
             tring.addView(tvCantidad);
