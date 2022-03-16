@@ -23,6 +23,7 @@ public class daoUsuario {
     public daoUsuario(Context c){
         this.c = c;
         sql = c.openOrCreateDatabase(bd,c.MODE_PRIVATE,null);
+
         sql.execSQL(tabla);
         u=new Usuario();
     }
@@ -91,10 +92,10 @@ public class daoUsuario {
         }
         return null;
     }
-    public Usuario getUsuarioById(int id){
+    public Usuario getUsuarioById(int user){
         lista=selectUsuario();
         for(Usuario us:lista){
-            if(us.getIdUsuario() == id){
+            if(us.getIdUsuario() == user){
                 return us;
             }
         }
@@ -112,8 +113,10 @@ public class daoUsuario {
     }
 
     public  boolean deleteUsuario(){
+
         return (sql.delete("t_usuarios","idUsuario="+1,null)>0);
     }
+
    /* public void deleteUser(String courseName){
 
         // on below line we are creating

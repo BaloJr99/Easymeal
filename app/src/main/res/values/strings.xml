@@ -34,8 +34,11 @@
     <string name="lista">Lista</string>
     <string name="horario">Horario</string>
     <string name="agregarDescripcion">Nueva Descripcion</string>
-    <string name="agregarcantidad">Nueva Cantidad</string>
+    <string name="agregarMedida">Nueva Medida</string>
+    <string name="agregarcantidad">Cantidad</string>
     <string name="marca">Marca</string>
+    <string name="medida">Unidad</string>
+    <string name="unidad">Unidad de Medida</string>
     <string name="agregarmarca">Nueva Marca</string>
     <string name="add">+</string>
 </resources>

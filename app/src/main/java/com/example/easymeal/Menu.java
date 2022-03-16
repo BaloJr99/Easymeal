@@ -134,7 +134,6 @@ public class Menu extends AppCompatActivity {
 
     public static void redirectActivity(Activity activity, Class aClass) {
         //Inicializamos el intento
-        System.out.println("hola " + username);
         Intent intent = new Intent(activity, aClass);
         intent.putExtra("idUsuario", id);
         //Creamos bandera

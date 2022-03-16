@@ -16,20 +16,26 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.easymeal.cl.model.bd.Ingrediente;
+import com.example.easymeal.cl.model.dao.IngredienteDao;
+
+import java.util.ArrayList;
+
 public class ListaMandado extends AppCompatActivity {
 
     //Inicializamo variable
     DrawerLayout dl;
     Button btnAgregar;
-    static String username
+    static String username;
 
     IngredienteDao ingDao;
     Ingrediente ing;
+    ArrayList<Ingrediente> listaIng;
 
     TableLayout tling;
     TableRow tring;
 
-    TextView tvDescripcion, tvCantidad;
+    TextView tvDescripcion, tvCantidad, tvMedida;
     ImageView ivEliminar;
 
     @Override
@@ -48,6 +54,7 @@ public class ListaMandado extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent abrirAgregarLista = new Intent(ListaMandado.this, AgregarLista.class);
+                abrirAgregarLista.putExtra("tipo", "mandado");
                 startActivity(abrirAgregarLista);
             }
         });
@@ -112,11 +119,12 @@ public class ListaMandado extends AppCompatActivity {
     public void llenarMandado(){
         ingDao = new IngredienteDao();
         ingDao.ingredienteDao(this);
-        ArrayList<Ingrediente> listaIng = ingDao.listaMandado();
+        listaIng = ingDao.listaMandado();
         TableRow.LayoutParams lfila = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        TableRow.LayoutParams ldescripcion = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 10f);
-        TableRow.LayoutParams lcantidad = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 10f);
-        TableRow.LayoutParams leliminar = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f);
+        TableRow.LayoutParams ldescripcion = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 4f);
+        TableRow.LayoutParams lcantidad = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 4f);
+        TableRow.LayoutParams lmedida = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 4f);
+        TableRow.LayoutParams leliminar = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 3f);
 
         for(Ingrediente listing: listaIng){
             tring = new TableRow(this);
@@ -133,6 +141,12 @@ public class ListaMandado extends AppCompatActivity {
             tvCantidad.setLayoutParams(lcantidad);
             tvCantidad.setGravity(Gravity.CENTER);
             tring.addView(tvCantidad);
+
+            tvMedida = new TextView(this);
+            tvMedida.setText(listing.getUnidadDeMedida());
+            tvMedida.setLayoutParams(lmedida);
+            tvMedida.setGravity(Gravity.CENTER);
+            tring.addView(tvMedida);
 
             ivEliminar = new ImageView(this);
             ivEliminar.setImageResource(R.drawable.ic_delete);

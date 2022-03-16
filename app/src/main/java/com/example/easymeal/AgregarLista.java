@@ -29,15 +29,17 @@ public class AgregarLista extends AppCompatActivity {
 
     //Inicializamo variable
     DrawerLayout dl;
-    EditText etcantidad, etmarca, etdescripcion;
-    Spinner scantidad, smarca, sdescripcion;
-    ImageView ivfoto;
+    EditText etCantidad, etMarca, etDescripcion, etMedida;
+    Spinner sMedida, sMarca, sDescripcion;
+    ImageView ivFoto;
     Producto pro;
     Ingrediente ing;
     IngredienteDao ingdao;
     ProductoDao prodao;
     ArrayList<Ingrediente> listaing;
     ArrayList<Producto> listaprod;
+
+    String tipo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +49,23 @@ public class AgregarLista extends AppCompatActivity {
 
         //Asignamos variable
         dl = findViewById(R.id.drawer_agregar_lista);
-        etdescripcion = findViewById(R.id.etDescripcion);
-        etmarca = findViewById(R.id.etMarca);
-        etcantidad = findViewById(R.id.etCantidad);
-        sdescripcion = findViewById(R.id.sDescripcion);
-        smarca = findViewById(R.id.sMarca);
-        scantidad = findViewById(R.id.sCantidad);
-        ivfoto = findViewById(R.id.ivFoto);
+        etDescripcion = findViewById(R.id.etDescripcion);
+        etMarca = findViewById(R.id.etMarca);
+        etCantidad = findViewById(R.id.etCantidad);
+        sDescripcion = findViewById(R.id.sDescripcion);
+        sMarca = findViewById(R.id.sMarca);
+        sMedida = findViewById(R.id.sMedida);
+        ivFoto = findViewById(R.id.ivFoto);
+        etMedida = findViewById(R.id.etMedida);
 
+        Bundle parametros = this.getIntent().getExtras();
+        if(parametros != null) {
+            tipo = parametros.getString("tipo");
+        }
+
+        if(tipo.equals("mandado")){
+            ivFoto.setVisibility(View.GONE);
+        }
         llenarSpinners();
     }
 
@@ -116,7 +127,7 @@ public class AgregarLista extends AppCompatActivity {
     }
 
     public void AgregarMarca(View view) {
-        String marca = etmarca.getText().toString();
+        String marca = etMarca.getText().toString();
         if(!marca.trim().isEmpty()){
             prodao = new ProductoDao();
             prodao.productoDao(this);
@@ -131,21 +142,25 @@ public class AgregarLista extends AppCompatActivity {
     }
 
     public void ClickAgregarLista(View view) {
-        String descripcion = etdescripcion.getText().toString();
-        String cantidad = etcantidad.getText().toString();
+        String descripcion = etDescripcion.getText().toString();
+        String cantidad = etCantidad.getText().toString();
         if(!descripcion.trim().isEmpty() && !cantidad.trim().isEmpty()){
             ingdao = new IngredienteDao();
             ingdao.ingredienteDao(this);
             ing = new Ingrediente();
             ing.setDescripcion(descripcion);
-            ing.setCantidad(Integer.parseInt(cantidad));
-            Bitmap bitmap = ((BitmapDrawable)ivfoto.getDrawable()).getBitmap();
+            ing.setCantidad(Float.parseFloat(cantidad));
+            Bitmap bitmap = null;
+            byte[] img = null;
 
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            bitmap .compress(Bitmap.CompressFormat.PNG, 100, bos);
-            byte[] img = bos.toByteArray();
+            if(!ivFoto.getTag().equals("pred")){
+                bitmap = ((BitmapDrawable)ivFoto.getDrawable()).getBitmap();
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                bitmap .compress(Bitmap.CompressFormat.PNG, 100, bos);
+                img = bos.toByteArray();
+            }
             ing.setImagen(img);
-            ingdao.insertarIngrediente(ing);
+            ingdao.insertarLista(ing);
             Toast.makeText(this, "INSERTADO", Toast.LENGTH_LONG).show();
             limpiarCampos();
         }else{
@@ -162,15 +177,15 @@ public class AgregarLista extends AppCompatActivity {
         listaprod = prodao.listaProducto();
 
         ArrayList<String> listadesc = new ArrayList<>();
-        ArrayList<String> listacant = new ArrayList<>();
+        ArrayList<String> listaMedida = new ArrayList<>();
         ArrayList<String> listaprodu = new ArrayList<>();
         listadesc.add("Seleccione...");
-        listacant.add("Seleccione...");
+        listaMedida.add("Seleccione...");
         listaprodu.add("Seleccione...");
 
         for(Ingrediente ingre: listaing){
             listadesc.add(ingre.getDescripcion());
-            listacant.add(String.valueOf(ingre.getCantidad()));
+            listaMedida.add(String.valueOf(ingre.getUnidadDeMedida()));
         }
 
         for(Producto produc: listaprod){
@@ -179,22 +194,23 @@ public class AgregarLista extends AppCompatActivity {
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listadesc);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sdescripcion.setAdapter(arrayAdapter);
+        sDescripcion.setAdapter(arrayAdapter);
 
-        arrayAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listacant);
+        arrayAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listaMedida);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        scantidad.setAdapter(arrayAdapter);
+        sMedida.setAdapter(arrayAdapter);
 
         arrayAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listaprodu);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        smarca.setAdapter(arrayAdapter);
+        sMarca.setAdapter(arrayAdapter);
     }
 
     public void limpiarCampos(){
-        etdescripcion.setText("");
-        etcantidad.setText("");
-        etmarca.setText("");
-        ivfoto.setImageBitmap(null);
+        etDescripcion.setText("");
+        etCantidad.setText("");
+        etMarca.setText("");
+        ivFoto.setImageResource(R.drawable.ic_camara);
+        ivFoto.setTag("pred");
     }
 
     public void ClickFoto(View view) {
@@ -209,7 +225,8 @@ public class AgregarLista extends AppCompatActivity {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            ivfoto.setImageBitmap(imageBitmap);
+            ivFoto.setImageBitmap(imageBitmap);
+            ivFoto.setTag("nopred");
         }
     }
 }
