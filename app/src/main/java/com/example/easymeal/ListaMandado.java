@@ -54,6 +54,7 @@ public class ListaMandado extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent abrirAgregarLista = new Intent(ListaMandado.this, AgregarLista.class);
+                abrirAgregarLista.putExtra("tipo", "mandado");
                 startActivity(abrirAgregarLista);
             }
         });

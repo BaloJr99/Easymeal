@@ -82,16 +82,21 @@
                 android:text="@string/cantidad"
                 android:textSize="25sp"
                 android:paddingStart="10dp"
-                android:layout_weight="1.5">
+                android:layout_weight="1">
 
             </TextView>
-            <Spinner
-                android:id="@+id/sCantidad"
+
+            <EditText
+                android:id="@+id/etCantidad"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_weight="1"
-                android:textSize="25sp">
-            </Spinner>
+                android:layout_weight="2"
+                android:fontFamily="@font/advent_pro_medium"
+                android:paddingStart="10dp"
+                android:textSize="25sp"
+                android:paddingTop="2dp">
+
+            </EditText>
         </LinearLayout>
 
         <LinearLayout
@@ -100,14 +105,38 @@
             android:orientation="horizontal"
             android:layout_marginTop="210dp">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:fontFamily="@font/advent_pro_medium"
+                android:text="@string/medida"
+                android:textSize="25sp"
+                android:paddingStart="10dp"
+                android:layout_weight="1">
+
+            </TextView>
+            <Spinner
+                android:id="@+id/sMedida"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:textSize="25sp">
+            </Spinner>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="260dp">
+
             <EditText
-                android:id="@+id/etCantidad"
+                android:id="@+id/etMedida"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/advent_pro_medium"
-                android:hint="@string/agregarcantidad"
                 android:paddingStart="10dp"
+                android:hint="@string/agregarMedida"
                 android:textSize="25sp">
 
             </EditText>
@@ -125,7 +154,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:layout_marginTop="260dp">
+            android:layout_marginTop="310dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -150,7 +179,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:layout_marginTop="310dp">
+            android:layout_marginTop="360dp">
 
             <EditText
                 android:id="@+id/etMarca"
@@ -176,9 +205,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginTop="370dp">
+            android:layout_marginTop="410dp">
 
             <ImageView
+                android:tag="pred"
                 android:id="@+id/ivFoto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
