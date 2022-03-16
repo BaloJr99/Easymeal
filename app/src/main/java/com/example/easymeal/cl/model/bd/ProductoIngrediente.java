@@ -13,7 +13,7 @@ public class ProductoIngrediente {
     }
 
     public boolean isNull(){
-        if(idProductoIngrediente.equals("")&&idProducto.equals("")&&idIngrediente.equals("")){
+        if(idProducto.equals("")&&idIngrediente.equals("")){
             return false;
         }else{
             return true;

@@ -13,7 +13,7 @@ public class Preparaciones {
     this.fechaPreparacion = fechaPreparacion;
     }
     public boolean isNull(){
-        if(idPreparaciones.equals("")&&tipoComida.equals("")&&fechaPreparacion.equals("")){
+        if(tipoComida.equals("")&&fechaPreparacion.equals("")){
             return false;
         }else{
             return true;

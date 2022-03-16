@@ -13,7 +13,7 @@ public class RecetaPreparacion {
     }
 
     public boolean isNull(){
-        if(idRecetaPreparacion.equals("")&&idReceta.equals("")&&idPreparaciones.equals("")){
+        if(idReceta.equals("")&&idPreparaciones.equals("")){
             return false;
         }else{
             return true;
