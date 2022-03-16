@@ -17,7 +17,7 @@ public class Producto {
     }
 
     public boolean isNull(){
-        if(idProducto.equals("")&&proveedor.equals("")){
+        if(proveedor.equals("")){
             return false;
         }else{
             return true;

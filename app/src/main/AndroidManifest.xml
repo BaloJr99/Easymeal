@@ -33,16 +33,19 @@
             android:exported="false" />
         <activity
             android:name=".Recetas"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".AcercaNosotros"
             android:exported="false" />
         <activity
             android:name=".Registro"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Menu"
             android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

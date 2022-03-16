@@ -70,7 +70,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/Layout2"
             android:layout_width="match_parent"
-            android:layout_height="272dp">
+            android:layout_height="175dp">
 
             <TextView
                 android:id="@+id/tvNombre"
