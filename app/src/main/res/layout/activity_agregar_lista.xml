@@ -42,33 +42,18 @@
             </Spinner>
         </LinearLayout>
 
-        <LinearLayout
+        <EditText
+            android:layout_marginTop="110dp"
+            android:id="@+id/etDescripcion"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="110dp">
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/advent_pro_medium"
+            android:paddingStart="10dp"
+            android:hint="@string/agregarDescripcion"
+            android:textSize="25sp">
+        </EditText>
 
-            <EditText
-                android:id="@+id/etDescripcion"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/advent_pro_medium"
-                android:paddingStart="10dp"
-                android:hint="@string/agregarDescripcion"
-                android:textSize="25sp">
-
-            </EditText>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_weight="6"
-                android:text="@string/add"
-                android:textSize="20sp">
-
-            </Button>
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -83,18 +68,20 @@
                 android:textSize="25sp"
                 android:paddingStart="10dp"
                 android:layout_weight="1">
-
             </TextView>
 
             <EditText
+                android:textAlignment="center"
                 android:id="@+id/etCantidad"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_weight="2"
                 android:fontFamily="@font/advent_pro_medium"
                 android:paddingStart="10dp"
+                android:text="0.00"
                 android:textSize="25sp"
-                android:paddingTop="2dp">
+                android:paddingTop="2dp"
+                android:inputType="numberDecimal">
 
             </EditText>
         </LinearLayout>
@@ -123,33 +110,20 @@
                 android:textSize="25sp">
             </Spinner>
         </LinearLayout>
-        <LinearLayout
+
+        <EditText
+            android:id="@+id/etMedida"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="260dp">
+            android:layout_height="45dp"
+            android:layout_marginTop="260dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/advent_pro_medium"
+            android:hint="@string/agregarMedida"
+            android:paddingStart="10dp"
+            android:textSize="25sp">
 
-            <EditText
-                android:id="@+id/etMedida"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/advent_pro_medium"
-                android:paddingStart="10dp"
-                android:hint="@string/agregarMedida"
-                android:textSize="25sp">
+        </EditText>
 
-            </EditText>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_weight="6"
-                android:text="@string/add"
-                android:textSize="20sp">
-
-            </Button>
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -175,33 +149,18 @@
             </Spinner>
         </LinearLayout>
 
-        <LinearLayout
+        <EditText
+            android:layout_marginTop="360dp"
+            android:id="@+id/etMarca"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="360dp">
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/advent_pro_medium"
+            android:hint="@string/agregarmarca"
+            android:paddingStart="10dp"
+            android:textSize="25sp">
 
-            <EditText
-                android:id="@+id/etMarca"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/advent_pro_medium"
-                android:hint="@string/agregarmarca"
-                android:paddingStart="10dp"
-                android:textSize="25sp">
-
-            </EditText>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_weight="6"
-                android:text="@string/add"
-                android:textSize="20sp"
-                android:onClick="AgregarMarca">
-            </Button>
-        </LinearLayout>
+        </EditText>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="300dp"
