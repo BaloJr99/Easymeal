@@ -100,7 +100,7 @@ public class Recetas extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 Receta c = new Receta();
-                if(nom.getText().toString()==""){
+                if(nom.getText().toString().equals(null)){
                     Toast.makeText(Recetas.this,"ERROR: CAMPO DE NOMBRE VACIO",Toast.LENGTH_LONG).show();
                 }else{
                     busqueda = dao.selectReceta(nom.getText().toString());
