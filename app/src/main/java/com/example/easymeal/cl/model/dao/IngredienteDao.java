@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import com.example.easymeal.cl.model.bd.Ingrediente;
 import com.example.easymeal.cl.model.bd.Usuario;
@@ -26,15 +27,40 @@ public class IngredienteDao {
     }
 
     public boolean insertarLista(Ingrediente i){
+        if(!repetidos(i)){
+            cv = new ContentValues();
+            cv.put("descripcion", i.getDescripcion());
+            cv.put("unidadDeMedida", i.getUnidadDeMedida());
+            cv.put("cantidad", i.getCantidad());
+            cv.put("fechaDeCaducidad", i.getCantidad());
+            cv.put("mandado", i.getMandado());
+            cv.put("cantidadAcomprar", i.getCantidadAComprar());
+            cv.put("imagen", i.getImagen());
+            return (sql.insert("t_ingrediente",null,cv)>0);
+        }else{
+            cv = new ContentValues();
+            cv.put("mandado", 1);
+            cv.put("cantidadAcomprar", i.getCantidadAComprar());
+            return (sql.update("t_ingrediente",cv,"idIngrediente = '" + ing.getIdIngrediente() + "'", null)>0);
+        }
+    }
+
+    public boolean repetidos(Ingrediente i){
+        String[] args = new String[]{i.getDescripcion(), i.getUnidadDeMedida()};
+
+        Cursor c = sql.rawQuery("select * from t_ingrediente WHERE descripcion = ? AND unidadDeMedida = ?",args);
+        if (c.moveToFirst()){
+            ing = new Ingrediente();
+            ing.setIdIngrediente(c.getInt(0));
+            return true;
+        }
+        return false;
+    }
+
+    public boolean eliminarLista(int id){
         cv = new ContentValues();
-        cv.put("descripcion", i.getDescripcion());
-        cv.put("unidadDeMedida", i.getUnidadDeMedida());
-        cv.put("cantidad", i.getCantidad());
-        cv.put("fechaDeCaducidad", i.getCantidad());
-        cv.put("mandado", i.getMandado());
-        cv.put("cantidadAcomprar", i.getCantidadAComprar());
-        cv.put("imagen", i.getImagen());
-        return (sql.insert("t_ingrediente",null,cv)>0);
+        cv.put("mandado", 0);
+        return (sql.update("t_ingrediente",cv,"idIngrediente = '" + id + "'", null)>0);
     }
 
     public ArrayList<Ingrediente> listaIngredientes(){

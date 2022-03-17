@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 
 public class AgregarLista extends AppCompatActivity {
 
-    //Inicializamo variable
+    //Inicializamos variable
     DrawerLayout dl;
     EditText etCantidad, etMarca, etDescripcion, etMedida;
     Spinner sMedida, sMarca, sDescripcion;
@@ -54,8 +55,61 @@ public class AgregarLista extends AppCompatActivity {
         etMarca = findViewById(R.id.etMarca);
         etCantidad = findViewById(R.id.etCantidad);
         sDescripcion = findViewById(R.id.sDescripcion);
+        sDescripcion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(sDescripcion.getSelectedItemPosition() == 0){
+                    etDescripcion.setEnabled(true);
+                    etDescripcion.setText("");
+                }else{
+                    etDescripcion.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         sMarca = findViewById(R.id.sMarca);
+
+        sMarca.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(sMarca.getSelectedItemPosition() == 0){
+                    etMarca.setEnabled(true);
+                    etMarca.setText("");
+                }else{
+                    etMarca.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         sMedida = findViewById(R.id.sMedida);
+
+        sMedida.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(sMedida.getSelectedItemPosition() == 0){
+                    etMedida.setEnabled(true);
+                    etMedida.setText("");
+                }else{
+                    etMedida.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         ivFoto = findViewById(R.id.ivFoto);
         etMedida = findViewById(R.id.etMedida);
 
@@ -127,18 +181,6 @@ public class AgregarLista extends AppCompatActivity {
         Menu.closeDrawer(dl);
     }
 
-    public void AgregarMarca(View view) {
-        String marca = etMarca.getText().toString();
-        if(!marca.trim().isEmpty()){
-
-
-            Toast.makeText(this, "INSERTADO", Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(this, "Escribir el proveedor", Toast.LENGTH_LONG).show();
-        }
-
-    }
-
     public void ClickAgregarLista(View view) {
         try {
 
@@ -174,27 +216,26 @@ public class AgregarLista extends AppCompatActivity {
                 if(sMedida.getSelectedItemPosition() == 0){
                     medida = etMedida.getText().toString();
                 }else{
-                    medida = etMedida.getText().toString();
+                    medida = sMedida.getSelectedItem().toString();
                 }
 
                 if(sMarca.getSelectedItemPosition() == 0){
                     marca = etMarca.getText().toString();
                 }else{
-                    marca = etMarca.getText().toString();
+                    marca = sMarca.getSelectedItem().toString();
                 }
 
                 ing.setDescripcion(descripcion);
                 ing.setUnidadDeMedida(medida);
                 pro.setProveedor(marca);
                 ing.setImagen(img);
+
                 if(tipo.equals("mandado")){
-                    System.out.println("Hola");
                     ing.setMandado(1);
                     ing.setCantidadAComprar(Float.valueOf(etCantidad.getText().toString()));
                     ing.setCantidad(0f);
                     ing.setFechaCaducidad(null);
                 }else{
-                    System.out.println("Hola2");
                     ing.setMandado(0);
                     ing.setCantidadAComprar(0f);
                     ing.setCantidad(Float.valueOf(etCantidad.getText().toString()));
@@ -213,18 +254,18 @@ public class AgregarLista extends AppCompatActivity {
 
     public boolean camposVacios(){
         try {
-            if(etDescripcion.getText().toString().trim().isEmpty()||sDescripcion.getSelectedItemPosition() == 0){
+            if(etDescripcion.getText().toString().trim().isEmpty()&&sDescripcion.getSelectedItemPosition() == 0){
                 throw new MisExcepciones(1);
-            }else if(etCantidad.getText().toString().trim().isEmpty()){
+            }else if((etCantidad.getText().toString().trim().isEmpty() || Float.parseFloat(etCantidad.getText().toString()) == 0f)){
                 throw new MisExcepciones(2);
-            }else if(etMarca.getText().toString().trim().isEmpty()||sMarca.getSelectedItemPosition() == 0){
+            }else if(etMarca.getText().toString().trim().isEmpty()&&sMarca.getSelectedItemPosition() == 0){
                 throw new MisExcepciones(3);
-            }else if(etMedida.getText().toString().trim().isEmpty()||sMedida.getSelectedItemPosition() == 0){
+            }else if(etMedida.getText().toString().trim().isEmpty()&&sMedida.getSelectedItemPosition() == 0){
                 throw new MisExcepciones(4);
             }
             return false;
         } catch (MisExcepciones me) {
-            Toast.makeText(this, me.getMessage(), Toast.LENGTH_LONG);
+            Toast.makeText(this, me.getMessage(), Toast.LENGTH_LONG).show();
             return true;
         }
     }
@@ -245,12 +286,19 @@ public class AgregarLista extends AppCompatActivity {
         listaprodu.add("Seleccione...");
 
         for(Ingrediente ingre: listaing){
-            listadesc.add(ingre.getDescripcion());
-            listaMedida.add(String.valueOf(ingre.getUnidadDeMedida()));
+            if(!listadesc.contains(ingre.getDescripcion())){
+                listadesc.add(ingre.getDescripcion());
+            }
+
+            if(!listaMedida.contains(ingre.getUnidadDeMedida())){
+                listaMedida.add(ingre.getUnidadDeMedida());
+            }
         }
 
         for(Producto produc: listaprod){
-            listaprodu.add(produc.getProveedor());
+            if(!listaprodu.contains(produc.getProveedor())){
+                listaprodu.add(produc.getProveedor());
+            }
         }
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listadesc);

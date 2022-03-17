@@ -112,8 +112,15 @@ public class ListaMandado extends AppCompatActivity {
         Menu.closeDrawer(dl);
     }
 
-    public void ClickEliminar() {
-        Toast.makeText(ListaMandado.this, "Se dio clic a eliminar", Toast.LENGTH_LONG).show();
+    public void ClickEliminar(int id) {
+        ingDao = new IngredienteDao();
+        ingDao.ingredienteDao(this);
+        if(ingDao.eliminarLista(id)){
+            Toast.makeText(this, "ELIMINADO", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show();
+        }
+        this.recreate();
     }
 
     public void llenarMandado(){
@@ -149,16 +156,19 @@ public class ListaMandado extends AppCompatActivity {
             tring.addView(tvMedida);
 
             ivEliminar = new ImageView(this);
+            ivEliminar.setTag(listing.getIdIngrediente());
             ivEliminar.setImageResource(R.drawable.ic_delete);
             ivEliminar.setLayoutParams(leliminar);
             ivEliminar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ClickEliminar();
+                    TableRow tablerow = (TableRow) view.getParent();
+                    ImageView items = (ImageView) tablerow.getChildAt(3);
+
+                    ClickEliminar(Integer.parseInt(items.getTag().toString()));
                 }
             });
             tring.addView(ivEliminar);
-
             tling.addView(tring);
 
         }
