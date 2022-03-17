@@ -3,14 +3,23 @@ package com.example.easymeal;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.DatePicker;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class Horario extends AppCompatActivity {
+import java.util.Calendar;
+
+public class Horario extends AppCompatActivity implements View.OnClickListener {
 
     //Inicializamo variable
     DrawerLayout dl;
+    ImageView fecha;
+    TextView txtFecha;
+    int dia,mes,anio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +30,10 @@ public class Horario extends AppCompatActivity {
 
         //Asignamos variable
         dl = findViewById(R.id.drawer_Horario);
-    }
+        fecha=(ImageView)findViewById(R.id.fecha);
+        txtFecha=(TextView)findViewById(R.id.txtFecha);
+        fecha.setOnClickListener(this);
+        }
 
     public void ClickMenu(View v){
         //Abrimos Drawer
@@ -73,5 +85,24 @@ public class Horario extends AppCompatActivity {
         super.onPause();
         //Cerramos Drawer
         Menu.closeDrawer(dl);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+            final Calendar c = Calendar.getInstance();
+            dia = c.get(Calendar.DAY_OF_MONTH);
+            mes = c.get(Calendar.MONTH);
+            anio= c.get(Calendar.YEAR);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener(){
+
+                @Override
+                public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                    txtFecha.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
+                }
+
+            },dia,mes,anio);
+            datePickerDialog.show();
     }
 }
