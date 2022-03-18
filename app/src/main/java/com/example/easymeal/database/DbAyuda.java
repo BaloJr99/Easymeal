@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 public class DbAyuda extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 11;
+    private static final int DATABASE_VERSION = 10;
     private static final String DATABASE_NAME = "easymeal.db";
     private static final String TABLE_PREPARACIONES = "t_preparaciones";
     private static final String TABLE_USUARIOS = "t_usuarios";
@@ -48,7 +48,7 @@ public class DbAyuda extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_RECETA+"("+
                 "idReceta INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "nombre VARCHAR(45) NOT NULL UNIQUE,"+
+                "nombre VARCHAR(45) NOT NULL,"+
                 "pasos VARCHAR(60))");
 
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_INGREDIENTE+"("+
