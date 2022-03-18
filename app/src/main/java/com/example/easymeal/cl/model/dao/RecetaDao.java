@@ -30,9 +30,8 @@ public class RecetaDao {
     }
     public boolean updateReceta(Receta r){
         ContentValues cv = new ContentValues();
-        cv.put("nombre", r.getNombre());
         cv.put("pasos", r.getPasos());
-        return (sql.update("t_receta",cv,"idReceta="+r.getIdReceta(),null)>0);
+        return (sql.update("t_receta",cv,"nombre='"+r.getNombre()+"'",null)>0);
     }
     public ArrayList<Receta> selectReceta(String nombre){
         ArrayList<Receta> listaRecetas =new ArrayList<Receta>();
