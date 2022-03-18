@@ -37,6 +37,7 @@ public class ListaMandado extends AppCompatActivity {
 
     TextView tvDescripcion, tvCantidad, tvMedida;
     ImageView ivEliminar;
+    String tipo = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +50,19 @@ public class ListaMandado extends AppCompatActivity {
         dl = findViewById(R.id.drawer_listamandado);
         btnAgregar = findViewById(R.id.agregarlista);
         tling = findViewById(R.id.tling);
+
+        Bundle datos = this.getIntent().getExtras();
+        tipo = datos.getString("tipo");
         llenarMandado();
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent abrirAgregarLista = new Intent(ListaMandado.this, AgregarLista.class);
-                abrirAgregarLista.putExtra("tipo", "mandado");
+                abrirAgregarLista.putExtra("tipo", tipo);
                 startActivity(abrirAgregarLista);
             }
         });
+
     }
 
     public void ClickMenu(View v){
@@ -126,7 +131,7 @@ public class ListaMandado extends AppCompatActivity {
     public void llenarMandado(){
         ingDao = new IngredienteDao();
         ingDao.ingredienteDao(this);
-        listaIng = ingDao.listaMandado();
+        listaIng = ingDao.listaMandado(tipo);
         TableRow.LayoutParams lfila = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         TableRow.LayoutParams ldescripcion = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 4f);
         TableRow.LayoutParams lcantidad = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 4f);
@@ -144,7 +149,11 @@ public class ListaMandado extends AppCompatActivity {
             tring.addView(tvDescripcion);
 
             tvCantidad = new TextView(this);
-            tvCantidad.setText(String.valueOf(listing.getCantidadAComprar()));
+            if(tipo.equals("mandado")){
+                tvCantidad.setText(String.valueOf(listing.getCantidadAComprar()));
+            }else{
+                tvCantidad.setText(String.valueOf(listing.getCantidad()));
+            }
             tvCantidad.setLayoutParams(lcantidad);
             tvCantidad.setGravity(Gravity.CENTER);
             tring.addView(tvCantidad);

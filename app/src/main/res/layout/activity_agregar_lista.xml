@@ -19,184 +19,219 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="60dp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/llfecha"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:fontFamily="@font/advent_pro_medium"
-                android:text="@string/descripcion"
-                android:textSize="25sp"
-                android:paddingStart="10dp"
-                android:layout_weight="1.5">
+                android:layout_height="50dp"
+                android:orientation="horizontal">
 
-            </TextView>
-            <Spinner
-                android:id="@+id/sDescripcion"
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/caducidad"
+                    android:textSize="25sp"
+                    android:fontFamily="@font/advent_pro_medium"
+                    android:layout_marginLeft="10dp">
+                </TextView>
+
+                <EditText
+                    android:id="@+id/etFecha"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:enabled="false">
+
+                </EditText>
+
+                <ImageView
+                    android:id="@+id/ivFecha"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:onClick="ClickFecha"
+                    android:src="@drawable/ic_baseline_calendar_today_24">
+                </ImageView>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_weight="1"
-                android:textSize="25sp">
-            </Spinner>
-        </LinearLayout>
+                android:layout_height="50dp"
+                android:orientation="horizontal">
 
-        <EditText
-            android:layout_marginTop="110dp"
-            android:id="@+id/etDescripcion"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/advent_pro_medium"
-            android:paddingStart="10dp"
-            android:hint="@string/agregarDescripcion"
-            android:textSize="25sp">
-        </EditText>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="1.5"
+                    android:fontFamily="@font/advent_pro_medium"
+                    android:paddingStart="10dp"
+                    android:text="@string/descripcion"
+                    android:textSize="25sp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="160dp">
+                </TextView>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:fontFamily="@font/advent_pro_medium"
-                android:text="@string/cantidad"
-                android:textSize="25sp"
-                android:paddingStart="10dp"
-                android:layout_weight="1">
-            </TextView>
+                <Spinner
+                    android:id="@+id/sDescripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:textSize="25sp">
+                </Spinner>
+            </LinearLayout>
 
             <EditText
-                android:textAlignment="center"
-                android:id="@+id/etCantidad"
+                android:id="@+id/etDescripcion"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:fontFamily="@font/advent_pro_medium"
+                android:hint="@string/agregarDescripcion"
                 android:paddingStart="10dp"
-                android:text="0.00"
-                android:textSize="25sp"
-                android:paddingTop="2dp"
-                android:inputType="numberDecimal">
+                android:textSize="25sp">
+            </EditText>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/advent_pro_medium"
+                    android:paddingStart="10dp"
+                    android:text="@string/cantidad"
+                    android:textSize="25sp">
+                </TextView>
+
+                <EditText
+                    android:id="@+id/etCantidad"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="2"
+                    android:fontFamily="@font/advent_pro_medium"
+                    android:inputType="numberDecimal"
+                    android:paddingStart="10dp"
+                    android:paddingTop="2dp"
+                    android:text="0.00"
+                    android:textAlignment="center"
+                    android:textSize="25sp">
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/advent_pro_medium"
+                    android:paddingStart="10dp"
+                    android:text="@string/unidad"
+                    android:textSize="25sp">
+
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/sMedida"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:textSize="25sp"></Spinner>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etMedida"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/advent_pro_medium"
+                android:hint="@string/agregarMedida"
+                android:paddingStart="10dp"
+                android:textSize="25sp">
 
             </EditText>
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="210dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
 
-            <TextView
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="1.5"
+                    android:fontFamily="@font/advent_pro_medium"
+                    android:paddingStart="10dp"
+                    android:text="@string/marca"
+                    android:textSize="25sp">
+
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/sMarca"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:textSize="25sp"></Spinner>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etMarca"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:layout_weight="1"
                 android:fontFamily="@font/advent_pro_medium"
-                android:text="@string/unidad"
-                android:textSize="25sp"
+                android:hint="@string/agregarmarca"
                 android:paddingStart="10dp"
-                android:layout_weight="1">
-
-            </TextView>
-            <Spinner
-                android:id="@+id/sMedida"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_weight="1"
                 android:textSize="25sp">
-            </Spinner>
+
+            </EditText>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <ImageView
+                    android:id="@+id/ivFoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="ClickFoto"
+                    android:src="@drawable/ic_camara"
+                    android:tag="pred">
+
+                </ImageView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:onClick="ClickAgregarLista"
+                    android:text="@string/agregar"></Button>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:onClick="ClickSalirAgregar"
+                    android:text="@string/salir"></Button>
+            </LinearLayout>
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/etMedida"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="260dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/advent_pro_medium"
-            android:hint="@string/agregarMedida"
-            android:paddingStart="10dp"
-            android:textSize="25sp">
-
-        </EditText>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="310dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:fontFamily="@font/advent_pro_medium"
-                android:text="@string/marca"
-                android:textSize="25sp"
-                android:paddingStart="10dp"
-                android:layout_weight="1.5">
-
-            </TextView>
-            <Spinner
-                android:id="@+id/sMarca"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_weight="1"
-                android:textSize="25sp">
-            </Spinner>
-        </LinearLayout>
-
-        <EditText
-            android:layout_marginTop="360dp"
-            android:id="@+id/etMarca"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/advent_pro_medium"
-            android:hint="@string/agregarmarca"
-            android:paddingStart="10dp"
-            android:textSize="25sp">
-
-        </EditText>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="410dp">
-
-            <ImageView
-                android:tag="pred"
-                android:id="@+id/ivFoto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_camara"
-                android:onClick="ClickFoto">
-            </ImageView>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true">
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/agregar"
-                android:onClick="ClickAgregarLista"
-                android:layout_margin="5dp">
-            </Button>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:text="@string/salir"
-                android:onClick="ClickSalirAgregar">
-            </Button>
-        </LinearLayout>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="300dp"

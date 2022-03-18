@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.easymeal.cl.model.bd.Usuario;
 import com.example.easymeal.cl.model.dao.daoUsuario;
@@ -26,6 +27,8 @@ public class Menu extends AppCompatActivity {
     daoUsuario dao;
     Usuario u;
     TextView nombreusuario;
+    static String tipo = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +81,8 @@ public class Menu extends AppCompatActivity {
 
     public void ClickLista(View view){
         //Redireccionamos actividad a dashboard
-        redirectActivity(this, ListaMandado.class);
+        redirectActivity(Menu.this, ListaMandado.class);
+
     }
 
     public void ClickHorario(View view){
@@ -134,12 +138,48 @@ public class Menu extends AppCompatActivity {
 
     public static void redirectActivity(Activity activity, Class aClass) {
         //Inicializamos el intento
+
         Intent intent = new Intent(activity, aClass);
         intent.putExtra("idUsuario", id);
-        //Creamos bandera
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //Empezamos activity
-        activity.startActivity(intent);
+        if(aClass == ListaMandado.class){
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            //Establecemos el titulo
+            builder.setTitle("Alacena");
+            //Establecemos el mensaje
+            builder.setMessage("Deseas generar lista de mandado?");
+            //Boton de seguro
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    tipo = "mandado";intent.putExtra("tipo", tipo);
+                    //Creamos bandera
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    //Empezamos activity
+                    activity.startActivity(intent);
+                }
+            });
+
+            //Boton negativo
+
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    tipo = "";intent.putExtra("tipo", tipo);
+                    //Creamos bandera
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    //Empezamos activity
+                    activity.startActivity(intent);
+                }
+            });
+
+            //Mostramos el dialogo
+            builder.show();
+        }else{
+            //Creamos bandera
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            //Empezamos activity
+            activity.startActivity(intent);
+        }
     }
 
     @Override
