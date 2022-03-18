@@ -3,6 +3,7 @@ package com.example.easymeal;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,8 +14,10 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -26,14 +29,16 @@ import com.example.easymeal.cl.model.dao.IngredienteDao;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class AgregarLista extends AppCompatActivity {
 
     //Inicializamos variable
     DrawerLayout dl;
-    EditText etCantidad, etMarca, etDescripcion, etMedida;
+    EditText etCantidad, etMarca, etDescripcion, etMedida, etFecha;
     Spinner sMedida, sMarca, sDescripcion;
-    ImageView ivFoto;
+    ImageView ivFoto, ivFecha;
+    LinearLayout llfecha;
     Producto pro;
     Ingrediente ing;
     IngredienteDao ingdao;
@@ -60,9 +65,9 @@ public class AgregarLista extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(sDescripcion.getSelectedItemPosition() == 0){
                     etDescripcion.setEnabled(true);
-                    etDescripcion.setText("");
                 }else{
                     etDescripcion.setEnabled(false);
+                    etDescripcion.setText("");
                 }
             }
 
@@ -79,9 +84,9 @@ public class AgregarLista extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(sMarca.getSelectedItemPosition() == 0){
                     etMarca.setEnabled(true);
-                    etMarca.setText("");
                 }else{
                     etMarca.setEnabled(false);
+                    etMarca.setText("");
                 }
             }
 
@@ -98,9 +103,9 @@ public class AgregarLista extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(sMedida.getSelectedItemPosition() == 0){
                     etMedida.setEnabled(true);
-                    etMedida.setText("");
                 }else{
                     etMedida.setEnabled(false);
+                    etMedida.setText("");
                 }
             }
 
@@ -112,6 +117,9 @@ public class AgregarLista extends AppCompatActivity {
 
         ivFoto = findViewById(R.id.ivFoto);
         etMedida = findViewById(R.id.etMedida);
+        etFecha = findViewById(R.id.etFecha);
+        ivFecha = findViewById(R.id.ivFecha);
+        llfecha = findViewById(R.id.llfecha);
 
         Bundle parametros = this.getIntent().getExtras();
         if(parametros != null) {
@@ -120,6 +128,7 @@ public class AgregarLista extends AppCompatActivity {
 
         if(tipo.equals("mandado")){
             ivFoto.setVisibility(View.GONE);
+            llfecha.setVisibility(View.GONE);
         }
         llenarSpinners();
     }
@@ -225,6 +234,10 @@ public class AgregarLista extends AppCompatActivity {
                     marca = sMarca.getSelectedItem().toString();
                 }
 
+                if(!tipo.equals("mandado")){
+                    fechaCaducidad = etFecha.getText().toString();
+                }
+
                 ing.setDescripcion(descripcion);
                 ing.setUnidadDeMedida(medida);
                 pro.setProveedor(marca);
@@ -234,7 +247,7 @@ public class AgregarLista extends AppCompatActivity {
                     ing.setMandado(1);
                     ing.setCantidadAComprar(Float.valueOf(etCantidad.getText().toString()));
                     ing.setCantidad(0f);
-                    ing.setFechaCaducidad(null);
+                    ing.setFechaCaducidad(fechaCaducidad);
                 }else{
                     ing.setMandado(0);
                     ing.setCantidadAComprar(0f);
@@ -263,6 +276,15 @@ public class AgregarLista extends AppCompatActivity {
             }else if(etMedida.getText().toString().trim().isEmpty()&&sMedida.getSelectedItemPosition() == 0){
                 throw new MisExcepciones(4);
             }
+
+            if(!tipo.equals("mandado")){
+                if(etFecha.getText().toString().trim().isEmpty()){
+                    throw new MisExcepciones(5);
+                }else if(ivFoto.getTag().equals("pred")){
+                    throw new MisExcepciones(6);
+                }
+            }
+
             return false;
         } catch (MisExcepciones me) {
             Toast.makeText(this, me.getMessage(), Toast.LENGTH_LONG).show();
@@ -321,6 +343,10 @@ public class AgregarLista extends AppCompatActivity {
         etMedida.setText("");
         ivFoto.setImageResource(R.drawable.ic_camara);
         ivFoto.setTag("pred");
+        etFecha.setText("");
+        sDescripcion.setSelection(0);
+        sMedida.setSelection(0);
+        sMarca.setSelection(0);
     }
 
     public void ClickFoto(View view) {
@@ -338,5 +364,21 @@ public class AgregarLista extends AppCompatActivity {
             ivFoto.setImageBitmap(imageBitmap);
             ivFoto.setTag("nopred");
         }
+    }
+
+    public void ClickFecha(View view) {
+        int dia, mes, ano;
+        Calendar c = Calendar.getInstance();
+        dia = c.get(Calendar.DAY_OF_MONTH);
+        mes = c.get(Calendar.MONTH);
+        ano = c.get(Calendar.YEAR);
+
+        DatePickerDialog date = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int anio, int mes, int dia) {
+                etFecha.setText(dia+"/"+mes+"/"+anio);
+            }
+        }, ano, mes, dia);
+        date.show();
     }
 }

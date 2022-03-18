@@ -75,13 +75,22 @@ public class IngredienteDao {
         return lista;
     }
 
-    public ArrayList<Ingrediente> listaMandado() {
+    public ArrayList<Ingrediente> listaMandado(String tipo) {
         ArrayList<Ingrediente> lista = new ArrayList<>();
-        Cursor c = sql.rawQuery("SELECT * FROM t_ingrediente WHERE mandado = 1", null);
+        Cursor c;
 
+        if(tipo.equals("mandado")){
+            c = sql.rawQuery("SELECT * FROM t_ingrediente WHERE mandado = 1", null);
+        }else{
+            c = sql.rawQuery("SELECT * FROM t_ingrediente WHERE mandado = 0", null);
+        }
         if (c.moveToFirst()){
             do {
-                ing = new Ingrediente(c.getInt(0), c.getString(1), c.getFloat(6), c.getString(2));
+                if(tipo.equals("mandado")){
+                    ing = new Ingrediente(c.getInt(0), c.getString(1), c.getFloat(6), c.getString(2));
+                }else{
+                    ing = new Ingrediente(c.getInt(0), c.getString(1), c.getString(2), c.getFloat(3));
+                }
                 lista.add(ing);
             } while(c.moveToNext());
         }

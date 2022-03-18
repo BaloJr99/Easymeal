@@ -27,6 +27,12 @@ public class MisExcepciones extends Exception{
             case 4:
                 mensaje = "Campo Medida Vacio";
                 break;
+            case 5:
+                mensaje = "Campo Fecha Vacio";
+                break;
+            case 6:
+                mensaje = "Favor de tomar la foto";
+                break;
 
         }
         return mensaje;

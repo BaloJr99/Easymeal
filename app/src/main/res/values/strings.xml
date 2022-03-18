@@ -31,7 +31,7 @@
     <string name="generarlista">Generar Lista</string>
     <string name="descripcion">Descripcion</string>
     <string name="cantidad">Cantidad</string>
-    <string name="lista">Lista</string>
+    <string name="alacena">Alacena</string>
     <string name="horario">Horario</string>
     <string name="agregarDescripcion">Nueva Descripcion</string>
     <string name="agregarMedida">Nueva Medida</string>
@@ -41,4 +41,5 @@
     <string name="unidad">Unidad de Medida</string>
     <string name="agregarmarca">Nueva Marca</string>
     <string name="add">+</string>
+    <string name="caducidad">Fecha Caducidad</string>
 </resources>
