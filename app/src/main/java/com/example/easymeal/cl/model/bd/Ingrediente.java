@@ -30,6 +30,13 @@ public class Ingrediente {
         this.cantidadAComprar = cantidadAComprar;
     }
 
+    public Ingrediente(Integer idIngrediente, String descripcion, String unidadDeMedida, float cantidad) {
+        this.idIngrediente = idIngrediente;
+        this.unidadDeMedida = unidadDeMedida;
+        this.descripcion = descripcion;
+        this.cantidad = cantidad;
+    }
+
     @Override
     public String toString() {
         return "Ingrediente{" +
