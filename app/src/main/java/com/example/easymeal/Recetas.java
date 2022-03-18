@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,6 +61,15 @@ public class Recetas extends AppCompatActivity{
         adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,infoList);
         listaRecetas.setAdapter(adapter);
 
+        listaRecetas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                nom.setText(recetasList.get(i).getNombre());
+                pasos.setText(recetasList.get(i).getPasos());
+            }
+        });
+
         insertar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,8 +101,6 @@ public class Recetas extends AppCompatActivity{
                     Intent i2 = new Intent(Recetas.this,Recetas.class);
                     startActivity(i2);
                     poblar();
-                }else{
-                    Toast.makeText(Recetas.this,"Receta ya registrada",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -100,7 +108,7 @@ public class Recetas extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 Receta c = new Receta();
-                if(nom.getText().toString()==""){
+                if(nom.getText().toString().equals(null)){
                     Toast.makeText(Recetas.this,"ERROR: CAMPO DE NOMBRE VACIO",Toast.LENGTH_LONG).show();
                 }else{
                     busqueda = dao.selectReceta(nom.getText().toString());
