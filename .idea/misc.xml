@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Angel/AndroidStudioProjects/Easymeal/app/src/main/res/layout/activity_menu_usuario.xml" value="0.18704710144927536" />
+        <entry key="..\:/Users/LATITUD/Documents/Android/Easymeal/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.2115" />
         <entry key="..\:/Users/LATITUD/Documents/Android/Easymeal/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/LATITUD/Documents/Android/Easymeal/app/src/main/res/layout/activity_main2.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/LATITUD/Documents/Android/Easymeal/app/src/main/res/layout/horario.xml" value="0.25" />
@@ -18,6 +20,7 @@
         <entry key="..\:/Users/baloc/Desktop/Easymeal/app/src/main/res/layout/activity_agregar_lista.xml" value="0.25" />
         <entry key="..\:/Users/baloc/Desktop/Easymeal/app/src/main/res/layout/activity_lista_mandado.xml" value="0.3048211508553655" />
         <entry key="..\:/Users/baloc/Desktop/Easymeal/app/src/main/res/layout/activity_main2.xml" value="0.33" />
+        <entry key="..\:/Users/baloc/Desktop/Easymeal/app/src/main/res/layout/horario.xml" value="0.10925925925925926" />
         <entry key="..\:/Users/baloc/Desktop/Easymeal/app/src/main/res/layout/main_nav_drawer.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/baloc/Desktop/Easymeal/app/src/main/res/layout/main_toolbar.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/baloc/Desktop/Easymeal/app/src/main/res/layout/menu.xml" value="0.33" />

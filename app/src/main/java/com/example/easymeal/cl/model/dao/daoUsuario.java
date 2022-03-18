@@ -10,7 +10,7 @@ import com.example.easymeal.cl.model.bd.Usuario;
 
 import java.util.ArrayList;
 
-public class daoUsuario {
+public class daoUsuario extends SQLiteOpenHelper {
     Context c;
     Usuario u;
     ArrayList<Usuario> lista;
@@ -20,13 +20,16 @@ public class daoUsuario {
     //String tabla="create table if not exists usuario(id integer primary key autoincrement, usuario text, pass text, nombre text, ap text)";
     String tabla = "create table if not exists t_usuarios(idUsuario INTEGER PRIMARY KEY AUTOINCREMENT,username VARCHAR(20) NOT NULL,clave VARCHAR(20) NOT NULL,nombre VARCHAR(20) NOT NULL,apellidoPaterno VARCHAR(20) NOT NULL,apellidoMaterno VARCHAR(20),fechaNacimiento DATE NOT NULL)";
 
-    public daoUsuario(Context c){
+    public daoUsuario(Context c) {
+        super(c,"easymeal.db",null,9);
         this.c = c;
         sql = c.openOrCreateDatabase(bd,c.MODE_PRIVATE,null);
 
         sql.execSQL(tabla);
         u=new Usuario();
     }
+
+
     public boolean insertUsuario(Usuario u){
         if(buscar(u.getUsername())==0){
             ContentValues cv = new ContentValues();
@@ -113,8 +116,21 @@ public class daoUsuario {
     }
 
     public  boolean deleteUsuario(){
-
+        /*sql = oh.getWritableDatabase();
+        */
+        sql=getWritableDatabase();
         return (sql.delete("t_usuarios","idUsuario="+1,null)>0);
+
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
     }
 
    /* public void deleteUser(String courseName){
