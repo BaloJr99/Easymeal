@@ -49,4 +49,21 @@ public class RecetaDao {
         return listaRecetas;
     }
 
+    public ArrayList<Receta> selectRecetas(){
+        ArrayList<Receta> listaRecetas =new ArrayList<Receta>();
+        listaRecetas.clear();
+        Cursor cr = sql.rawQuery("select * from t_receta",null);
+        if(cr != null && cr.moveToFirst()){
+            do{
+                Receta receta = new Receta();
+                receta.setIdReceta(cr.getInt(0));
+                receta.setNombre(cr.getString(1));
+                receta.setPasos(cr.getString(2));
+                listaRecetas.add(receta);
+            }while(cr.moveToNext());
+        }
+        return listaRecetas;
+    }
+
+
 }
