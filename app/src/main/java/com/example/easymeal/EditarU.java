@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.easymeal.cl.model.bd.Usuario;
@@ -16,7 +17,8 @@ import com.example.easymeal.cl.model.dao.daoUsuario;
 public class EditarU extends AppCompatActivity {
     String username;
     int id;
-    EditText user,clave,nombre,apellidoPaterno,apellidoMaterno,fecha;
+    EditText user,clave,nombre,apellidoPaterno,apellidoMaterno;
+    TextView fecha;
     Button btneditar;
     daoUsuario dao;
     Usuario u;
@@ -31,7 +33,7 @@ public class EditarU extends AppCompatActivity {
         nombre = (EditText) findViewById(R.id.editnombre);
         apellidoPaterno = (EditText) findViewById(R.id.editapellidop);
         apellidoMaterno = (EditText) findViewById(R.id.editapellidom);
-        fecha = (EditText) findViewById(R.id.editfecha);
+        fecha = (TextView) findViewById(R.id.editfecha);
         btneditar = (Button) findViewById(R.id.btneditar2);
         Bundle b=getIntent().getExtras();
         id=b.getInt("idUsuario");
