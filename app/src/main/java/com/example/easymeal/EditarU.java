@@ -24,7 +24,7 @@ public class EditarU extends AppCompatActivity {
     int id,dia,mes,anio;
     EditText user,clave,nombre,apellidoPaterno,apellidoMaterno;
     TextView fecha;
-    Button btneditar;
+    Button btneditar,regresar;
     ImageView imgFecha;
     daoUsuario dao;
     Usuario u;
@@ -41,6 +41,7 @@ public class EditarU extends AppCompatActivity {
         apellidoMaterno = (EditText) findViewById(R.id.editapellidom);
         fecha = (TextView) findViewById(R.id.editfecha);
         btneditar = (Button) findViewById(R.id.btneditar2);
+        regresar = (Button) findViewById(R.id.btnregresar2);
         imgFecha = (ImageView) findViewById(R.id.edtfechaNac);
         Bundle b=getIntent().getExtras();
         id=b.getInt("idUsuario");
@@ -64,7 +65,7 @@ public class EditarU extends AppCompatActivity {
                 u.setApellidoPaterno(apellidoPaterno.getText().toString());
                 u.setApellidoMaterno(apellidoMaterno.getText().toString());
                 u.setFechaNacimiento(fecha.getText().toString());
-                if (!u.isNull()) {
+                if (user.getText().equals("")||nombre.getText().equals("")||apellidoPaterno.getText().equals("")||apellidoMaterno.getText().equals("")||fecha.getText().equals("--/--/--")) {
                     Toast.makeText(EditarU.this, "ERROR", Toast.LENGTH_LONG).show();
                 } else if (dao.updateUsuario(u)) {
                     Toast.makeText(EditarU.this, "Actualizacion Exitosa", Toast.LENGTH_LONG).show();
@@ -92,6 +93,15 @@ public class EditarU extends AppCompatActivity {
 
                 },anio,mes,dia);
                 datePickerDialog.show();
+            }
+        });
+        regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i2 = new Intent(EditarU.this, MenuUsuario.class);
+                i2.putExtra("idUsuario",id);
+                startActivity(i2);
+                finish();
             }
         });
     }

@@ -63,7 +63,7 @@
             android:layout_height="match_parent"
             android:gravity="center_horizontal|center_vertical"
             android:enabled="false"
-            android:text="  --/--/--" />
+            android:text="--/--/--" />
         <ImageView
             android:id="@+id/edtfechaNac"
             android:layout_width="match_parent"
@@ -80,7 +80,7 @@
         android:text="EDITAR" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnregresar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
