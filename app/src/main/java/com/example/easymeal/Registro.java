@@ -54,7 +54,7 @@ ImageView fecha;
                 u.setApellidoPaterno(ap.getText().toString());
                 u.setApellidoMaterno(am.getText().toString());
                 u.setFechaNacimiento(fn.getText().toString());
-                if(!u.isNull()){
+                if(us.getText().equals("")||cla.getText().equals("")||nom.getText().equals("")||ap.getText().equals("")||am.getText().equals("")||fn.getText().equals("--/--/--")){
                     Toast.makeText(Registro.this,"ERROR: CAMPOS VACIOS",Toast.LENGTH_LONG).show();
                 }else if(dao.insertUsuario(u)){
                     Toast.makeText(Registro.this,"Registro Exitoso",Toast.LENGTH_LONG).show();
@@ -80,7 +80,7 @@ ImageView fecha;
                         fn.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
                     }
 
-                },dia,mes,anio);
+                },anio,mes,dia);
                 datePickerDialog.show();
             }
         });
