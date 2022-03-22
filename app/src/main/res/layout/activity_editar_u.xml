@@ -65,7 +65,7 @@
             android:enabled="false"
             android:text="  --/--/--" />
         <ImageView
-            android:id="@+id/fechaNac"
+            android:id="@+id/edtfechaNac"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_baseline_calendar_today_24"></ImageView>
