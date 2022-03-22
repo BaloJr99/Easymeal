@@ -8,15 +8,15 @@
     tools:context=".MostrarU">
 
     <TextView
-        android:id="@+id/tvRecetas"
+        android:id="@+id/tvUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:layout_gravity="center"
-        android:text="USUARIOS" />
+        android:text="DATOS DEL USUARIO" />
 
     <ListView
-        android:id="@+id/users"
+        android:id="@+id/listUsers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

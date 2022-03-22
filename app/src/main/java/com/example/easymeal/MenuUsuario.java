@@ -25,7 +25,7 @@ public class MenuUsuario extends AppCompatActivity {
     String username;
     int id = 0;
     TextView idusuario;
-    Button editar,eliminar;
+    Button editar,eliminar,ver;
     daoUsuario dao;
     //DbAyuda db = new DbAyuda(getApplicationContext());
 
@@ -39,6 +39,7 @@ public class MenuUsuario extends AppCompatActivity {
         idusuario = (TextView) findViewById(R.id.idUsuario);
         editar = (Button) findViewById(R.id.btneditar);
         eliminar = (Button) findViewById(R.id.btneliminar);
+        ver = (Button) findViewById(R.id.ver);
         Bundle b=getIntent().getExtras();
         id=b.getInt("idUsuario");
         idusuario.setText(String.valueOf(id));
@@ -51,40 +52,15 @@ public class MenuUsuario extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-        /*eliminar.setOnClickListener(new View.OnClickListener() {
+        ver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //db.borraUsuario();
-                dao.deleteUsuario();
+                Intent i = new Intent(MenuUsuario.this,MostrarU.class);
+                i.putExtra("idUsuario",id);
+                startActivity(i);
             }
-                AlertDialog.Builder b= new AlertDialog.Builder(MenuUsuario.this);
-                b.setMessage("¿Seguro que desea eliminar la cuenta?");
-                b.setCancelable(false);
-                b.setPositiveButton("SI", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Bundle b=getIntent().getExtras();
-                        id=b.getInt("idUsuario");
-                        if (dao.deleteUsuario(id)) {
-                            Toast.makeText(MenuUsuario.this,"Cuenta Eliminada",Toast.LENGTH_LONG).show();
-                            Intent i2 =   new Intent(MenuUsuario.this, MainActivity.class);
-                            startActivity(i2);
-                            finish();
-                        }else{
-                            Toast.makeText(MenuUsuario.this,"ERROR: No se pudo eliminar la cuenta",Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-                b.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                    }
-                });
-                b.show();
-            }
-        });*/
+        });
+
     }
     public void eliminarRegistro(View v){
         SQLiteDatabase op=c.getWritableDatabase();
