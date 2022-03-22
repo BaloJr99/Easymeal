@@ -2,22 +2,30 @@ package com.example.easymeal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.easymeal.cl.model.bd.Usuario;
 import com.example.easymeal.cl.model.dao.daoUsuario;
 
+import java.util.Calendar;
+
 public class EditarU extends AppCompatActivity {
     String username;
-    int id;
-    EditText user,clave,nombre,apellidoPaterno,apellidoMaterno,fecha;
+    int id,dia,mes,anio;
+    EditText user,clave,nombre,apellidoPaterno,apellidoMaterno;
+    TextView fecha;
     Button btneditar;
+    ImageView imgFecha;
     daoUsuario dao;
     Usuario u;
     @Override
@@ -31,8 +39,9 @@ public class EditarU extends AppCompatActivity {
         nombre = (EditText) findViewById(R.id.editnombre);
         apellidoPaterno = (EditText) findViewById(R.id.editapellidop);
         apellidoMaterno = (EditText) findViewById(R.id.editapellidom);
-        fecha = (EditText) findViewById(R.id.editfecha);
+        fecha = (TextView) findViewById(R.id.editfecha);
         btneditar = (Button) findViewById(R.id.btneditar2);
+        imgFecha = (ImageView) findViewById(R.id.edtfechaNac);
         Bundle b=getIntent().getExtras();
         id=b.getInt("idUsuario");
         //user.setText(String.valueOf(id));
@@ -64,6 +73,25 @@ public class EditarU extends AppCompatActivity {
                     startActivity(i2);
                     finish();
                 }
+            }
+        });
+        imgFecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar c = Calendar.getInstance();
+                dia = c.get(Calendar.DAY_OF_MONTH);
+                mes = c.get(Calendar.MONTH);
+                anio= c.get(Calendar.YEAR);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(EditarU.this, new DatePickerDialog.OnDateSetListener(){
+
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                        fecha.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
+                    }
+
+                },anio,mes,dia);
+                datePickerDialog.show();
             }
         });
     }
