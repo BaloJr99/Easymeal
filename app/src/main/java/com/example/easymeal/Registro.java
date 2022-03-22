@@ -2,21 +2,30 @@ package com.example.easymeal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.easymeal.cl.model.bd.Usuario;
 import com.example.easymeal.cl.model.dao.daoUsuario;
 
+import java.util.Calendar;
+
 public class Registro extends AppCompatActivity {
-EditText us,cla,nom,ap,am,fn;
+EditText us,cla,nom,ap,am;
+TextView fn;
 Button reg;
 daoUsuario dao;
+ImageView fecha;
+    int dia,mes,anio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +39,9 @@ daoUsuario dao;
         nom = (EditText) findViewById(R.id.nombre);
         ap = (EditText) findViewById(R.id.apellidop);
         am = (EditText) findViewById(R.id.apellidom);
-        fn = (EditText) findViewById(R.id.fechaN);
+        fn = (TextView) findViewById(R.id.fechaN);
         reg = (Button) findViewById(R.id.reg);
-
+        fecha=(ImageView)findViewById(R.id.fechaNac);
         dao = new daoUsuario(this);
 
         reg.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +63,25 @@ daoUsuario dao;
                 }else{
                     Toast.makeText(Registro.this,"Usuario ya registrado",Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+        fecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar c = Calendar.getInstance();
+                dia = c.get(Calendar.DAY_OF_MONTH);
+                mes = c.get(Calendar.MONTH);
+                anio= c.get(Calendar.YEAR);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(Registro.this, new DatePickerDialog.OnDateSetListener(){
+
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                        fn.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
+                    }
+
+                },dia,mes,anio);
+                datePickerDialog.show();
             }
         });
     }

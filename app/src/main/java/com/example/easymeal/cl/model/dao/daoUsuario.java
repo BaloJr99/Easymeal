@@ -11,6 +11,7 @@ import com.example.easymeal.cl.model.bd.Usuario;
 import java.util.ArrayList;
 
 public class daoUsuario extends SQLiteOpenHelper {
+    Conexion con= new Conexion(null,"easymeal.db",null,10);
     Context c;
     Usuario u;
     ArrayList<Usuario> lista;
@@ -122,7 +123,24 @@ public class daoUsuario extends SQLiteOpenHelper {
         return (sql.delete("t_usuarios","idUsuario="+1,null)>0);
 
     }
-
+    public ArrayList<Usuario> selectUsuarioById(int id){
+        ArrayList<Usuario> lista =new ArrayList<Usuario>();
+        lista.clear();
+        Cursor cr = sql.rawQuery("select * from t_usuarios where idUsuario="+id,null);
+        if(cr != null && cr.moveToFirst()){
+            do{
+                Usuario u = new Usuario();
+                //u.setId(cr.getInt(0));
+                u.setUsername(cr.getString(1));
+                u.setNombre(cr.getString(3));
+                u.setApellidoPaterno(cr.getString(4));
+                u.setApellidoMaterno(cr.getString(5));
+                u.setFechaNacimiento(cr.getString(6));
+                lista.add(u);
+            }while(cr.moveToNext());
+        }
+        return lista;
+    }
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
