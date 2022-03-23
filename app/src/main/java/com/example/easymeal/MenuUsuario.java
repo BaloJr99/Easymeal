@@ -25,7 +25,7 @@ public class MenuUsuario extends AppCompatActivity {
     String username;
     int id = 0;
     TextView idusuario;
-    Button editar,eliminar,ver;
+    Button editar,eliminar,ver,salir;
     daoUsuario dao;
     //DbAyuda db = new DbAyuda(getApplicationContext());
 
@@ -36,13 +36,12 @@ public class MenuUsuario extends AppCompatActivity {
         //getSupportActionBar().hide();
         setContentView(R.layout.activity_menu_usuario);
         dl = findViewById(R.id.drawer_usuario);
-        idusuario = (TextView) findViewById(R.id.idUsuario);
         editar = (Button) findViewById(R.id.btneditar);
         eliminar = (Button) findViewById(R.id.btneliminar);
+        salir = (Button) findViewById(R.id.btnsalir);
         ver = (Button) findViewById(R.id.ver);
         Bundle b=getIntent().getExtras();
         id=b.getInt("idUsuario");
-        idusuario.setText(String.valueOf(id));
 
         editar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +59,14 @@ public class MenuUsuario extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MenuUsuario.this,Menu.class);
+                i.putExtra("idUsuario",id);
+                startActivity(i);
+            }
+        });
     }
     public void eliminarRegistro(View v){
         SQLiteDatabase op=c.getWritableDatabase();
