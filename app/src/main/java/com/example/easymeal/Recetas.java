@@ -1,10 +1,12 @@
 package com.example.easymeal;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -34,7 +36,7 @@ public class Recetas extends AppCompatActivity{
     ArrayList<String> infoList;
     ArrayList<Receta> recetasList;
     EditText nom,pasos;
-    Button insertar,editar,buscar;
+    Button insertar,editar,buscar,borrar;
     RecetaDao dao;
     ArrayList<Receta> busqueda;
 
@@ -55,6 +57,7 @@ public class Recetas extends AppCompatActivity{
         insertar = (Button) findViewById(R.id.btnAgregar);
         editar = (Button) findViewById(R.id.btnEdit);
         buscar = (Button) findViewById(R.id.btnBuscar);
+        borrar = (Button) findViewById(R.id.btnBorrar);
         dao = new RecetaDao(this);
         listaRecetas = (ListView) findViewById(R.id.listaRecetas);
         poblar();
@@ -69,7 +72,6 @@ public class Recetas extends AppCompatActivity{
                 pasos.setText(recetasList.get(i).getPasos());
             }
         });
-
         insertar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,6 +90,7 @@ public class Recetas extends AppCompatActivity{
                 }
             }
         });
+
         editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,7 +142,28 @@ public class Recetas extends AppCompatActivity{
              infoList.add(String.valueOf(recetasList.get(i).getNombre())+"\n Pasos:"+recetasList.get(i).getPasos());
         }
     }
-
+    public void eliminarReceta(View v){
+        SQLiteDatabase op=db.getWritableDatabase();
+        AlertDialog.Builder b= new AlertDialog.Builder(Recetas.this);
+        b.setMessage("¿Seguro que desea eliminar la receta?");
+        b.setCancelable(false);
+        b.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                op.execSQL("DELETE FROM t_receta WHERE nombre='"+nom.getText().toString()+"'");
+                Toast.makeText(Recetas.this,"Receta Eliminada",Toast.LENGTH_LONG).show();
+                Intent i2 = new Intent(Recetas.this,Recetas.class);
+                startActivity(i2);
+            }
+        });
+        b.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        b.show();
+    }
     public void ClickMenu(View v){
         //Abrimos Drawer
         openDrawer(dl);
