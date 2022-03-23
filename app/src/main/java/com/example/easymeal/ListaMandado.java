@@ -1,9 +1,12 @@
 package com.example.easymeal;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -18,7 +21,10 @@ import android.widget.Toast;
 
 import com.example.easymeal.cl.model.bd.Ingrediente;
 import com.example.easymeal.cl.model.dao.IngredienteDao;
+import com.example.easymeal.pdf.TemplatePDF;
 
+import java.lang.reflect.Array;
+import java.security.Permission;
 import java.util.ArrayList;
 
 public class ListaMandado extends AppCompatActivity {
@@ -62,6 +68,8 @@ public class ListaMandado extends AppCompatActivity {
                 startActivity(abrirAgregarLista);
             }
         });
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
     }
 
@@ -181,5 +189,32 @@ public class ListaMandado extends AppCompatActivity {
             tling.addView(tring);
 
         }
+    }
+
+    private String[] header = {"Id", "Nombre", "Apellido"};
+    private String shortText = "Hola";
+    private String longText = "Nunca consideres el estudio como una obligacion";
+
+    public void ClickGenerar(View view) {
+        TemplatePDF templatePDF = new TemplatePDF(this);
+        templatePDF.openDocument();
+        templatePDF.addMetaData("Clientes", "Ventas", "Braulio");
+        templatePDF.addTitles("Tienda CodigoFacilito", "Clientes", "06/12/2017");
+        templatePDF.addParagraph(shortText);
+        templatePDF.addParagraph(longText);
+        templatePDF.createTable(header, getClients());
+        templatePDF.closeDocument();
+        templatePDF.appViewPDF(this);
+    }
+
+    private ArrayList<String[]> getClients(){
+        ArrayList<String[]> rows = new ArrayList<>();
+
+        rows.add(new String[]{"1","Pedro", "Lopez"});
+        rows.add(new String[]{"2","Sofia", "Hernandez"});
+        rows.add(new String[]{"3","Naomi", "Alfaro"});
+        rows.add(new String[]{"4","Lorena", "Espejel"});
+
+        return rows;
     }
 }

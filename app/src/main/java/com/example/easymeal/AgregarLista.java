@@ -347,6 +347,7 @@ public class AgregarLista extends AppCompatActivity {
         sDescripcion.setSelection(0);
         sMedida.setSelection(0);
         sMarca.setSelection(0);
+        llenarSpinners();
     }
 
     public void ClickFoto(View view) {
