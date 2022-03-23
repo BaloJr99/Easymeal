@@ -1,19 +1,25 @@
 package com.example.easymeal.pdf;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.core.content.FileProvider;
+
+import com.example.easymeal.BuildConfig;
+import com.example.easymeal.cl.model.bd.Ingrediente;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
@@ -72,6 +78,7 @@ public class TemplatePDF {
     public void addTitles(String title, String subTitle, String date){
         try {
             paragraph = new Paragraph();
+            addChild(new Paragraph());
             addChild(new Paragraph(title, fTitle));
             addChild(new Paragraph(subTitle, fSubTitle));
             addChild(new Paragraph("Generado: " + date, fHighText));
@@ -98,7 +105,7 @@ public class TemplatePDF {
         }
     }
 
-    public void createTable(String[] header, ArrayList<String[]> clients){
+    public void createTable(String[] header, ArrayList<Ingrediente> ingrediente){
 
         try {
             paragraph = new Paragraph();
@@ -110,17 +117,20 @@ public class TemplatePDF {
             while (indexC < header.length) {
                 pdfPCell = new PdfPCell(new Phrase(header[indexC++], fSubTitle));
                 pdfPCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                pdfPCell.setBackgroundColor(BaseColor.GREEN);
+                pdfPCell.setBackgroundColor(BaseColor.ORANGE);
                 pdfPTable.addCell(pdfPCell);
             }
-            for(int indexR = 0; indexR < clients.size(); indexR++){
-                String[] row = clients.get(indexR);
-                for(indexC = 0; indexC < header.length; indexC++){
-                    pdfPCell = new PdfPCell(new Phrase(row[indexC]));
-                    pdfPCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    pdfPCell.setFixedHeight(40);
-                    pdfPTable.addCell(pdfPCell);
-                }
+
+            for(Ingrediente ing: ingrediente){
+                pdfPCell = new PdfPCell(new Phrase(ing.getDescripcion()));
+                pdfPCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                pdfPTable.addCell(pdfPCell);
+                pdfPCell = new PdfPCell(new Phrase(ing.getCantidadAComprar() + " " + ing.getUnidadDeMedida()));
+                pdfPCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                pdfPTable.addCell(pdfPCell);
+                pdfPCell = new PdfPCell(new Phrase(ing.getCantidadAComprar()));
+                pdfPCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                pdfPTable.addCell(pdfPCell);
             }
 
             paragraph.add(pdfPTable);
@@ -132,10 +142,12 @@ public class TemplatePDF {
 
     public void appViewPDF(Activity activity){
         if(pdfFile.exists()){
-            Uri uri = Uri.fromFile(pdfFile);
+            Uri uri = FileProvider.getUriForFile(activity.getApplicationContext(),  BuildConfig.APPLICATION_ID + ".provider",
+                    pdfFile);
             Intent pdf = new Intent(Intent.ACTION_VIEW);
             pdf.setDataAndType(uri, "application/pdf");
-            pdf.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            pdf.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            pdf.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
             Intent intent = Intent.createChooser(pdf, "Open File");
             try {

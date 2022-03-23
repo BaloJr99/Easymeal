@@ -7,6 +7,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.example.easymeal.pdf.TemplatePDF;
 import java.lang.reflect.Array;
 import java.security.Permission;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ListaMandado extends AppCompatActivity {
 
@@ -59,6 +61,9 @@ public class ListaMandado extends AppCompatActivity {
 
         Bundle datos = this.getIntent().getExtras();
         tipo = datos.getString("tipo");
+        if(tipo.equals("mandado")){
+            btnAgregar.setVisibility(View.GONE);
+        }
         llenarMandado();
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,9 +163,9 @@ public class ListaMandado extends AppCompatActivity {
 
             tvCantidad = new TextView(this);
             if(tipo.equals("mandado")){
-                tvCantidad.setText(String.valueOf(listing.getCantidadAComprar()));
+                tvCantidad.setText(String.valueOf(listing.getCantidadAComprar()) + " " + listing.getUnidadDeMedida());
             }else{
-                tvCantidad.setText(String.valueOf(listing.getCantidad()));
+                tvCantidad.setText(String.valueOf(listing.getCantidad()) + " " + listing.getUnidadDeMedida());
             }
             tvCantidad.setLayoutParams(lcantidad);
             tvCantidad.setGravity(Gravity.CENTER);
@@ -191,30 +196,17 @@ public class ListaMandado extends AppCompatActivity {
         }
     }
 
-    private String[] header = {"Id", "Nombre", "Apellido"};
-    private String shortText = "Hola";
-    private String longText = "Nunca consideres el estudio como una obligacion";
+    private String[] header = {"Nombre", "Cantidad", "Marca"};
 
     public void ClickGenerar(View view) {
+
         TemplatePDF templatePDF = new TemplatePDF(this);
         templatePDF.openDocument();
-        templatePDF.addMetaData("Clientes", "Ventas", "Braulio");
-        templatePDF.addTitles("Tienda CodigoFacilito", "Clientes", "06/12/2017");
-        templatePDF.addParagraph(shortText);
-        templatePDF.addParagraph(longText);
-        templatePDF.createTable(header, getClients());
+        templatePDF.addMetaData("Lista de Mandado de la semana" + Calendar.getInstance().get(Calendar.WEEK_OF_YEAR), "Lista de Mandado", "Braulio");
+        templatePDF.addTitles("Easy Meal", "Lista de Mandado",
+                Calendar.getInstance().getTime().toString());
+        templatePDF.createTable(header, listaIng);
         templatePDF.closeDocument();
         templatePDF.appViewPDF(this);
-    }
-
-    private ArrayList<String[]> getClients(){
-        ArrayList<String[]> rows = new ArrayList<>();
-
-        rows.add(new String[]{"1","Pedro", "Lopez"});
-        rows.add(new String[]{"2","Sofia", "Hernandez"});
-        rows.add(new String[]{"3","Naomi", "Alfaro"});
-        rows.add(new String[]{"4","Lorena", "Espejel"});
-
-        return rows;
     }
 }
