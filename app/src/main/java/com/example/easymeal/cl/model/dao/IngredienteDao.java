@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import com.example.easymeal.cl.model.bd.Ingrediente;
+import com.example.easymeal.cl.model.bd.Producto;
 import com.example.easymeal.cl.model.bd.Usuario;
 
 import java.util.ArrayList;
@@ -26,8 +27,16 @@ public class IngredienteDao {
         ing = new Ingrediente();
     }
 
-    public boolean insertarLista(Ingrediente i){
-        if(!repetidos(i)){
+    public int insertarLista(Ingrediente i){
+        if(repetidos(i) != 0){
+            cv = new ContentValues();
+            cv.put("descripcion", i.getDescripcion());
+            cv.put("mandado", i.getMandado());
+            cv.put("cantidadAcomprar", i.getCantidadAComprar());
+            cv.put("unidadDeMedida", i.getUnidadDeMedida());
+            sql.update("t_ingrediente",cv,"idIngrediente = '" + repetidos(i) + "'", null);
+            return repetidos(i);
+        }else{
             cv = new ContentValues();
             cv.put("descripcion", i.getDescripcion());
             cv.put("unidadDeMedida", i.getUnidadDeMedida());
@@ -36,25 +45,18 @@ public class IngredienteDao {
             cv.put("mandado", i.getMandado());
             cv.put("cantidadAcomprar", i.getCantidadAComprar());
             cv.put("imagen", i.getImagen());
-            return (sql.insert("t_ingrediente",null,cv)>0);
-        }else{
-            cv = new ContentValues();
-            cv.put("mandado", 1);
-            cv.put("cantidadAcomprar", i.getCantidadAComprar());
-            return (sql.update("t_ingrediente",cv,"idIngrediente = '" + ing.getIdIngrediente() + "'", null)>0);
+            return (int) sql.insert("t_ingrediente",null,cv);
         }
     }
 
-    public boolean repetidos(Ingrediente i){
+    public int repetidos(Ingrediente i){
         String[] args = new String[]{i.getDescripcion(), i.getUnidadDeMedida()};
 
         Cursor c = sql.rawQuery("select * from t_ingrediente WHERE descripcion = ? AND unidadDeMedida = ?",args);
         if (c.moveToFirst()){
-            ing = new Ingrediente();
-            ing.setIdIngrediente(c.getInt(0));
-            return true;
+            return c.getInt(0);
         }
-        return false;
+        return 0;
     }
 
     public boolean eliminarLista(int id){

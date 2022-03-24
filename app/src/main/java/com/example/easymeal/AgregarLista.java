@@ -26,6 +26,7 @@ import com.example.easymeal.cl.model.bd.Ingrediente;
 import com.example.easymeal.cl.model.bd.Producto;
 import com.example.easymeal.cl.model.dao.ProductoDao;
 import com.example.easymeal.cl.model.dao.IngredienteDao;
+import com.example.easymeal.cl.model.dao.ProductoIngredienteDao;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class AgregarLista extends AppCompatActivity {
     Ingrediente ing;
     IngredienteDao ingdao;
     ProductoDao prodao;
+    ProductoIngredienteDao proingdao;
     ArrayList<Ingrediente> listaing;
     ArrayList<Producto> listaprod;
 
@@ -204,6 +206,8 @@ public class AgregarLista extends AppCompatActivity {
             ing = new Ingrediente();
             prodao = new ProductoDao();
             prodao.productoDao(this);
+            proingdao = new ProductoIngredienteDao();
+            proingdao.productoIngredienteDao(this);
             pro = new Producto();
             Bitmap bitmap = null;
             byte[] img = null;
@@ -254,8 +258,9 @@ public class AgregarLista extends AppCompatActivity {
                     ing.setCantidad(Float.valueOf(etCantidad.getText().toString()));
                     ing.setFechaCaducidad(fechaCaducidad);
                 }
-                prodao.insertarProducto(pro);
-                ingdao.insertarLista(ing);
+                int insertaprod = prodao.insertarProducto(pro);
+                int insertaing = ingdao.insertarLista(ing);
+                proingdao.insertarProductoIngredienteDao(insertaprod, insertaing);
                 Toast.makeText(this, "INSERTADO", Toast.LENGTH_LONG).show();
                 limpiarCampos();
             }
@@ -318,9 +323,7 @@ public class AgregarLista extends AppCompatActivity {
         }
 
         for(Producto produc: listaprod){
-            if(!listaprodu.contains(produc.getProveedor())){
-                listaprodu.add(produc.getProveedor());
-            }
+            listaprodu.add(produc.getProveedor());
         }
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listadesc);

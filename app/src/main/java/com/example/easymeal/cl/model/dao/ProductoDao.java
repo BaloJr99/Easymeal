@@ -24,10 +24,25 @@ public class ProductoDao {
         prod = new Producto();
     }
 
-    public boolean insertarProducto(Producto p){
-        ContentValues cv = new ContentValues();
-        cv.put("proveedor", p.getProveedor());
-        return (sql.insert("t_producto",null,cv) > 0);
+    public int insertarProducto(Producto p){
+        if(repetidos(p) != 0){
+
+            return repetidos(p);
+        }else{
+            ContentValues cv = new ContentValues();
+            cv.put("proveedor", p.getProveedor());
+            return (int) sql.insert("t_producto",null,cv);
+        }
+    }
+
+    public int repetidos(Producto p){
+        String[] args = new String[]{p.getProveedor()};
+
+        Cursor c = sql.rawQuery("select * from t_producto WHERE proveedor = ?",args);
+        if (c.moveToFirst()){
+            return c.getInt(0);
+        }
+        return 0;
     }
 
     public ArrayList<Producto> listaProducto(){

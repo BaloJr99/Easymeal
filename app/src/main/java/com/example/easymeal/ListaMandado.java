@@ -33,7 +33,7 @@ public class ListaMandado extends AppCompatActivity {
 
     //Inicializamo variable
     DrawerLayout dl;
-    Button btnAgregar;
+    Button btnAgregar, btnGenerar;
     static String username;
 
     IngredienteDao ingDao;
@@ -57,12 +57,13 @@ public class ListaMandado extends AppCompatActivity {
         //Asignamos variable
         dl = findViewById(R.id.drawer_listamandado);
         btnAgregar = findViewById(R.id.agregarlista);
+        btnGenerar = findViewById(R.id.btnGenerar);
         tling = findViewById(R.id.tling);
 
         Bundle datos = this.getIntent().getExtras();
         tipo = datos.getString("tipo");
         if(tipo.equals("mandado")){
-            btnAgregar.setVisibility(View.GONE);
+            btnGenerar.setVisibility(View.GONE);
         }
         llenarMandado();
         btnAgregar.setOnClickListener(new View.OnClickListener() {
