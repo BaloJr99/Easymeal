@@ -7,6 +7,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -14,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -22,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.easymeal.cl.model.bd.Ingrediente;
 import com.example.easymeal.cl.model.dao.IngredienteDao;
+import com.example.easymeal.cl.model.dao.ProductoDao;
 import com.example.easymeal.pdf.TemplatePDF;
 
 import java.lang.reflect.Array;
@@ -37,21 +42,22 @@ public class ListaMandado extends AppCompatActivity {
     static String username;
 
     IngredienteDao ingDao;
+    ProductoDao prodao;
     Ingrediente ing;
     ArrayList<Ingrediente> listaIng;
 
     TableLayout tling;
     TableRow tring;
 
-    TextView tvDescripcion, tvCantidad, tvMedida;
+    TextView tvDescripcion, tvCantidad, tvMarca;
     ImageView ivEliminar;
+    CheckBox cbMarcar;
     String tipo = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        getSupportActionBar().hide();
         setContentView(R.layout.activity_lista_mandado);
 
         //Asignamos variable
@@ -62,7 +68,7 @@ public class ListaMandado extends AppCompatActivity {
 
         Bundle datos = this.getIntent().getExtras();
         tipo = datos.getString("tipo");
-        if(tipo.equals("mandado")){
+        if(!tipo.equals("mandado")){
             btnGenerar.setVisibility(View.GONE);
         }
         llenarMandado();
@@ -145,20 +151,36 @@ public class ListaMandado extends AppCompatActivity {
     public void llenarMandado(){
         ingDao = new IngredienteDao();
         ingDao.ingredienteDao(this);
+        prodao = new ProductoDao();
+        prodao.productoDao(this);
+
         listaIng = ingDao.listaMandado(tipo);
         TableRow.LayoutParams lfila = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        TableRow.LayoutParams ldescripcion = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 4f);
-        TableRow.LayoutParams lcantidad = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 4f);
-        TableRow.LayoutParams lmedida = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 4f);
+        TableRow.LayoutParams lcomun = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 4f);
         TableRow.LayoutParams leliminar = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 3f);
 
         for(Ingrediente listing: listaIng){
             tring = new TableRow(this);
             tring.setLayoutParams(lfila);
 
+            cbMarcar = new CheckBox(this);
+            cbMarcar.setTag(listing.getIdIngrediente());
+            cbMarcar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    TableRow tr = (TableRow) compoundButton.getParent();
+                    if(compoundButton.isChecked()){
+                        tr.setBackgroundColor(Color.LTGRAY);
+                    }else{
+                        tr.setBackgroundColor(0);
+                    }
+                }
+            });
+            tring.addView(cbMarcar);
+
             tvDescripcion = new TextView(this);
             tvDescripcion.setText(listing.getDescripcion());
-            tvDescripcion.setLayoutParams(ldescripcion);
+            tvDescripcion.setLayoutParams(lcomun);
             tvDescripcion.setGravity(Gravity.CENTER);
             tring.addView(tvDescripcion);
 
@@ -168,15 +190,15 @@ public class ListaMandado extends AppCompatActivity {
             }else{
                 tvCantidad.setText(String.valueOf(listing.getCantidad()) + " " + listing.getUnidadDeMedida());
             }
-            tvCantidad.setLayoutParams(lcantidad);
+            tvCantidad.setLayoutParams(lcomun);
             tvCantidad.setGravity(Gravity.CENTER);
             tring.addView(tvCantidad);
 
-            tvMedida = new TextView(this);
-            tvMedida.setText(listing.getUnidadDeMedida());
-            tvMedida.setLayoutParams(lmedida);
-            tvMedida.setGravity(Gravity.CENTER);
-            tring.addView(tvMedida);
+            tvMarca = new TextView(this);
+            tvMarca.setText(prodao.obtenerProducto(listing.getIdIngrediente()));
+            tvMarca.setLayoutParams(lcomun);
+            tvMarca.setGravity(Gravity.CENTER);
+            tring.addView(tvMarca);
 
             ivEliminar = new ImageView(this);
             ivEliminar.setTag(listing.getIdIngrediente());
@@ -200,7 +222,6 @@ public class ListaMandado extends AppCompatActivity {
     private String[] header = {"Nombre", "Cantidad", "Marca"};
 
     public void ClickGenerar(View view) {
-
         TemplatePDF templatePDF = new TemplatePDF(this);
         templatePDF.openDocument();
         templatePDF.addMetaData("Lista de Mandado de la semana" + Calendar.getInstance().get(Calendar.WEEK_OF_YEAR), "Lista de Mandado", "Braulio");

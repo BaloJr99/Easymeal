@@ -45,6 +45,13 @@ public class ProductoDao {
         return 0;
     }
 
+    public String obtenerProducto(int idIngrediente){
+        Cursor c = sql.rawQuery("SELECT * FROM t_productoIngrediente " +
+                "INNER JOIN t_producto ON t_productoIngrediente.idProducto = t_producto.idProducto WHERE t_productoIngrediente.idIngrediente = ?", new String[]{String.valueOf(idIngrediente)});
+        c.moveToFirst();
+        return c.getString(4);
+    }
+
     public ArrayList<Producto> listaProducto(){
         ArrayList<Producto> lista = new ArrayList<>();
         lista.clear();

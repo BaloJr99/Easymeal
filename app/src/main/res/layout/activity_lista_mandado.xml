@@ -28,7 +28,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="26dp"
                 android:text="@string/agregarlista"
-                tools:ignore="TouchTargetSizeCheck"></Button>
+                tools:ignore="TouchTargetSizeCheck">
+            </Button>
             <TableLayout
                 android:id="@+id/tling"
                 android:layout_width="match_parent"
@@ -39,6 +40,9 @@
                 android:layout_marginRight="10dp">
 
                 <TableRow>
+                    <TextView
+                        android:layout_width="35dp">
+                    </TextView>
                     <TextView
                         android:text="@string/descripcion"
                         android:textAlignment="center"
@@ -71,7 +75,8 @@
                 android:layout_marginBottom="26dp"
                 android:text="@string/generarlista"
                 android:onClick="ClickGenerar"
-                tools:ignore="TouchTargetSizeCheck"></Button>
+                tools:ignore="TouchTargetSizeCheck">
+            </Button>
         </RelativeLayout>
     </LinearLayout>
     <RelativeLayout

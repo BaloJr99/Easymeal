@@ -15,6 +15,7 @@ import androidx.core.content.FileProvider;
 
 import com.example.easymeal.BuildConfig;
 import com.example.easymeal.cl.model.bd.Ingrediente;
+import com.example.easymeal.cl.model.dao.ProductoDao;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
@@ -41,6 +42,8 @@ public class TemplatePDF {
     private Font fSubTitle = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
     private Font fText = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
     private Font fHighText = new Font(Font.FontFamily.TIMES_ROMAN, 15, Font.BOLD, BaseColor.BLUE);
+
+    ProductoDao proDao;
 
     public TemplatePDF(Context context){
         this.context = context;
@@ -108,6 +111,8 @@ public class TemplatePDF {
     public void createTable(String[] header, ArrayList<Ingrediente> ingrediente){
 
         try {
+            proDao = new ProductoDao();
+            proDao.productoDao(context);
             paragraph = new Paragraph();
             paragraph.setFont(fText);
             PdfPTable pdfPTable = new PdfPTable(header.length);
@@ -128,7 +133,7 @@ public class TemplatePDF {
                 pdfPCell = new PdfPCell(new Phrase(ing.getCantidadAComprar() + " " + ing.getUnidadDeMedida()));
                 pdfPCell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 pdfPTable.addCell(pdfPCell);
-                pdfPCell = new PdfPCell(new Phrase(ing.getCantidadAComprar()));
+                pdfPCell = new PdfPCell(new Phrase(proDao.obtenerProducto(ing.getIdIngrediente())));
                 pdfPCell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 pdfPTable.addCell(pdfPCell);
             }
