@@ -18,11 +18,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
+import com.example.easymeal.cl.model.bd.Ingrediente;
 import com.example.easymeal.cl.model.bd.Receta;
 
+import com.example.easymeal.cl.model.bd.Usuario;
+import com.example.easymeal.cl.model.dao.Conexion;
+import com.example.easymeal.cl.model.dao.IngredienteDao;
 import com.example.easymeal.cl.model.dao.RecetaDao;
 
 import com.example.easymeal.database.DbAyuda;
@@ -30,6 +35,7 @@ import com.example.easymeal.database.DbAyuda;
 import java.util.ArrayList;
 
 public class Recetas extends AppCompatActivity{
+    Conexion c= new Conexion(this,"easymeal.db",null,11);
     DbAyuda db;
     ArrayAdapter adapter;
     ListView listaRecetas;
@@ -39,8 +45,8 @@ public class Recetas extends AppCompatActivity{
     Button insertar,editar,buscar,borrar;
     RecetaDao dao;
     ArrayList<Receta> busqueda;
-
-
+    Spinner ing;
+    IngredienteDao ingDao;
 
     //Inicializamos variable
     DrawerLayout dl;
@@ -58,11 +64,41 @@ public class Recetas extends AppCompatActivity{
         editar = (Button) findViewById(R.id.btnEdit);
         buscar = (Button) findViewById(R.id.btnBuscar);
         borrar = (Button) findViewById(R.id.btnBorrar);
+        ing=(Spinner) findViewById(R.id.spiingrediente);
         dao = new RecetaDao(this);
         listaRecetas = (ListView) findViewById(R.id.listaRecetas);
         poblar();
         adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,infoList);
         listaRecetas.setAdapter(adapter);
+
+        SQLiteDatabase op=c.getWritableDatabase();
+        Cursor cr = op.rawQuery("SELECT * FROM t_ingrediente",null);
+        ArrayList<Ingrediente> lista =new ArrayList<Ingrediente>();
+        lista.clear();
+        if(cr != null && cr.moveToFirst()) {
+            do {
+                Ingrediente i = new Ingrediente();
+                i.setIdIngrediente(cr.getInt(0));
+
+                i.setDescripcion(cr.getString(1));
+                System.out.println(cr.getString(1));
+                i.setUnidadDeMedida(cr.getString(2));
+                i.setCantidad(cr.getFloat(3));
+                i.setFechaCaducidad(cr.getString(4));
+                i.setMandado(cr.getInt(5));
+                i.setCantidadAComprar(cr.getFloat(6));
+                i.setImagen(cr.getBlob(7));
+                lista.add(i);
+            } while (cr.moveToNext());
+        }
+        ArrayList<String> list = new ArrayList<String>();
+        for (Ingrediente i:lista) {
+            list.add(i.getDescripcion());
+        }
+        //String[] datos = new String[] {"C#", "Java", "Python", "R", "Go"};
+        ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,list);
+        ing.setAdapter(a);
+
 
         listaRecetas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

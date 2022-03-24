@@ -100,4 +100,24 @@ public class IngredienteDao {
 
         return lista;
     }
+    /*public ArrayList<Ingrediente> selectIngredientes(){
+        ArrayList<Ingrediente> lista =new ArrayList<Ingrediente>();
+        lista.clear();
+        Cursor cr = sql.rawQuery("select * from t_ingrediente",null);
+        if(cr != null && cr.moveToFirst()){
+            do{
+                Ingrediente i = new Ingrediente();
+                i.setIdIngrediente(cr.getInt(0));
+                i.setDescripcion(cr.getString(1));
+                i.setUnidadDeMedida(cr.getString(2));
+                i.setCantidad(cr.getFloat(3));
+                i.setFechaCaducidad(cr.getString(4));
+                i.setMandado(cr.getInt(5));
+                i.setCantidadAComprar(cr.getFloat(6));
+                i.setImagen(cr.getBlob(7));
+                lista.add(i);
+            }while(cr.moveToNext());
+        }
+        return lista;
+    }*/
 }
