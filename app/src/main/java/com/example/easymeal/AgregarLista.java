@@ -62,14 +62,42 @@ public class AgregarLista extends AppCompatActivity {
         etMarca = findViewById(R.id.etMarca);
         etCantidad = findViewById(R.id.etCantidad);
         sDescripcion = findViewById(R.id.sDescripcion);
+        ivFoto = findViewById(R.id.ivFoto);
         sDescripcion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(sDescripcion.getSelectedItemPosition() == 0){
                     etDescripcion.setEnabled(true);
+                    if(tipo.equals("mandado")){
+                        ivFoto.setVisibility(View.GONE);
+                        llfecha.setVisibility(View.GONE);
+                    }
                 }else{
                     etDescripcion.setEnabled(false);
+                    System.out.println("Hola");
                     etDescripcion.setText("");
+                    System.out.println("Hola1");
+                    ingdao = new IngredienteDao();
+                    System.out.println("Hola2");
+                    ingdao.ingredienteDao(AgregarLista.this);
+                    System.out.println("Hola3");
+                    listaing = ingdao.listaIngredientes();
+                    System.out.println("Hola4");
+                    for(Ingrediente in: listaing){
+                        System.out.println("Hola5");
+                        if(in.getDescripcion().equals(sDescripcion.getSelectedItem().toString())){
+                            System.out.println("Hola6");
+                            if(in.getImagen() != null){
+                                System.out.println("Hola7");
+                                ivFoto.setVisibility(View.VISIBLE);
+                                System.out.println("Hola8");
+                                Bitmap bmp = BitmapFactory.decodeByteArray(in.getImagen(),0,in.getImagen().length);
+                                System.out.println("Hola9");
+                                ivFoto.setImageBitmap(bmp);
+                                System.out.println("Hola10");
+                            }
+                        }
+                    }
                 }
             }
 
@@ -128,10 +156,6 @@ public class AgregarLista extends AppCompatActivity {
             tipo = parametros.getString("tipo");
         }
 
-        if(tipo.equals("mandado")){
-            ivFoto.setVisibility(View.GONE);
-            llfecha.setVisibility(View.GONE);
-        }
         llenarSpinners();
     }
 

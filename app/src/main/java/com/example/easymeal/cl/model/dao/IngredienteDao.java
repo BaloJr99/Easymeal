@@ -34,6 +34,7 @@ public class IngredienteDao {
             cv.put("mandado", i.getMandado());
             cv.put("cantidadAcomprar", i.getCantidadAComprar());
             cv.put("unidadDeMedida", i.getUnidadDeMedida());
+            cv.put("imagen", i.getImagen());
             sql.update("t_ingrediente",cv,"idIngrediente = '" + repetidos(i) + "'", null);
             return repetidos(i);
         }else{
