@@ -18,155 +18,167 @@
             layout="@layout/main_toolbar">
         </include>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/linearLayout"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="106dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imgLogo"
-                android:layout_width="102dp"
-                android:layout_height="101dp"
-                android:layout_marginTop="4dp"
-                android:baselineAligned="false"
-                android:src="@drawable/logo1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/tvRecetas"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvRecetas"
-                android:layout_width="150dp"
-                android:layout_height="53dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="36dp"
-                android:layout_marginEnd="123dp"
-                android:text="@string/recetas"
-                android:textColor="@color/black"
-                android:textSize="40sp"
-                app:layout_constraintEnd_toStartOf="@+id/imgLogo"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ListView
-            android:id="@+id/listaRecetas"
-            android:layout_width="match_parent"
-            android:layout_height="96dp" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:text="@string/ar"
-            android:textColor="#000000"
-            android:textSize="34sp" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/Layout2"
-            android:layout_width="match_parent"
-            android:layout_height="175dp">
-
-            <TextView
-                android:id="@+id/tvNombre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="14dp"
-                android:text="@string/nombrereceta"
-                app:layout_constraintBottom_toTopOf="@+id/tvPasos"
-                app:layout_constraintEnd_toStartOf="@+id/fieldNombre"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/fieldNombre"
-                android:layout_width="248dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="14dp"
-                android:layout_marginBottom="28dp"
-                android:ems="10"
-                android:hint="Como se llama su receta"
-                android:inputType="textPersonName"
-                app:layout_constraintBottom_toTopOf="@+id/mFieldPasos"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvNombre"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvPasos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="9dp"
-                android:text="@string/pasos"
-                app:layout_constraintBottom_toTopOf="@+id/mFieldPasos"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvNombre" />
-
-            <EditText
-                android:id="@+id/mFieldPasos"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="14dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="Ingrese aqui los pasos para su receta"
-                android:inputType="textMultiLine"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fieldNombre" />
-            <Spinner
-                android:id="@+id/spiingrediente"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mFieldPasos"/>
+                android:orientation="vertical" >
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="106dp"
+                    android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="56dp">
+                    <ImageView
+                        android:id="@+id/imgLogo"
+                        android:layout_width="102dp"
+                        android:layout_height="101dp"
+                        android:layout_marginTop="4dp"
+                        android:baselineAligned="false"
+                        android:src="@drawable/logo1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/tvRecetas"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/btnAgregar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/agregar" />
+                    <TextView
+                        android:id="@+id/tvRecetas"
+                        android:layout_width="150dp"
+                        android:layout_height="53dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginEnd="123dp"
+                        android:text="@string/recetas"
+                        android:textColor="@color/black"
+                        android:textSize="40sp"
+                        app:layout_constraintEnd_toStartOf="@+id/imgLogo"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/btnBorrar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="eliminarReceta"
-                android:text="@string/borrar" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
-                android:id="@+id/btnEdit"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="@string/editar" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/Layout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="175dp">
 
-            <Button
-                android:id="@+id/btnBuscar"
-                android:layout_width="111dp"
-                android:layout_height="wrap_content"
-                android:text="@string/buscar" />
+                    <TextView
+                        android:id="@+id/tvNombre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="17dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="14dp"
+                        android:text="@string/nombrereceta"
+                        app:layout_constraintBottom_toTopOf="@+id/tvPasos"
+                        app:layout_constraintEnd_toStartOf="@+id/fieldNombre"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-        </LinearLayout>
+                    <EditText
+                        android:id="@+id/fieldNombre"
+                        android:layout_width="248dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="14dp"
+                        android:layout_marginBottom="28dp"
+                        android:ems="10"
+                        android:hint="Como se llama su receta"
+                        android:inputType="textPersonName"
+                        app:layout_constraintBottom_toTopOf="@+id/mFieldPasos"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvNombre"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvPasos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginBottom="9dp"
+                        android:text="@string/pasos"
+                        app:layout_constraintBottom_toTopOf="@+id/mFieldPasos"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvNombre" />
+
+                    <EditText
+                        android:id="@+id/mFieldPasos"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:ems="10"
+                        android:gravity="start|top"
+                        android:hint="Ingrese aqui los pasos para su receta"
+                        android:inputType="textMultiLine"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/fieldNombre" />
+
+                    <Spinner
+                        android:id="@+id/spiingrediente"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/mFieldPasos" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:text="@string/ar"
+                    android:textColor="#000000"
+                    android:textSize="34sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp">
+
+                    <Button
+                        android:id="@+id/btnAgregar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/agregar" />
+
+                    <Button
+                        android:id="@+id/btnBorrar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="eliminarReceta"
+                        android:text="@string/borrar" />
+
+                    <Button
+                        android:id="@+id/btnEdit"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/editar" />
+
+                    <Button
+                        android:id="@+id/btnBuscar"
+                        android:layout_width="111dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/buscar" />
+
+                </LinearLayout>
+
+                <ListView
+                    android:id="@+id/listaRecetas"
+                    android:layout_width="match_parent"
+                    android:layout_height="96dp" />
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
     <RelativeLayout
