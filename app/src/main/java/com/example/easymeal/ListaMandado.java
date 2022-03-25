@@ -112,7 +112,7 @@ public class ListaMandado extends AppCompatActivity {
 
     public void ClickLista(View view){
         //Redireccionamos actividad a dashboard
-        recreate();
+        Menu.redirectActivity(this, ListaMandado.class);
     }
 
     public void ClickHorario(View view){
