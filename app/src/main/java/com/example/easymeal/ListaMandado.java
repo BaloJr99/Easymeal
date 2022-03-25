@@ -200,20 +200,25 @@ public class ListaMandado extends AppCompatActivity {
             tvMarca.setGravity(Gravity.CENTER);
             tring.addView(tvMarca);
 
-            ivEliminar = new ImageView(this);
-            ivEliminar.setTag(listing.getIdIngrediente());
-            ivEliminar.setImageResource(R.drawable.ic_delete);
-            ivEliminar.setLayoutParams(leliminar);
-            ivEliminar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    TableRow tablerow = (TableRow) view.getParent();
-                    ImageView items = (ImageView) tablerow.getChildAt(3);
 
-                    ClickEliminar(Integer.parseInt(items.getTag().toString()));
-                }
-            });
+            ivEliminar = new ImageView(this);
+            ivEliminar.setLayoutParams(leliminar);
+
+            if(tipo.equals("mandado")){
+                ivEliminar.setTag(listing.getIdIngrediente());
+                ivEliminar.setImageResource(R.drawable.ic_delete);
+                ivEliminar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        TableRow tablerow = (TableRow) view.getParent();
+                        ImageView items = (ImageView) tablerow.getChildAt(3);
+
+                        ClickEliminar(Integer.parseInt(items.getTag().toString()));
+                    }
+                });
+            }
             tring.addView(ivEliminar);
+
             tling.addView(tring);
 
         }
