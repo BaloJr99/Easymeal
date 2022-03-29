@@ -3,20 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Angel/AndroidStudioProjects/Easymeal/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.178" />
         <entry key="..\:/Users/Angel/AndroidStudioProjects/Easymeal/app/src/main/res/layout/activity_editar_u.xml" value="0.33" />
         <entry key="..\:/Users/Angel/AndroidStudioProjects/Easymeal/app/src/main/res/layout/activity_menu_usuario.xml" value="0.18704710144927536" />
+        <entry key="..\:/Users/Angel/AndroidStudioProjects/Easymeal/app/src/main/res/layout/activity_recetas.xml" value="0.33" />
         <entry key="..\:/Users/Angel/AndroidStudioProjects/Easymeal/app/src/main/res/layout/activity_registro.xml" value="0.5" />
+        <entry key="..\:/Users/Angel/AndroidStudioProjects/Easymeal/app/src/main/res/layout/horario.xml" value="0.17708333333333334" />
         <entry key="..\:/Users/LATITUD/Documents/Android/Easymeal/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.2115" />
         <entry key="..\:/Users/LATITUD/Documents/Android/Easymeal/app/src/main/res/layout/activity_lista_mandado.xml" value="0.1" />
         <entry key="..\:/Users/LATITUD/Documents/Android/Easymeal/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/LATITUD/Documents/Android/Easymeal/app/src/main/res/layout/activity_main2.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/LATITUD/Documents/Android/Easymeal/app/src/main/res/layout/horario.xml" value="0.33" />
+        <entry key="..\:/Users/LATITUD/Documents/Android/Easymeal/app/src/main/res/layout/horario.xml" value="0.1" />
         <entry key="..\:/Users/LATITUD/Documents/Android/Easymeal/app/src/main/res/layout/main_nav_drawer.xml" value="0.1793478260869565" />
         <entry key="..\:/Users/LATITUD/Documents/Android/Easymeal/app/src/main/res/layout/main_toolbar.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/PC005/AndroidStudioProjects/Easymeal/app/src/main/res/layout/activity_acerca_nosotros.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/PC005/AndroidStudioProjects/Easymeal/app/src/main/res/layout/activity_agregar_lista.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/PC005/AndroidStudioProjects/Easymeal/app/src/main/res/layout/activity_editar.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/PC005/AndroidStudioProjects/Easymeal/app/src/main/res/layout/activity_editar_u.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/PC005/AndroidStudioProjects/Easymeal/app/src/main/res/layout/activity_lista_mandado.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/PC005/AndroidStudioProjects/Easymeal/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/PC005/AndroidStudioProjects/Easymeal/app/src/main/res/layout/activity_main2.xml" value="0.25" />
         <entry key="..\:/Users/PC005/AndroidStudioProjects/Easymeal/app/src/main/res/layout/activity_menu_usuario.xml" value="0.25" />
+        <entry key="..\:/Users/PC005/AndroidStudioProjects/Easymeal/app/src/main/res/layout/activity_mostrar_u.xml" value="0.1" />
+        <entry key="..\:/Users/PC005/AndroidStudioProjects/Easymeal/app/src/main/res/layout/activity_recetas.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/PC005/AndroidStudioProjects/Easymeal/app/src/main/res/layout/activity_registro.xml" value="0.1" />
         <entry key="..\:/Users/PC005/AndroidStudioProjects/Easymeal/app/src/main/res/layout/menu.xml" value="0.16523605150214593" />
         <entry key="..\:/Users/baloc/Desktop/Easymeal/app/src/main/res/drawable/ic_camara.xml" value="0.1" />
         <entry key="..\:/Users/baloc/Desktop/Easymeal/app/src/main/res/drawable/ic_delete.xml" value="0.1945" />
@@ -52,10 +62,8 @@
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/recetas.xml" value="0.25" />
         <entry key="..\:/Users/septi/StudioProjects/Easymeal/app/src/main/res/layout/activity_main.xml" value="0.17481884057971014" />
         <entry key="..\:/Users/septi/StudioProjects/Easymeal/app/src/main/res/layout/activity_main2.xml" value="0.17481884057971014" />
-        <entry key="..\:/Users/septi/StudioProjects/Easymeal/app/src/main/res/layout/activity_menu_usuario.xml" value="0.16259057971014493" />
-        <entry key="..\:/Users/septi/StudioProjects/Easymeal/app/src/main/res/layout/activity_recetas.xml" value="0.22" />
+        <entry key="..\:/Users/septi/StudioProjects/Easymeal/app/src/main/res/layout/activity_recetas.xml" value="0.25" />
         <entry key="..\:/Users/septi/StudioProjects/Easymeal/app/src/main/res/layout/activity_registro.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/septi/StudioProjects/Easymeal/app/src/main/res/layout/horario.xml" value="0.1381340579710145" />
         <entry key="..\:/Users/septi/StudioProjects/Easymeal/app/src/main/res/layout/recetas.xml" value="0.3769230769230769" />
       </map>
     </option>
