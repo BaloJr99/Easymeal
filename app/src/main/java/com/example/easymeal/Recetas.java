@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -17,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -44,7 +46,8 @@ public class Recetas extends AppCompatActivity{
     ArrayList<String> infoList;
     ArrayList<Receta> recetasList;
     EditText nom,pasos,cantidad;
-    Button insertar,editar,buscar,borrar,agregarIng;
+    Button agregarIng,nuevoIng;
+    ImageButton insertar,editar,buscar,borrar;
     RecetaDao dao;
     RecetaIngredienteDao daoing;
     ArrayList<Receta> busqueda;
@@ -66,11 +69,12 @@ public class Recetas extends AppCompatActivity{
         nom = (EditText) findViewById(R.id.fieldNombre);
         pasos = (EditText) findViewById(R.id.mFieldPasos);
         cantidad = (EditText) findViewById(R.id.txtCantidad);
-        insertar = (Button) findViewById(R.id.btnAgregar);
-        editar = (Button) findViewById(R.id.btnEdit);
-        buscar = (Button) findViewById(R.id.btnBuscar);
-        borrar = (Button) findViewById(R.id.btnBorrar);
+        insertar = (ImageButton) findViewById(R.id.btnAgregar);
+        editar = (ImageButton) findViewById(R.id.btnEdit);
+        buscar = (ImageButton) findViewById(R.id.btnBuscar);
+        borrar = (ImageButton) findViewById(R.id.btnBorrar);
         agregarIng = (Button) findViewById(R.id.btnAgregarIng);
+        nuevoIng = (Button) findViewById(R.id.btnNuevoIng);
         ing=(Spinner) findViewById(R.id.spiingrediente);
         dao = new RecetaDao(this);
         listaRecetas = (ListView) findViewById(R.id.listaRecetas);
@@ -190,7 +194,15 @@ public class Recetas extends AppCompatActivity{
                 }
             }
         });
-
+        nuevoIng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String tipo = "mandado";
+                Intent i = new Intent(Recetas.this,ListaMandado.class);
+                i.putExtra("tipo",tipo);
+                startActivity(i);
+            }
+        });
     }
     private void poblar(){  //Metodo para poblar el array objeto
         SQLiteDatabase bd = db.getReadableDatabase();
