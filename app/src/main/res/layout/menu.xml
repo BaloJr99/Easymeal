@@ -17,20 +17,56 @@
         </include>
 
         <TextView
+            android:layout_marginTop="20dp"
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="30sp"
             android:textStyle="bold" />
+
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/inicio"
-            android:textSize="50sp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="30sp"
             android:textStyle="bold"
-            android:gravity="center">
-        </TextView>
+            android:fontFamily="sans-serif-thin"
+            android:text="estás son sus estádisticas de ahorro"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:rotation="-90"
+                android:text="GASTO"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/grafico"
+                android:layout_width="match_parent"
+                android:layout_height="400dp">
+            </com.github.mikephil.charting.charts.LineChart>
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="FECHA"/>
     </LinearLayout>
     <RelativeLayout
         android:layout_width="300dp"
