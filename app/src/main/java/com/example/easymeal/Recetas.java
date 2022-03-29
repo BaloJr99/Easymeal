@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 
 import com.example.easymeal.cl.model.bd.Ingrediente;
+import com.example.easymeal.cl.model.bd.IngredienteReceta;
 import com.example.easymeal.cl.model.bd.Receta;
 
 import com.example.easymeal.cl.model.bd.Usuario;
@@ -30,6 +31,7 @@ import com.example.easymeal.cl.model.dao.Conexion;
 import com.example.easymeal.cl.model.dao.IngredienteDao;
 import com.example.easymeal.cl.model.dao.RecetaDao;
 
+import com.example.easymeal.cl.model.dao.RecetaIngredienteDao;
 import com.example.easymeal.database.DbAyuda;
 
 import java.util.ArrayList;
@@ -41,12 +43,15 @@ public class Recetas extends AppCompatActivity{
     ListView listaRecetas;
     ArrayList<String> infoList;
     ArrayList<Receta> recetasList;
-    EditText nom,pasos;
-    Button insertar,editar,buscar,borrar;
+    EditText nom,pasos,cantidad;
+    Button insertar,editar,buscar,borrar,agregarIng;
     RecetaDao dao;
+    RecetaIngredienteDao daoing;
     ArrayList<Receta> busqueda;
     Spinner ing;
     IngredienteDao ingDao;
+    Integer idReceta, idIngrediente;
+
 
     //Inicializamos variable
     DrawerLayout dl;
@@ -60,10 +65,12 @@ public class Recetas extends AppCompatActivity{
         db = new DbAyuda(getApplicationContext());
         nom = (EditText) findViewById(R.id.fieldNombre);
         pasos = (EditText) findViewById(R.id.mFieldPasos);
+        cantidad = (EditText) findViewById(R.id.txtCantidad);
         insertar = (Button) findViewById(R.id.btnAgregar);
         editar = (Button) findViewById(R.id.btnEdit);
         buscar = (Button) findViewById(R.id.btnBuscar);
         borrar = (Button) findViewById(R.id.btnBorrar);
+        agregarIng = (Button) findViewById(R.id.btnAgregarIng);
         ing=(Spinner) findViewById(R.id.spiingrediente);
         dao = new RecetaDao(this);
         listaRecetas = (ListView) findViewById(R.id.listaRecetas);
@@ -79,7 +86,7 @@ public class Recetas extends AppCompatActivity{
             do {
                 Ingrediente i = new Ingrediente();
                 i.setIdIngrediente(cr.getInt(0));
-
+                idIngrediente = cr.getInt(0);
                 i.setDescripcion(cr.getString(1));
                 System.out.println(cr.getString(1));
                 i.setUnidadDeMedida(cr.getString(2));
@@ -106,6 +113,8 @@ public class Recetas extends AppCompatActivity{
 
                 nom.setText(recetasList.get(i).getNombre());
                 pasos.setText(recetasList.get(i).getPasos());
+                idReceta = recetasList.get(i).getIdReceta();
+                agregarIng.setEnabled(true);
             }
         });
         insertar.setOnClickListener(new View.OnClickListener() {
@@ -118,9 +127,11 @@ public class Recetas extends AppCompatActivity{
                     Toast.makeText(Recetas.this,"ERROR: CAMPOS VACIOS",Toast.LENGTH_LONG).show();
                 }else if(dao.insertarReceta(c)){
                     Toast.makeText(Recetas.this,"Registro Exitoso",Toast.LENGTH_LONG).show();
+                    idReceta = dao.ultimaReceta();
                     Intent i2 = new Intent(Recetas.this,Recetas.class);
                     startActivity(i2);
                     poblar();
+                    agregarIng.setEnabled(true);
                 }else{
                     Toast.makeText(Recetas.this,"Receta ya registrada",Toast.LENGTH_LONG).show();
                 }
@@ -152,10 +163,34 @@ public class Recetas extends AppCompatActivity{
                 }else{
                     busqueda = dao.selectReceta(nom.getText().toString());
                     pasos.setText(busqueda.get(0).getPasos());
+                    idReceta = recetasList.get(0).getIdReceta();
                     poblar();
+                    agregarIng.setEnabled(true);
                 }
             }
         });
+        agregarIng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IngredienteReceta r = new IngredienteReceta();
+                r.setCantidad(Float.parseFloat(String.valueOf(cantidad.getText())));
+                r.setIdReceta(idReceta);
+                r.setIdIngrediente(idIngrediente);
+                if(!r.isNull()){
+                    Toast.makeText(Recetas.this,"ERROR: CAMPOS VACIOS",Toast.LENGTH_LONG).show();
+                }else if(daoing.insertarReceta(r)){
+                    Toast.makeText(Recetas.this,"Registro de Ingrediente exitoso",Toast.LENGTH_LONG).show();
+                    idReceta = dao.ultimaReceta();
+                    Intent i2 = new Intent(Recetas.this,Recetas.class);
+                    startActivity(i2);
+                    poblar();
+                    agregarIng.setEnabled(true);
+                }else{
+                    Toast.makeText(Recetas.this,"Ingrediente ya registrado",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
     }
     private void poblar(){  //Metodo para poblar el array objeto
         SQLiteDatabase bd = db.getReadableDatabase();
@@ -190,6 +225,8 @@ public class Recetas extends AppCompatActivity{
                 Toast.makeText(Recetas.this,"Receta Eliminada",Toast.LENGTH_LONG).show();
                 Intent i2 = new Intent(Recetas.this,Recetas.class);
                 startActivity(i2);
+                agregarIng.setEnabled(false);
+
             }
         });
         b.setNegativeButton("NO", new DialogInterface.OnClickListener() {
