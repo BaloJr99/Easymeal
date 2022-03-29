@@ -469,6 +469,7 @@
                         android:layout_weight="1"
                         android:layout_marginRight="5dp"
                         android:text="A G R E G A R"
+                        android:onClick="insetarInformacion"
                         >
                     </Button>
                     <Button

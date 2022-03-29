@@ -1,32 +1,16 @@
 package com.example.easymeal.cl.model.bd;
 
 public class RecetaPreparacion {
-    Integer idRecetaPreparacion,idReceta,idPreparaciones;
+    Integer idRecetaPreparacion,idReceta,idPreparaciones,cantidadAPreparar;
 
     public RecetaPreparacion() {
+
     }
 
-    public RecetaPreparacion(Integer idRecetaPreparacion, Integer idReceta, Integer idPreparaciones) {
-        this.idRecetaPreparacion = idRecetaPreparacion;
+    public RecetaPreparacion(Integer idReceta, Integer idPreparaciones, Integer cantidadAPreparar) {
         this.idReceta = idReceta;
         this.idPreparaciones = idPreparaciones;
-    }
-
-    public boolean isNull(){
-        if(idReceta.equals("")&&idPreparaciones.equals("")){
-            return false;
-        }else{
-            return true;
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "RecetaPreparacion{" +
-                "idRecetaPreparacion=" + idRecetaPreparacion +
-                ", idReceta=" + idReceta +
-                ", idPreparaciones=" + idPreparaciones +
-                '}';
+        this.cantidadAPreparar = cantidadAPreparar;
     }
 
     public Integer getIdRecetaPreparacion() {
@@ -51,5 +35,13 @@ public class RecetaPreparacion {
 
     public void setIdPreparaciones(Integer idPreparaciones) {
         this.idPreparaciones = idPreparaciones;
+    }
+
+    public Integer getCantidadAPreparar() {
+        return cantidadAPreparar;
+    }
+
+    public void setCantidadAPreparar(Integer cantidadAPreparar) {
+        this.cantidadAPreparar = cantidadAPreparar;
     }
 }
