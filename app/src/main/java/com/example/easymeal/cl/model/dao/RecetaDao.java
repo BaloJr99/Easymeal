@@ -3,7 +3,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.example.easymeal.cl.model.bd.Receta;
-import com.example.easymeal.cl.model.bd.Usuario;
 
 import java.util.ArrayList;
 import android.content.Context;
@@ -65,5 +64,10 @@ public class RecetaDao {
         return listaRecetas;
     }
 
+    public Integer ultimaReceta(){
+        Cursor cr = sql.rawQuery("select MAX(idReceta) from t_receta",null);
+        Integer idRecetaMax = cr.getInt(0);
+        return idRecetaMax;
+    }
 
 }

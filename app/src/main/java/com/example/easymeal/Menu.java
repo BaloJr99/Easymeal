@@ -264,7 +264,7 @@ public class Menu extends AppCompatActivity {
                 if(value == 0){
                     return "";
                 }
-                return listaCompras.get((int)value - 1).getFechaCompra();
+                return "";
             }
         });
 
