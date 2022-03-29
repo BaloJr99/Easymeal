@@ -18,7 +18,7 @@ public class Usuario {
     }
 
     public boolean isNull(){
-        if(nombre.equals("")&&apellidoPaterno.equals("")&&apellidoMaterno.equals("")&&username.equals("")&&clave.equals("")&&fechaNacimiento.equals("--/--/--")){
+        if(nombre.equals("")&&apellidoPaterno.equals("")&&apellidoMaterno.equals("")&&username.equals("")&&clave.equals("")&&fechaNacimiento.equals("")){
             return false;
         }else{
             return true;

@@ -30,34 +30,18 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="106dp"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imgLogo"
-                        android:layout_width="102dp"
-                        android:layout_height="101dp"
-                        android:layout_marginTop="4dp"
-                        android:baselineAligned="false"
-                        android:src="@drawable/logo1"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toEndOf="@+id/tvRecetas"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/tvRecetas"
-                        android:layout_width="150dp"
-                        android:layout_height="53dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="36dp"
-                        android:layout_marginEnd="123dp"
-                        android:text="@string/recetas"
+                        android:layout_width="98dp"
+                        android:layout_height="29dp"
+                        android:layout_marginStart="156dp"
+                        android:layout_marginTop="4dp"
+                        android:text="RECETAS"
                         android:textColor="@color/black"
-                        android:textSize="40sp"
-                        app:layout_constraintEnd_toStartOf="@+id/imgLogo"
-                        app:layout_constraintHorizontal_bias="0.0"
+                        android:textSize="20sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -76,6 +60,7 @@
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="14dp"
                         android:text="@string/nombrereceta"
+                        android:textSize="14sp"
                         app:layout_constraintBottom_toTopOf="@+id/tvPasos"
                         app:layout_constraintEnd_toStartOf="@+id/fieldNombre"
                         app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +74,6 @@
                         android:layout_marginEnd="14dp"
                         android:layout_marginBottom="28dp"
                         android:ems="10"
-                        android:hint="Como se llama su receta"
                         android:inputType="textPersonName"
                         app:layout_constraintBottom_toTopOf="@+id/mFieldPasos"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -116,43 +100,56 @@
                         android:layout_marginBottom="14dp"
                         android:ems="10"
                         android:gravity="start|top"
-                        android:hint="Ingrese aqui los pasos para su receta"
                         android:inputType="textMultiLine"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/fieldNombre"
-                        tools:ignore="TextContrastCheck" />
+                        app:layout_constraintTop_toBottomOf="@+id/fieldNombre" />
 
-                    <Spinner
-                        android:id="@+id/spiingrediente"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/mFieldPasos"
-                        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="46dp"
-                    android:text="@string/ar"
-                    android:textColor="#000000"
-                    android:textSize="34sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="56dp">
 
+                    <ImageButton
+                        android:layout_width="95dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="3dp"
+                        android:src="@drawable/ic_baseline_add_24"
+                        android:background="@color/purple_500"
+                        />
+                    <ImageButton
+                        android:layout_width="95dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_delete"
+                        android:background="@color/purple_500"
+                        android:layout_margin="3dp"
+                        />
+                    <ImageButton
+                        android:layout_width="95dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_baseline_update_24"
+                        android:background="@color/purple_500"
+                        android:layout_margin="3dp"
+                        />
+                    <ImageButton
+                        android:layout_width="95dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_baseline_search_24"
+                        android:background="@color/purple_500"
+                        android:layout_margin="3dp"
+                        />
                     <Button
                         android:id="@+id/btnAgregar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/agregar" />
+                        app:icon="@drawable/ic_baseline_add_24"
+                        app:iconTint="#FA851E"
+                        android:gravity="center"
+
+                        />
 
                     <Button
                         android:id="@+id/btnBorrar"
@@ -179,6 +176,43 @@
                     android:id="@+id/listaRecetas"
                     android:layout_width="match_parent"
                     android:layout_height="96dp" />
+
+                <Spinner
+                    android:id="@+id/spiingrediente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/listaRecetas"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp">
+                <Button
+                    android:id="@+id/btnAgregarIng"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Agregar Ingrediente"
+                    android:layout_gravity="center"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="number"
+                        />
+
+            </LinearLayout>
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="30dp"/>
+                <Button
+                    android:id="@+id/btnNuevoIng"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nuevo Ingrediente"
+                    android:layout_gravity="right"/>
+
             </LinearLayout>
         </ScrollView>
 

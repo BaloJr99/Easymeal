@@ -8,15 +8,28 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.easymeal.cl.model.bd.Compras;
 import com.example.easymeal.cl.model.bd.Usuario;
+import com.example.easymeal.cl.model.dao.ComprasDao;
 import com.example.easymeal.cl.model.dao.daoUsuario;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+
+import java.util.ArrayList;
+
 
 public class Menu extends AppCompatActivity {
 
@@ -28,6 +41,10 @@ public class Menu extends AppCompatActivity {
     Usuario u;
     TextView nombreusuario;
     static String tipo = "";
+    private LineChart lineChart;
+
+    private ArrayList<Compras> listaCompras;
+    private ComprasDao compraDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +52,7 @@ public class Menu extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        getSupportActionBar().hide();
         setContentView(R.layout.menu);
+
 
         //Asignamos variable
         dl = findViewById(R.id.drawer_menu);
@@ -44,6 +62,14 @@ public class Menu extends AppCompatActivity {
         dao = new daoUsuario(this);
         u=dao.getUsuarioById(id);
         nombreusuario.setText("BIENVENIDO " + u.getNombre()+" "+u.getApellidoPaterno());
+
+        lineChart = findViewById(R.id.grafico);
+
+        compraDao = new ComprasDao();
+        compraDao.comprasDao(this);
+        listaCompras = compraDao.listaCompras();
+
+        llenarGrafico();
     }
 
     public void ClickMenu(View view){
@@ -188,4 +214,76 @@ public class Menu extends AppCompatActivity {
         //Cerramos drawer
         closeDrawer(dl);
     }
+
+    private void llenarGrafico(){
+        //Diseño de grafico
+        lineChart.setBackgroundColor(Color.WHITE);
+        lineChart.setNoDataText("NO HAY DATOS REGISTRADOS");
+        lineChart.setNoDataTextColor(Color.WHITE);
+        lineChart.setDrawBorders(false);
+        lineChart.getAxisLeft().setDrawGridLines(false);
+        lineChart.getAxisRight().setDrawGridLines(false);
+        lineChart.getXAxis().setDrawGridLines(false);
+        lineChart.getAxisRight().setEnabled(false);
+
+        //Eliminamos legenda
+        Legend legend = lineChart.getLegend();
+        legend.setEnabled(false);
+
+        //Añadimos descripcion
+        lineChart.setDescription(null);
+
+        //Declaracion de datos y diseño de linea
+        LineDataSet lineDataSet = new LineDataSet(getDataVals(), "Data Set 1");
+        lineDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
+        lineDataSet.setHighlightEnabled(true);
+        lineDataSet.setLineWidth(3);
+        lineDataSet.setColor(Color.parseColor("#FA851E"));
+        lineDataSet.setDrawCircles(false);
+        lineDataSet.setDrawHighlightIndicators(true);
+        lineDataSet.setHighLightColor(Color.RED);
+        lineDataSet.setValueTextSize(10);
+        lineDataSet.setValueTextColor(Color.BLACK);
+
+        //Se agregan los datos
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(lineDataSet);
+
+        //Se crea la linea
+        LineData data = new LineData(dataSets);
+
+        //Se configura el Eje X
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setGranularity(1f);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+        xAxis.setLabelRotationAngle(90);
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                if(value == 0){
+                    return "";
+                }
+                return listaCompras.get((int)value - 1).getFechaCompra();
+            }
+        });
+
+        lineChart.animateY(1000);
+        lineChart.setData(data);
+        lineChart.invalidate();
+    }
+
+    private ArrayList<Entry>  getDataVals(){
+        ArrayList<Entry> dataVals = new ArrayList<Entry>();
+        int index = 1;
+
+        dataVals.add(new Entry(0, 0));
+        for(Compras c: listaCompras) {
+            dataVals.add(new Entry(index, (int) c.getImporteGasto()));
+            index++;
+        }
+
+        return dataVals;
+    }
+
 }
