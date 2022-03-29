@@ -121,7 +121,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/fieldNombre" />
+                        app:layout_constraintTop_toBottomOf="@+id/fieldNombre"
+                        tools:ignore="TextContrastCheck" />
 
                     <Spinner
                         android:id="@+id/spiingrediente"
@@ -130,7 +131,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/mFieldPasos" />
+                        app:layout_constraintTop_toBottomOf="@+id/mFieldPasos"
+                        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
