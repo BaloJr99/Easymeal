@@ -39,7 +39,7 @@ import com.example.easymeal.database.DbAyuda;
 import java.util.ArrayList;
 
 public class Recetas extends AppCompatActivity{
-    Conexion c= new Conexion(this,"easymeal.db",null,13);
+    Conexion co= new Conexion(this,"easymeal.db",null,13);
     DbAyuda db;
     ArrayAdapter adapter;
     ListView listaRecetas;
@@ -53,7 +53,7 @@ public class Recetas extends AppCompatActivity{
     ArrayList<Receta> busqueda;
     Spinner ing;
     IngredienteDao ingDao;
-    Integer idReceta, idIngrediente;
+    Integer idReceta, idIngrediente,idMax;
 
 
     //Inicializamos variable
@@ -82,7 +82,7 @@ public class Recetas extends AppCompatActivity{
         adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,infoList);
         listaRecetas.setAdapter(adapter);
 
-        SQLiteDatabase op=c.getWritableDatabase();
+        SQLiteDatabase op=co.getWritableDatabase();
         Cursor cr = op.rawQuery("SELECT * FROM t_ingrediente",null);
         ArrayList<Ingrediente> lista =new ArrayList<Ingrediente>();
         lista.clear();
@@ -124,14 +124,31 @@ public class Recetas extends AppCompatActivity{
         insertar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+               /* SQLiteDatabase op=co.getWritableDatabase();
+                Cursor cr = op.rawQuery("SELECT MAX(idReceta) from t_receta",null);
+                if(cr != null && cr.moveToFirst()){
+                    do {
+
+                        System.out.println(cr.getInt(0));
+                        Toast.makeText(Recetas.this,String.valueOf(cr.getInt(0)),Toast.LENGTH_LONG).show();
+                    }while(cr.moveToNext());
+                }*/
+
                 Receta c = new Receta();
                 c.setNombre(nom.getText().toString());
                 c.setPasos(pasos.getText().toString());
                 if(!c.isNull()){
                     Toast.makeText(Recetas.this,"ERROR: CAMPOS VACIOS",Toast.LENGTH_LONG).show();
-                }else if(dao.insertarReceta(c)){
-                    Toast.makeText(Recetas.this,"Registro Exitoso",Toast.LENGTH_LONG).show();
-                    idReceta = dao.ultimaReceta();
+                }else if(dao.insertarReceta(c)) {
+                    Toast.makeText(Recetas.this, "Registro Exitoso", Toast.LENGTH_LONG).show();
+                    SQLiteDatabase op = co.getWritableDatabase();
+                    Cursor cr = op.rawQuery("SELECT MAX(idReceta) from t_receta", null);
+                    if (cr != null && cr.moveToFirst()) {
+                        do {
+                            System.out.println(cr.getInt(0));
+                            idMax = cr.getInt(0);
+                            Toast.makeText(Recetas.this, String.valueOf(idMax), Toast.LENGTH_LONG).show();
+                        } while (cr.moveToNext());
                     Intent i2 = new Intent(Recetas.this,Recetas.class);
                     startActivity(i2);
                     poblar();
@@ -139,7 +156,8 @@ public class Recetas extends AppCompatActivity{
                 }else{
                     Toast.makeText(Recetas.this,"Receta ya registrada",Toast.LENGTH_LONG).show();
                 }
-            }
+                    }
+                }
         });
 
         editar.setOnClickListener(new View.OnClickListener() {
@@ -184,7 +202,7 @@ public class Recetas extends AppCompatActivity{
                     Toast.makeText(Recetas.this,"ERROR: CAMPOS VACIOS",Toast.LENGTH_LONG).show();
                 }else if(daoing.insertarReceta(r)){
                     Toast.makeText(Recetas.this,"Registro de Ingrediente exitoso",Toast.LENGTH_LONG).show();
-                    idReceta = dao.ultimaReceta();
+                    //idReceta = dao.ultimaReceta();
                     Intent i2 = new Intent(Recetas.this,Recetas.class);
                     startActivity(i2);
                     poblar();

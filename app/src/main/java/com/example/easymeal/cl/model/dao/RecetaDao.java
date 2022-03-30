@@ -64,10 +64,31 @@ public class RecetaDao {
         return listaRecetas;
     }
 
-    public Integer ultimaReceta(){
+   /* public Integer ultimaReceta(){
         Cursor cr = sql.rawQuery("select MAX(idReceta) from t_receta",null);
-        Integer idRecetaMax = cr.getInt(0);
-        return idRecetaMax;
-    }
+        int idRecetaMax = 0;
+        if(cr != null && cr.moveToFirst()){
+            do{
+                Receta receta = new Receta();
+                receta.setIdReceta(cr.getInt(0));
+            }while(cr.moveToNext());
 
+        }
+        return idRecetaMax;
+    }*/
+   public ArrayList<Receta> ultimaReceta(){
+       ArrayList<Receta> listaRecetas =new ArrayList<Receta>();
+       listaRecetas.clear();
+       Cursor cr = sql.rawQuery("select MAX(idReceta) from t_receta",null);
+       if(cr != null && cr.moveToFirst()){
+           do{
+               Receta receta = new Receta();
+               receta.setIdReceta(cr.getInt(0));
+               receta.setNombre(cr.getString(1));
+               receta.setPasos(cr.getString(2));
+               listaRecetas.add(receta);
+           }while(cr.moveToNext());
+       }
+       return listaRecetas;
+   }
 }
