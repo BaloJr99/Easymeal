@@ -32,7 +32,7 @@
             android:textSize="30sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-thin"
-            android:text="estás son sus estádisticas de ahorro"/>
+            android:text="@string/estadisticas"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:rotation="-90"
-                android:text="GASTO"/>
+                android:text="@string/gasto"/>
 
             <com.github.mikephil.charting.charts.LineChart
                 android:layout_marginLeft="10dp"
@@ -61,12 +61,94 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
             android:layout_marginTop="15dp"
             android:gravity="center"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:text="FECHA"/>
+            android:text="@string/fecha"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/importe"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"
+                android:gravity="start|center_vertical"
+                android:layout_weight="1">
+            </TextView>
+
+            <EditText
+                android:id="@+id/importeCompra"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="@string/captura_importe"
+                android:inputType="numberDecimal">
+            </EditText>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_width="170dp"
+                android:layout_height="match_parent"
+                android:text="@string/fecha_de_compra"
+                android:textSize="20sp"
+                android:gravity="start|center_vertical">
+            </TextView>
+
+            <EditText
+                android:id="@+id/etFechaCompra"
+                android:layout_marginStart="30dp"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:hint="@string/formatofecha"
+                android:inputType="number"
+                android:enabled="false"
+                android:textSize="20sp">
+            </EditText>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_baseline_calendar_today_24"
+                android:onClick="mostrarFecha">
+            </ImageView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:onClick="agregarCompra"
+                android:id="@+id/btnAgregarCompra"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/agregar"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp">
+            </Button>
+            <Button
+                android:id="@+id/btnModificarCompra"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/modificar"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp">
+
+            </Button>
+        </LinearLayout>
     </LinearLayout>
     <RelativeLayout
         android:layout_width="300dp"
@@ -74,7 +156,9 @@
         android:layout_gravity="start"
         android:background="@android:color/white">
 
-        <include layout="@layout/main_nav_drawer"></include>
+        <include layout="@layout/main_nav_drawer">
+
+        </include>
 
     </RelativeLayout>
 

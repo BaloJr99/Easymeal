@@ -37,4 +37,11 @@ public class ComprasDao {
         }
         return listaCompras;
     }
+
+    public boolean insertarCompra(Compras compra) {
+        cv = new ContentValues();
+        cv.put("fechaCompra", compra.getFechaCompra());
+        cv.put("importeGastado", compra.getImporteGasto());
+        return(sql.insert("t_compras", null, cv)>0);
+    }
 }

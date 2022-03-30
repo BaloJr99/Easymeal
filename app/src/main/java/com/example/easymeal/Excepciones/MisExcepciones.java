@@ -33,6 +33,12 @@ public class MisExcepciones extends Exception{
             case 6:
                 mensaje = "Favor de tomar la foto";
                 break;
+            case 7:
+                mensaje = "No hay importe capturado";
+                break;
+            case 8:
+                mensaje = "Favor de ingresar la fecha";
+                break;
 
         }
         return mensaje;

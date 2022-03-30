@@ -6,14 +6,19 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.easymeal.Excepciones.MisExcepciones;
 import com.example.easymeal.cl.model.bd.Compras;
 import com.example.easymeal.cl.model.bd.Usuario;
 import com.example.easymeal.cl.model.dao.ComprasDao;
@@ -29,22 +34,29 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class Menu extends AppCompatActivity {
 
     //Inicializamos variables
     DrawerLayout dl;
+
     static String username;
     static int id;
+
     daoUsuario dao;
     Usuario u;
     TextView nombreusuario;
+
     static String tipo = "";
     private LineChart lineChart;
+    private EditText etFecha;
+    private EditText etImporte;
 
     private ArrayList<Compras> listaCompras;
     private ComprasDao compraDao;
+    private Compras compras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,22 +69,24 @@ public class Menu extends AppCompatActivity {
         //Asignamos variable
         dl = findViewById(R.id.drawer_menu);
         nombreusuario = findViewById(R.id.username);
-        Bundle b=getIntent().getExtras();
-        id=b.getInt("idUsuario");
-        dao = new daoUsuario(this);
-        u=dao.getUsuarioById(id);
-        nombreusuario.setText("BIENVENIDO " + u.getNombre()+" "+u.getApellidoPaterno());
-
         lineChart = findViewById(R.id.grafico);
+        etFecha = findViewById(R.id.etFechaCompra);
+        etImporte = findViewById(R.id.importeCompra);
+
+        Bundle b = getIntent().getExtras();
+        id = b.getInt("idUsuario");
+
+        dao = new daoUsuario(this);
+        u = dao.getUsuarioById(id);
+        nombreusuario.setText("BIENVENIDO " + u.getNombre() + " " + u.getApellidoPaterno());
 
         compraDao = new ComprasDao();
         compraDao.comprasDao(this);
-        listaCompras = compraDao.listaCompras();
 
         llenarGrafico();
     }
 
-    public void ClickMenu(View view){
+    public void ClickMenu(View view) {
         //Abrimos drawer
         openDrawer(dl);
     }
@@ -82,52 +96,53 @@ public class Menu extends AppCompatActivity {
         drawer.openDrawer(GravityCompat.START);
     }
 
-    public void ClickLogo(View view){
+    public void ClickLogo(View view) {
         //Cerramos el drawer
         closeDrawer(dl);
     }
 
     public static void closeDrawer(DrawerLayout drawer) {
         //Cerramos el layout si esta abierto
-        if(drawer.isDrawerOpen(GravityCompat.START)){
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             //Cuando este abierto cerramos el drawer
             drawer.closeDrawer(GravityCompat.START);
         }
     }
 
-    public void ClickInicio(View view){
+    public void ClickInicio(View view) {
         //Recreamos actividad
         recreate();
     }
 
-    public void ClickRecetas(View view){
+    public void ClickRecetas(View view) {
         //Redireccionamos actividad a dashboard
         redirectActivity(this, Recetas.class);
     }
 
-    public void ClickLista(View view){
+    public void ClickLista(View view) {
         //Redireccionamos actividad a dashboard
         redirectActivity(Menu.this, ListaMandado.class);
 
     }
 
-    public void ClickHorario(View view){
+    public void ClickHorario(View view) {
         //Redireccionamos actividad a dashboard
         redirectActivity(this, Horario.class);
     }
 
-    public void ClickAcercaDe(View view){
+    public void ClickAcercaDe(View view) {
         //Redireccionamos actividad a acerca de nosotros
         redirectActivity(this, AcercaNosotros.class);
     }
 
-    public void ClickSalir(View view){
+    public void ClickSalir(View view) {
         //Cerramos app
         logout(this);
     }
-    public void ClickUsuarios (View v){
-       //Nos dirijimos al menu de los usuarios
-       redirectActivity(this,MenuUsuario.class);
+
+    public void ClickUsuarios(View v) {
+        //Nos dirijimos al menu de los usuarios
+        redirectActivity(this, MenuUsuario.class);
     }
 
     public static void logout(Activity activity) {
@@ -167,7 +182,7 @@ public class Menu extends AppCompatActivity {
 
         Intent intent = new Intent(activity, aClass);
         intent.putExtra("idUsuario", id);
-        if(aClass == ListaMandado.class){
+        if (aClass == ListaMandado.class) {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             //Establecemos el titulo
             builder.setTitle("Alacena");
@@ -177,7 +192,8 @@ public class Menu extends AppCompatActivity {
             builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    tipo = "mandado";intent.putExtra("tipo", tipo);
+                    tipo = "mandado";
+                    intent.putExtra("tipo", tipo);
                     //Creamos bandera
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //Empezamos activity
@@ -190,7 +206,8 @@ public class Menu extends AppCompatActivity {
             builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    tipo = "";intent.putExtra("tipo", tipo);
+                    tipo = "";
+                    intent.putExtra("tipo", tipo);
                     //Creamos bandera
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //Empezamos activity
@@ -200,7 +217,7 @@ public class Menu extends AppCompatActivity {
 
             //Mostramos el dialogo
             builder.show();
-        }else{
+        } else {
             //Creamos bandera
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             //Empezamos activity
@@ -215,7 +232,8 @@ public class Menu extends AppCompatActivity {
         closeDrawer(dl);
     }
 
-    private void llenarGrafico(){
+    private void llenarGrafico() {
+        listaCompras = compraDao.listaCompras();
         //Diseño de grafico
         lineChart.setBackgroundColor(Color.WHITE);
         lineChart.setNoDataText("NO HAY DATOS REGISTRADOS");
@@ -261,10 +279,15 @@ public class Menu extends AppCompatActivity {
         xAxis.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
-                if(value == 0){
+                if (value == 0) {
                     return "";
                 }
-                return "";
+
+                if (listaCompras.size() != 0) {
+                    return listaCompras.get((int) value - 1).getFechaCompra();
+                } else {
+                    return "";
+                }
             }
         });
 
@@ -273,12 +296,12 @@ public class Menu extends AppCompatActivity {
         lineChart.invalidate();
     }
 
-    private ArrayList<Entry>  getDataVals(){
+    private ArrayList<Entry> getDataVals() {
         ArrayList<Entry> dataVals = new ArrayList<Entry>();
         int index = 1;
 
         dataVals.add(new Entry(0, 0));
-        for(Compras c: listaCompras) {
+        for (Compras c : listaCompras) {
             dataVals.add(new Entry(index, (int) c.getImporteGasto()));
             index++;
         }
@@ -286,4 +309,53 @@ public class Menu extends AppCompatActivity {
         return dataVals;
     }
 
+    public void mostrarFecha(View view) {
+        int dia, mes, ano;
+        Calendar c = Calendar.getInstance();
+        dia = c.get(Calendar.DAY_OF_MONTH);
+        mes = c.get(Calendar.MONTH);
+        ano = c.get(Calendar.YEAR);
+
+        DatePickerDialog date = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int anio, int mes, int dia) {
+                etFecha.setText(dia + "/" + mes + "/" + anio);
+            }
+        }, ano, mes, dia);
+        date.show();
+    }
+
+    public void agregarCompra(View view) {
+        if(!camposVacios()){
+            compras = new Compras();
+            compras.setFechaCompra(etFecha.getText().toString());
+            compras.setImporteGasto(Float.parseFloat(etImporte.getText().toString()));
+            if(compraDao.insertarCompra(compras)){
+                Toast.makeText(this, "Insertado exitosamente", Toast.LENGTH_SHORT).show();
+                limpiarCampos();
+                llenarGrafico();
+            }else {
+                Toast.makeText(this, "Ocurrio un error al insertar", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void limpiarCampos(){
+        etFecha.setText("");
+        etImporte.setText("");
+    }
+
+    private boolean camposVacios(){
+        try {
+            if(etImporte.getText().toString().trim().isEmpty()){
+                throw new MisExcepciones(7);
+            }else if(etFecha.getText().toString().trim().isEmpty()){
+                throw new MisExcepciones(8);
+            }
+            return false;
+        }catch (MisExcepciones me){
+            Toast.makeText(this, me.getMessage(), Toast.LENGTH_SHORT).show();
+            return true;
+        }
+    }
 }
