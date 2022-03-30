@@ -167,29 +167,34 @@ public class AgregarLista extends AppCompatActivity {
         Menu.closeDrawer(dl);
     }
 
+    public void ClickAlacena(View view) {
+        //Redireccionamos actividad a dashboard
+        Menu.redirectActivity(this, ListaMandado.class, "");
+    }
+
     public void ClickInicio(View v){
         //Redireccionamos activity a inicio
-        Menu.redirectActivity(this, Menu.class);
+        Menu.redirectActivity(this, Menu.class, "");
     }
 
     public void ClickRecetas(View v){
         //Redireccionamos actividad a tablero
-        Menu.redirectActivity(this, Recetas.class);
+        Menu.redirectActivity(this, Recetas.class, "");
     }
 
     public void ClickAcercaDe(View v){
         //Recreamos actividad
-        Menu.redirectActivity(this, AcercaNosotros.class);
+        Menu.redirectActivity(this, AcercaNosotros.class, "");
     }
 
     public void ClickLista(View view){
         //Redireccionamos actividad a dashboard
-        Menu.redirectActivity(this, ListaMandado.class);
+        Menu.redirectActivity(this, ListaMandado.class, tipo);
     }
 
     public void ClickHorario(View view){
         //Redireccionamos actividad a dashboard
-        Menu.redirectActivity(this, Horario.class);
+        Menu.redirectActivity(this, Horario.class, tipo);
     }
 
     public void ClickSalir(View v){
@@ -199,12 +204,12 @@ public class AgregarLista extends AppCompatActivity {
 
     public void ClickSalirAgregar(View v){
         //Cerramos app
-        Menu.redirectActivity(this, ListaMandado.class);
+        Menu.redirectActivity(this, ListaMandado.class, "");
     }
 
     public void ClickUsuarios (View v){
         //Nos dirijimos al menu de los usuarios
-        Menu.redirectActivity(this,MenuUsuario.class);
+        Menu.redirectActivity(this,MenuUsuario.class, "");
     }
 
     @Override

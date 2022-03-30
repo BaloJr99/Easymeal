@@ -42,14 +42,13 @@ public class ComprasDao {
         cv = new ContentValues();
         cv.put("fechaCompra", compra.getFechaCompra());
         cv.put("importeGastado", compra.getImporteGasto());
-        return(sql.insert("t_compras", null, cv)>0);
+        return(sql.insert("t_compras+", null, cv)>0);
     }
 
     public boolean modificarCompra(Compras compras) {
         cv = new ContentValues();
-        System.out.println(compras.getIdCompra());
-        cv.put("fechaCompra", compra.getFechaCompra());
-        cv.put("importeGastado", compra.getImporteGasto());
+        cv.put("fechaCompra", compras.getFechaCompra());
+        cv.put("importeGastado", compras.getImporteGasto());
         return(sql.update("t_compras",cv,"idCompras = '" + compras.getIdCompra() + "'", null) > 0);
     }
 }

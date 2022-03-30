@@ -256,7 +256,12 @@ public class Recetas extends AppCompatActivity{
 
     public void ClickUsuarios (View v){
         //Nos dirijimos al menu de los usuarios
-        Menu.redirectActivity(this,MenuUsuario.class);
+        Menu.redirectActivity(this,MenuUsuario.class, "");
+    }
+
+    public void ClickAlacena(View view) {
+        //Redireccionamos actividad a dashboard
+        Menu.redirectActivity(this, ListaMandado.class, "");
     }
 
     public static void openDrawer(DrawerLayout drawer) {
@@ -271,7 +276,7 @@ public class Recetas extends AppCompatActivity{
 
     public void ClickInicio(View v){
         //Redireccionamos activity a inicio
-        Menu.redirectActivity(this, Menu.class);
+        Menu.redirectActivity(this, Menu.class, "");
     }
 
     public void ClickRecetas(View v){
@@ -281,17 +286,17 @@ public class Recetas extends AppCompatActivity{
 
     public void ClickLista(View view){
         //Redireccionamos actividad a dashboard
-        Menu.redirectActivity(this, ListaMandado.class);
+        Menu.redirectActivity(this, ListaMandado.class, "mandado");
     }
 
     public void ClickHorario(View view){
         //Redireccionamos actividad a dashboard
-        Menu.redirectActivity(this, Horario.class);
+        Menu.redirectActivity(this, Horario.class, "");
     }
 
     public void ClickAcercaDe(View v){
         //Redireccionamos actividad a acerca de nosotros
-        Menu.redirectActivity(this, AcercaNosotros.class);
+        Menu.redirectActivity(this, AcercaNosotros.class, "");
     }
 
     public void ClickSalir(View v){

@@ -51,7 +51,6 @@ public class Menu extends AppCompatActivity {
     Usuario u;
     TextView nombreusuario;
 
-    static String tipo = "";
     private LineChart lineChart;
     private EditText etFecha;
     private EditText etImporte;
@@ -118,23 +117,27 @@ public class Menu extends AppCompatActivity {
 
     public void ClickRecetas(View view) {
         //Redireccionamos actividad a dashboard
-        redirectActivity(this, Recetas.class);
+        redirectActivity(this, Recetas.class, "");
     }
 
     public void ClickLista(View view) {
         //Redireccionamos actividad a dashboard
-        redirectActivity(Menu.this, ListaMandado.class);
+        redirectActivity(Menu.this, ListaMandado.class, "mandado");
+    }
 
+    public void ClickAlacena(View view) {
+        //Redireccionamos actividad a dashboard
+        redirectActivity(Menu.this, ListaMandado.class, "");
     }
 
     public void ClickHorario(View view) {
         //Redireccionamos actividad a dashboard
-        redirectActivity(this, Horario.class);
+        redirectActivity(this, Horario.class, "");
     }
 
     public void ClickAcercaDe(View view) {
         //Redireccionamos actividad a acerca de nosotros
-        redirectActivity(this, AcercaNosotros.class);
+        redirectActivity(this, AcercaNosotros.class, "");
     }
 
     public void ClickSalir(View view) {
@@ -144,7 +147,7 @@ public class Menu extends AppCompatActivity {
 
     public void ClickUsuarios(View v) {
         //Nos dirijimos al menu de los usuarios
-        redirectActivity(this, MenuUsuario.class);
+        redirectActivity(this, MenuUsuario.class, "");
     }
 
     public static void logout(Activity activity) {
@@ -179,52 +182,16 @@ public class Menu extends AppCompatActivity {
         builder.show();
     }
 
-    public static void redirectActivity(Activity activity, Class aClass) {
+    public static void redirectActivity(Activity activity, Class aClass, String tipo) {
         //Inicializamos el intento
 
         Intent intent = new Intent(activity, aClass);
         intent.putExtra("idUsuario", id);
-        if (aClass == ListaMandado.class) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-            //Establecemos el titulo
-            builder.setTitle("Alacena");
-            //Establecemos el mensaje
-            builder.setMessage("Deseas generar lista de mandado?");
-            //Boton de seguro
-            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    tipo = "mandado";
-                    intent.putExtra("tipo", tipo);
-                    //Creamos bandera
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    //Empezamos activity
-                    activity.startActivity(intent);
-                }
-            });
-
-            //Boton negativo
-
-            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    tipo = "";
-                    intent.putExtra("tipo", tipo);
-                    //Creamos bandera
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    //Empezamos activity
-                    activity.startActivity(intent);
-                }
-            });
-
-            //Mostramos el dialogo
-            builder.show();
-        } else {
-            //Creamos bandera
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            //Empezamos activity
-            activity.startActivity(intent);
-        }
+        intent.putExtra("tipo", tipo);
+        //Creamos bandera
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //Empezamos activity
+        activity.startActivity(intent);
     }
 
     @Override

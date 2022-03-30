@@ -50,4 +50,5 @@
     <string name="modificar">Modificar</string>
     <string name="importe">Importe</string>
     <string name="formatofecha">--/--/----</string>
+    <string name="lista_del_mandado">Lista del mandado</string>
 </resources>
