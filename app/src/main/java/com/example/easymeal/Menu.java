@@ -31,7 +31,9 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -243,6 +245,24 @@ public class Menu extends AppCompatActivity {
         lineChart.getAxisRight().setDrawGridLines(false);
         lineChart.getXAxis().setDrawGridLines(false);
         lineChart.getAxisRight().setEnabled(false);
+        lineChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+                if(e.getX() != 0){
+                    etImporte.setText(String.valueOf(listaCompras.get((int)e.getX() - 1).getImporteGasto()));
+                    etImporte.setTag((int)e.getX());
+                    etFecha.setText(listaCompras.get((int)e.getX() - 1).getFechaCompra());
+                }else{
+                    etImporte.setText("");
+                    etFecha.setText("");
+                }
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
 
         //Eliminamos legenda
         Legend legend = lineChart.getLegend();
@@ -343,6 +363,7 @@ public class Menu extends AppCompatActivity {
     private void limpiarCampos(){
         etFecha.setText("");
         etImporte.setText("");
+        etImporte.setTag("0");
     }
 
     private boolean camposVacios(){
@@ -356,6 +377,22 @@ public class Menu extends AppCompatActivity {
         }catch (MisExcepciones me){
             Toast.makeText(this, me.getMessage(), Toast.LENGTH_SHORT).show();
             return true;
+        }
+    }
+
+    public void modificarCompra(View view) {
+        if(!camposVacios()  && etImporte.getTag() != "0"){
+            compras = new Compras();
+            compras.setIdCompra(Integer.parseInt(etImporte.getTag().toString()));
+            compras.setFechaCompra(etFecha.getText().toString());
+            compras.setImporteGasto(Float.parseFloat(etImporte.getText().toString()));
+            if(compraDao.modificarCompra(compras)){
+                Toast.makeText(this, "Modificado exitosamente", Toast.LENGTH_SHORT).show();
+                limpiarCampos();
+                llenarGrafico();
+            }else {
+                Toast.makeText(this, "Ocurrio un error al modificar", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
