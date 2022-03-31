@@ -20,7 +20,7 @@ import com.example.easymeal.cl.model.dao.daoUsuario;
 import com.example.easymeal.database.DbAyuda;
 
 public class MenuUsuario extends AppCompatActivity {
-    Conexion c= new Conexion(this,"easymeal.db",null,11);
+    Conexion c= new Conexion(this,"easymeal.db",null,13);
     DrawerLayout dl;
     String username;
     int id = 0;
