@@ -146,12 +146,16 @@ public class Recetas extends AppCompatActivity{
                     if (cr != null && cr.moveToFirst()) {
                         do {
                             System.out.println(cr.getInt(0));
-                            idMax = cr.getInt(0);
-                            Toast.makeText(Recetas.this, String.valueOf(idMax), Toast.LENGTH_LONG).show();
+                            idReceta = cr.getInt(0);
+                            Toast.makeText(Recetas.this, String.valueOf(idReceta), Toast.LENGTH_LONG).show();
                         } while (cr.moveToNext());
-                    Intent i2 = new Intent(Recetas.this,Recetas.class);
+                    /*Intent i2 = new Intent(Recetas.this,Recetas.class);
                     startActivity(i2);
-                    poblar();
+                    poblar();*/
+                        poblar();
+                        //ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,infoList);
+                        ArrayAdapter adapter = new ArrayAdapter(Recetas.this, android.R.layout.simple_expandable_list_item_1,infoList);
+                        listaRecetas.setAdapter(adapter);
                     agregarIng.setEnabled(true);
                 }else{
                     Toast.makeText(Recetas.this,"Receta ya registrada",Toast.LENGTH_LONG).show();
@@ -194,8 +198,17 @@ public class Recetas extends AppCompatActivity{
         agregarIng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SQLiteDatabase op = co.getWritableDatabase();
+                Cursor cr = op.rawQuery("SELECT idIngrediente from t_ingrediente WHERE descripcion='"+ing.getSelectedItem().toString()+"'", null);
+                if (cr != null && cr.moveToFirst()) {
+                    do {
+                        System.out.println(cr.getInt(0));
+                        idIngrediente = cr.getInt(0);
+                        Toast.makeText(Recetas.this, String.valueOf(idIngrediente), Toast.LENGTH_LONG).show();
+                    } while (cr.moveToNext());
+                }
                 IngredienteReceta r = new IngredienteReceta();
-                r.setCantidad(Float.parseFloat(String.valueOf(cantidad.getText())));
+                r.setCantidad(Float.parseFloat(cantidad.getText().toString()));
                 r.setIdReceta(idReceta);
                 r.setIdIngrediente(idIngrediente);
                 if(!r.isNull()){
