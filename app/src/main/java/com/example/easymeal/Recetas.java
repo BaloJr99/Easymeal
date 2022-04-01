@@ -173,10 +173,24 @@ public class Recetas extends AppCompatActivity{
                 if(!c.isNull()){
                     Toast.makeText(Recetas.this,"ERROR: CAMPOS VACIOS",Toast.LENGTH_LONG).show();
                 }else if(dao.updateReceta(c)){
-                    Toast.makeText(Recetas.this,"Registro Exitoso",Toast.LENGTH_LONG).show();
-                    Intent i2 = new Intent(Recetas.this,Recetas.class);
-                    startActivity(i2);
+                    SQLiteDatabase op = co.getWritableDatabase();
+                    Cursor cr = op.rawQuery("SELECT idReceta from t_receta WHERE nombre='"+nom.getText().toString()+"'", null);
+                    if (cr != null && cr.moveToFirst()) {
+                        do {
+                            System.out.println(cr.getInt(0));
+                            idReceta = cr.getInt(0);
+                            Toast.makeText(Recetas.this, String.valueOf(idReceta), Toast.LENGTH_LONG).show();
+                        } while (cr.moveToNext());
+                    }
                     poblar();
+                    //ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,infoList);
+                    ArrayAdapter adapter = new ArrayAdapter(Recetas.this, android.R.layout.simple_expandable_list_item_1,infoList);
+                    listaRecetas.setAdapter(adapter);
+                    agregarIng.setEnabled(true);
+                    Toast.makeText(Recetas.this,"Registro Exitoso",Toast.LENGTH_LONG).show();
+                    /*Intent i2 = new Intent(Recetas.this,Recetas.class);
+                    startActivity(i2);*/
+                    //poblar();
                 }
             }
         });
@@ -211,6 +225,7 @@ public class Recetas extends AppCompatActivity{
                 r.setCantidad(Float.parseFloat(cantidad.getText().toString()));
                 r.setIdReceta(idReceta);
                 r.setIdIngrediente(idIngrediente);
+                daoing = new RecetaIngredienteDao(Recetas.this);
                 if(!r.isNull()){
                     Toast.makeText(Recetas.this,"ERROR: CAMPOS VACIOS",Toast.LENGTH_LONG).show();
                 }else if(daoing.insertarReceta(r)){
