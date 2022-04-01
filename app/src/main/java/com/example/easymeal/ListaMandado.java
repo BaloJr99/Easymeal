@@ -190,6 +190,7 @@ public class ListaMandado extends AppCompatActivity {
             if(tipo.equals("mandado")){
                 cantidad = listing.getCantidadAComprar();
             }else{
+                cbMarcar.setEnabled(false);
                 cantidad = listing.getCantidad();
             }
 
