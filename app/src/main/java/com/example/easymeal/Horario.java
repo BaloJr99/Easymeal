@@ -226,7 +226,16 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
 
     public void insetarInformacion(View view){
         try {
-
+            if(!txtFecha.getText().toString().equals("--/--/----") &&
+                    ((lunes_alm.getSelectedItemPosition()!=(0))||(lunes_com.getSelectedItemPosition()!=(0))|| (lun_cen.getSelectedItemPosition()!=(0))||
+                    (martes_alm.getSelectedItemPosition()!=(0))||(martes_com.getSelectedItemPosition()!=(0))|| (martes_cen.getSelectedItemPosition()!=(0))||
+                            (miercoles_alm.getSelectedItemPosition()!=(0))||(miercoles_com.getSelectedItemPosition()!=(0))|| (miercoles_cen.getSelectedItemPosition()!=(0))||
+                            (jueves_alm.getSelectedItemPosition()!=(0))||(jueves_com.getSelectedItemPosition()!=(0))|| (jueves_cen.getSelectedItemPosition()!=(0))||
+                            (viernes_alm.getSelectedItemPosition()!=(0))||(viernes_com.getSelectedItemPosition()!=(0))|| (viernes_cen.getSelectedItemPosition()!=(0))||
+                            (sabado_alm.getSelectedItemPosition()!=(0))||(sabado_com.getSelectedItemPosition()!=(0))|| (sabado_cen.getSelectedItemPosition()!=(0))||
+                            (domingo_alm.getSelectedItemPosition()!=(0))||(domingo_com.getSelectedItemPosition()!=(0))|| (domingo_cen.getSelectedItemPosition()!=(0))
+                    )
+            ){
             PreparacionesDao predao = new PreparacionesDao(this);
             Preparaciones pre = new Preparaciones();
             RecetaPreparacionDao recpredao = new RecetaPreparacionDao(this);
@@ -281,6 +290,300 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
                 }
             }
 
+            if(martes_alm.getSelectedItemPosition() != 0){
+                pre.setTipoComida("AlmuerzoMartes");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(martes_alm.getSelectedItemPosition());
+                    if(!cant_martes_alm.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_martes_alm.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            if(martes_com.getSelectedItemPosition() != 0){
+                pre.setTipoComida("ComidaMartes");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(martes_com.getSelectedItemPosition());
+                    if(!cant_martes_com.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_martes_com.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            if(martes_cen.getSelectedItemPosition() != 0){
+                pre.setTipoComida("CenaMartes");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(martes_cen.getSelectedItemPosition());
+                    if(!cant_martes_cen.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_martes_cen.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            //MIERCOLES
+            if(miercoles_alm.getSelectedItemPosition() != 0){
+                pre.setTipoComida("AlmuerzoMiercoles");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(miercoles_alm.getSelectedItemPosition());
+                    if(!cant_miercoles_alm.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_miercoles_alm.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            if(miercoles_com.getSelectedItemPosition() != 0){
+                pre.setTipoComida("ComidaMiercoles");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(miercoles_com.getSelectedItemPosition());
+                    if(!cant_miercoles_com.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_miercoles_com.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            if(miercoles_cen.getSelectedItemPosition() != 0){
+                pre.setTipoComida("CenaMiercoles");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(miercoles_cen.getSelectedItemPosition());
+                    if(!cant_miercoles_cen.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_miercoles_cen.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            //JUEVES
+            if(jueves_alm.getSelectedItemPosition() != 0){
+                pre.setTipoComida("AlmuerzoJueves");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(jueves_alm.getSelectedItemPosition());
+                    if(!cant_jueves_alm.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_jueves_alm.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            if(jueves_com.getSelectedItemPosition() != 0){
+                pre.setTipoComida("ComidaJueves");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(jueves_com.getSelectedItemPosition());
+                    if(!cant_jueves_com.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_jueves_com.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            if(jueves_cen.getSelectedItemPosition() != 0){
+                pre.setTipoComida("CenaJueves");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(jueves_cen.getSelectedItemPosition());
+                    if(!cant_jueves_cen.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_jueves_cen.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            //VIERNES
+            if(viernes_alm.getSelectedItemPosition() != 0){
+                pre.setTipoComida("AlmuerzoViernes");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(viernes_alm.getSelectedItemPosition());
+                    if(!cant_viernes_alm.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_viernes_alm.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            if(viernes_com.getSelectedItemPosition() != 0){
+                pre.setTipoComida("ComidaViernes");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(viernes_com.getSelectedItemPosition());
+                    if(!cant_viernes_com.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_viernes_com.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            if(viernes_cen.getSelectedItemPosition() != 0){
+                pre.setTipoComida("CenaViernes");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(viernes_cen.getSelectedItemPosition());
+                    if(!cant_viernes_cen.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_viernes_cen.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            //SABADO
+            if(sabado_alm.getSelectedItemPosition() != 0){
+                pre.setTipoComida("AlmuerzoSabado");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(sabado_alm.getSelectedItemPosition());
+                    if(!cant_sabado_alm.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_sabado_alm.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            if(sabado_com.getSelectedItemPosition() != 0){
+                pre.setTipoComida("ComidaSabado");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(sabado_com.getSelectedItemPosition());
+                    if(!cant_sabado_com.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_sabado_com.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            if(sabado_cen.getSelectedItemPosition() != 0){
+                pre.setTipoComida("CenaSabado");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(sabado_cen.getSelectedItemPosition());
+                    if(!cant_sabado_cen.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_sabado_cen.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            //DOMINGO
+            if(domingo_alm.getSelectedItemPosition() != 0){
+                pre.setTipoComida("AlmuerzoDomingo");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(domingo_alm.getSelectedItemPosition());
+                    if(!cant_domingo_alm.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_domingo_alm.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            if(domingo_com.getSelectedItemPosition() != 0){
+                pre.setTipoComida("ComidaDomingo");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(domingo_com.getSelectedItemPosition());
+                    if(!cant_domingo_com.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_domingo_com.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            if(domingo_cen.getSelectedItemPosition() != 0){
+                pre.setTipoComida("CenaDomingo");
+                pre.setfechaPreparacion(txtFecha.getText().toString());
+                int resultado = predao.insertarPreparacion(pre);
+                if(resultado != 0 ){
+                    recpre.setIdPreparaciones(resultado);
+                    recpre.setIdReceta(domingo_cen.getSelectedItemPosition());
+                    if(!cant_domingo_cen.getText().toString().trim().equals("")){
+                        recpre.setCantidadAPreparar(Integer.valueOf(cant_domingo_cen.getText().toString()));
+                    }else{
+                        recpre.setCantidadAPreparar(1);
+                    }
+                    recpredao.insertarRecetaPreparacion(recpre);
+                    Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                }
+            }
+            }
 
         } catch (Exception e) {
             System.out.println("Error");
