@@ -8,8 +8,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -26,31 +24,27 @@ import android.widget.Toast;
 
 import com.example.easymeal.cl.model.bd.Ingrediente;
 import com.example.easymeal.cl.model.dao.IngredienteDao;
-import com.example.easymeal.cl.model.dao.ProductoDao;
 import com.example.easymeal.pdf.TemplatePDF;
 
-import java.lang.reflect.Array;
-import java.security.Permission;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class ListaMandado extends AppCompatActivity {
 
-    //Inicializamo variable
+    //Inicializamos variable
     DrawerLayout dl;
     Button btnAgregar, btnGenerar;
     static String username;
 
     IngredienteDao ingDao;
-    ProductoDao prodao;
     Ingrediente ing;
     ArrayList<Ingrediente> listaIng;
 
     TableLayout tling;
     TableRow tring;
 
-    TextView tvDescripcion, tvCantidad, tvMarca;
-    ImageView ivEliminar;
+    TextView tvDescripcion, tvTitulo;
+    ImageView ivEliminar, ivEditar;
     CheckBox cbMarcar;
     String tipo = "";
 
@@ -64,12 +58,14 @@ public class ListaMandado extends AppCompatActivity {
         dl = findViewById(R.id.drawer_listamandado);
         btnAgregar = findViewById(R.id.agregarlista);
         btnGenerar = findViewById(R.id.btnGenerar);
+        tvTitulo = findViewById(R.id.tvTitulo);
         tling = findViewById(R.id.tling);
 
         Bundle datos = this.getIntent().getExtras();
         tipo = datos.getString("tipo");
         if(!tipo.equals("mandado")){
             btnGenerar.setVisibility(View.GONE);
+            tvTitulo.setText("Alacena");
         }
         llenarMandado();
         btnAgregar.setOnClickListener(new View.OnClickListener() {
@@ -153,16 +149,23 @@ public class ListaMandado extends AppCompatActivity {
         this.recreate();
     }
 
+    public void ClickEditar(int idIngrediente) {
+        Intent abrirAgregarLista = new Intent(ListaMandado.this, AgregarLista.class);
+        abrirAgregarLista.putExtra("tipo", tipo);
+        abrirAgregarLista.putExtra("idIngrediente", idIngrediente);
+        startActivity(abrirAgregarLista);
+    }
+
     public void llenarMandado(){
+        float cantidad;
+        String marca = "";
         ingDao = new IngredienteDao();
         ingDao.ingredienteDao(this);
-        prodao = new ProductoDao();
-        prodao.productoDao(this);
 
         listaIng = ingDao.listaMandado(tipo);
         TableRow.LayoutParams lfila = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         TableRow.LayoutParams lcomun = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 4f);
-        TableRow.LayoutParams leliminar = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 3f);
+        TableRow.LayoutParams lacciones = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f);
 
         for(Ingrediente listing: listaIng){
             tring = new TableRow(this);
@@ -170,6 +173,7 @@ public class ListaMandado extends AppCompatActivity {
 
             cbMarcar = new CheckBox(this);
             cbMarcar.setTag(listing.getIdIngrediente());
+            cbMarcar.setWidth(35);
             cbMarcar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -183,31 +187,29 @@ public class ListaMandado extends AppCompatActivity {
             });
             tring.addView(cbMarcar);
 
+            if(tipo.equals("mandado")){
+                cantidad = listing.getCantidadAComprar();
+            }else{
+                cantidad = listing.getCantidad();
+            }
+
+            marca = listing.getProveedor();
+
+            if(marca.equals("NA")){
+                marca = "";
+            }
             tvDescripcion = new TextView(this);
-            tvDescripcion.setText(listing.getDescripcion());
+            tvDescripcion.setText(cantidad + " " + listing.getUnidadDeMedida() + " " + listing.getDescripcion() + " " + marca);
             tvDescripcion.setLayoutParams(lcomun);
-            tvDescripcion.setGravity(Gravity.CENTER);
+            tvDescripcion.setTextSize(20);
+            tvDescripcion.setGravity(Gravity.CENTER_VERTICAL);
             tring.addView(tvDescripcion);
 
-            tvCantidad = new TextView(this);
-            if(tipo.equals("mandado")){
-                tvCantidad.setText(String.valueOf(listing.getCantidadAComprar()) + " " + listing.getUnidadDeMedida());
-            }else{
-                tvCantidad.setText(String.valueOf(listing.getCantidad()) + " " + listing.getUnidadDeMedida());
-            }
-            tvCantidad.setLayoutParams(lcomun);
-            tvCantidad.setGravity(Gravity.CENTER);
-            tring.addView(tvCantidad);
-
-            tvMarca = new TextView(this);
-            tvMarca.setText(prodao.obtenerProducto(listing.getIdIngrediente()));
-            tvMarca.setLayoutParams(lcomun);
-            tvMarca.setGravity(Gravity.CENTER);
-            tring.addView(tvMarca);
-
-
             ivEliminar = new ImageView(this);
-            ivEliminar.setLayoutParams(leliminar);
+            ivEliminar.setLayoutParams(lacciones);
+
+            ivEditar = new ImageView(this);
+            ivEditar.setLayoutParams(lacciones);
 
             if(tipo.equals("mandado")){
                 ivEliminar.setTag(listing.getIdIngrediente());
@@ -221,7 +223,21 @@ public class ListaMandado extends AppCompatActivity {
                         ClickEliminar(Integer.parseInt(items.getTag().toString()));
                     }
                 });
+
             }
+
+            ivEditar.setTag(listing.getIdIngrediente());
+            ivEditar.setImageResource(R.drawable.ic_edit);
+            ivEditar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    TableRow tablerow = (TableRow) view.getParent();
+                    ImageView items = (ImageView) tablerow.getChildAt(2);
+                    ClickEditar(Integer.parseInt(items.getTag().toString()));
+                }
+            });
+
+            tring.addView(ivEditar);
             tring.addView(ivEliminar);
 
             tling.addView(tring);

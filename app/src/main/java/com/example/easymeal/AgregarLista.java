@@ -23,10 +23,7 @@ import android.widget.Toast;
 
 import com.example.easymeal.Excepciones.MisExcepciones;
 import com.example.easymeal.cl.model.bd.Ingrediente;
-import com.example.easymeal.cl.model.bd.Producto;
-import com.example.easymeal.cl.model.dao.ProductoDao;
 import com.example.easymeal.cl.model.dao.IngredienteDao;
-import com.example.easymeal.cl.model.dao.ProductoIngredienteDao;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -40,15 +37,16 @@ public class AgregarLista extends AppCompatActivity {
     Spinner sMedida, sMarca, sDescripcion;
     ImageView ivFoto, ivFecha;
     LinearLayout llfecha;
-    Producto pro;
     Ingrediente ing;
     IngredienteDao ingdao;
-    ProductoDao prodao;
-    ProductoIngredienteDao proingdao;
     ArrayList<Ingrediente> listaing;
-    ArrayList<Producto> listaprod;
 
-    String tipo;
+    ArrayList<String> listadesc = new ArrayList<>();
+    ArrayList<String> listaMedida = new ArrayList<>();
+    ArrayList<String> listaprodu = new ArrayList<>();
+
+    String tipo, marca, medida, descripcion;
+    int idIngrediente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,8 +148,23 @@ public class AgregarLista extends AppCompatActivity {
         llfecha = findViewById(R.id.llfecha);
 
         Bundle parametros = this.getIntent().getExtras();
-        if(parametros != null) {
-            tipo = parametros.getString("tipo");
+        tipo = parametros.getString("tipo");
+        idIngrediente = parametros.getInt("idIngrediente");
+        if(idIngrediente != 0){
+            int index;
+            ingdao = new IngredienteDao();
+            ingdao.ingredienteDao(this);
+            ing = ingdao.buscarIngrediente(idIngrediente);
+            etFecha.setText(ing.getFechaCaducidad());
+            if(tipo.equals("mandado")){
+                etCantidad.setText(String.valueOf(ing.getCantidadAComprar()));
+            }else{
+                etCantidad.setText(String.valueOf(ing.getCantidad()));
+            }
+
+            marca = ing.getProveedor();
+            descripcion = ing.getDescripcion();
+            medida = ing.getUnidadDeMedida();
         }
 
         llenarSpinners();
@@ -204,7 +217,7 @@ public class AgregarLista extends AppCompatActivity {
 
     public void ClickSalirAgregar(View v){
         //Cerramos app
-        Menu.redirectActivity(this, ListaMandado.class, "");
+        Menu.redirectActivity(this, ListaMandado.class, tipo);
     }
 
     public void ClickUsuarios (View v){
@@ -231,11 +244,6 @@ public class AgregarLista extends AppCompatActivity {
             ingdao = new IngredienteDao();
             ingdao.ingredienteDao(this);
             ing = new Ingrediente();
-            prodao = new ProductoDao();
-            prodao.productoDao(this);
-            proingdao = new ProductoIngredienteDao();
-            proingdao.productoIngredienteDao(this);
-            pro = new Producto();
             Bitmap bitmap = null;
             byte[] img = null;
 
@@ -271,8 +279,8 @@ public class AgregarLista extends AppCompatActivity {
 
                 ing.setDescripcion(descripcion);
                 ing.setUnidadDeMedida(medida);
-                pro.setProveedor(marca);
                 ing.setImagen(img);
+                ing.setProveedor(marca);
 
                 if(tipo.equals("mandado")){
                     ing.setMandado(1);
@@ -285,14 +293,15 @@ public class AgregarLista extends AppCompatActivity {
                     ing.setCantidad(Float.valueOf(etCantidad.getText().toString()));
                     ing.setFechaCaducidad(fechaCaducidad);
                 }
-                int insertaprod = prodao.insertarProducto(pro);
-                int insertaing = ingdao.insertarLista(ing);
-                proingdao.insertarProductoIngredienteDao(insertaprod, insertaing);
-                Toast.makeText(this, "INSERTADO", Toast.LENGTH_LONG).show();
+                if(ingdao.insertarLista(ing) != -1){
+                    Toast.makeText(this, "INSERTADO", Toast.LENGTH_LONG).show();
+                }else{
+                    throw new Exception();
+                }
                 limpiarCampos();
             }
         } catch (Exception e) {
-            System.out.println("Error");
+            System.out.println("Error al INSERTAR");
             System.out.println(e.getMessage());
         }
     }
@@ -328,29 +337,43 @@ public class AgregarLista extends AppCompatActivity {
         ingdao = new IngredienteDao();
         ingdao.ingredienteDao(this);
         listaing = ingdao.listaIngredientes();
-        prodao = new ProductoDao();
-        prodao.productoDao(this);
-        listaprod = prodao.listaProducto();
 
-        ArrayList<String> listadesc = new ArrayList<>();
-        ArrayList<String> listaMedida = new ArrayList<>();
-        ArrayList<String> listaprodu = new ArrayList<>();
         listadesc.add("Seleccione...");
         listaMedida.add("Seleccione...");
         listaprodu.add("Seleccione...");
 
+        int iDescripcion = 0;
+        int iUnidadMedida = 0;
+        int iProveedor = 0;
+
+        int iDescripcionS = 0;
+        int iUnidadMedidaS = 0;
+        int iProveedorS = 0;
+
         for(Ingrediente ingre: listaing){
             if(!listadesc.contains(ingre.getDescripcion())){
+                iDescripcion++;
+                if(ingre.getDescripcion().equals(descripcion)){
+                    iDescripcionS = iDescripcion;
+                }
                 listadesc.add(ingre.getDescripcion());
             }
 
             if(!listaMedida.contains(ingre.getUnidadDeMedida())){
+                iUnidadMedida++;
+                if(ingre.getUnidadDeMedida().equals(medida)){
+                    iUnidadMedidaS = iUnidadMedida;
+                }
                 listaMedida.add(ingre.getUnidadDeMedida());
             }
-        }
 
-        for(Producto produc: listaprod){
-            listaprodu.add(produc.getProveedor());
+            if(!listaprodu.contains(ingre.getProveedor())){
+                iProveedor++;
+                if(ingre.getProveedor().equals(marca)){
+                    iProveedorS = iProveedor;
+                }
+                listaprodu.add(ingre.getProveedor());
+            }
         }
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listadesc);
@@ -364,6 +387,10 @@ public class AgregarLista extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listaprodu);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sMarca.setAdapter(arrayAdapter);
+
+        sDescripcion.setSelection(iDescripcionS);
+        sMedida.setSelection(iUnidadMedidaS);
+        sMarca.setSelection(iProveedorS);
     }
 
     public void limpiarCampos(){
