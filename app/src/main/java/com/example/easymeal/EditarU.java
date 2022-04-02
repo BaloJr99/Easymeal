@@ -34,7 +34,6 @@ public class EditarU extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         //getSupportActionBar().hide();
         setContentView(R.layout.activity_editar_u);
-        user = (EditText) findViewById(R.id.edituser);
         //clave = (EditText) findViewById(R.id.editclave);
         nombre = (EditText) findViewById(R.id.editnombre);
         apellidoPaterno = (EditText) findViewById(R.id.editapellidop);
@@ -60,12 +59,11 @@ public class EditarU extends AppCompatActivity {
             public void onClick(View view) {
                 Usuario u = new Usuario();
                 u.setIdUsuario(id);
-                //u.setUsername(user.getText().toString());
                 u.setNombre(nombre.getText().toString());
                 u.setApellidoPaterno(apellidoPaterno.getText().toString());
                 u.setApellidoMaterno(apellidoMaterno.getText().toString());
                 u.setFechaNacimiento(fecha.getText().toString());
-                if (user.getText().equals("")||nombre.getText().equals("")||apellidoPaterno.getText().equals("")||apellidoMaterno.getText().equals("")||fecha.getText().equals("--/--/--")) {
+                if (nombre.getText().equals("")||apellidoPaterno.getText().equals("")||apellidoMaterno.getText().equals("")||fecha.getText().equals("--/--/--")) {
                     Toast.makeText(EditarU.this, "ERROR", Toast.LENGTH_LONG).show();
                 } else if (dao.updateUsuario(u)) {
                     Toast.makeText(EditarU.this, "Actualizacion Exitosa", Toast.LENGTH_LONG).show();

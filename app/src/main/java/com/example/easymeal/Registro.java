@@ -59,6 +59,7 @@ ImageView fecha;
                 }else if(dao.insertUsuario(u)){
                     Toast.makeText(Registro.this,"Registro Exitoso",Toast.LENGTH_LONG).show();
                     Intent i2 = new Intent(Registro.this,MainActivity.class);
+                    i2.putExtra("user", us.getText().toString());
                     startActivity(i2);
                 }else{
                     Toast.makeText(Registro.this,"Usuario ya registrado",Toast.LENGTH_LONG).show();

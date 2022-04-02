@@ -42,7 +42,7 @@ public class ComprasDao {
         cv = new ContentValues();
         cv.put("fechaCompra", compra.getFechaCompra());
         cv.put("importeGastado", compra.getImporteGasto());
-        return(sql.insert("t_compras+", null, cv)>0);
+        return(sql.insert("t_compras", null, cv)>0);
     }
 
     public boolean modificarCompra(Compras compras) {

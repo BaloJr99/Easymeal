@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:context=".EditarU">
 
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
@@ -45,14 +44,6 @@
         android:inputType="textPersonName"
         android:text="Apellido Materno" />
 
-    <!--<EditText
-        android:id="@+id/editfecha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:ems="10"
-        android:inputType="date"
-        android:text="Fecha Nacimiento" />-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"

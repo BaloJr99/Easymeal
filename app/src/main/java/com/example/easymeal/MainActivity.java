@@ -23,11 +23,6 @@ public class MainActivity extends AppCompatActivity {
     Button login;
     daoUsuario dao;
 
-    public void siguiente(View v){
-        Intent intento=new Intent(this, Menu.class);
-        startActivity(intento);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
         //btnCreate = findViewById(R.id.btnCreate);
         DbAyuda Helper = new DbAyuda(MainActivity.this);
         SQLiteDatabase db = Helper.getWritableDatabase();
+
+        Bundle p = this.getIntent().getExtras();
+        if(p != null){
+            usuario.setText(p.getString("user"));
+        }
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
