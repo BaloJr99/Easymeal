@@ -4,16 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="212dp"
-        android:layout_height="216dp"
+        android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="44dp"
         android:src="@drawable/logo1"
+        app:layout_constraintBottom_toTopOf="@+id/usuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,9 +25,10 @@
         android:id="@+id/usuario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginBottom="20dp"
         android:hint="@string/usuario"
         android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
@@ -33,9 +37,10 @@
         android:id="@+id/password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="72dp"
         android:hint="@string/contra"
         android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usuario" />
@@ -45,39 +50,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="2dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="129dp"
         android:text="@string/login"
-        app:layout_constraintBottom_toTopOf="@+id/tv_registrar"
-        app:layout_constraintStart_toStartOf="@+id/tv_registrar"
+        app:layout_constraintBottom_toTopOf="@+id/btnSalir"
+        app:layout_constraintEnd_toStartOf="@+id/tv_registrar"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
-    <TextView
+    <Button
         android:id="@+id/tv_registrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="23dp"
+        android:layout_marginEnd="4dp"
         android:text="@string/registrar"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnSalir"
-        app:layout_constraintEnd_toStartOf="@+id/btnSalir" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/login" />
 
     <Button
         android:id="@+id/btnSalir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="283dp"
-        android:layout_marginTop="635dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="48dp"
         android:text="@string/salir"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/login" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

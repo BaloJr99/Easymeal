@@ -5,14 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo"
     android:id="@+id/drawer_Horario"
     tools:context=".Horario">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#3BFFEB3B">
+        android:orientation="vertical">
 
         <include
             layout="@layout/main_toolbar">

@@ -18,7 +18,7 @@ import com.example.easymeal.database.DbAyuda;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView tv_registrar;
+    Button tv_registrar;
     EditText usuario,pass;
     Button login;
     daoUsuario dao;

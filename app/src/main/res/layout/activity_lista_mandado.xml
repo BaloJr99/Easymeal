@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_listamandado"
+    android:background="@drawable/fondo"
     tools:context=".ListaMandado">
 
     <LinearLayout
@@ -41,27 +42,26 @@
 
                 <TableRow>
                     <TextView
+                        android:layout_height="match_parent"
                         android:layout_width="35dp">
                     </TextView>
                     <TextView
-                        android:text="@string/descripcion"
-                        android:textAlignment="center"
+                        android:id="@+id/tvTitulo"
+                        android:text="@string/lista_del_mandado"
                         android:padding="3dp"
-                        android:layout_weight="4"/>
-                    <TextView
-                        android:text="@string/cantidad"
-                        android:textAlignment="center"
-                        android:padding="3dp"
-                        android:layout_weight="4"/>
-                    <TextView
-                        android:text="@string/medida"
-                        android:textAlignment="center"
-                        android:padding="3dp"
+                        android:textSize="20sp"
                         android:layout_weight="4"/>
                     <ImageView
+                        android:layout_height="match_parent"
                         android:textAlignment="center"
                         android:padding="3dp"
-                        android:layout_weight="3"
+                        android:layout_weight="1"
+                        tools:ignore="ContentDescription" />
+                    <ImageView
+                        android:layout_height="match_parent"
+                        android:textAlignment="center"
+                        android:padding="3dp"
+                        android:layout_weight="1"
                         tools:ignore="ContentDescription" />
                 </TableRow>
             </TableLayout>

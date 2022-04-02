@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.easymeal.Excepciones.MisExcepciones;
 import com.example.easymeal.cl.model.bd.Compras;
+import com.example.easymeal.cl.model.bd.Ingrediente;
 import com.example.easymeal.cl.model.bd.Usuario;
 import com.example.easymeal.cl.model.dao.ComprasDao;
 import com.example.easymeal.cl.model.dao.daoUsuario;
@@ -188,6 +189,19 @@ public class Menu extends AppCompatActivity {
         Intent intent = new Intent(activity, aClass);
         intent.putExtra("idUsuario", id);
         intent.putExtra("tipo", tipo);
+        //Creamos bandera
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //Empezamos activity
+        activity.startActivity(intent);
+    }
+
+    public static void redirectActivityE(Activity activity, Class aClass, String tipo, Ingrediente ing) {
+        //Inicializamos el intento
+
+        Intent intent = new Intent(activity, aClass);
+        intent.putExtra("idUsuario", id);
+        intent.putExtra("tipo", tipo);
+
         //Creamos bandera
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //Empezamos activity

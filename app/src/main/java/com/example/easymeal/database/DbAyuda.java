@@ -9,16 +9,13 @@ import androidx.annotation.Nullable;
 
 public class DbAyuda extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 13;
+    private static final int DATABASE_VERSION = 14;
     private static final String DATABASE_NAME = "easymeal.db";
     private static final String TABLE_PREPARACIONES = "t_preparaciones";
     private static final String TABLE_USUARIOS = "t_usuarios";
     private static final String TABLE_RECETAPREPARACION = "t_recetaPreparacion";
-    private static final String TABLE_HORARIO = "t_horario";
     private static final String TABLE_RECETA = "t_receta";
     private static final String TABLE_INGREDIENTE = "t_ingrediente";
-    private static final String TABLE_PRODUCTO = "t_producto";
-    private static final String TABLE_PRODUCTOINGREDIENTE = "t_productoIngrediente";
     private static final String TABLE_INGREDIENTERECETA = "t_ingredienteReceta";
     private static final String TABLE_COMPRAS = "t_compras";
 
@@ -42,11 +39,6 @@ public class DbAyuda extends SQLiteOpenHelper {
                 "apellidoMaterno VARCHAR(20),"+
                 "fechaNacimiento DATE NOT NULL)");
 
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_HORARIO+"("+
-                "idHorario INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "comidas INTEGER NOT NULL,"+
-                "fecha DATE NOT NULL)");
-
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_RECETA+"("+
                 "idReceta INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "nombre VARCHAR(45) NOT NULL,"+
@@ -60,18 +52,8 @@ public class DbAyuda extends SQLiteOpenHelper {
                 "fechaDeCaducidad DATE, "+
                 "mandado INTEGER NOT NULL, "+
                 "cantidadAcomprar FLOAT NOT NULL, "+
+                "proveedor VARCHAR(45) NOT NULL,"+
                 "imagen BLOB)");
-
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_PRODUCTO+"("+
-                "idProducto INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "proveedor VARCHAR(45) NOT NULL)");
-
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_PRODUCTOINGREDIENTE+"("+
-                "idProductoIngrediente INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "idIngrediente INTEGER NOT NULL,"+
-                "idProducto INTEGER NOT NULL,"+
-                "FOREIGN KEY(idIngrediente) REFERENCES t_ingrediente(idIngrediente),"+
-                "FOREIGN KEY(idProducto) REFERENCES t_producto(idProducto))");
 
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_RECETAPREPARACION+"("+
                 "idRecetaPreparacion INTEGER PRIMARY KEY AUTOINCREMENT,"+
@@ -101,21 +83,14 @@ public class DbAyuda extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_PREPARACIONES);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_USUARIOS);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_RECETAPREPARACION);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_HORARIO);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS t_horario");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_RECETA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_INGREDIENTE);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_PRODUCTO);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_PRODUCTOINGREDIENTE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS t_producto");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS t_productoIngrediente");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_INGREDIENTERECETA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS t_lista");
         onCreate(sqLiteDatabase);
     }
 
-    public Cursor selectReceta(){   
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "select * from " + TABLE_RECETA;
-        Cursor cursor = db.rawQuery(query,null);
-
-        return cursor;
-    }
 }
