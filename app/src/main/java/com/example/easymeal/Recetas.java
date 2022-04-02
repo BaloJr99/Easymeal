@@ -260,6 +260,7 @@ public class Recetas extends AppCompatActivity{
 
         while(cursor.moveToNext()){
             receta = new Receta();
+            receta.setIdReceta(cursor.getInt(0));
             receta.setNombre(cursor.getString(1));
             receta.setPasos(cursor.getString(2));
 
