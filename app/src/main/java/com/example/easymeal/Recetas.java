@@ -118,21 +118,14 @@ public class Recetas extends AppCompatActivity{
                 nom.setText(recetasList.get(i).getNombre());
                 pasos.setText(recetasList.get(i).getPasos());
                 idReceta = recetasList.get(i).getIdReceta();
-                agregarIng.setEnabled(true);
+                if(ing.getSelectedItem() != null){
+                    agregarIng.setEnabled(true);
+                }
             }
         });
         insertar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* SQLiteDatabase op=co.getWritableDatabase();
-                Cursor cr = op.rawQuery("SELECT MAX(idReceta) from t_receta",null);
-                if(cr != null && cr.moveToFirst()){
-                    do {
-
-                        System.out.println(cr.getInt(0));
-                        Toast.makeText(Recetas.this,String.valueOf(cr.getInt(0)),Toast.LENGTH_LONG).show();
-                    }while(cr.moveToNext());
-                }*/
 
                 Receta c = new Receta();
                 c.setNombre(nom.getText().toString());
@@ -147,16 +140,13 @@ public class Recetas extends AppCompatActivity{
                         do {
                             System.out.println(cr.getInt(0));
                             idReceta = cr.getInt(0);
-                            Toast.makeText(Recetas.this, String.valueOf(idReceta), Toast.LENGTH_LONG).show();
                         } while (cr.moveToNext());
-                    /*Intent i2 = new Intent(Recetas.this,Recetas.class);
-                    startActivity(i2);
-                    poblar();*/
                         poblar();
-                        //ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,infoList);
                         ArrayAdapter adapter = new ArrayAdapter(Recetas.this, android.R.layout.simple_expandable_list_item_1,infoList);
                         listaRecetas.setAdapter(adapter);
-                    agregarIng.setEnabled(true);
+                        if(ing.getSelectedItem() != null){
+                            agregarIng.setEnabled(true);
+                        }
                 }else{
                     Toast.makeText(Recetas.this,"Receta ya registrada",Toast.LENGTH_LONG).show();
                 }
@@ -182,16 +172,12 @@ public class Recetas extends AppCompatActivity{
                         } while (cr.moveToNext());
                     }
                     poblar();
-                    //ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,infoList);
                     ArrayAdapter adapter = new ArrayAdapter(Recetas.this, android.R.layout.simple_expandable_list_item_1,infoList);
                     listaRecetas.setAdapter(adapter);
                     agregarIng.setEnabled(true);
                     Toast.makeText(Recetas.this,"Registro Editado Exitoso",Toast.LENGTH_LONG).show();
                     nom.setText("");
                     pasos.setText("");
-                    /*Intent i2 = new Intent(Recetas.this,Recetas.class);
-                    startActivity(i2);*/
-                    //poblar();
                 }
             }
         });
