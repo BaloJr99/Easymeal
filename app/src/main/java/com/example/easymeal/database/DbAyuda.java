@@ -41,7 +41,7 @@ public class DbAyuda extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_RECETA+"("+
                 "idReceta INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "nombre VARCHAR(45) NOT NULL,"+
+                "nombre VARCHAR(45) NOT NULL UNIQUE,"+
                 "pasos VARCHAR(60))");
 
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_INGREDIENTE+"("+

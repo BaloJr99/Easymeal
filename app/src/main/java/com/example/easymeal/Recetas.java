@@ -39,7 +39,7 @@ import com.example.easymeal.database.DbAyuda;
 import java.util.ArrayList;
 
 public class Recetas extends AppCompatActivity{
-    Conexion co= new Conexion(this,"easymeal.db",null,14);
+    Conexion co= new Conexion(this,"easymeal.db",null,15);
     DbAyuda db;
     ArrayAdapter adapter;
     ListView listaRecetas;
