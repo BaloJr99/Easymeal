@@ -39,7 +39,7 @@ import com.example.easymeal.database.DbAyuda;
 import java.util.ArrayList;
 
 public class Recetas extends AppCompatActivity{
-    Conexion co= new Conexion(this,"easymeal.db",null,14);
+    Conexion co= new Conexion(this,"easymeal.db",null,15);
     DbAyuda db;
     ArrayAdapter adapter;
     ListView listaRecetas;
@@ -258,6 +258,7 @@ public class Recetas extends AppCompatActivity{
 
         while(cursor.moveToNext()){
             receta = new Receta();
+            receta.setIdReceta(cursor.getInt(0));
             receta.setNombre(cursor.getString(1));
             receta.setPasos(cursor.getString(2));
 
