@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,77 +10,78 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="80dp"
-        android:text="Registro de usuario"
+        android:text="@string/registro_de_usuario"
         android:layout_gravity="center"
         android:textSize="25sp"
         />
     <EditText
+        android:autofillHints="name"
         android:id="@+id/nombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre"
+        android:hint="@string/nombre"
         android:inputType="text"
         />
     <EditText
+        android:autofillHints="surname"
         android:id="@+id/apellidop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Apellido Paterno"
+        android:hint="@string/apellidoP"
         android:inputType="text"
         />
     <EditText
+        android:autofillHints="second surname"
         android:id="@+id/apellidom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Apellido Materno"
+        android:hint="@string/apellidoM"
         android:inputType="text"
         />
 
     <EditText
+        android:autofillHints="username"
         android:id="@+id/user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Usuario"
+        android:hint="@string/usuario"
         android:inputType="text"
         />
     <EditText
+        android:autofillHints="password"
         android:id="@+id/contra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="@string/contra"
         android:inputType="textPassword"
         />
-    <!--<EditText
-        android:id="@+id/fechaN"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Fecha de nacimiento (DD/MM/AAAA)"
-        android:inputType="date"
-        />-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal"
-        >
+        tools:ignore="UseCompoundDrawables">
         <TextView
             android:id="@+id/fechaN"
             android:layout_width="250dp"
             android:layout_height="match_parent"
             android:gravity="center_horizontal|center_vertical"
             android:enabled="false"
-            android:text="--/--/--" />
+            android:text="@string/fechaUsuario" />
         <ImageView
             android:id="@+id/fechaNac"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_baseline_calendar_today_24"></ImageView>
+            android:src="@drawable/ic_baseline_calendar_today_24"
+            tools:ignore="ContentDescription">
+
+        </ImageView>
 
         </LinearLayout>
     <Button
         android:id="@+id/reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="REGISTRAR"
+        android:text="@string/registrar"
         android:layout_gravity="center"
         />
 

@@ -15,14 +15,13 @@ public class IngredienteDao {
 
     Context c;
     Ingrediente ing;
-    ArrayList<Ingrediente> listaIngredientes;
     SQLiteDatabase sql;
     String bd = "easymeal.db";
     ContentValues cv = new ContentValues();
 
     public void ingredienteDao(Context c){
         this.c = c;
-        sql = c.openOrCreateDatabase(bd,c.MODE_PRIVATE,null);
+        sql = c.openOrCreateDatabase(bd, Context.MODE_PRIVATE,null);
         ing = new Ingrediente();
     }
 
@@ -31,13 +30,13 @@ public class IngredienteDao {
             if(repetidos(i) != 0){
                 cv = new ContentValues();
                 cv.put("descripcion", i.getDescripcion());
-                cv.put("mandado", i.getMandado());
                 if(i.getMandado() == 1){
+                    cv.put("mandado", i.getMandado());
                     cv.put("cantidadAcomprar", i.getCantidadAComprar());
                 }else{
                     cv.put("cantidad", i.getCantidad());
+                    cv.put("fechaDeCaducidad", i.getFechaCaducidad());
                 }
-                cv.put("fechaDeCaducidad", i.getFechaCaducidad());
                 cv.put("unidadDeMedida", i.getUnidadDeMedida());
                 cv.put("imagen", i.getImagen());
                 cv.put("proveedor", i.getProveedor());
@@ -68,6 +67,7 @@ public class IngredienteDao {
         if (c.moveToFirst()){
             return c.getInt(0);
         }
+        c.close();
         return 0;
     }
 
@@ -87,6 +87,7 @@ public class IngredienteDao {
                 lista.add(ing);
             } while(c.moveToNext());
         }
+        c.close();
         return lista;
     }
 
@@ -109,6 +110,7 @@ public class IngredienteDao {
                 lista.add(ing);
             } while(c.moveToNext());
         }
+        c.close();
 
         return lista;
     }
@@ -123,7 +125,7 @@ public class IngredienteDao {
         if (c.moveToFirst()){
             ing = new Ingrediente(c.getInt(0), c.getInt(5), c.getString(2), c.getString(1), c.getString(4), c.getFloat(3), c.getFloat(6),c.getBlob(8), c.getString(7));
         }
-
+        c.close();
         return ing;
     }
 }

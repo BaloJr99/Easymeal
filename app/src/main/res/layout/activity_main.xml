@@ -13,8 +13,8 @@
         android:layout_width="212dp"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginBottom="49dp"
         android:src="@drawable/logo1"
         app:layout_constraintBottom_toTopOf="@+id/usuario"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,10 +37,10 @@
         android:id="@+id/password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="84dp"
         android:hint="@string/contra"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/login"
+        app:layout_constraintBottom_toTopOf="@+id/tv_registrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usuario" />
@@ -50,15 +50,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="20dp"
         android:layout_marginEnd="11dp"
-        android:layout_marginBottom="129dp"
         android:text="@string/login"
-        app:layout_constraintBottom_toTopOf="@+id/btnSalir"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_registrar"
         app:layout_constraintEnd_toStartOf="@+id/tv_registrar"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/tv_registrar"
@@ -66,20 +63,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginEnd="4dp"
+        android:layout_marginBottom="168dp"
         android:text="@string/registrar"
-        app:layout_constraintBaseline_toBaselineOf="@+id/login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/login" />
-
-    <Button
-        android:id="@+id/btnSalir"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="48dp"
-        android:text="@string/salir"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login" />
+        app:layout_constraintStart_toEndOf="@+id/login"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

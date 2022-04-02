@@ -179,7 +179,6 @@ public class Recetas extends AppCompatActivity{
                         do {
                             System.out.println(cr.getInt(0));
                             idReceta = cr.getInt(0);
-                            Toast.makeText(Recetas.this, String.valueOf(idReceta), Toast.LENGTH_LONG).show();
                         } while (cr.moveToNext());
                     }
                     poblar();
@@ -220,7 +219,6 @@ public class Recetas extends AppCompatActivity{
                     do {
                         System.out.println(cr.getInt(0));
                         idIngrediente = cr.getInt(0);
-                        Toast.makeText(Recetas.this, String.valueOf(idIngrediente), Toast.LENGTH_LONG).show();
                     } while (cr.moveToNext());
                 }
                 IngredienteReceta r = new IngredienteReceta();

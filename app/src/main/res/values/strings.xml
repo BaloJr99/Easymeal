@@ -51,4 +51,6 @@
     <string name="importe">Importe</string>
     <string name="formatofecha">--/--/----</string>
     <string name="lista_del_mandado">Lista del mandado</string>
+    <string name="registro_de_usuario">Registro de usuario</string>
+    <string name="fechaUsuario">--/--/--</string>
 </resources>

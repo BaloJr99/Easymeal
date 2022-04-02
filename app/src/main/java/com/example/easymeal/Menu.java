@@ -162,10 +162,8 @@ public class Menu extends AppCompatActivity {
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //Finalizamos actividad
-                activity.finishAffinity();
-                //Cerramos app
-                System.exit(0);
+                Intent intent = new Intent(activity, MainActivity.class);
+                activity.startActivity(intent);
             }
         });
 
@@ -189,19 +187,6 @@ public class Menu extends AppCompatActivity {
         Intent intent = new Intent(activity, aClass);
         intent.putExtra("idUsuario", id);
         intent.putExtra("tipo", tipo);
-        //Creamos bandera
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //Empezamos activity
-        activity.startActivity(intent);
-    }
-
-    public static void redirectActivityE(Activity activity, Class aClass, String tipo, Ingrediente ing) {
-        //Inicializamos el intento
-
-        Intent intent = new Intent(activity, aClass);
-        intent.putExtra("idUsuario", id);
-        intent.putExtra("tipo", tipo);
-
         //Creamos bandera
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //Empezamos activity

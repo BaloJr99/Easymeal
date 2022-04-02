@@ -3,6 +3,7 @@ package com.example.easymeal;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -40,6 +42,7 @@ public class AgregarLista extends AppCompatActivity {
     Ingrediente ing;
     IngredienteDao ingdao;
     ArrayList<Ingrediente> listaing;
+    Button btnModificar;
 
     ArrayList<String> listadesc = new ArrayList<>();
     ArrayList<String> listaMedida = new ArrayList<>();
@@ -48,6 +51,7 @@ public class AgregarLista extends AppCompatActivity {
     String tipo, marca, medida, descripcion;
     int idIngrediente;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +65,7 @@ public class AgregarLista extends AppCompatActivity {
         etCantidad = findViewById(R.id.etCantidad);
         sDescripcion = findViewById(R.id.sDescripcion);
         ivFoto = findViewById(R.id.ivFoto);
+        btnModificar = findViewById(R.id.modificarLista);
         sDescripcion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -150,8 +155,9 @@ public class AgregarLista extends AppCompatActivity {
         Bundle parametros = this.getIntent().getExtras();
         tipo = parametros.getString("tipo");
         idIngrediente = parametros.getInt("idIngrediente");
+
         if(idIngrediente != 0){
-            int index;
+            btnModificar.setText("MODIFICAR");
             ingdao = new IngredienteDao();
             ingdao.ingredienteDao(this);
             ing = ingdao.buscarIngrediente(idIngrediente);
@@ -286,15 +292,20 @@ public class AgregarLista extends AppCompatActivity {
                     ing.setMandado(1);
                     ing.setCantidadAComprar(Float.valueOf(etCantidad.getText().toString()));
                     ing.setCantidad(0f);
-                    ing.setFechaCaducidad(fechaCaducidad);
                 }else{
                     ing.setMandado(0);
                     ing.setCantidadAComprar(0f);
                     ing.setCantidad(Float.valueOf(etCantidad.getText().toString()));
-                    ing.setFechaCaducidad(fechaCaducidad);
                 }
+
+                ing.setFechaCaducidad(fechaCaducidad);
+
                 if(ingdao.insertarLista(ing) != -1){
-                    Toast.makeText(this, "INSERTADO", Toast.LENGTH_LONG).show();
+                    if(idIngrediente != 0){
+                        Toast.makeText(this, "MODIFICADO", Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(this, "INSERTADO", Toast.LENGTH_LONG).show();
+                    }
                 }else{
                     throw new Exception();
                 }
@@ -376,15 +387,15 @@ public class AgregarLista extends AppCompatActivity {
             }
         }
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listadesc);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listadesc);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sDescripcion.setAdapter(arrayAdapter);
 
-        arrayAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listaMedida);
+        arrayAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listaMedida);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sMedida.setAdapter(arrayAdapter);
 
-        arrayAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listaprodu);
+        arrayAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listaprodu);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sMarca.setAdapter(arrayAdapter);
 
@@ -393,6 +404,7 @@ public class AgregarLista extends AppCompatActivity {
         sMarca.setSelection(iProveedorS);
     }
 
+    @SuppressLint("SetTextI18n")
     public void limpiarCampos(){
         etDescripcion.setText("");
         etCantidad.setText("0.00");
@@ -407,6 +419,7 @@ public class AgregarLista extends AppCompatActivity {
         llenarSpinners();
     }
 
+    @SuppressLint("QueryPermissionsNeeded")
     public void ClickFoto(View view) {
         Intent foto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if(foto.resolveActivity(getPackageManager()) != null){
@@ -431,12 +444,7 @@ public class AgregarLista extends AppCompatActivity {
         mes = c.get(Calendar.MONTH);
         ano = c.get(Calendar.YEAR);
 
-        DatePickerDialog date = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int anio, int mes, int dia) {
-                etFecha.setText(dia+"/"+mes+"/"+anio);
-            }
-        }, ano, mes, dia);
+        @SuppressLint("SetTextI18n") DatePickerDialog date = new DatePickerDialog(this, (datePicker, anio, mes1, dia1) -> etFecha.setText(dia1 +"/"+ mes1 +"/"+anio), ano, mes, dia);
         date.show();
     }
 }
