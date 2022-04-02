@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.easymeal.cl.model.bd.Ingrediente;
 import com.example.easymeal.cl.model.bd.Producto;
+import com.example.easymeal.cl.model.bd.Receta;
 import com.example.easymeal.cl.model.bd.Usuario;
 
 import java.util.ArrayList;

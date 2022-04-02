@@ -52,8 +52,8 @@ public class Recetas extends AppCompatActivity{
     RecetaIngredienteDao daoing;
     ArrayList<Receta> busqueda;
     Spinner ing;
-    IngredienteDao ingDao;
-    Integer idReceta, idIngrediente,idMax;
+    Integer idReceta, idIngrediente;
+
 
 
     //Inicializamos variable
@@ -187,7 +187,9 @@ public class Recetas extends AppCompatActivity{
                     ArrayAdapter adapter = new ArrayAdapter(Recetas.this, android.R.layout.simple_expandable_list_item_1,infoList);
                     listaRecetas.setAdapter(adapter);
                     agregarIng.setEnabled(true);
-                    Toast.makeText(Recetas.this,"Registro Exitoso",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Recetas.this,"Registro Editado Exitoso",Toast.LENGTH_LONG).show();
+                    nom.setText("");
+                    pasos.setText("");
                     /*Intent i2 = new Intent(Recetas.this,Recetas.class);
                     startActivity(i2);*/
                     //poblar();

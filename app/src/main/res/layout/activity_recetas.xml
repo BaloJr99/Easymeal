@@ -74,6 +74,7 @@
                         android:layout_marginEnd="14dp"
                         android:layout_marginBottom="28dp"
                         android:ems="10"
+                        android:hint="Nombre para receta"
                         android:inputType="textPersonName"
                         app:layout_constraintBottom_toTopOf="@+id/mFieldPasos"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -104,7 +105,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/fieldNombre" />
+                        app:layout_constraintTop_toBottomOf="@+id/fieldNombre"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -118,34 +120,37 @@
                         android:layout_width="95dp"
                         android:layout_height="40dp"
                         android:layout_margin="3dp"
-                        android:src="@drawable/ic_baseline_add_24"
                         android:background="@color/purple_500"
-                        />
+                        android:src="@drawable/ic_baseline_add_24"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
                     <ImageButton
                         android:id="@+id/btnBorrar"
                         android:layout_width="95dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_delete"
-                        android:onClick="eliminarReceta"
-                        android:background="@color/purple_500"
                         android:layout_margin="3dp"
-                        />
+                        android:background="@color/purple_500"
+                        android:onClick="eliminarReceta"
+                        android:src="@drawable/ic_delete"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
                     <ImageButton
                         android:id="@+id/btnEdit"
                         android:layout_width="95dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_baseline_update_24"
-                        android:background="@color/purple_500"
                         android:layout_margin="3dp"
-                        />
+                        android:background="@color/purple_500"
+                        android:src="@drawable/ic_baseline_update_24"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
                     <ImageButton
                         android:id="@+id/btnBuscar"
                         android:layout_width="95dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_baseline_search_24"
-                        android:background="@color/purple_500"
                         android:layout_margin="3dp"
-                        />
+                        android:background="@color/purple_500"
+                        android:src="@drawable/ic_baseline_search_24"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
                     <!--<Button
                         android:id="@+id/btnAgregar"
                         android:layout_width="wrap_content"
@@ -186,10 +191,12 @@
                     android:id="@+id/spiingrediente"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:contentDescription="Ingredientes"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/listaRecetas"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent" />
+                    app:layout_constraintTop_toBottomOf="parent"
+                    tools:ignore="TouchTargetSizeCheck" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="56dp">
@@ -201,13 +208,16 @@
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
                         android:enabled="false"
-                        android:text="Agregar Ingrediente" />
+                        android:text="Agregar Ingrediente"
+                        tools:ignore="TouchTargetSizeCheck" />
 
                     <EditText
                         android:id="@+id/txtCantidad"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="number" />
+                        android:hint="Cantidad"
+                        android:inputType="number"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
             </LinearLayout>
             <Space
