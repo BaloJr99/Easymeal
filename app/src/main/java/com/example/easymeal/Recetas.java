@@ -160,7 +160,9 @@ public class Recetas extends AppCompatActivity{
                 }else{
                     Toast.makeText(Recetas.this,"Receta ya registrada",Toast.LENGTH_LONG).show();
                 }
-                    }
+                    }else{
+                        Toast.makeText(Recetas.this,"Receta ya registrada",Toast.LENGTH_LONG).show();
+                }
                 }
         });
 

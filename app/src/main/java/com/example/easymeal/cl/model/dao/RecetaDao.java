@@ -3,6 +3,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.example.easymeal.cl.model.bd.Receta;
+import com.example.easymeal.cl.model.bd.Usuario;
 
 import java.util.ArrayList;
 import android.content.Context;
@@ -12,6 +13,7 @@ public class RecetaDao {
     Context c;
     Receta receta;
     ArrayList<Receta> listaRecetas;
+    ArrayList<Receta> lista;
     SQLiteDatabase sql;
     String bd = "easymeal.db";
 
@@ -22,10 +24,40 @@ public class RecetaDao {
     }
 
     public boolean insertarReceta(Receta r){
-        ContentValues cv = new ContentValues();
-        cv.put("nombre", r.getNombre());
-        cv.put("pasos", r.getPasos());
-        return (sql.insert("t_receta",null,cv) > 0);
+        if(buscar(r.getNombre())==0) {
+            ContentValues cv = new ContentValues();
+            cv.put("nombre", r.getNombre());
+            cv.put("pasos", r.getPasos());
+            return (sql.insert("t_receta", null, cv) > 0);
+        }else{
+
+            return false;
+        }
+    }
+    public ArrayList<Receta> selectRec(){
+        ArrayList<Receta> lista =new ArrayList<Receta>();
+        lista.clear();
+        Cursor cr = sql.rawQuery("select * from t_receta",null);
+        if(cr != null && cr.moveToFirst()){
+            do{
+                Receta r= new Receta();
+                r.setIdReceta(cr.getInt(0));
+                r.setNombre(cr.getString(1));
+                r.setPasos(cr.getString(2));
+                lista.add(r);
+            }while(cr.moveToNext());
+        }
+        return lista;
+    }
+    public int buscar(String n){
+        lista=selectRec();
+        for(Receta re:lista){
+            if(re.getNombre().equals(n)){
+                return 1;
+            }
+
+        }
+        return 0;
     }
     public boolean updateReceta(Receta r){
         ContentValues cv = new ContentValues();
