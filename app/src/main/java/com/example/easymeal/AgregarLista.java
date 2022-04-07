@@ -208,12 +208,12 @@ public class AgregarLista extends AppCompatActivity {
 
     public void ClickLista(View view){
         //Redireccionamos actividad a dashboard
-        Menu.redirectActivity(this, ListaMandado.class, tipo);
+        Menu.redirectActivity(this, ListaMandado.class, "mandado");
     }
 
     public void ClickHorario(View view){
         //Redireccionamos actividad a dashboard
-        Menu.redirectActivity(this, Horario.class, tipo);
+        Menu.redirectActivity(this, Horario.class, "");
     }
 
     public void ClickSalir(View v){
@@ -348,7 +348,9 @@ public class AgregarLista extends AppCompatActivity {
         ingdao = new IngredienteDao();
         ingdao.ingredienteDao(this);
         listaing = ingdao.listaIngredientes();
-
+        listadesc.clear();
+        listaMedida.clear();
+        listaprodu.clear();
         listadesc.add("Seleccione...");
         listaMedida.add("Seleccione...");
         listaprodu.add("Seleccione...");
@@ -387,7 +389,9 @@ public class AgregarLista extends AppCompatActivity {
             }
         }
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listadesc);
+        ArrayAdapter<String> arrayAdapter;
+
+        arrayAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listadesc);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sDescripcion.setAdapter(arrayAdapter);
 
@@ -413,10 +417,10 @@ public class AgregarLista extends AppCompatActivity {
         ivFoto.setImageResource(R.drawable.ic_camara);
         ivFoto.setTag("pred");
         etFecha.setText("");
+        llenarSpinners();
         sDescripcion.setSelection(0);
         sMedida.setSelection(0);
         sMarca.setSelection(0);
-        llenarSpinners();
     }
 
     @SuppressLint("QueryPermissionsNeeded")
