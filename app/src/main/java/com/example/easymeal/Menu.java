@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -302,12 +303,7 @@ public class Menu extends AppCompatActivity {
         mes = c.get(Calendar.MONTH);
         ano = c.get(Calendar.YEAR);
 
-        DatePickerDialog date = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int anio, int mes, int dia) {
-                etFecha.setText(dia + "/" + mes + "/" + anio);
-            }
-        }, ano, mes, dia);
+        @SuppressLint("SetTextI18n") DatePickerDialog date = new DatePickerDialog(this, (datePicker, anio, mes1, dia1) -> etFecha.setText(dia1 + "/" + (mes1 + 1) + "/" + anio), ano, mes, dia);
         date.show();
     }
 

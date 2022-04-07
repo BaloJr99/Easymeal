@@ -447,7 +447,7 @@ public class AgregarLista extends AppCompatActivity {
         mes = c.get(Calendar.MONTH);
         ano = c.get(Calendar.YEAR);
 
-        @SuppressLint("SetTextI18n") DatePickerDialog date = new DatePickerDialog(this, (datePicker, anio, mes1, dia1) -> etFecha.setText(dia1 +"/"+ mes1 +"/"+anio), ano, mes, dia);
+        @SuppressLint("SetTextI18n") DatePickerDialog date = new DatePickerDialog(this, (datePicker, anio, mes1, dia1) -> etFecha.setText(dia1 +"/"+ (mes1 + 1) +"/"+anio), ano, mes, dia);
         date.show();
     }
 }
