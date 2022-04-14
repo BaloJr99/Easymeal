@@ -210,21 +210,25 @@ public class Recetas extends AppCompatActivity{
                     } while (cr.moveToNext());
                 }
                 IngredienteReceta r = new IngredienteReceta();
-                r.setCantidad(Float.parseFloat(cantidad.getText().toString()));
-                r.setIdReceta(idReceta);
-                r.setIdIngrediente(idIngrediente);
-                daoing = new RecetaIngredienteDao(Recetas.this);
-                if(!r.isNull()){
-                    Toast.makeText(Recetas.this,"ERROR: CAMPOS VACIOS",Toast.LENGTH_LONG).show();
-                }else if(daoing.insertarReceta(r)){
-                    Toast.makeText(Recetas.this,"Registro de Ingrediente exitoso",Toast.LENGTH_LONG).show();
-                    //idReceta = dao.ultimaReceta();
-                    Intent i2 = new Intent(Recetas.this,Recetas.class);
-                    startActivity(i2);
-                    poblar();
-                    agregarIng.setEnabled(true);
+                if(!cantidad.getText().toString().trim().isEmpty()){
+                    r.setCantidad(Float.parseFloat(cantidad.getText().toString()));
+                    r.setIdReceta(idReceta);
+                    r.setIdIngrediente(idIngrediente);
+                    daoing = new RecetaIngredienteDao(Recetas.this);
+                    if(!r.isNull()){
+                        Toast.makeText(Recetas.this,"ERROR: CAMPOS VACIOS",Toast.LENGTH_LONG).show();
+                    }else if(daoing.insertarReceta(r)){
+                        Toast.makeText(Recetas.this,"Registro de Ingrediente exitoso",Toast.LENGTH_LONG).show();
+                        //idReceta = dao.ultimaReceta();
+                        Intent i2 = new Intent(Recetas.this,Recetas.class);
+                        startActivity(i2);
+                        poblar();
+                        agregarIng.setEnabled(true);
+                    }else{
+                        Toast.makeText(Recetas.this,"Ingrediente ya registrado",Toast.LENGTH_LONG).show();
+                    }
                 }else{
-                    Toast.makeText(Recetas.this,"Ingrediente ya registrado",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Recetas.this,"Favor de ingresar la cantidad",Toast.LENGTH_LONG).show();
                 }
             }
         });
