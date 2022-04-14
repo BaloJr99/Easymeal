@@ -229,6 +229,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nuevo Ingrediente"
+                    android:enabled="false"
+                    android:layout_gravity="right"/>
+
+                <Button
+                    android:id="@+id/btnVerIng"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:text="Ver ingredientes de la receta"
                     android:layout_gravity="right"/>
 
             </LinearLayout>

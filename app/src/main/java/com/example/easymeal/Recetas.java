@@ -46,7 +46,7 @@ public class Recetas extends AppCompatActivity{
     ArrayList<String> infoList;
     ArrayList<Receta> recetasList;
     EditText nom,pasos,cantidad;
-    Button agregarIng,nuevoIng;
+    Button agregarIng,nuevoIng,verIng;
     ImageButton insertar,editar,buscar,borrar;
     RecetaDao dao;
     RecetaIngredienteDao daoing;
@@ -75,6 +75,7 @@ public class Recetas extends AppCompatActivity{
         borrar = (ImageButton) findViewById(R.id.btnBorrar);
         agregarIng = (Button) findViewById(R.id.btnAgregarIng);
         nuevoIng = (Button) findViewById(R.id.btnNuevoIng);
+        verIng = (Button) findViewById(R.id.btnVerIng);
         ing=(Spinner) findViewById(R.id.spiingrediente);
         dao = new RecetaDao(this);
         listaRecetas = (ListView) findViewById(R.id.listaRecetas);
@@ -120,6 +121,8 @@ public class Recetas extends AppCompatActivity{
                 idReceta = recetasList.get(i).getIdReceta();
                 if(ing.getSelectedItem() != null){
                     agregarIng.setEnabled(true);
+                    verIng.setEnabled(true);
+                    nuevoIng.setEnabled(true);
                 }
             }
         });
@@ -238,6 +241,14 @@ public class Recetas extends AppCompatActivity{
                 String tipo = "mandado";
                 Intent i = new Intent(Recetas.this,ListaMandado.class);
                 i.putExtra("tipo",tipo);
+                startActivity(i);
+            }
+        });
+        verIng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Recetas.this,IngRec.class);
+                i.putExtra("idReceta",idReceta);
                 startActivity(i);
             }
         });
