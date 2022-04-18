@@ -1,6 +1,5 @@
 package com.example.easymeal.cl.model.bd;
 
-import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
 
 public class Ingrediente {

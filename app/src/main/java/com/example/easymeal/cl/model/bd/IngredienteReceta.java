@@ -7,12 +7,6 @@ public class IngredienteReceta {
     public IngredienteReceta() {
     }
 
-    public IngredienteReceta(Integer idIngredientesReceta, Integer idIngrediente, Integer idReceta, Float cantidad) {
-        this.idIngredientesReceta = idIngredientesReceta;
-        this.idIngrediente = idIngrediente;
-        this.idReceta = idReceta;
-        this.cantidad = cantidad;
-    }
     public boolean isNull(){
         if(idIngrediente.equals("")&&idReceta.equals("")&&cantidad.equals("")){
             return false;

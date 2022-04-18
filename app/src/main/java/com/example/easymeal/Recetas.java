@@ -119,11 +119,13 @@ public class Recetas extends AppCompatActivity{
                 nom.setText(recetasList.get(i).getNombre());
                 pasos.setText(recetasList.get(i).getPasos());
                 idReceta = recetasList.get(i).getIdReceta();
-                if(ing.getSelectedItem() != null){
+                if(ing.getAdapter().getCount() != 0){
                     agregarIng.setEnabled(true);
                     verIng.setEnabled(true);
+                }else{
                     nuevoIng.setEnabled(true);
                 }
+
             }
         });
         insertar.setOnClickListener(new View.OnClickListener() {
@@ -150,12 +152,13 @@ public class Recetas extends AppCompatActivity{
                         if(ing.getSelectedItem() != null){
                             agregarIng.setEnabled(true);
                         }
+                        nuevoIng.setEnabled(true);
                 }else{
                     Toast.makeText(Recetas.this,"Receta ya registrada",Toast.LENGTH_LONG).show();
                 }
                     }else{
                         Toast.makeText(Recetas.this,"Receta ya registrada",Toast.LENGTH_LONG).show();
-                }
+                    }
                 }
         });
 

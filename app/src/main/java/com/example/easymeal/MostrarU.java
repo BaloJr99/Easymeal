@@ -1,39 +1,42 @@
 package com.example.easymeal;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.easymeal.cl.model.bd.Usuario;
 import com.example.easymeal.cl.model.dao.Conexion;
-import com.example.easymeal.cl.model.dao.daoUsuario;
 
 import java.util.ArrayList;
 
 public class MostrarU extends AppCompatActivity {
     Conexion c= new Conexion(this,"easymeal.db",null,15);
     int id;
-ListView listaUser;
-daoUsuario dao;
+
+    ListView listaUser;
+
+    DrawerLayout dl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //getSupportActionBar().hide();
         setContentView(R.layout.activity_mostrar_u);
+        dl = findViewById(R.id.drawer_mostrar_u);
         Bundle b=getIntent().getExtras();
-        listaUser = (ListView) findViewById(R.id.listUsers);
+        listaUser = findViewById(R.id.listUsers);
         id=b.getInt("idUsuario");
 
         SQLiteDatabase op=c.getWritableDatabase();
         Cursor cr = op.rawQuery("SELECT * FROM t_usuarios WHERE idUsuario="+id,null);
-        ArrayList<Usuario> lista =new ArrayList<Usuario>();
-        lista.clear();
+        ArrayList<Usuario> lista =new ArrayList<>();
         if(cr != null && cr.moveToFirst()){
             do{
                 Usuario u = new Usuario();
@@ -48,7 +51,10 @@ daoUsuario dao;
                 lista.add(u);
             }while(cr.moveToNext());
         }
-        ArrayList<String> list = new ArrayList<String>();
+        if (cr != null) {
+            cr.close();
+        }
+        ArrayList<String> list = new ArrayList<>();
 
         for (Usuario u:lista) {
             list.add("Usuario: "+u.getUsername());
@@ -57,19 +63,57 @@ daoUsuario dao;
             list.add("Apellido Materno: "+u.getApellidoMaterno());
             list.add("Fecha de Nacimiento: "+u.getFechaNacimiento());
         }
-        ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,list);
+        ArrayAdapter<String> a = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1,list);
         listaUser.setAdapter(a);
-        /*ArrayList<Usuario> l = dao.selectUsuarioById(1);
-        ArrayList<String> list = new ArrayList<String>();
+    }
 
-        for (Usuario u:l) {
-            list.add("Usuario: "+u.getUsername());
-            list.add("Nombre: "+u.getNombre());
-            list.add("Apellido Paterno: "+u.getApellidoPaterno());
-            list.add("Apellido Materno: "+u.getApellidoMaterno());
-            list.add("Fecha de Nacimiento: "+u.getFechaNacimiento());
-        }
-        ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,list);
-        lista.setAdapter(a);*/
+    public void ClickMenu(View v){
+        //Abrimos Drawer
+        Menu.openDrawer(dl);
+    }
+
+    public void ClickLogo(View v){
+        //Cerramos drawer
+        Menu.closeDrawer(dl);
+    }
+
+    public void ClickInicio(View v){
+        //Redireccionamos activity a inicio
+        Menu.redirectActivity(this, Menu.class, "");
+    }
+
+    public void ClickRecetas(View v){
+        //Redireccionamos actividad a tablero
+        Menu.redirectActivity(this, Recetas.class, "");
+    }
+
+    public void ClickAcercaDe(View v){
+        //Redireccionamos actividad a acerca de
+        Menu.redirectActivity(this, AcercaNosotros.class, "");
+    }
+
+    public void ClickHorario(View view){
+        //Redireccionamos actividad a dashboard
+        Menu.redirectActivity(this, Horario.class, "");
+    }
+
+    public void ClickLista(View view){
+        //Redireccionamos actividad a dashboard
+        Menu.redirectActivity(this, ListaMandado.class, "mandado");
+    }
+
+    public void ClickUsuarios (View v){
+        //Nos dirijimos al menu de los usuarios
+        Menu.redirectActivity(this,MenuUsuario.class, "");
+    }
+
+    public void ClickAlacena(View view) {
+        //Redireccionamos actividad a dashboard
+        Menu.redirectActivity(this, ListaMandado.class, "");
+    }
+
+    public void ClickSalir(View v){
+        //Cerramos app
+        Menu.logout(this);
     }
 }
