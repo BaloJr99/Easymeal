@@ -3,12 +3,12 @@ package com.example.easymeal;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -51,7 +51,7 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
     ArrayList<Receta> listaRecetas;
     RecetaDao reDao;
 
-    String datos[] = new String[]{"AlmuerzoLunes", "ComidaLunes", "CenaLunes",
+    String[] datos = new String[]{"AlmuerzoLunes", "ComidaLunes", "CenaLunes",
             "AlmuerzoMartes", "ComidaMartes", "CenaMartes",
             "AlmuerzoMiercoles", "ComidaMiercoles", "CenaMiercoles",
             "AlmuerzoJueves", "ComidaJueves", "CenaJueves",
@@ -69,51 +69,51 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
 
         //Asignamos variable
         dl = findViewById(R.id.drawer_Horario);
-        fecha=(ImageView)findViewById(R.id.fecha);
-        txtFecha=(TextView)findViewById(R.id.txtFecha);
-        lunes_alm=(Spinner)findViewById(R.id.lunes_alm);
-        lunes_com=(Spinner)findViewById(R.id.lunes_com);
-        lun_cen=(Spinner)findViewById(R.id.lunes_cen);
-        martes_alm=(Spinner)findViewById(R.id.martes_alm);
-        martes_com=(Spinner)findViewById(R.id.martes_com);
-        martes_cen=(Spinner)findViewById(R.id.martes_cen);
-        miercoles_alm=(Spinner)findViewById(R.id.miercoles_alm);
-        miercoles_com=(Spinner)findViewById(R.id.miercoles_com);
-        miercoles_cen=(Spinner)findViewById(R.id.miercoles_cen);
-        jueves_alm=(Spinner)findViewById(R.id.jueves_alm);
-        jueves_com=(Spinner)findViewById(R.id.jueves_com);
-        jueves_cen=(Spinner)findViewById(R.id.jueves_cen);
-        viernes_alm=(Spinner)findViewById(R.id.viernes_alm);
-        viernes_com=(Spinner)findViewById(R.id.viernes_com);
-        viernes_cen=(Spinner)findViewById(R.id.viernes_cen);
-        sabado_alm=(Spinner)findViewById(R.id.sabado_alm);
-        sabado_com=(Spinner)findViewById(R.id.sabado_com);
-        sabado_cen=(Spinner)findViewById(R.id.sabado_cen);
-        domingo_alm=(Spinner)findViewById(R.id.domingo_alm);
-        domingo_com=(Spinner)findViewById(R.id.domingo_com);
-        domingo_cen=(Spinner)findViewById(R.id.domingo_cen);
+        fecha=findViewById(R.id.fecha);
+        txtFecha=findViewById(R.id.txtFecha);
+        lunes_alm=findViewById(R.id.lunes_alm);
+        lunes_com=findViewById(R.id.lunes_com);
+        lun_cen=findViewById(R.id.lunes_cen);
+        martes_alm=findViewById(R.id.martes_alm);
+        martes_com=findViewById(R.id.martes_com);
+        martes_cen=findViewById(R.id.martes_cen);
+        miercoles_alm=findViewById(R.id.miercoles_alm);
+        miercoles_com=findViewById(R.id.miercoles_com);
+        miercoles_cen=findViewById(R.id.miercoles_cen);
+        jueves_alm=findViewById(R.id.jueves_alm);
+        jueves_com=findViewById(R.id.jueves_com);
+        jueves_cen=findViewById(R.id.jueves_cen);
+        viernes_alm=findViewById(R.id.viernes_alm);
+        viernes_com=findViewById(R.id.viernes_com);
+        viernes_cen=findViewById(R.id.viernes_cen);
+        sabado_alm=findViewById(R.id.sabado_alm);
+        sabado_com=findViewById(R.id.sabado_com);
+        sabado_cen=findViewById(R.id.sabado_cen);
+        domingo_alm=findViewById(R.id.domingo_alm);
+        domingo_com=findViewById(R.id.domingo_com);
+        domingo_cen=findViewById(R.id.domingo_cen);
 
-        cant_lunes_alm=(EditText) findViewById(R.id.cant_lunes_alm);
-        cant_lunes_com=(EditText) findViewById(R.id.cant_lunes_com);
-        cant_lunes_cen=(EditText) findViewById(R.id.cant_lunes_cen);
-        cant_martes_alm=(EditText) findViewById(R.id.cant_martes_alm);
-        cant_martes_com=(EditText) findViewById(R.id.cant_martes_com);
-        cant_martes_cen=(EditText) findViewById(R.id.cant_martes_cen);
-        cant_miercoles_alm=(EditText) findViewById(R.id.cant_miercoles_alm);
-        cant_miercoles_com=(EditText) findViewById(R.id.cant_miercoles_com);
-        cant_miercoles_cen=(EditText) findViewById(R.id.cant_miercoles_cen);
-        cant_jueves_alm=(EditText) findViewById(R.id.cant_jueves_alm);
-        cant_jueves_com=(EditText) findViewById(R.id.cant_jueves_com);
-        cant_jueves_cen=(EditText) findViewById(R.id.cant_jueves_cen);
-        cant_viernes_alm=(EditText) findViewById(R.id.cant_viernes_alm);
-        cant_viernes_com=(EditText) findViewById(R.id.cant_viernes_com);
-        cant_viernes_cen=(EditText) findViewById(R.id.cant_viernes_cen);
-        cant_sabado_alm=(EditText) findViewById(R.id.cant_sabado_alm);
-        cant_sabado_com=(EditText) findViewById(R.id.cant_sabado_com);
-        cant_sabado_cen=(EditText) findViewById(R.id.cant_sabado_cen);
-        cant_domingo_alm=(EditText) findViewById(R.id.cant_domingo_alm);
-        cant_domingo_com=(EditText) findViewById(R.id.cant_domingo_com);
-        cant_domingo_cen=(EditText) findViewById(R.id.cant_domingo_cen);
+        cant_lunes_alm= findViewById(R.id.cant_lunes_alm);
+        cant_lunes_com= findViewById(R.id.cant_lunes_com);
+        cant_lunes_cen= findViewById(R.id.cant_lunes_cen);
+        cant_martes_alm= findViewById(R.id.cant_martes_alm);
+        cant_martes_com= findViewById(R.id.cant_martes_com);
+        cant_martes_cen= findViewById(R.id.cant_martes_cen);
+        cant_miercoles_alm= findViewById(R.id.cant_miercoles_alm);
+        cant_miercoles_com= findViewById(R.id.cant_miercoles_com);
+        cant_miercoles_cen= findViewById(R.id.cant_miercoles_cen);
+        cant_jueves_alm= findViewById(R.id.cant_jueves_alm);
+        cant_jueves_com= findViewById(R.id.cant_jueves_com);
+        cant_jueves_cen= findViewById(R.id.cant_jueves_cen);
+        cant_viernes_alm= findViewById(R.id.cant_viernes_alm);
+        cant_viernes_com= findViewById(R.id.cant_viernes_com);
+        cant_viernes_cen= findViewById(R.id.cant_viernes_cen);
+        cant_sabado_alm= findViewById(R.id.cant_sabado_alm);
+        cant_sabado_com= findViewById(R.id.cant_sabado_com);
+        cant_sabado_cen= findViewById(R.id.cant_sabado_cen);
+        cant_domingo_alm= findViewById(R.id.cant_domingo_alm);
+        cant_domingo_com= findViewById(R.id.cant_domingo_com);
+        cant_domingo_cen= findViewById(R.id.cant_domingo_cen);
         fecha.setOnClickListener(this);
         llenarSpinners();
         }
@@ -183,14 +183,7 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
             mes = c.get(Calendar.MONTH);
             anio= c.get(Calendar.YEAR);
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener(){
-
-                @Override
-                public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                    txtFecha.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
-                }
-
-            },anio,mes,dia);
+            @SuppressLint("SetTextI18n") DatePickerDialog datePickerDialog = new DatePickerDialog(this, (datePicker, year, monthOfYear, dayOfMonth) -> txtFecha.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year),anio,mes,dia);
             datePickerDialog.show();
     }
 
@@ -206,10 +199,10 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
          listaR.add(rec.getNombre());
         }
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listaR);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listaR);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        LinearLayout layout = (LinearLayout)findViewById(R.id.linear_Horario);
+        LinearLayout layout = findViewById(R.id.linear_Horario);
 
         for (int i = 0; i < layout.getChildCount(); i++) {
             View v = layout.getChildAt(i);
@@ -242,7 +235,7 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
                 RecetaPreparacionDao recpredao = new RecetaPreparacionDao(this);
                 RecetaPreparacion recpre = new RecetaPreparacion();
 
-                LinearLayout layout = (LinearLayout)findViewById(R.id.linear_Horario);
+                LinearLayout layout = findViewById(R.id.linear_Horario);
 
                 int flag = 0;
 
@@ -271,7 +264,7 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
                                         Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
                                     }
                                     limpiarCampos();
-                                };
+                                }
                             }
                         }
 
@@ -289,7 +282,7 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
 
     public void limpiarCampos(){
 
-        LinearLayout layout = (LinearLayout)findViewById(R.id.linear_Horario);
+        LinearLayout layout = findViewById(R.id.linear_Horario);
 
         for (int i = 0; i < layout.getChildCount(); i++) {
             View v = layout.getChildAt(i);
