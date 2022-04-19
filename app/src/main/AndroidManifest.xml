@@ -21,6 +21,9 @@
             android:name=".IngRec"
             android:exported="false" />
         <activity
+            android:name=".VistaHorario"
+            android:exported="false" />
+        <activity
             android:name=".EditarU"
             android:exported="false" />
         <activity
