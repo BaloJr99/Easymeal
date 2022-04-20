@@ -138,21 +138,6 @@ public class VistaHorario extends AppCompatActivity {
             ivEditar = new ImageView(this);
             ivEditar.setLayoutParams(lacciones);
 
-            if(tipo.equals("mandado")){
-                ivEliminar.setTag(listing.getIdIngrediente());
-                ivEliminar.setImageResource(R.drawable.ic_delete);
-                ivEliminar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        TableRow tablerow = (TableRow) view.getParent();
-                        ImageView items = (ImageView) tablerow.getChildAt(3);
-
-                        ClickEliminar(Integer.parseInt(items.getTag().toString()));
-                    }
-                });
-
-            }
-
             ivEditar.setTag(listing.getIdIngrediente());
             ivEditar.setImageResource(R.drawable.ic_edit);
             ivEditar.setOnClickListener(new View.OnClickListener() {
