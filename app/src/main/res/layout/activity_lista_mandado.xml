@@ -31,37 +31,41 @@
                 android:text="@string/agregarlista"
                 tools:ignore="TouchTargetSizeCheck">
             </Button>
+
             <TableLayout
                 android:id="@+id/tling"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="80dp"
-                android:layout_marginBottom="80dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginTop="80dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="80dp">
 
                 <TableRow>
+
                     <TextView
-                        android:layout_height="match_parent"
-                        android:layout_width="35dp">
-                    </TextView>
+                        android:layout_width="35dp"
+                        android:layout_height="match_parent"></TextView>
+
                     <TextView
                         android:id="@+id/tvTitulo"
+                        android:layout_weight="4"
+                        android:padding="3dp"
                         android:text="@string/lista_del_mandado"
-                        android:padding="3dp"
-                        android:textSize="20sp"
-                        android:layout_weight="4"/>
+                        android:textSize="20sp" />
+
                     <ImageView
                         android:layout_height="match_parent"
-                        android:textAlignment="center"
-                        android:padding="3dp"
                         android:layout_weight="1"
+                        android:padding="3dp"
+                        android:textAlignment="center"
                         tools:ignore="ContentDescription" />
+
                     <ImageView
                         android:layout_height="match_parent"
-                        android:textAlignment="center"
-                        android:padding="3dp"
                         android:layout_weight="1"
+                        android:padding="3dp"
+                        android:textAlignment="center"
                         tools:ignore="ContentDescription" />
                 </TableRow>
             </TableLayout>
