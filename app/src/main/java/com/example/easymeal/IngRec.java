@@ -28,7 +28,7 @@ public class IngRec extends AppCompatActivity {
     EditText nombreIng,cantidad;
     Button modificar, eliminar;
     DbAyuda db;
-    Conexion co= new Conexion(this,"easymeal.db",null,15);
+    Conexion co= new Conexion(this,"easymeal.db",null,16);
     ArrayAdapter adapter;
     ArrayList<IngredienteReceta> IngRecetaList;
     ArrayList<String> infoList;

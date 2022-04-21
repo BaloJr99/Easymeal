@@ -17,7 +17,7 @@ import com.example.easymeal.cl.model.dao.Conexion;
 import java.util.ArrayList;
 
 public class MostrarU extends AppCompatActivity {
-    Conexion c= new Conexion(this,"easymeal.db",null,15);
+    Conexion c= new Conexion(this,"easymeal.db",null,16);
     int id;
 
     ListView listaUser;

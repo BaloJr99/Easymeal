@@ -91,15 +91,16 @@ public class IngredienteDao {
         return lista;
     }
 
-    public ArrayList<Ingrediente> listaMandado(String fecha) {
+    public ArrayList<Ingrediente> listaMandado(String tipo) {
         ArrayList<Ingrediente> lista = new ArrayList<>();
         Cursor c;
 
-        if(fecha.equals("mandado")){
+        if(tipo.equals("mandado")){
             c = sql.rawQuery("SELECT * FROM t_ingrediente WHERE mandado = 1", null);
         }else{
             c = sql.rawQuery("SELECT * FROM t_ingrediente", null);
         }
+
         if (c.moveToFirst()){
             do {
                 if(tipo.equals("mandado")){

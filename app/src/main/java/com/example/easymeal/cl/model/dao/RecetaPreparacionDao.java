@@ -2,9 +2,13 @@ package com.example.easymeal.cl.model.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.easymeal.cl.model.bd.Preparaciones;
 import com.example.easymeal.cl.model.bd.RecetaPreparacion;
+
+import java.util.ArrayList;
 
 public class RecetaPreparacionDao {
 
@@ -12,6 +16,7 @@ public class RecetaPreparacionDao {
     Context c;
     SQLiteDatabase sql;
     String bd = "easymeal.db";
+    Cursor cursor;
 
     public RecetaPreparacionDao(Context c){
         this.c = c;
@@ -25,6 +30,5 @@ public class RecetaPreparacionDao {
         cv.put("idReceta", p.getIdReceta());
         cv.put("cantidadAPreparar", p.getCantidadAPreparar());
         return (sql.insert("t_recetaPreparacion",null,cv)>0);
-
     }
 }

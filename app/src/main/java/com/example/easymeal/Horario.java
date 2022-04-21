@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,6 +24,7 @@ import com.example.easymeal.cl.model.dao.PreparacionesDao;
 import com.example.easymeal.cl.model.dao.RecetaDao;
 import com.example.easymeal.cl.model.dao.RecetaPreparacionDao;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -33,6 +35,8 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
     ImageView fecha;
     TextView txtFecha;
     int dia,mes,anio;
+    int idPreparacion;
+
     Spinner lunes_alm,lunes_com,lun_cen,
             martes_alm,martes_com,martes_cen,
             miercoles_alm,miercoles_com, miercoles_cen,
@@ -48,8 +52,17 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
             cant_viernes_alm, cant_viernes_com,cant_viernes_cen,
             cant_sabado_alm, cant_sabado_com,cant_sabado_cen,
             cant_domingo_alm, cant_domingo_com,cant_domingo_cen;
+
+    Button btnModificar;
+    LinearLayout layout;
+
     ArrayList<Receta> listaRecetas;
     RecetaDao reDao;
+
+    PreparacionesDao predao;
+    Preparaciones pre;
+    RecetaPreparacionDao recpredao;
+    RecetaPreparacion recpre;
 
     String[] datos = new String[]{"AlmuerzoLunes", "ComidaLunes", "CenaLunes",
             "AlmuerzoMartes", "ComidaMartes", "CenaMartes",
@@ -114,9 +127,16 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
         cant_domingo_alm= findViewById(R.id.cant_domingo_alm);
         cant_domingo_com= findViewById(R.id.cant_domingo_com);
         cant_domingo_cen= findViewById(R.id.cant_domingo_cen);
+
+        btnModificar = findViewById(R.id.modificar);
+        btnModificar.setEnabled(false);
+
+        layout = findViewById(R.id.linear_Horario);
+
         fecha.setOnClickListener(this);
         llenarSpinners();
-        }
+
+    }
 
     public void ClickMenu(View v){
         //Abrimos Drawer
@@ -183,7 +203,36 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
             mes = c.get(Calendar.MONTH);
             anio= c.get(Calendar.YEAR);
 
-            @SuppressLint("SetTextI18n") DatePickerDialog datePickerDialog = new DatePickerDialog(this, (datePicker, year, monthOfYear, dayOfMonth) -> txtFecha.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year),anio,mes,dia);
+            @SuppressLint("SetTextI18n") DatePickerDialog datePickerDialog = new DatePickerDialog(this, (datePicker, year, monthOfYear, dayOfMonth) -> {
+                c.set(year, monthOfYear, dayOfMonth);
+                txtFecha.setText("SEMANA: " + (c.get(Calendar.WEEK_OF_YEAR) - 1));
+                predao = new PreparacionesDao(this);
+                ArrayList<Object[]> listapre = predao.buscarHorario(txtFecha.getText().toString());
+                if(listapre != null){
+                    int spin = 0;
+                    for (int i = 0; i < layout.getChildCount(); i++) {
+                        View v0 = layout.getChildAt(i);
+                        if (v0 instanceof LinearLayout) {
+                            LinearLayout layout1 = (LinearLayout) v0;
+                            for (int j = 0; j < layout1.getChildCount(); j++) {
+                                View v1 = layout1.getChildAt(j);
+                                View v2 = layout1.getChildAt((j + 1));
+                                if (v1 instanceof Spinner) {
+                                    for(Object[] o: listapre){
+                                        if(datos[spin].equals(o[0])){
+                                            ((Spinner) v1).setSelection(Integer.parseInt(o[1].toString()));
+                                            ((EditText) v2).setText(o[2].toString());
+                                        }
+                                    }
+                                    spin++;
+                                }
+                            }
+
+                        }
+                    }
+                    btnModificar.setEnabled(true);
+                }
+            },anio,mes,dia);
             datePickerDialog.show();
     }
 
@@ -201,8 +250,6 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listaR);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        LinearLayout layout = findViewById(R.id.linear_Horario);
 
         for (int i = 0; i < layout.getChildCount(); i++) {
             View v = layout.getChildAt(i);
@@ -230,12 +277,10 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
                     (sabado_alm.getSelectedItemPosition()!=(0))||(sabado_com.getSelectedItemPosition()!=(0))|| (sabado_cen.getSelectedItemPosition()!=(0))||
                     (domingo_alm.getSelectedItemPosition()!=(0))||(domingo_com.getSelectedItemPosition()!=(0))|| (domingo_cen.getSelectedItemPosition()!=(0)))){
 
-                PreparacionesDao predao = new PreparacionesDao(this);
-                Preparaciones pre = new Preparaciones();
-                RecetaPreparacionDao recpredao = new RecetaPreparacionDao(this);
-                RecetaPreparacion recpre = new RecetaPreparacion();
-
-                LinearLayout layout = findViewById(R.id.linear_Horario);
+                predao = new PreparacionesDao(this);
+                pre = new Preparaciones();
+                recpredao = new RecetaPreparacionDao(this);
+                recpre = new RecetaPreparacion();
 
                 int flag = 0;
 
@@ -250,9 +295,12 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
                                 if(((Spinner) v1).getSelectedItemPosition() != 0){
                                     pre.setTipoComida(datos[flag]);
                                     flag ++;
+
                                     pre.setfechaPreparacion(txtFecha.getText().toString());
                                     int resultado = predao.insertarPreparacion(pre);
+                                    System.out.println(resultado);
                                     if(resultado != 0 ){
+                                        System.out.println("Entro");
                                         recpre.setIdPreparaciones(resultado);
                                         recpre.setIdReceta(((Spinner) v1).getSelectedItemPosition());
                                         if(!((EditText)v2).getText().toString().trim().equals("")){
@@ -263,13 +311,13 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
                                         recpredao.insertarRecetaPreparacion(recpre);
                                         Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
                                     }
-                                    limpiarCampos();
                                 }
                             }
                         }
 
                     }
                 }
+                limpiarCampos();
             }else{
                 Toast.makeText(this,"Existen campos vacios",Toast.LENGTH_SHORT).show();
             }
