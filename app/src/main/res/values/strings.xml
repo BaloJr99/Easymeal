@@ -28,7 +28,7 @@
     <string name="editar">Editar</string>
     <string name="buscar">Buscar</string>
     <string name="agregarlista">+ Agregar</string>
-    <string name="generarlista">Generar Lista</string>
+    <string name="generarlista">Imprimir Lista</string>
     <string name="descripcion">Descripcion</string>
     <string name="cantidad">Cantidad</string>
     <string name="alacena">Alacena</string>
@@ -84,4 +84,5 @@
     <string name="domingo">Domingo</string>
     <string name="a_g_r_e_g_a_r">A G R E G A R</string>
     <string name="m_o_d_i_f_i_c_a_r">M O D I F I C A R</string>
+    <string name="finalizar">FINALIZAR COMPRA</string>
 </resources>

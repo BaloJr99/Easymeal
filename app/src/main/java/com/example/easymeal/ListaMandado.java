@@ -33,10 +33,11 @@ public class ListaMandado extends AppCompatActivity {
 
     //Inicializamos variable
     DrawerLayout dl;
-    Button btnAgregar, btnGenerar;
+    Button btnAgregar, btnGenerar, btnFinalizar;
 
     IngredienteDao ingDao;
     ArrayList<Ingrediente> listaIng;
+    ArrayList<Integer> listaIngSeleccionados = new ArrayList<>();
 
     TableLayout tling;
     TableRow tring;
@@ -57,6 +58,7 @@ public class ListaMandado extends AppCompatActivity {
         dl = findViewById(R.id.drawer_listamandado);
         btnAgregar = findViewById(R.id.agregarlista);
         btnGenerar = findViewById(R.id.btnGenerar);
+        btnFinalizar = findViewById(R.id.btnGuardarMandado);
         tvTitulo = findViewById(R.id.tvTitulo);
         tling = findViewById(R.id.tling);
 
@@ -64,6 +66,7 @@ public class ListaMandado extends AppCompatActivity {
         tipo = datos.getString("tipo");
         if(!tipo.equals("mandado")){
             btnGenerar.setVisibility(View.GONE);
+            btnFinalizar.setVisibility(View.GONE);
             tvTitulo.setText("Alacena");
         }
         llenarMandado();
@@ -135,8 +138,7 @@ public class ListaMandado extends AppCompatActivity {
     }
 
     public void ClickEliminar(int id) {
-        ingDao = new IngredienteDao();
-        ingDao.ingredienteDao(this);
+        ingDao = new IngredienteDao(this);
         if(ingDao.eliminarLista(id)){
             Toast.makeText(this, "ELIMINADO", Toast.LENGTH_SHORT).show();
         }else{
@@ -156,8 +158,7 @@ public class ListaMandado extends AppCompatActivity {
     public void llenarMandado(){
         float cantidad;
         String marca;
-        ingDao = new IngredienteDao();
-        ingDao.ingredienteDao(this);
+        ingDao = new IngredienteDao(this);
 
         listaIng = ingDao.listaMandado(tipo);
         TableRow.LayoutParams lfila = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -175,8 +176,12 @@ public class ListaMandado extends AppCompatActivity {
                 TableRow tr = (TableRow) compoundButton.getParent();
                 if(compoundButton.isChecked()){
                     tr.setBackgroundColor(Color.LTGRAY);
+                    listaIngSeleccionados.add(listing.getIdIngrediente());
+                    System.out.println(listaIngSeleccionados);
+
                 }else{
                     tr.setBackgroundColor(0);
+                    listaIngSeleccionados.remove(listing.getIdIngrediente());
                 }
             });
             tring.addView(cbMarcar);
@@ -245,5 +250,14 @@ public class ListaMandado extends AppCompatActivity {
         templatePDF.createTable(header, listaIng);
         templatePDF.closeDocument();
         templatePDF.appViewPDF(this);
+    }
+
+    public void ClickCompras(View view) {
+        if(!listaIngSeleccionados.isEmpty()){
+            ingDao = new IngredienteDao(this);
+            ingDao.marcarComprado(listaIngSeleccionados);
+            Toast.makeText(this, "Ha finalizado su compra", Toast.LENGTH_SHORT).show();
+            this.recreate();
+        }
     }
 }

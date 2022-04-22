@@ -71,17 +71,37 @@
                 </TableRow>
             </TableLayout>
 
-            <Button
-                android:id="@+id/btnGenerar"
-                android:layout_width="200dp"
-                android:layout_height="45dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="26dp"
-                android:text="@string/generarlista"
-                android:onClick="ClickGenerar"
-                tools:ignore="TouchTargetSizeCheck">
-            </Button>
+            <LinearLayout
+                android:gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btnGuardarMandado"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:layout_height="45dp"
+                    android:onClick="ClickCompras"
+                    android:text="@string/finalizar"
+                    tools:ignore="TouchTargetSizeCheck">
+
+                </Button>
+
+                <Button
+                    android:id="@+id/btnGenerar"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="ClickGenerar"
+                    android:text="@string/generarlista"
+                    tools:ignore="TouchTargetSizeCheck">
+
+                </Button>
+            </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
     <RelativeLayout

@@ -19,7 +19,9 @@ public class IngredienteDao {
     String bd = "easymeal.db";
     ContentValues cv = new ContentValues();
 
-    public void ingredienteDao(Context c){
+    Cursor cursor;
+
+    public IngredienteDao (Context c){
         this.c = c;
         sql = c.openOrCreateDatabase(bd, Context.MODE_PRIVATE,null);
         ing = new Ingrediente();
@@ -63,55 +65,54 @@ public class IngredienteDao {
     public int repetidos(Ingrediente i){
         String[] args = new String[]{i.getDescripcion(), i.getUnidadDeMedida(), i.getProveedor()};
 
-        Cursor c = sql.rawQuery("select * from t_ingrediente WHERE descripcion = ? AND unidadDeMedida = ? AND proveedor = ?",args);
-        if (c.moveToFirst()){
-            return c.getInt(0);
+        cursor = sql.rawQuery("select * from t_ingrediente WHERE descripcion = ? AND unidadDeMedida = ? AND proveedor = ?",args);
+        if (cursor.moveToFirst()){
+            return cursor.getInt(0);
         }
-        c.close();
+        cursor.close();
         return 0;
     }
 
     public boolean eliminarLista(int id){
         cv = new ContentValues();
         cv.put("mandado", 0);
-        cv.put("cantidadAComprar", 0);
+        cv.put("cantidadAcomprar", 0);
         return (sql.update("t_ingrediente",cv,"idIngrediente = '" + id + "'", null)>0);
     }
 
     public ArrayList<Ingrediente> listaIngredientes(){
         ArrayList<Ingrediente> lista = new ArrayList<>();
-        Cursor c = sql.rawQuery("select * from t_ingrediente",null);
-        if (c.moveToFirst()){
+        cursor = sql.rawQuery("select * from t_ingrediente",null);
+        if (cursor.moveToFirst()){
             do {
-                ing = new Ingrediente(c.getInt(0), c.getInt(5), c.getString(2), c.getString(1), c.getString(4), c.getFloat(3), c.getFloat(6),c.getBlob(8), c.getString(7));
+                ing = new Ingrediente(cursor.getInt(0), cursor.getInt(5), cursor.getString(2), cursor.getString(1), cursor.getString(4), cursor.getFloat(3), cursor.getFloat(6),cursor.getBlob(8), cursor.getString(7));
                 lista.add(ing);
-            } while(c.moveToNext());
+            } while(cursor.moveToNext());
         }
-        c.close();
+        cursor.close();
         return lista;
     }
 
     public ArrayList<Ingrediente> listaMandado(String tipo) {
         ArrayList<Ingrediente> lista = new ArrayList<>();
-        Cursor c;
 
         if(tipo.equals("mandado")){
-            c = sql.rawQuery("SELECT * FROM t_ingrediente WHERE mandado = 1", null);
+            cursor = sql.rawQuery("SELECT * FROM t_ingrediente WHERE mandado = 1", null);
         }else{
-            c = sql.rawQuery("SELECT * FROM t_ingrediente", null);
+            cursor = sql.rawQuery("SELECT * FROM t_ingrediente", null);
         }
 
-        if (c.moveToFirst()){
+        if (cursor.moveToFirst()){
             do {
                 if(tipo.equals("mandado")){
-                    ing = new Ingrediente(c.getInt(0), c.getString(1), c.getFloat(6), c.getString(2), c.getString(7));
+                    ing = new Ingrediente(cursor.getInt(0), cursor.getString(1), cursor.getFloat(6), cursor.getString(2), cursor.getString(7));
                 }else{
-                    ing = new Ingrediente(c.getInt(0), c.getString(1), c.getString(2), c.getFloat(3), c.getString(7));
+                    ing = new Ingrediente(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getFloat(3), cursor.getString(7));
                 }
                 lista.add(ing);
-            } while(c.moveToNext());
+            } while(cursor.moveToNext());
         }
-        c.close();
+        cursor.close();
 
         return lista;
     }
@@ -119,14 +120,24 @@ public class IngredienteDao {
     public Ingrediente buscarIngrediente(int idIngrediente) {
         Ingrediente ing = new Ingrediente();
 
-        Cursor c;
+        cursor = sql.rawQuery("SELECT * FROM t_ingrediente WHERE idIngrediente = '" + idIngrediente + "'", null);
 
-        c = sql.rawQuery("SELECT * FROM t_ingrediente WHERE idIngrediente = '" + idIngrediente + "'", null);
-
-        if (c.moveToFirst()){
-            ing = new Ingrediente(c.getInt(0), c.getInt(5), c.getString(2), c.getString(1), c.getString(4), c.getFloat(3), c.getFloat(6),c.getBlob(8), c.getString(7));
+        if (cursor.moveToFirst()){
+            ing = new Ingrediente(cursor.getInt(0), cursor.getInt(5), cursor.getString(2), cursor.getString(1), cursor.getString(4), cursor.getFloat(3), cursor.getFloat(6),cursor.getBlob(8), cursor.getString(7));
         }
-        c.close();
+        cursor.close();
         return ing;
+    }
+
+    public void marcarComprado(ArrayList<Integer> listaIngSeleccionados) {
+        for (Integer lista: listaIngSeleccionados) {
+            cursor = sql.rawQuery("SELECT cantidad, cantidadAcomprar FROM t_ingrediente WHERE idIngrediente = ?", new String[]{String.valueOf(lista)});
+            cursor.moveToFirst();
+            cv = new ContentValues();
+            cv.put("mandado", 0);
+            cv.put("cantidadAcomprar", 0);
+            cv.put("cantidad", cursor.getInt(0) + cursor.getInt(1));
+            sql.update("t_ingrediente",cv,"idIngrediente = ?", new String[]{String.valueOf(lista)});
+        }
     }
 }

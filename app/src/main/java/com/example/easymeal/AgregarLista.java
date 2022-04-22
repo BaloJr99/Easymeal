@@ -79,8 +79,7 @@ public class AgregarLista extends AppCompatActivity {
                 }else{
                     etDescripcion.setEnabled(false);
                     etDescripcion.setText("");
-                    ingdao = new IngredienteDao();
-                    ingdao.ingredienteDao(AgregarLista.this);
+                    ingdao = new IngredienteDao(AgregarLista.this);
                     listaing = ingdao.listaIngredientes();
                     for(Ingrediente in: listaing){
                         if(in.getDescripcion().equals(sDescripcion.getSelectedItem().toString())){
@@ -157,8 +156,7 @@ public class AgregarLista extends AppCompatActivity {
 
         if(idIngrediente != 0){
             btnModificar.setText("MODIFICAR");
-            ingdao = new IngredienteDao();
-            ingdao.ingredienteDao(this);
+            ingdao = new IngredienteDao(this);
             ing = ingdao.buscarIngrediente(idIngrediente);
             etFecha.setText(ing.getFechaCaducidad());
             if(tipo.equals("mandado")){
@@ -246,8 +244,7 @@ public class AgregarLista extends AppCompatActivity {
 
             String fechaCaducidad = null;
 
-            ingdao = new IngredienteDao();
-            ingdao.ingredienteDao(this);
+            ingdao = new IngredienteDao(this);
             ing = new Ingrediente();
             Bitmap bitmap = null;
             byte[] img = null;
@@ -344,8 +341,7 @@ public class AgregarLista extends AppCompatActivity {
     }
 
     public void llenarSpinners() {
-        ingdao = new IngredienteDao();
-        ingdao.ingredienteDao(this);
+        ingdao = new IngredienteDao(this);
         listaing = ingdao.listaIngredientes();
         listadesc.clear();
         listaMedida.clear();
