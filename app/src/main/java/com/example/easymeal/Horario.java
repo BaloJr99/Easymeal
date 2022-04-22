@@ -263,14 +263,14 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
                                     (sabado_alm.getSelectedItemPosition()!=(0))||(sabado_com.getSelectedItemPosition()!=(0))|| (sabado_cen.getSelectedItemPosition()!=(0))||
                                     (domingo_alm.getSelectedItemPosition()!=(0))||(domingo_com.getSelectedItemPosition()!=(0))|| (domingo_cen.getSelectedItemPosition()!=(0)))){
 
-                        predao = new PreparacionesDao(this);
+                        predao = new PreparacionesDao(Horario.this);
                         pre = new Preparaciones();
-                        recpredao = new RecetaPreparacionDao(this);
+                        recpredao = new RecetaPreparacionDao(Horario.this);
                         recpre = new RecetaPreparacion();
 
                         int flag = 0;
 
-                        for (int i = 0; i < layout.getChildCount(); i++) {
+                        for (int x = 0; x < layout.getChildCount(); x++) {
                             View v = layout.getChildAt(i);
                             if (v instanceof LinearLayout) {
                                 LinearLayout layout1 = (LinearLayout) v;
@@ -280,7 +280,7 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
                                     if (v1 instanceof Spinner) {
                                         if(((Spinner) v1).getSelectedItemPosition() != 0){
                                             pre.setTipoComida(datos[flag]);
-                                            flag ++;
+                                            flag++;
 
                                             pre.setfechaPreparacion(txtFecha.getText().toString());
                                             int resultado = predao.insertarPreparacion(pre);
