@@ -40,7 +40,7 @@
                         android:layout_height="29dp"
                         android:layout_marginStart="156dp"
                         android:layout_marginTop="4dp"
-                        android:text="RECETAS"
+                        android:text="@string/recet"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -75,12 +75,13 @@
                         android:layout_marginEnd="14dp"
                         android:layout_marginBottom="28dp"
                         android:ems="10"
-                        android:hint="Nombre para receta"
+                        android:hint="@string/nombre_para_receta"
                         android:inputType="textPersonName"
                         app:layout_constraintBottom_toTopOf="@+id/mFieldPasos"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/tvNombre"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="Autofill" />
 
                     <TextView
                         android:id="@+id/tvPasos"
@@ -107,7 +108,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/fieldNombre"
-                        tools:ignore="SpeakableTextPresentCheck" />
+                        tools:ignore="Autofill,SpeakableTextPresentCheck" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -123,7 +124,7 @@
                         android:layout_margin="3dp"
                         android:background="@color/purple_500"
                         android:src="@drawable/ic_baseline_add_24"
-                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                     <ImageButton
                         android:id="@+id/btnBorrar"
@@ -133,7 +134,7 @@
                         android:background="@color/purple_500"
                         android:onClick="eliminarReceta"
                         android:src="@drawable/ic_delete"
-                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                     <ImageButton
                         android:id="@+id/btnEdit"
@@ -142,7 +143,7 @@
                         android:layout_margin="3dp"
                         android:background="@color/purple_500"
                         android:src="@drawable/ic_baseline_update_24"
-                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                     <ImageButton
                         android:id="@+id/btnBuscar"
@@ -151,7 +152,7 @@
                         android:layout_margin="3dp"
                         android:background="@color/purple_500"
                         android:src="@drawable/ic_baseline_search_24"
-                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
                     <!--<Button
                         android:id="@+id/btnAgregar"
                         android:layout_width="wrap_content"
@@ -186,13 +187,14 @@
                 <ListView
                     android:id="@+id/listaRecetas"
                     android:layout_width="match_parent"
-                    android:layout_height="96dp" />
+                    android:layout_height="96dp"
+                    tools:ignore="NestedScrolling" />
 
                 <Spinner
                     android:id="@+id/spiingrediente"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:contentDescription="Ingredientes"
+                    android:contentDescription="@string/ingredient"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/listaRecetas"
                     app:layout_constraintStart_toStartOf="parent"
@@ -209,16 +211,16 @@
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
                         android:enabled="false"
-                        android:text="Agregar Ingrediente"
+                        android:text="@string/agregar_ingrediente"
                         tools:ignore="TouchTargetSizeCheck" />
 
                     <EditText
                         android:id="@+id/txtCantidad"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="Cantidad"
+                        android:hint="@string/cantida"
                         android:inputType="number"
-                        tools:ignore="SpeakableTextPresentCheck" />
+                        tools:ignore="Autofill,SpeakableTextPresentCheck" />
 
             </LinearLayout>
             <Space
@@ -228,17 +230,17 @@
                     android:id="@+id/btnNuevoIng"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nuevo Ingrediente"
+                    android:text="@string/nuevo_ingrediente"
                     android:enabled="false"
-                    android:layout_gravity="right"/>
+                    android:layout_gravity="end"/>
 
                 <Button
                     android:id="@+id/btnVerIng"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
-                    android:text="Ver ingredientes de la receta"
-                    android:layout_gravity="right"/>
+                    android:text="@string/ver_ingredientes_de_la_receta"
+                    android:layout_gravity="end"/>
 
             </LinearLayout>
         </ScrollView>
@@ -250,6 +252,8 @@
     android:layout_gravity="start"
     android:background="@color/white">
 
-        <include layout="@layout/main_nav_drawer"></include>
+        <include layout="@layout/main_nav_drawer">
+
+        </include>
     </RelativeLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

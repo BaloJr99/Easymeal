@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 
 import com.example.easymeal.cl.model.bd.Compras;
-import com.example.easymeal.cl.model.bd.Ingrediente;
 
 import java.util.ArrayList;
 
@@ -35,6 +34,7 @@ public class ComprasDao {
                 listaCompras.add(compra);
             } while(c.moveToNext());
         }
+        c.close();
         return listaCompras;
     }
 

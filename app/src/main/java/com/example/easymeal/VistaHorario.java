@@ -3,19 +3,9 @@ package com.example.easymeal;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.TableRow;
-import android.widget.TextView;
 
-import com.example.easymeal.cl.model.bd.Ingrediente;
-import com.example.easymeal.cl.model.dao.IngredienteDao;
 
 public class VistaHorario extends AppCompatActivity {
     DrawerLayout dl;

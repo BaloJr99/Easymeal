@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.example.easymeal.cl.model.bd.Preparaciones;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class PreparacionesDao {
@@ -28,9 +27,11 @@ public class PreparacionesDao {
         cv.put("semanaPreparacion", p.getfechaPreparacion());
         sql.insert("t_preparaciones",null,cv);
 
-        Cursor c = sql.rawQuery("select max(idPreparacion) from t_preparaciones",null);
-        if (c.moveToFirst()){
-            return c.getInt(0);
+        Cursor cursor = sql.rawQuery("select max(idPreparacion) from t_preparaciones",null);
+        if (cursor.moveToFirst()){
+            int aux = cursor.getInt(0);
+            cursor.close();
+            return aux;
         }
         return 0;
     }
@@ -51,6 +52,7 @@ public class PreparacionesDao {
             do {
                 preparaciones.add(new Object[]{cursor.getString(1), cursor.getInt(5), cursor.getInt(6)});
             }while(cursor.moveToNext());
+            cursor.close();
         }
         return preparaciones;
     }

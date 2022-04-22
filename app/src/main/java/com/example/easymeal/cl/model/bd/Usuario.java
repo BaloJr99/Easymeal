@@ -8,15 +8,6 @@ public class Usuario {
 
     }
 
-    public Usuario(String username, String clave, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento) {
-        this.username = username;
-        this.clave = clave;
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
     public boolean isNull(){
         if(nombre.equals("")&&apellidoPaterno.equals("")&&apellidoMaterno.equals("")&&username.equals("")&&clave.equals("")&&fechaNacimiento.equals("")){
             return false;

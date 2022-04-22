@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:layout_gravity="center"
-        android:text="INGREDIENTES" />
+        android:text="@string/ingredientes" />
 
     <ListView
         android:id="@+id/listIngredientes"
@@ -26,9 +25,10 @@
         android:id="@+id/txtNombreIng"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Ingrediente"
+        android:hint="@string/ingrediente"
         android:enabled="false"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:inputType="text"
+        tools:ignore="Autofill,SpeakableTextPresentCheck" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp">
@@ -40,15 +40,15 @@
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:enabled="false"
-            android:text="Modificar"
+            android:text="@string/modifica"
             tools:ignore="TouchTargetSizeCheck" />
         <EditText
             android:id="@+id/txtCantidad"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Cantidad"
+            android:hint="@string/cantida"
             android:inputType="number"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="Autofill,SpeakableTextPresentCheck" />
 
 
     </LinearLayout>
@@ -59,7 +59,7 @@
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:enabled="false"
-        android:text="Eliminar ingrediente de la receta"
+        android:text="@string/eliminar_ingrediente_de_la_receta"
         tools:ignore="TouchTargetSizeCheck" />
 
 </LinearLayout>

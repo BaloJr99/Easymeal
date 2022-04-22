@@ -8,7 +8,7 @@ public class IngredienteReceta {
     }
 
     public boolean isNull(){
-        if(idIngrediente.equals("")&&idReceta.equals("")&&cantidad.equals("")){
+        if(idIngrediente.equals(0)&&idReceta.equals(0)&&cantidad.equals(0f)){
             return false;
         }else{
             return true;

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,7 +23,7 @@
             <LinearLayout
                 android:id="@+id/linear_Horario"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -32,13 +31,15 @@
                     android:layout_height="40dp"
                     android:orientation="horizontal"
                     android:gravity="end"
-                    android:layout_marginEnd="10dp">
+                    android:layout_marginEnd="10dp"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                     android:id="@+id/fecha"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_calendar_today_24">
+                    android:src="@drawable/ic_baseline_calendar_today_24"
+                        tools:ignore="ContentDescription">
                     </ImageView>
 
                     <TextView
@@ -52,7 +53,7 @@
                         android:id="@+id/txtLunes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="    Lunes" />
+                        android:text="@string/lunes" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -66,11 +67,12 @@
 
                     <EditText
                         android:id="@+id/cant_lunes_alm"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -84,11 +86,12 @@
 
                     <EditText
                         android:id="@+id/cant_lunes_com"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -102,18 +105,19 @@
 
                     <EditText
                         android:id="@+id/cant_lunes_cen"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/txtMartes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="    Martes" />
+                    android:text="@string/martes" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -126,11 +130,12 @@
 
                     <EditText
                         android:id="@+id/cant_martes_alm"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -144,11 +149,12 @@
 
                     <EditText
                         android:id="@+id/cant_martes_com"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -162,17 +168,18 @@
 
                     <EditText
                         android:id="@+id/cant_martes_cen"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <TextView
                     android:id="@+id/txtMiercoles"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="    Miercoles" />
+                    android:text="@string/miercoles" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -185,11 +192,12 @@
 
                     <EditText
                         android:id="@+id/cant_miercoles_alm"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -203,11 +211,12 @@
 
                     <EditText
                         android:id="@+id/cant_miercoles_com"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -221,17 +230,18 @@
 
                     <EditText
                         android:id="@+id/cant_miercoles_cen"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <TextView
                     android:id="@+id/txtJueves"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="    Jueves" />
+                    android:text="@string/jueves" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -244,11 +254,12 @@
 
                     <EditText
                         android:id="@+id/cant_jueves_alm"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -262,11 +273,12 @@
 
                     <EditText
                         android:id="@+id/cant_jueves_com"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -280,17 +292,18 @@
 
                     <EditText
                         android:id="@+id/cant_jueves_cen"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <TextView
                     android:id="@+id/txtViernes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="    Viernes" />
+                    android:text="@string/viernes" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -303,11 +316,12 @@
 
                     <EditText
                         android:id="@+id/cant_viernes_alm"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -321,11 +335,12 @@
 
                     <EditText
                         android:id="@+id/cant_viernes_com"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -339,17 +354,18 @@
 
                     <EditText
                         android:id="@+id/cant_viernes_cen"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <TextView
                     android:id="@+id/txtSabado"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="    Sabado" />
+                    android:text="@string/sabado" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -362,11 +378,12 @@
 
                     <EditText
                         android:id="@+id/cant_sabado_alm"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -380,11 +397,12 @@
 
                     <EditText
                         android:id="@+id/cant_sabado_com"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -398,17 +416,18 @@
 
                     <EditText
                         android:id="@+id/cant_sabado_cen"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <TextView
                     android:id="@+id/txtDomingo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="    Domingo" />
+                    android:text="@string/domingo" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -421,11 +440,12 @@
 
                     <EditText
                         android:id="@+id/cant_domingo_alm"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -439,11 +459,12 @@
 
                     <EditText
                         android:id="@+id/cant_domingo_com"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -457,11 +478,12 @@
 
                     <EditText
                         android:id="@+id/cant_domingo_cen"
-                        android:layout_width="72dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        tools:ignore="Autofill,LabelFor"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -472,20 +494,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
-                        android:text="A G R E G A R"
+                        android:layout_marginEnd="5dp"
+                        android:text="@string/a_g_r_e_g_a_r"
                         android:onClick="insertarInformacion"
-                        >
+                        tools:ignore="ButtonStyle,TooManyViews">
                     </Button>
                     <Button
                         android:id="@+id/modificar"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         android:onClick="eliminarHorario"
-                        android:text="M O D I F I C A R"
-                        >
+                        android:text="@string/m_o_d_i_f_i_c_a_r"
+                        tools:ignore="ButtonStyle">
                     </Button>
                 </LinearLayout>
 
@@ -498,7 +520,9 @@
         android:layout_gravity="start"
         android:background="@color/white">
 
-        <include layout="@layout/main_nav_drawer"></include>
+        <include layout="@layout/main_nav_drawer">
+
+        </include>
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

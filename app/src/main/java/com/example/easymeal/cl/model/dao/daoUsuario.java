@@ -11,12 +11,10 @@ import com.example.easymeal.cl.model.bd.Usuario;
 import java.util.ArrayList;
 
 public class daoUsuario extends SQLiteOpenHelper {
-    Conexion con= new Conexion(null,"easymeal.db",null,10);
     Context c;
     Usuario u;
     ArrayList<Usuario> lista;
     SQLiteDatabase sql;
-    SQLiteOpenHelper oh;
     String bd="easymeal.db";
     //String tabla="create table if not exists usuario(id integer primary key autoincrement, usuario text, pass text, nombre text, ap text)";
     String tabla = "create table if not exists t_usuarios(idUsuario INTEGER PRIMARY KEY AUTOINCREMENT,username VARCHAR(20) NOT NULL,clave VARCHAR(20) NOT NULL,nombre VARCHAR(20) NOT NULL,apellidoPaterno VARCHAR(20) NOT NULL,apellidoMaterno VARCHAR(20),fechaNacimiento DATE NOT NULL)";
@@ -57,8 +55,7 @@ public class daoUsuario extends SQLiteOpenHelper {
         return x;
     }
     public ArrayList<Usuario> selectUsuario(){
-        ArrayList<Usuario> lista =new ArrayList<Usuario>();
-        lista.clear();
+        ArrayList<Usuario> lista =new ArrayList<>();
         Cursor cr = sql.rawQuery("select * from t_usuarios",null);
         if(cr != null && cr.moveToFirst()){
             do{
@@ -72,6 +69,7 @@ public class daoUsuario extends SQLiteOpenHelper {
                 u.setFechaNacimiento(cr.getString(6));
                 lista.add(u);
             }while(cr.moveToNext());
+            cr.close();
         }
         return lista;
     }
@@ -84,6 +82,7 @@ public class daoUsuario extends SQLiteOpenHelper {
                     a++;
                 }
             }while(cr.moveToNext());
+            cr.close();
         }
         return a;
     }
@@ -116,31 +115,7 @@ public class daoUsuario extends SQLiteOpenHelper {
         return (sql.update("t_usuarios",cv,"idUsuario="+u.getIdUsuario(),null)>0);
     }
 
-    public  boolean deleteUsuario(){
-        /*sql = oh.getWritableDatabase();
-        */
-        sql=getWritableDatabase();
-        return (sql.delete("t_usuarios","idUsuario="+1,null)>0);
 
-    }
-    public ArrayList<Usuario> selectUsuarioById(int id){
-        ArrayList<Usuario> lista =new ArrayList<Usuario>();
-        lista.clear();
-        Cursor cr = sql.rawQuery("select * from t_usuarios where idUsuario="+id,null);
-        if(cr != null && cr.moveToFirst()){
-            do{
-                Usuario u = new Usuario();
-                //u.setId(cr.getInt(0));
-                u.setUsername(cr.getString(1));
-                u.setNombre(cr.getString(3));
-                u.setApellidoPaterno(cr.getString(4));
-                u.setApellidoMaterno(cr.getString(5));
-                u.setFechaNacimiento(cr.getString(6));
-                lista.add(u);
-            }while(cr.moveToNext());
-        }
-        return lista;
-    }
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
@@ -150,16 +125,4 @@ public class daoUsuario extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
-
-   /* public void deleteUser(String courseName){
-
-        // on below line we are creating
-        // a variable to write our database.
-        sql = daoUsuario.this.oh.getWritableDatabase();
-
-        // on below line we are calling a method to delete our
-        // course and we are comparing it with our course name.
-        sql.delete("t_usuarios", "username=?", new String[]{courseName});
-        sql.close();
-    }*/
 }

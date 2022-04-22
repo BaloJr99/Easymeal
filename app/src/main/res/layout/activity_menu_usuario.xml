@@ -19,7 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_usuarios"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            tools:ignore="ContentDescription" />
 
         <Button
             android:id="@+id/btneditar"
@@ -27,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:layout_gravity="center"
-            android:text="EDITAR"
+            android:text="@string/editar"
             tools:layout_editor_absoluteX="158dp"
             tools:layout_editor_absoluteY="342dp" />
 
@@ -38,7 +39,7 @@
             android:layout_gravity="center"
             android:onClick="eliminarRegistro"
             android:layout_marginBottom="20dp"
-            android:text="ELIMINAR"
+            android:text="@string/eliminar"
             tools:layout_editor_absoluteX="158dp"
             tools:layout_editor_absoluteY="342dp" />
         <Button
@@ -47,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:layout_gravity="center"
-            android:text="VER DATOS"
+            android:text="@string/ver_datos"
             tools:layout_editor_absoluteX="158dp"
             tools:layout_editor_absoluteY="342dp" />
 
@@ -56,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="SALIR"
+            android:text="@string/salir"
             tools:layout_editor_absoluteX="158dp"
             tools:layout_editor_absoluteY="342dp" />
 
@@ -67,7 +68,9 @@
         android:layout_gravity="start"
         android:background="@android:color/white">
 
-        <include layout="@layout/main_nav_drawer"></include>
+        <include layout="@layout/main_nav_drawer">
+
+        </include>
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

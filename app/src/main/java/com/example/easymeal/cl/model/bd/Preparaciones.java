@@ -8,12 +8,6 @@ public class Preparaciones {
 
     }
 
-    public Preparaciones(Integer idPreparaciones, String tipoComida, String fechaPreparacion){
-        this.idPreparaciones = idPreparaciones;
-        this.tipoComida = tipoComida;
-        this.fechaPreparacion = fechaPreparacion;
-    }
-
     public boolean isNull(){
         if(tipoComida.equals("")&&fechaPreparacion.equals("")){
             return false;

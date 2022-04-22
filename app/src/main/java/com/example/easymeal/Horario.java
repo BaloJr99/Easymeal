@@ -6,9 +6,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -24,25 +21,19 @@ import android.widget.Toast;
 import com.example.easymeal.cl.model.bd.Preparaciones;
 import com.example.easymeal.cl.model.bd.Receta;
 import com.example.easymeal.cl.model.bd.RecetaPreparacion;
-import com.example.easymeal.cl.model.dao.Conexion;
 import com.example.easymeal.cl.model.dao.PreparacionesDao;
 import com.example.easymeal.cl.model.dao.RecetaDao;
 import com.example.easymeal.cl.model.dao.RecetaPreparacionDao;
-import com.example.easymeal.database.DbAyuda;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Horario extends AppCompatActivity implements View.OnClickListener {
-    Conexion co= new Conexion(this,"easymeal.db",null,16);
-    DbAyuda db;
     //Inicializamo variable
     DrawerLayout dl;
     ImageView fecha;
     TextView txtFecha;
     int dia,mes,anio;
-    int idPreparacion;
 
     Spinner lunes_alm,lunes_com,lun_cen,
             martes_alm,martes_com,martes_cen,
@@ -238,6 +229,8 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
                         }
                     }
                     btnModificar.setEnabled(true);
+                }else{
+                    btnModificar.setEnabled(false);
                 }
             },anio,mes,dia);
             datePickerDialog.show();
@@ -248,37 +241,29 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
         AlertDialog.Builder b= new AlertDialog.Builder(this);
         b.setMessage("¿Seguro que desea modificar el horario?");
         b.setCancelable(false);
-        b.setPositiveButton("SI", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int p) {
-                try {
-                    if(!camposVacios()){
+        b.setPositiveButton("SI", (dialogInterface, p) -> {
+            try {
+                if(!camposVacios()){
 
-                        predao = new PreparacionesDao(Horario.this);
-                        pre = new Preparaciones();
-                        recpredao = new RecetaPreparacionDao(Horario.this);
-                        recpre = new RecetaPreparacion();
+                    predao = new PreparacionesDao(Horario.this);
+                    pre = new Preparaciones();
+                    recpredao = new RecetaPreparacionDao(Horario.this);
+                    recpre = new RecetaPreparacion();
 
-                        predao.eliminarPreparacion(txtFecha.getText().toString());
-                        insertarInformacion("Modificado");
-                        limpiarCampos();
-                        btnModificar.setEnabled(false);
-                    }else{
-                        Toast.makeText(Horario.this,"Existen campos vacios",Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (Exception e) {
-                    System.out.println("Error");
-                    System.out.println(e.getMessage());
+                    predao.eliminarPreparacion(txtFecha.getText().toString());
+                    insertarInformacion("Modificado");
+                    limpiarCampos();
+                    btnModificar.setEnabled(false);
+                }else{
+                    Toast.makeText(Horario.this,"Existen campos vacios",Toast.LENGTH_SHORT).show();
                 }
+
+            } catch (Exception e) {
+                System.out.println("Error");
+                System.out.println(e.getMessage());
             }
         });
-        b.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
+        b.setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.cancel());
         b.show();
     }
 
@@ -392,7 +377,7 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
     }
 
     public boolean camposVacios(){
-        return txtFecha.getText().toString().equals("--/--/----") ||
+        return txtFecha.getText().toString().equals("") ||
                 ((lunes_alm.getSelectedItemPosition() == (0)) && (lunes_com.getSelectedItemPosition() == (0)) && (lun_cen.getSelectedItemPosition() == (0)) &&
                         (martes_alm.getSelectedItemPosition() == (0)) && (martes_com.getSelectedItemPosition() == (0)) && (martes_cen.getSelectedItemPosition() == (0)) &&
                         (miercoles_alm.getSelectedItemPosition() == (0)) && (miercoles_com.getSelectedItemPosition() == (0)) && (miercoles_cen.getSelectedItemPosition() == (0)) &&

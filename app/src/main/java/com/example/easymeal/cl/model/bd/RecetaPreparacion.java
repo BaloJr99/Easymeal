@@ -4,20 +4,6 @@ public class RecetaPreparacion {
     Integer idRecetaPreparacion,idReceta,idPreparaciones,cantidadAPreparar;
 
     public RecetaPreparacion() {
-
-    }
-
-    public RecetaPreparacion(Integer idReceta, Integer idPreparaciones, Integer cantidadAPreparar) {
-        this.idReceta = idReceta;
-        this.idPreparaciones = idPreparaciones;
-        this.cantidadAPreparar = cantidadAPreparar;
-    }
-
-    public RecetaPreparacion(Integer idRecetaPreparacion, Integer idPreparaciones, Integer idReceta, Integer cantidadAPreparar) {
-        this.idRecetaPreparacion = idRecetaPreparacion;
-        this.idReceta = idReceta;
-        this.idPreparaciones = idPreparaciones;
-        this.cantidadAPreparar = cantidadAPreparar;
     }
 
     public Integer getIdRecetaPreparacion() {

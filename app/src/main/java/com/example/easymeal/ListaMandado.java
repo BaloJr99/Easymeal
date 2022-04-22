@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -15,7 +16,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -34,10 +34,8 @@ public class ListaMandado extends AppCompatActivity {
     //Inicializamos variable
     DrawerLayout dl;
     Button btnAgregar, btnGenerar;
-    static String username;
 
     IngredienteDao ingDao;
-    Ingrediente ing;
     ArrayList<Ingrediente> listaIng;
 
     TableLayout tling;
@@ -48,6 +46,7 @@ public class ListaMandado extends AppCompatActivity {
     CheckBox cbMarcar;
     String tipo = "";
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,13 +67,10 @@ public class ListaMandado extends AppCompatActivity {
             tvTitulo.setText("Alacena");
         }
         llenarMandado();
-        btnAgregar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent abrirAgregarLista = new Intent(ListaMandado.this, AgregarLista.class);
-                abrirAgregarLista.putExtra("tipo", tipo);
-                startActivity(abrirAgregarLista);
-            }
+        btnAgregar.setOnClickListener(view -> {
+            Intent abrirAgregarLista = new Intent(ListaMandado.this, AgregarLista.class);
+            abrirAgregarLista.putExtra("tipo", tipo);
+            startActivity(abrirAgregarLista);
         });
 
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
@@ -156,9 +152,10 @@ public class ListaMandado extends AppCompatActivity {
         startActivity(abrirAgregarLista);
     }
 
+    @SuppressLint("SetTextI18n")
     public void llenarMandado(){
         float cantidad;
-        String marca = "";
+        String marca;
         ingDao = new IngredienteDao();
         ingDao.ingredienteDao(this);
 
@@ -174,15 +171,12 @@ public class ListaMandado extends AppCompatActivity {
             cbMarcar = new CheckBox(this);
             cbMarcar.setTag(listing.getIdIngrediente());
             cbMarcar.setWidth(35);
-            cbMarcar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    TableRow tr = (TableRow) compoundButton.getParent();
-                    if(compoundButton.isChecked()){
-                        tr.setBackgroundColor(Color.LTGRAY);
-                    }else{
-                        tr.setBackgroundColor(0);
-                    }
+            cbMarcar.setOnCheckedChangeListener((compoundButton, b) -> {
+                TableRow tr = (TableRow) compoundButton.getParent();
+                if(compoundButton.isChecked()){
+                    tr.setBackgroundColor(Color.LTGRAY);
+                }else{
+                    tr.setBackgroundColor(0);
                 }
             });
             tring.addView(cbMarcar);
@@ -215,27 +209,21 @@ public class ListaMandado extends AppCompatActivity {
             if(tipo.equals("mandado")){
                 ivEliminar.setTag(listing.getIdIngrediente());
                 ivEliminar.setImageResource(R.drawable.ic_delete);
-                ivEliminar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        TableRow tablerow = (TableRow) view.getParent();
-                        ImageView items = (ImageView) tablerow.getChildAt(3);
+                ivEliminar.setOnClickListener(view -> {
+                    TableRow tablerow = (TableRow) view.getParent();
+                    ImageView items = (ImageView) tablerow.getChildAt(3);
 
-                        ClickEliminar(Integer.parseInt(items.getTag().toString()));
-                    }
+                    ClickEliminar(Integer.parseInt(items.getTag().toString()));
                 });
 
             }
 
             ivEditar.setTag(listing.getIdIngrediente());
             ivEditar.setImageResource(R.drawable.ic_edit);
-            ivEditar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    TableRow tablerow = (TableRow) view.getParent();
-                    ImageView items = (ImageView) tablerow.getChildAt(2);
-                    ClickEditar(Integer.parseInt(items.getTag().toString()));
-                }
+            ivEditar.setOnClickListener(view -> {
+                TableRow tablerow = (TableRow) view.getParent();
+                ImageView items = (ImageView) tablerow.getChildAt(2);
+                ClickEditar(Integer.parseInt(items.getTag().toString()));
             });
 
             tring.addView(ivEditar);
@@ -246,7 +234,7 @@ public class ListaMandado extends AppCompatActivity {
         }
     }
 
-    private String[] header = {"Nombre", "Cantidad", "Marca"};
+    private final String[] header = {"Nombre", "Cantidad", "Marca"};
 
     public void ClickGenerar(View view) {
         TemplatePDF templatePDF = new TemplatePDF(this);

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,7 +30,7 @@
                     android:id="@+id/tvTitulo"
                     android:layout_weight="4"
                     android:padding="3dp"
-                    android:text="HORARIO SEMANAL"
+                    android:text="@string/horario_semanal"
                     android:textAlignment="center"
                     android:textSize="20sp" />
             </TableRow>
@@ -43,33 +42,33 @@
                     android:layout_width="2sp"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:text="DIA"
+                    android:text="@string/dia"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvAlmuerzo"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:padding="3dp"
-                    android:text="ALMUERZO"
+                    android:text="@string/almuerzo"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvComida"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:text="COMIDA"
+                    android:text="@string/comida"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvCena"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:text="CENA"
+                    android:text="@string/cena"
                     android:textAlignment="center"
                     android:textSize="20sp" />
             </TableRow>
@@ -81,13 +80,13 @@
                     android:layout_width="2sp"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:text="Lunes"
+                    android:text="@string/lunes"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvAlmuerzoLunes"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
@@ -95,7 +94,7 @@
 
                 <TextView
                     android:id="@+id/tvComidaLunes"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
@@ -104,7 +103,7 @@
 
                 <TextView
                     android:id="@+id/tvCenaLunes"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
@@ -119,13 +118,13 @@
                     android:layout_width="2sp"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:text="Martes"
+                    android:text="@string/martes"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvAlmuerzoMartes"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
@@ -133,7 +132,7 @@
 
                 <TextView
                     android:id="@+id/tvComidaMartes"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
@@ -142,7 +141,7 @@
 
                 <TextView
                     android:id="@+id/tvCenaMartes"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
@@ -157,13 +156,13 @@
                     android:layout_width="2sp"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:text="Miercoles"
+                    android:text="@string/miercoles"
                     android:textAlignment="center"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tvAlmuerzoMiercoles"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
 
                     android:padding="3dp"
                     android:text=""
@@ -172,7 +171,7 @@
 
                 <TextView
                     android:id="@+id/tvComidaMiercoles"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
@@ -181,7 +180,7 @@
 
                 <TextView
                     android:id="@+id/tvCenaMiercoles"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
@@ -196,13 +195,13 @@
                     android:layout_width="2sp"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:text="Jueves"
+                    android:text="@string/jueves"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvAlmuerzoJueves"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
@@ -210,7 +209,7 @@
 
                 <TextView
                     android:id="@+id/tvComidaJueves"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
@@ -219,7 +218,7 @@
 
                 <TextView
                     android:id="@+id/tvCenaJueves"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
@@ -234,13 +233,13 @@
                     android:layout_width="2sp"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:text="Viernes"
+                    android:text="@string/viernes"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvAlmuerzoViernes"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
@@ -248,7 +247,7 @@
 
                 <TextView
                     android:id="@+id/tvComidaViernes"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
@@ -257,7 +256,7 @@
 
                 <TextView
                     android:id="@+id/tvCenaViernes"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
@@ -272,13 +271,13 @@
                     android:layout_width="2sp"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:text="Sabado"
+                    android:text="@string/sabado"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvAlmuerzoSabado"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
@@ -286,7 +285,7 @@
 
                 <TextView
                     android:id="@+id/tvComidaSabado"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
@@ -295,7 +294,7 @@
 
                 <TextView
                     android:id="@+id/tvCenaSabado"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
@@ -310,13 +309,13 @@
                     android:layout_width="2sp"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:text="Domingo"
+                    android:text="@string/domingo"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvAlmuerzoDomingo"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
@@ -324,7 +323,7 @@
 
                 <TextView
                     android:id="@+id/tvComidaDomingo"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
@@ -333,7 +332,7 @@
 
                 <TextView
                     android:id="@+id/tvCenaDomingo"
-                    android:layout_width="20mm"
+                    android:layout_width="20dp"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
@@ -350,6 +349,8 @@
         android:layout_gravity="start"
         android:background="@color/white">
 
-        <include layout="@layout/main_nav_drawer"></include>
+        <include layout="@layout/main_nav_drawer">
+
+        </include>
     </RelativeLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

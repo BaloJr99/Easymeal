@@ -3,10 +3,7 @@ package com.example.easymeal.cl.model.dao;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
 
-import com.example.easymeal.Recetas;
-import com.example.easymeal.cl.model.bd.Ingrediente;
 import com.example.easymeal.cl.model.bd.IngredienteReceta;
 
 public class RecetaIngredienteDao {
@@ -14,7 +11,6 @@ public class RecetaIngredienteDao {
     IngredienteReceta ingRec;
     SQLiteDatabase sql;
     String bd = "easymeal.db";
-    ContentValues cv = new ContentValues();
 
     public RecetaIngredienteDao (Context context){
         this.c = context;

@@ -3,7 +3,6 @@ package com.example.easymeal;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -41,22 +40,13 @@ public class AcercaNosotros extends AppCompatActivity {
             this.video.setMediaController(mc);
         }
 
-        this.video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                video.seekTo(position);
-                if(position == 0){
-                    video.start();
-                }
-
-                mediaPlayer.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() {
-                    @Override
-                    public void onVideoSizeChanged(MediaPlayer mediaPlayer, int i, int i1) {
-                        mc.setAnchorView(video);
-                    }
-                });
+        this.video.setOnPreparedListener(mediaPlayer -> {
+            video.seekTo(position);
+            if(position == 0){
+                video.start();
             }
 
+            mediaPlayer.setOnVideoSizeChangedListener((mediaPlayer1, i, i1) -> mc.setAnchorView(video));
         });
     }
 

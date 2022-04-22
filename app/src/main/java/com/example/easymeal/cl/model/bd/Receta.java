@@ -7,12 +7,6 @@ public class Receta {
     public Receta() {
     }
 
-    public Receta(Integer idReceta, String nombre, String pasos) {
-        this.idReceta = idReceta;
-        this.nombre = nombre;
-        this.pasos = pasos;
-    }
-
     public boolean isNull(){
         if(nombre.equals("")&&pasos.equals("")){
             return false;

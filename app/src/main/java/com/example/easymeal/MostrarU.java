@@ -40,7 +40,6 @@ public class MostrarU extends AppCompatActivity {
         if(cr != null && cr.moveToFirst()){
             do{
                 Usuario u = new Usuario();
-                //u.setId(cr.getInt(0));
                 u.setUsername(cr.getString(1));
                 System.out.println(cr.getString(1));
                 u.setNombre(cr.getString(3));

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -10,7 +11,8 @@
         android:layout_height="200dp"
         android:layout_margin="16dp"
         android:onClick="ClickLogo"
-        android:src="@drawable/logo1">
+        android:src="@drawable/logo1"
+        tools:ignore="ContentDescription">
         </ImageView>
     <View
         android:layout_width="match_parent"
@@ -25,7 +27,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:onClick="ClickInicio">
+        android:onClick="ClickInicio"
+        tools:ignore="UseCompoundDrawables">
 
         <TextView
             android:layout_width="0dp"
@@ -41,7 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
-            android:src="@drawable/ic_home">
+            android:src="@drawable/ic_home"
+            tools:ignore="ContentDescription">
         </ImageView>
 
     </LinearLayout>
@@ -51,7 +55,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:onClick="ClickHorario">
+        android:onClick="ClickHorario"
+        tools:ignore="UseCompoundDrawables">
 
         <TextView
             android:layout_width="0dp"
@@ -67,7 +72,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
-            android:src="@drawable/ic_horario">
+            android:src="@drawable/ic_horario"
+            tools:ignore="ContentDescription">
         </ImageView>
     </LinearLayout>
 
@@ -76,7 +82,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:onClick="ClickRecetas">
+        android:onClick="ClickRecetas"
+        tools:ignore="UseCompoundDrawables">
 
         <TextView
             android:layout_width="0dp"
@@ -92,7 +99,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
-            android:src="@drawable/ic_dashboard">
+            android:src="@drawable/ic_dashboard"
+            tools:ignore="ContentDescription">
         </ImageView>
     </LinearLayout>
 
@@ -101,7 +109,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:onClick="ClickAlacena">
+        android:onClick="ClickAlacena"
+        tools:ignore="UseCompoundDrawables">
 
         <TextView
             android:layout_width="0dp"
@@ -117,7 +126,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
-            android:src="@drawable/ic_baseline_list_alt_24">
+            android:src="@drawable/ic_baseline_list_alt_24"
+            tools:ignore="ContentDescription">
 
         </ImageView>
 
@@ -127,7 +137,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:onClick="ClickLista">
+        android:onClick="ClickLista"
+        tools:ignore="UseCompoundDrawables">
 
         <TextView
             android:layout_width="0dp"
@@ -143,7 +154,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
-            android:src="@drawable/ic_lista">
+            android:src="@drawable/ic_lista"
+            tools:ignore="ContentDescription">
 
         </ImageView>
 
@@ -153,7 +165,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:onClick="ClickAcercaDe">
+        android:onClick="ClickAcercaDe"
+        tools:ignore="UseCompoundDrawables">
 
 
         <TextView
@@ -163,7 +176,8 @@
             android:text="@string/acerca"
             android:padding="12dp"
             android:layout_marginStart="16dp"
-            android:textColor="@android:color/black">
+            android:textColor="@android:color/black"
+            tools:ignore="InefficientWeight">
 
         </TextView>
 
@@ -171,7 +185,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
-            android:src="@drawable/ic_info">
+            android:src="@drawable/ic_info"
+            tools:ignore="ContentDescription">
 
         </ImageView>
     </LinearLayout>
@@ -180,7 +195,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:onClick="ClickUsuarios">
+        android:onClick="ClickUsuarios"
+        tools:ignore="UseCompoundDrawables">
 
 
         <TextView
@@ -190,7 +206,8 @@
             android:text="@string/usuario"
             android:padding="12dp"
             android:layout_marginStart="16dp"
-            android:textColor="@android:color/black">
+            android:textColor="@android:color/black"
+            tools:ignore="InefficientWeight">
 
         </TextView>
 
@@ -198,7 +215,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
-            android:src="@drawable/ic_user">
+            android:src="@drawable/ic_user"
+            tools:ignore="ContentDescription">
 
         </ImageView>
     </LinearLayout>
@@ -208,7 +226,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:onClick="ClickSalir">
+        android:onClick="ClickSalir"
+        tools:ignore="UseCompoundDrawables">
 
         <TextView
             android:layout_width="0dp"
@@ -224,7 +243,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
-            android:src="@drawable/ic_logout">
+            android:src="@drawable/ic_logout"
+            tools:ignore="ContentDescription">
 
         </ImageView>
 

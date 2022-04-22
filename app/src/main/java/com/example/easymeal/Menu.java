@@ -8,20 +8,17 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.easymeal.Excepciones.MisExcepciones;
 import com.example.easymeal.cl.model.bd.Compras;
-import com.example.easymeal.cl.model.bd.Ingrediente;
 import com.example.easymeal.cl.model.bd.Usuario;
 import com.example.easymeal.cl.model.dao.ComprasDao;
 import com.example.easymeal.cl.model.dao.daoUsuario;
@@ -46,7 +43,6 @@ public class Menu extends AppCompatActivity {
     //Inicializamos variables
     DrawerLayout dl;
 
-    static String username;
     static int id;
 
     daoUsuario dao;
@@ -61,11 +57,11 @@ public class Menu extends AppCompatActivity {
     private ComprasDao compraDao;
     private Compras compras;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        getSupportActionBar().hide();
         setContentView(R.layout.menu);
 
 
@@ -160,22 +156,16 @@ public class Menu extends AppCompatActivity {
         //Establecemos el mensaje
         builder.setMessage("Estas seguro de que desea salir?");
         //Boton de seguro
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(activity, MainActivity.class);
-                activity.startActivity(intent);
-            }
+        builder.setPositiveButton("YES", (dialogInterface, i) -> {
+            Intent intent = new Intent(activity, MainActivity.class);
+            activity.startActivity(intent);
         });
 
         //Boton negativo
 
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //Hacemos caso omiso al dialogo
-                dialogInterface.dismiss();
-            }
+        builder.setNegativeButton("NO", (dialogInterface, i) -> {
+            //Hacemos caso omiso al dialogo
+            dialogInterface.dismiss();
         });
 
         //Mostramos el dialogo
@@ -284,7 +274,7 @@ public class Menu extends AppCompatActivity {
     }
 
     private ArrayList<Entry> getDataVals() {
-        ArrayList<Entry> dataVals = new ArrayList<Entry>();
+        ArrayList<Entry> dataVals = new ArrayList<>();
         int index = 1;
 
         dataVals.add(new Entry(0, 0));
