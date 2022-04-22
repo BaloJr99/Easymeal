@@ -1,10 +1,14 @@
 package com.example.easymeal;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -20,16 +24,19 @@ import android.widget.Toast;
 import com.example.easymeal.cl.model.bd.Preparaciones;
 import com.example.easymeal.cl.model.bd.Receta;
 import com.example.easymeal.cl.model.bd.RecetaPreparacion;
+import com.example.easymeal.cl.model.dao.Conexion;
 import com.example.easymeal.cl.model.dao.PreparacionesDao;
 import com.example.easymeal.cl.model.dao.RecetaDao;
 import com.example.easymeal.cl.model.dao.RecetaPreparacionDao;
+import com.example.easymeal.database.DbAyuda;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Horario extends AppCompatActivity implements View.OnClickListener {
-
+    Conexion co= new Conexion(this,"easymeal.db",null,16);
+    DbAyuda db;
     //Inicializamo variable
     DrawerLayout dl;
     ImageView fecha;
@@ -235,6 +242,87 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
             },anio,mes,dia);
             datePickerDialog.show();
     }
+    //modificar una semana
+    public void eliminarReceta(View v){
+        SQLiteDatabase op=db.getWritableDatabase();
+        AlertDialog.Builder b= new AlertDialog.Builder(this);
+        b.setMessage("¿Seguro que desea modificar el horario?");
+        b.setCancelable(false);
+        b.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                op.execSQL("DELETE FROM t_receta WHERE fecha='"+txtFecha.getText().toString()+"'");
+                Intent i2 = new Intent(Horario.this,Preparaciones.class);
+                try {
+                    if(!txtFecha.getText().toString().equals("--/--/----") &&
+                            ((lunes_alm.getSelectedItemPosition()!=(0))||(lunes_com.getSelectedItemPosition()!=(0))|| (lun_cen.getSelectedItemPosition()!=(0))||
+                                    (martes_alm.getSelectedItemPosition()!=(0))||(martes_com.getSelectedItemPosition()!=(0))|| (martes_cen.getSelectedItemPosition()!=(0))||
+                                    (miercoles_alm.getSelectedItemPosition()!=(0))||(miercoles_com.getSelectedItemPosition()!=(0))|| (miercoles_cen.getSelectedItemPosition()!=(0))||
+                                    (jueves_alm.getSelectedItemPosition()!=(0))||(jueves_com.getSelectedItemPosition()!=(0))|| (jueves_cen.getSelectedItemPosition()!=(0))||
+                                    (viernes_alm.getSelectedItemPosition()!=(0))||(viernes_com.getSelectedItemPosition()!=(0))|| (viernes_cen.getSelectedItemPosition()!=(0))||
+                                    (sabado_alm.getSelectedItemPosition()!=(0))||(sabado_com.getSelectedItemPosition()!=(0))|| (sabado_cen.getSelectedItemPosition()!=(0))||
+                                    (domingo_alm.getSelectedItemPosition()!=(0))||(domingo_com.getSelectedItemPosition()!=(0))|| (domingo_cen.getSelectedItemPosition()!=(0)))){
+
+                        predao = new PreparacionesDao(this);
+                        pre = new Preparaciones();
+                        recpredao = new RecetaPreparacionDao(this);
+                        recpre = new RecetaPreparacion();
+
+                        int flag = 0;
+
+                        for (int i = 0; i < layout.getChildCount(); i++) {
+                            View v = layout.getChildAt(i);
+                            if (v instanceof LinearLayout) {
+                                LinearLayout layout1 = (LinearLayout) v;
+                                for (int j = 0; j < layout1.getChildCount(); j++) {
+                                    View v1 = layout1.getChildAt(j);
+                                    View v2 = layout1.getChildAt((j + 1));
+                                    if (v1 instanceof Spinner) {
+                                        if(((Spinner) v1).getSelectedItemPosition() != 0){
+                                            pre.setTipoComida(datos[flag]);
+                                            flag ++;
+
+                                            pre.setfechaPreparacion(txtFecha.getText().toString());
+                                            int resultado = predao.insertarPreparacion(pre);
+                                            System.out.println(resultado);
+                                            if(resultado != 0 ){
+                                                System.out.println("Entro");
+                                                recpre.setIdPreparaciones(resultado);
+                                                recpre.setIdReceta(((Spinner) v1).getSelectedItemPosition());
+                                                if(!((EditText)v2).getText().toString().trim().equals("")){
+                                                    recpre.setCantidadAPreparar(Integer.valueOf(((EditText)v2).getText().toString()));
+                                                }else{
+                                                    recpre.setCantidadAPreparar(1);
+                                                }
+                                                recpredao.insertarRecetaPreparacion(recpre);
+                                                Toast.makeText(Horario.this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                        limpiarCampos();
+                    }else{
+                        Toast.makeText(Horario.this,"Existen campos vacios",Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("Error");
+                    System.out.println(e.getMessage());
+                }
+            }
+        });
+        b.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        b.show();
+    }
+
 
     //llenar todos los spinner
     public void llenarSpinners() {
