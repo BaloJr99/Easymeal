@@ -483,6 +483,7 @@
                         android:layout_height="40dp"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="1"
+                        android:onClick="eliminarHorario"
                         android:text="M O D I F I C A R"
                         >
                     </Button>

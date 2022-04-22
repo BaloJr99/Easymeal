@@ -242,68 +242,27 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
             },anio,mes,dia);
             datePickerDialog.show();
     }
+
     //modificar una semana
-    public void eliminarReceta(View v){
-        SQLiteDatabase op=db.getWritableDatabase();
+    public void eliminarHorario(View v){
         AlertDialog.Builder b= new AlertDialog.Builder(this);
         b.setMessage("¿Seguro que desea modificar el horario?");
         b.setCancelable(false);
         b.setPositiveButton("SI", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                op.execSQL("DELETE FROM t_receta WHERE fecha='"+txtFecha.getText().toString()+"'");
-                Intent i2 = new Intent(Horario.this,Preparaciones.class);
+            public void onClick(DialogInterface dialogInterface, int p) {
                 try {
-                    if(!txtFecha.getText().toString().equals("--/--/----") &&
-                            ((lunes_alm.getSelectedItemPosition()!=(0))||(lunes_com.getSelectedItemPosition()!=(0))|| (lun_cen.getSelectedItemPosition()!=(0))||
-                                    (martes_alm.getSelectedItemPosition()!=(0))||(martes_com.getSelectedItemPosition()!=(0))|| (martes_cen.getSelectedItemPosition()!=(0))||
-                                    (miercoles_alm.getSelectedItemPosition()!=(0))||(miercoles_com.getSelectedItemPosition()!=(0))|| (miercoles_cen.getSelectedItemPosition()!=(0))||
-                                    (jueves_alm.getSelectedItemPosition()!=(0))||(jueves_com.getSelectedItemPosition()!=(0))|| (jueves_cen.getSelectedItemPosition()!=(0))||
-                                    (viernes_alm.getSelectedItemPosition()!=(0))||(viernes_com.getSelectedItemPosition()!=(0))|| (viernes_cen.getSelectedItemPosition()!=(0))||
-                                    (sabado_alm.getSelectedItemPosition()!=(0))||(sabado_com.getSelectedItemPosition()!=(0))|| (sabado_cen.getSelectedItemPosition()!=(0))||
-                                    (domingo_alm.getSelectedItemPosition()!=(0))||(domingo_com.getSelectedItemPosition()!=(0))|| (domingo_cen.getSelectedItemPosition()!=(0)))){
+                    if(!camposVacios()){
 
-                        predao = new PreparacionesDao(this);
+                        predao = new PreparacionesDao(Horario.this);
                         pre = new Preparaciones();
-                        recpredao = new RecetaPreparacionDao(this);
+                        recpredao = new RecetaPreparacionDao(Horario.this);
                         recpre = new RecetaPreparacion();
 
-                        int flag = 0;
-
-                        for (int i = 0; i < layout.getChildCount(); i++) {
-                            View v = layout.getChildAt(i);
-                            if (v instanceof LinearLayout) {
-                                LinearLayout layout1 = (LinearLayout) v;
-                                for (int j = 0; j < layout1.getChildCount(); j++) {
-                                    View v1 = layout1.getChildAt(j);
-                                    View v2 = layout1.getChildAt((j + 1));
-                                    if (v1 instanceof Spinner) {
-                                        if(((Spinner) v1).getSelectedItemPosition() != 0){
-                                            pre.setTipoComida(datos[flag]);
-                                            flag ++;
-
-                                            pre.setfechaPreparacion(txtFecha.getText().toString());
-                                            int resultado = predao.insertarPreparacion(pre);
-                                            System.out.println(resultado);
-                                            if(resultado != 0 ){
-                                                System.out.println("Entro");
-                                                recpre.setIdPreparaciones(resultado);
-                                                recpre.setIdReceta(((Spinner) v1).getSelectedItemPosition());
-                                                if(!((EditText)v2).getText().toString().trim().equals("")){
-                                                    recpre.setCantidadAPreparar(Integer.valueOf(((EditText)v2).getText().toString()));
-                                                }else{
-                                                    recpre.setCantidadAPreparar(1);
-                                                }
-                                                recpredao.insertarRecetaPreparacion(recpre);
-                                                Toast.makeText(Horario.this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    }
-                                }
-
-                            }
-                        }
+                        predao.eliminarPreparacion(txtFecha.getText().toString());
+                        insertarInformacion("Modificado");
                         limpiarCampos();
+                        btnModificar.setEnabled(false);
                     }else{
                         Toast.makeText(Horario.this,"Existen campos vacios",Toast.LENGTH_SHORT).show();
                     }
@@ -323,6 +282,42 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
         b.show();
     }
 
+    public void insertarInformacion(String accion){
+        int flag = 0;
+
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            View v = layout.getChildAt(i);
+            if (v instanceof LinearLayout) {
+                LinearLayout layout1 = (LinearLayout) v;
+                for (int j = 0; j < layout1.getChildCount(); j++) {
+                    View v1 = layout1.getChildAt(j);
+                    View v2 = layout1.getChildAt((j + 1));
+                    if (v1 instanceof Spinner) {
+                        if(((Spinner) v1).getSelectedItemPosition() != 0){
+                            pre.setTipoComida(datos[flag]);
+                            flag ++;
+
+                            pre.setfechaPreparacion(txtFecha.getText().toString());
+                            int resultado = predao.insertarPreparacion(pre);
+                            if(resultado != 0 ){
+                                recpre.setIdPreparaciones(resultado);
+                                recpre.setIdReceta(((Spinner) v1).getSelectedItemPosition());
+                                if(!((EditText)v2).getText().toString().trim().equals("")){
+                                    recpre.setCantidadAPreparar(Integer.valueOf(((EditText)v2).getText().toString()));
+                                }else{
+                                    recpre.setCantidadAPreparar(1);
+                                }
+                                recpredao.insertarRecetaPreparacion(recpre);
+                                Toast.makeText(this,accion + " exitosamente",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+        limpiarCampos();
+    }
 
     //llenar todos los spinner
     public void llenarSpinners() {
@@ -356,56 +351,14 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
 
     public void insertarInformacion(View view){
         try {
-            if(!txtFecha.getText().toString().equals("--/--/----") &&
-                    ((lunes_alm.getSelectedItemPosition()!=(0))||(lunes_com.getSelectedItemPosition()!=(0))|| (lun_cen.getSelectedItemPosition()!=(0))||
-                    (martes_alm.getSelectedItemPosition()!=(0))||(martes_com.getSelectedItemPosition()!=(0))|| (martes_cen.getSelectedItemPosition()!=(0))||
-                    (miercoles_alm.getSelectedItemPosition()!=(0))||(miercoles_com.getSelectedItemPosition()!=(0))|| (miercoles_cen.getSelectedItemPosition()!=(0))||
-                    (jueves_alm.getSelectedItemPosition()!=(0))||(jueves_com.getSelectedItemPosition()!=(0))|| (jueves_cen.getSelectedItemPosition()!=(0))||
-                    (viernes_alm.getSelectedItemPosition()!=(0))||(viernes_com.getSelectedItemPosition()!=(0))|| (viernes_cen.getSelectedItemPosition()!=(0))||
-                    (sabado_alm.getSelectedItemPosition()!=(0))||(sabado_com.getSelectedItemPosition()!=(0))|| (sabado_cen.getSelectedItemPosition()!=(0))||
-                    (domingo_alm.getSelectedItemPosition()!=(0))||(domingo_com.getSelectedItemPosition()!=(0))|| (domingo_cen.getSelectedItemPosition()!=(0)))){
+            if(!camposVacios()){
 
                 predao = new PreparacionesDao(this);
                 pre = new Preparaciones();
                 recpredao = new RecetaPreparacionDao(this);
                 recpre = new RecetaPreparacion();
 
-                int flag = 0;
-
-                for (int i = 0; i < layout.getChildCount(); i++) {
-                    View v = layout.getChildAt(i);
-                    if (v instanceof LinearLayout) {
-                        LinearLayout layout1 = (LinearLayout) v;
-                        for (int j = 0; j < layout1.getChildCount(); j++) {
-                            View v1 = layout1.getChildAt(j);
-                            View v2 = layout1.getChildAt((j + 1));
-                            if (v1 instanceof Spinner) {
-                                if(((Spinner) v1).getSelectedItemPosition() != 0){
-                                    pre.setTipoComida(datos[flag]);
-                                    flag ++;
-
-                                    pre.setfechaPreparacion(txtFecha.getText().toString());
-                                    int resultado = predao.insertarPreparacion(pre);
-                                    System.out.println(resultado);
-                                    if(resultado != 0 ){
-                                        System.out.println("Entro");
-                                        recpre.setIdPreparaciones(resultado);
-                                        recpre.setIdReceta(((Spinner) v1).getSelectedItemPosition());
-                                        if(!((EditText)v2).getText().toString().trim().equals("")){
-                                            recpre.setCantidadAPreparar(Integer.valueOf(((EditText)v2).getText().toString()));
-                                        }else{
-                                            recpre.setCantidadAPreparar(1);
-                                        }
-                                        recpredao.insertarRecetaPreparacion(recpre);
-                                        Toast.makeText(this,"Insertado exitosamente",Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            }
-                        }
-
-                    }
-                }
-                limpiarCampos();
+                insertarInformacion("Insertado");
             }else{
                 Toast.makeText(this,"Existen campos vacios",Toast.LENGTH_SHORT).show();
             }
@@ -435,5 +388,17 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
 
             }
         }
+        txtFecha.setText("");
+    }
+
+    public boolean camposVacios(){
+        return txtFecha.getText().toString().equals("--/--/----") ||
+                ((lunes_alm.getSelectedItemPosition() == (0)) && (lunes_com.getSelectedItemPosition() == (0)) && (lun_cen.getSelectedItemPosition() == (0)) &&
+                        (martes_alm.getSelectedItemPosition() == (0)) && (martes_com.getSelectedItemPosition() == (0)) && (martes_cen.getSelectedItemPosition() == (0)) &&
+                        (miercoles_alm.getSelectedItemPosition() == (0)) && (miercoles_com.getSelectedItemPosition() == (0)) && (miercoles_cen.getSelectedItemPosition() == (0)) &&
+                        (jueves_alm.getSelectedItemPosition() == (0)) && (jueves_com.getSelectedItemPosition() == (0)) && (jueves_cen.getSelectedItemPosition() == (0)) &&
+                        (viernes_alm.getSelectedItemPosition() == (0)) && (viernes_com.getSelectedItemPosition() == (0)) && (viernes_cen.getSelectedItemPosition() == (0)) &&
+                        (sabado_alm.getSelectedItemPosition() == (0)) && (sabado_com.getSelectedItemPosition() == (0)) && (sabado_cen.getSelectedItemPosition() == (0)) &&
+                        (domingo_alm.getSelectedItemPosition() == (0)) && (domingo_com.getSelectedItemPosition() == (0)) && (domingo_cen.getSelectedItemPosition() == (0)));
     }
 }

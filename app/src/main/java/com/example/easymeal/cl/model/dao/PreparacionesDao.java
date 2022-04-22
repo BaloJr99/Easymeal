@@ -35,6 +35,13 @@ public class PreparacionesDao {
         return 0;
     }
 
+    public void eliminarPreparacion(String semana){
+        sql.execSQL("DELETE FROM t_recetaPreparacion WHERE idPreparacion IN(SELECT idPreparacion FROM t_preparaciones WHERE semanaPreparacion = ?)",new String[]{semana});
+        sql.execSQL("DELETE FROM t_preparaciones WHERE semanaPreparacion = ?",new String[]{semana});
+    }
+
+
+
     public ArrayList<Object[]> buscarHorario(String semana) {
         ArrayList<Object[]> preparaciones = null;
 
