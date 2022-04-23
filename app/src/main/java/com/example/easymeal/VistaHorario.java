@@ -72,6 +72,66 @@ public class VistaHorario extends AppCompatActivity {
             if("CenaLunes".equals(o[0])){
                 tvCenaLunes.setText(o[1].toString());
             }
+
+            if("AlmuerzoMartes".equals(o[0])){
+                tvAlmuerzoMartes.setText(o[1].toString());
+            }
+            if("ComidaMartes".equals(o[0])){
+                tvComidaMartes.setText(o[1].toString());
+            }
+            if("CenaMartes".equals(o[0])){
+                tvCenaMartes.setText(o[1].toString());
+            }
+
+            if("AlmuerzoMiercoles".equals(o[0])){
+                tvAlmuerzoMiercoles.setText(o[1].toString());
+            }
+            if("ComidaMiercoles".equals(o[0])){
+                tvComidaMiercoles.setText(o[1].toString());
+            }
+            if("CenaMiercoles".equals(o[0])){
+                tvCenaMiercoles.setText(o[1].toString());
+            }
+
+            if("AlmuerzoJueves".equals(o[0])){
+                tvAlmuerzoJueves.setText(o[1].toString());
+            }
+            if("ComidaJueves".equals(o[0])){
+                tvComidaJueves.setText(o[1].toString());
+            }
+            if("CenaJueves".equals(o[0])){
+                tvCenaJueves.setText(o[1].toString());
+            }
+
+            if("AlmuerzoViernes".equals(o[0])){
+                tvAlmuerzoViernes.setText(o[1].toString());
+            }
+            if("ComidaViernes".equals(o[0])){
+                tvComidaViernes.setText(o[1].toString());
+            }
+            if("CenaViernes".equals(o[0])){
+                tvCenaViernes.setText(o[1].toString());
+            }
+
+            if("AlmuerzoSabado".equals(o[0])){
+                tvAlmuerzoSabado.setText(o[1].toString());
+            }
+            if("ComidaSabado".equals(o[0])){
+                tvComidaSabado.setText(o[1].toString());
+            }
+            if("CenaSabado".equals(o[0])){
+                tvCenaSabado.setText(o[1].toString());
+            }
+
+            if("AlmuerzoDomingo".equals(o[0])){
+                tvAlmuerzoDomingo.setText(o[1].toString());
+            }
+            if("ComidaDomingo".equals(o[0])){
+                tvComidaDomingo.setText(o[1].toString());
+            }
+            if("CenaDomingo".equals(o[0])){
+                tvCenaDomingo.setText(o[1].toString());
+            }
         }
 
     }
