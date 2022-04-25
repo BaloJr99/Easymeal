@@ -32,12 +32,13 @@ public class RecetaIngredienteDao {
     }
 
     public ArrayList<IngredienteReceta> listaIngRec(Integer idReceta){
+        System.out.println(idReceta);
         ArrayList<IngredienteReceta> IngRecetaList = null;
-        Cursor cursor = sql.rawQuery("SELECT * FROM "+"t_ingredienteReceta WHERE idReceta="+idReceta,null);
+        Cursor cursor = sql.rawQuery("SELECT * FROM t_ingredienteReceta WHERE idReceta = ?",new String[]{String.valueOf(idReceta)});
 
         if(cursor.moveToFirst()){
             IngRecetaList = new ArrayList<>();
-            while(cursor.moveToNext()){
+            do {
                 ingRec = new IngredienteReceta();
                 ingRec.setIdIngredientesReceta(cursor.getInt(0));
                 ingRec.setCantidad(cursor.getFloat(1));
@@ -45,9 +46,10 @@ public class RecetaIngredienteDao {
                 ingRec.setIdIngrediente(cursor.getInt(3));
 
                 IngRecetaList.add(ingRec);
-            }
+            }while(cursor.moveToNext());
             cursor.close();
         }
+        System.out.println(IngRecetaList);
         return IngRecetaList;
     }
 

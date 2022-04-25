@@ -39,7 +39,9 @@ public class IngRec extends AppCompatActivity {
         eliminar = findViewById(R.id.btnEliminarIng);
         poblar();
         adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,infoList);
-        listaIng.setAdapter(adapter);
+        if(infoList != null){
+            listaIng.setAdapter(adapter);
+        }
 
         listaIng.setOnItemClickListener((adapterView, view, i, l) -> {
             idIngredienteReceta = IngRecetaList.get(i).getIdIngredientesReceta();
@@ -61,13 +63,16 @@ public class IngRec extends AppCompatActivity {
         });
     }
     private void poblar(){  //Metodo para poblar el array objeto
+        System.out.println(idReceta);
         recetaIngredienteDao = new RecetaIngredienteDao(this);
         IngRecetaList = recetaIngredienteDao.listaIngRec(idReceta);
         crearLista();
     }
     private void crearLista(){ //Metodo para poblar la lista
         recetaIngredienteDao = new RecetaIngredienteDao(this);
-        infoList = recetaIngredienteDao.listaIng(IngRecetaList);
+        if(IngRecetaList != null){
+            infoList = recetaIngredienteDao.listaIng(IngRecetaList);
+        }
     }
     private void modificarIng() {
         //Metodo que modifica el ingrediente de la receta

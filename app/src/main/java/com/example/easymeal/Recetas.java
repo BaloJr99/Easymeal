@@ -17,7 +17,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-
 import com.example.easymeal.cl.model.bd.Ingrediente;
 import com.example.easymeal.cl.model.bd.IngredienteReceta;
 import com.example.easymeal.cl.model.bd.Receta;
