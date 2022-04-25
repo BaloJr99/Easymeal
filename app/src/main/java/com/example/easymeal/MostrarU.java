@@ -3,8 +3,6 @@ package com.example.easymeal;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -12,12 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.easymeal.cl.model.bd.Usuario;
-import com.example.easymeal.cl.model.dao.Conexion;
+import com.example.easymeal.cl.model.dao.daoUsuario;
 
 import java.util.ArrayList;
 
 public class MostrarU extends AppCompatActivity {
-    Conexion c= new Conexion(this,"easymeal.db",null,16);
     int id;
 
     ListView listaUser;
@@ -34,25 +31,8 @@ public class MostrarU extends AppCompatActivity {
         listaUser = findViewById(R.id.listUsers);
         id=b.getInt("idUsuario");
 
-        SQLiteDatabase op=c.getWritableDatabase();
-        Cursor cr = op.rawQuery("SELECT * FROM t_usuarios WHERE idUsuario="+id,null);
-        ArrayList<Usuario> lista =new ArrayList<>();
-        if(cr != null && cr.moveToFirst()){
-            do{
-                Usuario u = new Usuario();
-                u.setUsername(cr.getString(1));
-                System.out.println(cr.getString(1));
-                u.setNombre(cr.getString(3));
-                System.out.println(cr.getString(3));
-                u.setApellidoPaterno(cr.getString(4));
-                u.setApellidoMaterno(cr.getString(5));
-                u.setFechaNacimiento(cr.getString(6));
-                lista.add(u);
-            }while(cr.moveToNext());
-        }
-        if (cr != null) {
-            cr.close();
-        }
+        ArrayList<Usuario> lista = new daoUsuario(this).datosUsuario(id);
+
         ArrayList<String> list = new ArrayList<>();
 
         for (Usuario u:lista) {
@@ -94,6 +74,11 @@ public class MostrarU extends AppCompatActivity {
     public void ClickHorario(View view){
         //Redireccionamos actividad a dashboard
         Menu.redirectActivity(this, Horario.class, "");
+    }
+
+    public void ClickHorarioSemana(View view) {
+        //Redireccionamos actividad a dashboard
+        Menu.redirectActivity(this, VistaHorario.class, "");
     }
 
     public void ClickLista(View view){

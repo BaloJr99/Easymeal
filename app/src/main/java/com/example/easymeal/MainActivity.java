@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
         tv_registrar= findViewById(R.id.tv_registrar);
         login = findViewById(R.id.login);
         usuario = findViewById(R.id.usuario);

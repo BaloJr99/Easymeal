@@ -5,20 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.easymeal.cl.model.dao.Conexion;
+import com.example.easymeal.cl.model.dao.daoUsuario;
 
 public class MenuUsuario extends AppCompatActivity {
-    Conexion c= new Conexion(this,"easymeal.db",null,16);
     DrawerLayout dl;
     int id = 0;
     Button editar,eliminar,ver,salir;
+
+    daoUsuario daoUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +50,16 @@ public class MenuUsuario extends AppCompatActivity {
         });
     }
     public void eliminarRegistro(View v){
-        SQLiteDatabase op=c.getWritableDatabase();
         AlertDialog.Builder b= new AlertDialog.Builder(MenuUsuario.this);
         b.setMessage("¿Seguro que desea eliminar la cuenta?");
         b.setCancelable(false);
         b.setPositiveButton("SI", (dialogInterface, i) -> {
-                op.execSQL("DELETE FROM t_usuarios WHERE idUsuario="+id);
-                Toast.makeText(MenuUsuario.this,"Cuenta Eliminada",Toast.LENGTH_LONG).show();
-                Intent i2 =   new Intent(MenuUsuario.this, MainActivity.class);
-                startActivity(i2);
-                finish();
+            daoUsuario = new daoUsuario(this);
+            daoUsuario.eliminarUsuario(id);
+            Toast.makeText(MenuUsuario.this,"Cuenta Eliminada",Toast.LENGTH_LONG).show();
+            Intent i2 =   new Intent(MenuUsuario.this, MainActivity.class);
+            startActivity(i2);
+            finish();
         });
         b.setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.cancel());
         b.show();
@@ -93,6 +93,11 @@ public class MenuUsuario extends AppCompatActivity {
     public void ClickHorario(View view){
         //Redireccionamos actividad a dashboard
         Menu.redirectActivity(this, Horario.class, "");
+    }
+
+    public void ClickHorarioSemana(View view) {
+        //Redireccionamos actividad a dashboard
+        Menu.redirectActivity(this, VistaHorario.class, "");
     }
 
     public void ClickLista(View view){

@@ -3,6 +3,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.example.easymeal.cl.model.bd.Receta;
+import com.example.easymeal.database.DbAyuda;
 
 import java.util.ArrayList;
 import android.content.Context;
@@ -13,11 +14,12 @@ public class RecetaDao {
     Receta receta;
     ArrayList<Receta> lista;
     SQLiteDatabase sql;
-    String bd = "easymeal.db";
+    Cursor cr;
 
     public RecetaDao(Context c){
         this.c = c;
-        sql = c.openOrCreateDatabase(bd,c.MODE_PRIVATE,null);
+        DbAyuda dbAyuda = new DbAyuda(c);
+        sql = dbAyuda.getWritableDatabase();
         receta = new Receta();
     }
 
@@ -34,7 +36,7 @@ public class RecetaDao {
     }
     public ArrayList<Receta> selectRec(){
         ArrayList<Receta> lista =new ArrayList<>();
-        Cursor cr = sql.rawQuery("select * from t_receta",null);
+        cr = sql.rawQuery("select * from t_receta",null);
         if(cr != null && cr.moveToFirst()){
             do{
                 Receta r= new Receta();
@@ -62,9 +64,18 @@ public class RecetaDao {
         cv.put("pasos", r.getPasos());
         return (sql.update("t_receta",cv,"nombre='"+r.getNombre()+"'",null)>0);
     }
+
+    public int eliminarReceta(String nombre){
+        cr = sql.rawQuery("select * from t_receta as R INNER JOIN t_recetaPreparacion as P on R.idReceta = P.idReceta WHERE nombre = ?",new String[]{nombre});
+        if(cr.moveToFirst()){
+            return 0;
+        }
+        sql.execSQL("DELETE FROM t_receta WHERE nombre='"+nombre+"'");
+        return 1;
+    }
     public ArrayList<Receta> selectReceta(String nombre){
         ArrayList<Receta> listaRecetas =new ArrayList<>();
-        Cursor cr = sql.rawQuery("select * from t_receta where nombre='"+nombre+"'",null);
+        cr = sql.rawQuery("select * from t_receta where nombre='"+nombre+"'",null);
         if(cr != null && cr.moveToFirst()){
             do{
                 Receta receta = new Receta();
@@ -78,20 +89,23 @@ public class RecetaDao {
         return listaRecetas;
     }
 
-    public ArrayList<Receta> selectRecetas(){
-        ArrayList<Receta> listaRecetas =new ArrayList<>();
-        Cursor cr = sql.rawQuery("select * from t_receta",null);
-        if(cr != null && cr.moveToFirst()){
-            do{
-                Receta receta = new Receta();
-                receta.setIdReceta(cr.getInt(0));
-                receta.setNombre(cr.getString(1));
-                receta.setPasos(cr.getString(2));
-                listaRecetas.add(receta);
-            }while(cr.moveToNext());
+    public int maxId(){
+        int aux = 0;
+        cr = sql.rawQuery("SELECT MAX(idReceta) from t_receta", null);
+        if (cr != null && cr.moveToFirst()) {
+            aux = cr.getInt(0);
             cr.close();
         }
-        return listaRecetas;
+        return aux;
     }
 
+    public int idReceta(String nombre){
+        int aux = 0;
+        cr = sql.rawQuery("SELECT idReceta from t_receta WHERE nombre='"+nombre+"'", null);
+        if (cr != null && cr.moveToFirst()) {
+            aux = cr.getInt(0);
+            cr.close();
+        }
+        return aux;
+    }
 }

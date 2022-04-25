@@ -91,5 +91,4 @@ public class DbAyuda extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS t_lista");
         onCreate(sqLiteDatabase);
     }
-
 }

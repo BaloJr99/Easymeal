@@ -133,6 +133,11 @@ public class Menu extends AppCompatActivity {
         redirectActivity(this, Horario.class, "");
     }
 
+    public void ClickHorarioSemana(View view) {
+        //Redireccionamos actividad a dashboard
+        redirectActivity(this, VistaHorario.class, "");
+    }
+
     public void ClickAcercaDe(View view) {
         //Redireccionamos actividad a acerca de nosotros
         redirectActivity(this, AcercaNosotros.class, "");

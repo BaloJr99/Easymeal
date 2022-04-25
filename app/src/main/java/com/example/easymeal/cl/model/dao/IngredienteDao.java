@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import com.example.easymeal.cl.model.bd.Ingrediente;
+import com.example.easymeal.database.DbAyuda;
 
 import java.util.ArrayList;
 
@@ -16,14 +17,14 @@ public class IngredienteDao {
     Context c;
     Ingrediente ing;
     SQLiteDatabase sql;
-    String bd = "easymeal.db";
     ContentValues cv = new ContentValues();
 
     Cursor cursor;
 
     public IngredienteDao (Context c){
         this.c = c;
-        sql = c.openOrCreateDatabase(bd, Context.MODE_PRIVATE,null);
+        DbAyuda dbAyuda = new DbAyuda(c);
+        sql = dbAyuda.getWritableDatabase();
         ing = new Ingrediente();
     }
 
@@ -127,6 +128,17 @@ public class IngredienteDao {
         }
         cursor.close();
         return ing;
+    }
+
+    public int buscarIngredienteRecetas(String nombre) {
+        int idIngrediente = 0;
+        cursor = sql.rawQuery("SELECT idIngrediente FROM t_ingrediente WHERE descripcion = '" + nombre + "'", null);
+
+        if (cursor.moveToFirst()){
+            idIngrediente = cursor.getInt(0);
+        }
+        cursor.close();
+        return idIngrediente;
     }
 
     public void marcarComprado(ArrayList<Integer> listaIngSeleccionados) {

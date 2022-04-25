@@ -18,11 +18,9 @@
         <TableLayout
             android:id="@+id/tling"
             android:layout_width="match_parent"
-            android:layout_height="359dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="80dp">
+            android:layout_marginRight="10dp">
 
             <TableRow>
                 <TextView
@@ -31,6 +29,7 @@
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
+                    android:background="@drawable/border"
                     android:textSize="20sp" />
             </TableRow>
             <TableRow>
@@ -40,6 +39,7 @@
                     android:padding="3dp"
                     android:text="@string/horario_semanal"
                     android:textAlignment="center"
+                    android:background="@drawable/border"
                     android:textSize="20sp" />
             </TableRow>
 
@@ -47,306 +47,340 @@
 
                 <TextView
                     android:id="@+id/tvDia"
-                    android:layout_width="120dp"
-                    android:layout_weight="800"
+                    android:layout_width="match_parent"
                     android:padding="3dp"
                     android:text="@string/dia"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvAlmuerzo"
-                    android:layout_width="120dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
                     android:padding="3dp"
                     android:text="@string/almuerzo"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvComida"
-                    android:layout_width="100dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
                     android:padding="3dp"
                     android:text="@string/comida"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvCena"
-                    android:layout_width="100dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
                     android:padding="3dp"
                     android:text="@string/cena"
+                    android:textSize="20sp"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:background="@drawable/border"/>
             </TableRow>
 
             <TableRow>
 
                 <TextView
                     android:id="@+id/tvLunes"
-                    android:layout_width="2dp"
-                    android:layout_weight="800"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
                     android:padding="3dp"
                     android:text="@string/lunes"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvAlmuerzoLunes"
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvComidaLunes"
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvCenaLunes"
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
             </TableRow>
 
             <TableRow>
 
                 <TextView
                     android:id="@+id/tvMartes"
-                    android:layout_width="2dp"
-                    android:layout_weight="800"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
                     android:padding="3dp"
                     android:text="@string/martes"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvAlmuerzoMartes"
-                    android:layout_width="120dp"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvComidaMartes"
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvCenaMartes"
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
             </TableRow>
 
             <TableRow>
 
                 <TextView
                     android:id="@+id/tvMiercoles"
-                    android:layout_width="2sp"
-                    android:layout_weight="800"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
                     android:padding="3dp"
                     android:text="@string/miercoles"
                     android:textAlignment="center"
-                    android:textSize="14sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvAlmuerzoMiercoles"
-                    android:layout_width="20dp"
-
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvComidaMiercoles"
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvCenaMiercoles"
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
             </TableRow>
 
             <TableRow>
 
                 <TextView
                     android:id="@+id/tvJueves"
-                    android:layout_width="2sp"
-                    android:layout_weight="800"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
                     android:padding="3dp"
                     android:text="@string/jueves"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvAlmuerzoJueves"
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvComidaJueves"
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvCenaJueves"
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
                     android:id="@+id/tvViernes"
-                    android:layout_width="2sp"
-                    android:layout_weight="800"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
                     android:padding="3dp"
                     android:text="@string/viernes"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvAlmuerzoViernes"
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvComidaViernes"
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvCenaViernes"
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
             </TableRow>
 
             <TableRow>
 
                 <TextView
                     android:id="@+id/tvSabado"
-                    android:layout_width="2sp"
-                    android:layout_weight="800"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
                     android:padding="3dp"
                     android:text="@string/sabado"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvAlmuerzoSabado"
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvComidaSabado"
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvCenaSabado"
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
             </TableRow>
 
             <TableRow>
 
                 <TextView
                     android:id="@+id/tvDomingo"
-                    android:layout_width="2sp"
-                    android:layout_weight="800"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
                     android:padding="3dp"
                     android:text="@string/domingo"
                     android:textAlignment="center"
-                    android:textSize="15sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvAlmuerzoDomingo"
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvComidaDomingo"
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
 
                 <TextView
                     android:id="@+id/tvCenaDomingo"
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="@drawable/border"/>
             </TableRow>
         </TableLayout>
 

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 
 import com.example.easymeal.cl.model.bd.Compras;
+import com.example.easymeal.database.DbAyuda;
 
 import java.util.ArrayList;
 
@@ -16,12 +17,12 @@ public class ComprasDao {
     Compras compra;
     ArrayList<Compras> listaCompras;
     SQLiteDatabase sql;
-    String bd = "easymeal.db";
     ContentValues cv = new ContentValues();
 
     public void comprasDao(Context c){
         this.c = c;
-        sql = c.openOrCreateDatabase(bd,c.MODE_PRIVATE,null);
+        DbAyuda dbAyuda = new DbAyuda(c);
+        sql = dbAyuda.getWritableDatabase();
         compra = new Compras();
     }
 

@@ -213,6 +213,11 @@ public class AgregarLista extends AppCompatActivity {
         Menu.redirectActivity(this, Horario.class, "");
     }
 
+    public void ClickHorarioSemana(View view) {
+        //Redireccionamos actividad a dashboard
+        Menu.redirectActivity(this, VistaHorario.class, "");
+    }
+
     public void ClickSalir(View v){
         //Cerramos app
         Menu.logout(this);

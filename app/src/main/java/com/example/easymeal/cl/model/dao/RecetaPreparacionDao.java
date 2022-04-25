@@ -5,30 +5,27 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.easymeal.cl.model.bd.Preparaciones;
 import com.example.easymeal.cl.model.bd.RecetaPreparacion;
-
-import java.util.ArrayList;
+import com.example.easymeal.database.DbAyuda;
 
 public class RecetaPreparacionDao {
 
     RecetaPreparacion recetaPreparacion;
     Context c;
     SQLiteDatabase sql;
-    String bd = "easymeal.db";
-    Cursor cursor;
 
     public RecetaPreparacionDao(Context c){
         this.c = c;
-        sql = c.openOrCreateDatabase(bd,c.MODE_PRIVATE,null);
+        DbAyuda dbAyuda = new DbAyuda(c);
+        sql = dbAyuda.getWritableDatabase();
         recetaPreparacion = new RecetaPreparacion();
     }
 
-    public boolean insertarRecetaPreparacion(RecetaPreparacion p){
+    public void insertarRecetaPreparacion(RecetaPreparacion p){
         ContentValues cv = new ContentValues();
         cv.put("idPreparacion", p.getIdPreparaciones());
         cv.put("idReceta", p.getIdReceta());
         cv.put("cantidadAPreparar", p.getCantidadAPreparar());
-        return (sql.insert("t_recetaPreparacion",null,cv)>0);
+        sql.insert("t_recetaPreparacion", null, cv);
     }
 }

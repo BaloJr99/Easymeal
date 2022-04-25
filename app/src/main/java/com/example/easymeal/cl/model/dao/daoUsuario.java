@@ -4,30 +4,24 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.easymeal.cl.model.bd.Usuario;
+import com.example.easymeal.database.DbAyuda;
 
 import java.util.ArrayList;
 
-public class daoUsuario extends SQLiteOpenHelper {
+public class daoUsuario {
     Context c;
     Usuario u;
     ArrayList<Usuario> lista;
     SQLiteDatabase sql;
-    String bd="easymeal.db";
-    //String tabla="create table if not exists usuario(id integer primary key autoincrement, usuario text, pass text, nombre text, ap text)";
-    String tabla = "create table if not exists t_usuarios(idUsuario INTEGER PRIMARY KEY AUTOINCREMENT,username VARCHAR(20) NOT NULL,clave VARCHAR(20) NOT NULL,nombre VARCHAR(20) NOT NULL,apellidoPaterno VARCHAR(20) NOT NULL,apellidoMaterno VARCHAR(20),fechaNacimiento DATE NOT NULL)";
 
     public daoUsuario(Context c) {
-        super(c,"easymeal.db",null,9);
         this.c = c;
-        sql = c.openOrCreateDatabase(bd,c.MODE_PRIVATE,null);
-
-        sql.execSQL(tabla);
+        DbAyuda dbAyuda = new DbAyuda(c);
+        sql = dbAyuda.getWritableDatabase();
         u=new Usuario();
     }
-
 
     public boolean insertUsuario(Usuario u){
         if(buscar(u.getUsername())==0){
@@ -115,14 +109,28 @@ public class daoUsuario extends SQLiteOpenHelper {
         return (sql.update("t_usuarios",cv,"idUsuario="+u.getIdUsuario(),null)>0);
     }
 
-
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
+    public void eliminarUsuario(Integer id){
+        sql.execSQL("DELETE FROM t_usuarios WHERE idUsuario="+id);
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+    public ArrayList<Usuario> datosUsuario(Integer id){
+        Cursor cr = sql.rawQuery("SELECT * FROM t_usuarios WHERE idUsuario="+id,null);
+        ArrayList<Usuario> lista = null;
+        if(cr != null && cr.moveToFirst()){
+            lista =new ArrayList<>();
+            do{
+                Usuario u = new Usuario();
+                u.setUsername(cr.getString(1));
+                u.setNombre(cr.getString(3));
+                u.setApellidoPaterno(cr.getString(4));
+                u.setApellidoMaterno(cr.getString(5));
+                u.setFechaNacimiento(cr.getString(6));
+                lista.add(u);
+            }while(cr.moveToNext());
+        }
+        if (cr != null) {
+            cr.close();
+        }
+        return lista;
     }
 }

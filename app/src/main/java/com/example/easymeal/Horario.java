@@ -181,6 +181,11 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
         recreate();
     }
 
+    public void ClickHorarioSemana(View view) {
+        //Redireccionamos actividad a dashboard
+        Menu.redirectActivity(this, VistaHorario.class, "");
+    }
+
     public void ClickSalir(View v){
         //Cerramos app
         Menu.logout(this);
@@ -307,7 +312,7 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
     //llenar todos los spinner
     public void llenarSpinners() {
         reDao = new RecetaDao(this);
-        listaRecetas = reDao.selectRecetas();
+        listaRecetas = reDao.selectRec();
 
         ArrayList<String> listaR = new ArrayList<>();
         listaR.add("Seleccione...");

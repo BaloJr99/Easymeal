@@ -120,6 +120,11 @@ public class ListaMandado extends AppCompatActivity {
         Menu.redirectActivity(this, Horario.class, "");
     }
 
+    public void ClickHorarioSemana(View view) {
+        //Redireccionamos actividad a dashboard
+        Menu.redirectActivity(this, VistaHorario.class, "");
+    }
+
     public void ClickUsuarios (View v){
         //Nos dirijimos al menu de los usuarios
         Menu.redirectActivity(this,MenuUsuario.class, "");
