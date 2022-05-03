@@ -72,17 +72,18 @@
             </TableLayout>
 
             <LinearLayout
-                android:gravity="bottom"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="bottom"
                 android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/btnGuardarMandado"
                     android:layout_width="match_parent"
+                    android:layout_height="45dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
-                    android:layout_height="45dp"
                     android:onClick="ClickCompras"
                     android:text="@string/finalizar"
                     tools:ignore="TouchTargetSizeCheck">
@@ -91,11 +92,11 @@
 
                 <Button
                     android:id="@+id/btnGenerar"
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
                     android:onClick="ClickGenerar"
                     android:text="@string/generarlista"
                     tools:ignore="TouchTargetSizeCheck">

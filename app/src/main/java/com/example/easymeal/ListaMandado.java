@@ -182,7 +182,6 @@ public class ListaMandado extends AppCompatActivity {
                 if(compoundButton.isChecked()){
                     tr.setBackgroundColor(Color.LTGRAY);
                     listaIngSeleccionados.add(listing.getIdIngrediente());
-                    System.out.println(listaIngSeleccionados);
 
                 }else{
                     tr.setBackgroundColor(0);

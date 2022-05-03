@@ -55,7 +55,6 @@ public class VistaHorario extends AppCompatActivity {
         tvAlmuerzoDomingo=findViewById(R.id.tvAlmuerzoDomingo);
         tvComidaDomingo= findViewById(R.id.tvComidaDomingo);
         tvCenaDomingo= findViewById(R.id.tvCenaDomingo);
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         final Calendar c = Calendar.getInstance();
         txtFecha.setText("SEMANA: " + (c.get(Calendar.WEEK_OF_YEAR) - 1));
         llenarVista();
