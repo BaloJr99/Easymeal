@@ -86,4 +86,14 @@
     <string name="m_o_d_i_f_i_c_a_r">M O D I F I C A R</string>
     <string name="finalizar">FINALIZAR COMPRA</string>
     <string name="horarioSemana">Horario Semanal</string>
+    <string name="prueba_gratuita">PLAN GRATUITO</string>
+    <string name="obtenerGratis">Plan Actual</string>
+    <string name="plan_premium">PLAN PREMIUM</string>
+    <string name="obtenerMensual">Mensual $10</string>
+    <string name="obtenerAnual">Anual $100</string>
+    <string name="vida_saludable">Vida Saludable</string>
+    <string name="pro">Pro</string>
+    <string name="vistaprevia">- Control de inventario de ingredientes \n\n- Control de sus Recetas \n\n- Generación de una lista de mandado \n\n- Generación de un Horario Semanal de comidas</string>
+    <string name="vista_premium">- Control de inventario de ingredientes \n\n- Control de sus Recetas \n\n- Generación de una lista de mandado \n\n- Generación de un Horario Semanal de comidas \n\n- Asesoría personalizada por parte de uno de nuestros nutriólogos \n\n- Creación de un Horario Nutricional (Modifica el del usuario)</string>
+    <string name="formas_de_pago">FORMAS DE PAGO</string>
 </resources>

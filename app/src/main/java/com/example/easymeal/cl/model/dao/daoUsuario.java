@@ -15,6 +15,7 @@ public class daoUsuario {
     Usuario u;
     ArrayList<Usuario> lista;
     SQLiteDatabase sql;
+    Cursor cr;
 
     public daoUsuario(Context c) {
         this.c = c;
@@ -32,11 +33,14 @@ public class daoUsuario {
             cv.put("apellidoPaterno", u.getApellidoPaterno());
             cv.put("apellidoMaterno", u.getApellidoMaterno());
             cv.put("fechaNacimiento", u.getFechaNacimiento());
+            cv.put("vidaSaludable", u.getVidaSaludable());
+            cv.put("fechaVencimiento", u.getFechaVencimiento());
             return (sql.insert("t_usuarios",null,cv)>0);
         }else{
             return false;
         }
     }
+
     public int buscar(String u){
         int x=0;
         lista=selectUsuario();
@@ -50,7 +54,7 @@ public class daoUsuario {
     }
     public ArrayList<Usuario> selectUsuario(){
         ArrayList<Usuario> lista =new ArrayList<>();
-        Cursor cr = sql.rawQuery("select * from t_usuarios",null);
+        cr = sql.rawQuery("select * from t_usuarios",null);
         if(cr != null && cr.moveToFirst()){
             do{
                 Usuario u = new Usuario();
@@ -69,7 +73,7 @@ public class daoUsuario {
     }
     public int login(String u, String p){
         int a = 0;
-        Cursor cr = sql.rawQuery("select * from t_usuarios",null);
+        cr = sql.rawQuery("select * from t_usuarios",null);
         if(cr!=null && cr.moveToFirst()){
             do{
                 if(cr.getString(1).equals(u) && cr.getString(2).equals(p)){
@@ -114,7 +118,7 @@ public class daoUsuario {
     }
 
     public ArrayList<Usuario> datosUsuario(Integer id){
-        Cursor cr = sql.rawQuery("SELECT * FROM t_usuarios WHERE idUsuario="+id,null);
+        cr = sql.rawQuery("SELECT * FROM t_usuarios WHERE idUsuario="+id,null);
         ArrayList<Usuario> lista = null;
         if(cr != null && cr.moveToFirst()){
             lista =new ArrayList<>();
@@ -132,5 +136,32 @@ public class daoUsuario {
             cr.close();
         }
         return lista;
+    }
+
+    public String plan(Integer id){
+        cr = sql.rawQuery("SELECT vidaSaludable from t_usuarios WHERE idUsuario="+id, null);
+        if(cr.moveToFirst()){
+            return cr.getString(0);
+        }
+        return "";
+    }
+
+    public void compraMensual(int id, String tipo, String fecha) {
+        ContentValues cv = new ContentValues();
+        cv.put("idUsuario",id);
+        cv.put("vidaSaludable", tipo);
+        cv.put("fechaVencimiento", fecha);
+        sql.update("t_usuarios",cv,"idUsuario="+id,null);
+    }
+
+    public String getFechaVencimiento(int id) {
+        cr = sql.rawQuery("SELECT fechaVencimiento, VidaSaludable from t_usuarios WHERE idUsuario="+id, null);
+        if(cr.moveToFirst()){
+
+            if(cr.getString(1).equals("Premium")){
+                return cr.getString(0);
+            }
+        }
+        return "";
     }
 }

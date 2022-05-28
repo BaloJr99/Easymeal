@@ -42,10 +42,15 @@
         <entry key="..\:/Users/baloc/Desktop/Easymeal/app/src/main/res/layout/main_toolbar.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/baloc/Desktop/Easymeal/app/src/main/res/layout/menu.xml" value="0.33" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/border.xml" value="0.2205" />
+        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/button_background.xml" value="0.2205" />
+        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/conversacion.xml" value="0.2105" />
+        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/conversacion_backgound.xml" value="0.2105" />
+        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/fondopp.xml" value="0.2205" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.2115" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_baseline_list_alt_24.xml" value="0.231" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_camara.xml" value="0.2115" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_dashboard.xml" value="0.1945" />
+        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_emoji.xml" value="0.2115" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_home.xml" value="0.145" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_horario.xml" value="0.145" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_lista.xml" value="0.2115" />
@@ -53,6 +58,9 @@
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_menu.xml" value="0.1945" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_more.xml" value="0.1945" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_semanal.xml" value="0.2205" />
+        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_star.xml" value="0.2115" />
+        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/ic_usuarios.xml" value="0.2115" />
+        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/drawable/pop_up.xml" value="0.2205" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_acerca_nosotros.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_agregar_lista.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_editar.xml" value="0.22447916666666667" />
@@ -66,12 +74,16 @@
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_recetas.xml" value="0.25" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_registro.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_tablero.xml" value="0.25" />
+        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_vida_saludable.xml" value="0.33" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_vista_horario.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/forma_pago.xml" value="0.2234375" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/horario-Balo1999.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/horario.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/main_nav_drawer.xml" value="0.25" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/main_toolbar.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/menu.xml" value="0.2401263823064771" />
+        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/pop_up.xml" value="0.25" />
+        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/prueba.xml" value="0.203125" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/recetas.xml" value="0.25" />
         <entry key="..\:/Users/septi/StudioProjects/Easymeal/app/src/main/res/layout/activity_main.xml" value="0.17481884057971014" />
         <entry key="..\:/Users/septi/StudioProjects/Easymeal/app/src/main/res/layout/activity_main2.xml" value="0.17481884057971014" />

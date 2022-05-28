@@ -51,6 +51,8 @@ ImageView fecha;
             u.setApellidoPaterno(ap.getText().toString());
             u.setApellidoMaterno(am.getText().toString());
             u.setFechaNacimiento(fn.getText().toString());
+            u.setVidaSaludable("Gratis");
+            u.setFechaVencimiento("");
             if(us.getText().toString().equals("")||cla.getText().toString().equals("")||nom.getText().toString().equals("")||ap.getText().toString().equals("")||am.getText().toString().equals("")||fn.getText().equals("--/--/--")){
                 Toast.makeText(Registro.this,"ERROR: CAMPOS VACIOS",Toast.LENGTH_LONG).show();
             }else if(dao.insertUsuario(u)){

@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "ERROR:Campos vacíos", Toast.LENGTH_LONG).show();
             } else if (dao.login(u, p1) == 1) {
                 Usuario us = dao.getUsuario(u, p1);
-                Toast.makeText(MainActivity.this, "BIENVENIDO " + us.getNombre(), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(view.getContext(), Menu.class);
                 intent.putExtra("idUsuario",us.getIdUsuario());
                 startActivity(intent);

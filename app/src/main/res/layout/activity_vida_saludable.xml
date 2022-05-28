@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VidaSaludable"
+    android:id="@+id/drawer_vidaSaludable">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp">
+
+        <include layout="@layout/main_toolbar">
+        </include>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:background="@drawable/pop_up"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/ic_usuarios"
+                tools:ignore="ContentDescription">
+
+            </ImageView>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_margin="10dp"
+                    android:textSize="20sp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Braulio Chávez Martínez"
+                    tools:ignore="NestedWeights">
+
+                </TextView>
+
+
+                <TextView
+                    android:layout_margin="10dp"
+                    android:textSize="20sp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Ingeniería en Sistemas Computacionales">
+
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+
+            android:text="VER HORARIO DE LA SEMANA">
+
+        </Button>
+
+        <TextView
+            android:background="@drawable/conversacion_backgound"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_emoji"
+                tools:ignore="ContentDescription">
+
+            </ImageView>
+            <LinearLayout
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="@drawable/conversacion">
+                <EditText
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_width="match_parent"
+                    android:inputType="text"
+                    android:layout_height="match_parent"
+                    tools:ignore="Autofill,LabelFor">
+
+                </EditText>
+            </LinearLayout>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_send"
+                tools:ignore="ContentDescription">
+
+            </ImageView>
+        </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white">
+
+        <include layout="@layout/main_nav_drawer">
+
+        </include>
+    </RelativeLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

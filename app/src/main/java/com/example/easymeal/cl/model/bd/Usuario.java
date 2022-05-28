@@ -1,7 +1,7 @@
 package com.example.easymeal.cl.model.bd;
 
 public class Usuario {
-    String username,clave,nombre,apellidoPaterno,apellidoMaterno,fechaNacimiento;
+    String username,clave,nombre,apellidoPaterno,apellidoMaterno,fechaNacimiento, vidaSaludable, fechaVencimiento;
     int idUsuario;
 
     public Usuario() {
@@ -78,5 +78,21 @@ public class Usuario {
 
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getVidaSaludable() {
+        return vidaSaludable;
+    }
+
+    public void setVidaSaludable(String vidaSaludable) {
+        this.vidaSaludable = vidaSaludable;
+    }
+
+    public String getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(String fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
     }
 }

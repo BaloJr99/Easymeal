@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="350dp"
+    android:layout_height="500dp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:id="@+id/pop_up"
+    android:background="@drawable/pop_up">
+
+    <HorizontalScrollView
+        android:layout_margin="10dp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/button_background">
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="40sp"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/harland"
+                    android:text="@string/prueba_gratuita">
+
+                </TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/niguella"
+
+                        android:text="@string/vistaprevia">
+
+                    </TextView>
+
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentBottom="true"
+
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:backgroundTint="@color/white"
+                        android:text="@string/obtenerGratis"
+                        android:textColor="@color/black">
+
+                    </Button>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginEnd="10dp"
+                android:layout_width="400dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/button_background">
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:gravity="center"
+                    android:textSize="40sp"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/harland"
+                    android:text="@string/plan_premium">
+
+                </TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="310dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/niguella"
+
+                        android:text="@string/vista_premium">
+
+                    </TextView>
+
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/btnObtenerMensual"
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:onClick="ClickCompraMensual"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:backgroundTint="@color/white"
+                        android:text="@string/obtenerMensual"
+                        android:textColor="@color/black"
+                        tools:ignore="ButtonStyle">
+
+                    </Button>
+
+                    <Button
+                        android:id="@+id/btnObtenerAnual"
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+
+                        android:layout_marginStart="220dp"
+                        android:layout_marginTop="10dp"
+
+                        android:onClick="ClickCompraAnual"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:backgroundTint="@color/white"
+                        android:text="@string/obtenerAnual"
+                        android:textColor="@color/black"
+                        tools:ignore="ButtonStyle">
+
+                    </Button>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>

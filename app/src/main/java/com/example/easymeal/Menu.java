@@ -1,5 +1,7 @@
 package com.example.easymeal;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -8,20 +10,40 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.braintreepayments.api.dropin.DropInActivity;
+import com.braintreepayments.api.dropin.DropInRequest;
+import com.braintreepayments.api.dropin.DropInResult;
+import com.braintreepayments.api.models.PaymentMethodNonce;
 import com.example.easymeal.Excepciones.MisExcepciones;
 import com.example.easymeal.cl.model.bd.Compras;
 import com.example.easymeal.cl.model.bd.Usuario;
 import com.example.easymeal.cl.model.dao.ComprasDao;
 import com.example.easymeal.cl.model.dao.daoUsuario;
+import com.example.easymeal.getToken.AsyncResponse;
+import com.example.easymeal.getToken.GetToken;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -34,20 +56,37 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
-public class Menu extends AppCompatActivity {
+public class Menu extends AppCompatActivity  implements AsyncResponse{
 
+    private static final int REQUEST_CODE = 1234;
     //Inicializamos variables
     DrawerLayout dl;
+    Dialog dialog;
+
+    final String API_GET_CHEKOUT = "http://192.168.0.9/braintree/checkout.php";
+
+    String token, amount;
+    HashMap<String, String> paramsHash;
 
     static int id;
 
     daoUsuario dao;
     Usuario u;
     TextView nombreusuario;
+    ImageButton paymentButton;
 
     private LineChart lineChart;
     private EditText etFecha;
@@ -56,14 +95,15 @@ public class Menu extends AppCompatActivity {
     private ArrayList<Compras> listaCompras;
     private ComprasDao compraDao;
     private Compras compras;
+    private TextView paymentTV;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.menu);
-
 
         //Asignamos variable
         dl = findViewById(R.id.drawer_menu);
@@ -76,8 +116,29 @@ public class Menu extends AppCompatActivity {
         id = b.getInt("idUsuario");
 
         dao = new daoUsuario(this);
+        String fecha = dao.getFechaVencimiento(id);
+        if(!fecha.equals("")){
+            LocalDate dateBefore = LocalDate.now();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+            LocalDate dateAfter = null;
+            try {
+                dateAfter = sdf.parse(fecha).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            long days = ChronoUnit.DAYS.between(dateBefore, dateAfter);
+            if(days < 7 && days > 1){
+                Toast.makeText(this, "Le quedan " + days + " dias de suscripción", Toast.LENGTH_SHORT).show();
+            }else if(days == 1){
+                Toast.makeText(this, "Le queda " + days + " día de suscripción", Toast.LENGTH_SHORT).show();
+            }else if(days == 0){
+                Toast.makeText(this, "Su suscripción ha vencido favor de renovarla", Toast.LENGTH_SHORT).show();
+                dao.compraMensual(id, "Gratis", "");
+            }
+        }
         u = dao.getUsuarioById(id);
-        nombreusuario.setText("BIENVENIDO " + u.getNombre() + " " + u.getApellidoPaterno());
 
         compraDao = new ComprasDao();
         compraDao.comprasDao(this);
@@ -143,6 +204,137 @@ public class Menu extends AppCompatActivity {
         redirectActivity(this, AcercaNosotros.class, "");
     }
 
+    public void ClickNutricionista(View view) {
+        //Redireccionamos actividad a acerca de nosotros
+        String tipoCuenta = dao.plan(id);
+        if(tipoCuenta.equals("Gratis")){
+            dialog = new Dialog(this);
+            dialog.setContentView(R.layout.pop_up);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+        }else{
+            redirectActivity(this, VidaSaludable.class, "");
+        }
+    }
+
+    public void ClickCompraMensual(View view){
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.forma_pago);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+        amount = "10";
+
+        new GetToken(this, this, this).execute();
+
+        paymentButton = dialog.findViewById(R.id.btnPaypal);
+        paymentTV = dialog.findViewById(R.id.idTVStatus);
+
+        paymentButton.setOnClickListener(view1 -> {
+            DropInRequest dropInRequest = new DropInRequest().clientToken(token);
+            startActivityForResult(dropInRequest.getIntent(this), REQUEST_CODE);
+        });
+    }
+
+    public void ClickCompraAnual(View view){
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.forma_pago);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+        amount = "100";
+
+        new GetToken(this, this, this).execute();;
+
+        paymentButton = dialog.findViewById(R.id.btnPaypal);
+        paymentTV = dialog.findViewById(R.id.idTVStatus);
+        paymentButton.setOnClickListener(view1 -> {
+            DropInRequest dropInRequest = new DropInRequest().clientToken(token);
+            startActivityForResult(dropInRequest.getIntent(this), REQUEST_CODE);
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                DropInResult result = data.getParcelableExtra(DropInResult.EXTRA_DROP_IN_RESULT);
+                PaymentMethodNonce nonce = result.getPaymentMethodNonce();
+                String strNonce = nonce.getNonce();
+
+                paramsHash = new HashMap<>();
+                paramsHash.put("amount", amount);
+                paramsHash.put("nonce", strNonce);
+
+                sendPayment();
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "User cancelled", Toast.LENGTH_SHORT).show();
+            } else {
+                Exception error = (Exception) data.getSerializableExtra(DropInActivity.EXTRA_ERROR);
+                Log.d("EDMT_ERROR", error.toString());
+            }
+        }
+    }
+
+    private void sendPayment(){
+        RequestQueue queue = Volley.newRequestQueue(Menu.this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, API_GET_CHEKOUT,
+                response -> {
+                    if(response.contains("Successful")){
+                        Toast.makeText(Menu.this, "Transaction successfull!", Toast.LENGTH_SHORT).show();
+                        dao = new daoUsuario(Menu.this);
+                        Calendar cal = Calendar.getInstance();
+                        int dia = cal.get(Calendar.DAY_OF_MONTH);
+                        int mes;
+                        int anio;
+                        if(amount.equals("10")){
+                            mes = cal.get(Calendar.MONTH) + 2;
+                        }else{
+                            mes = cal.get(Calendar.MONTH) + 1;
+                        }
+                        if(amount.equals("100")){
+                            anio = cal.get(Calendar.YEAR) + 1;
+                        }else{
+                            anio = cal.get(Calendar.YEAR);
+                        }
+                        dao.compraMensual(id, "Premium", dia + "/" + mes + "/" + anio);
+
+                        redirectActivity(this, VidaSaludable.class, "");
+
+                    }else{
+                        Toast.makeText(Menu.this, "Transaction failed!", Toast.LENGTH_SHORT).show();
+                    }
+                    Log.d("EDMT_LOG", response);
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("EDMT_LOG", error.toString());
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                if(paramsHash == null) return null;
+                Map<String, String> params = new HashMap<>();
+                for(String key: paramsHash.keySet()){
+                    params.put(key, paramsHash.get(key));
+                }
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+
+        queue.add(stringRequest);
+    }
+
     public void ClickSalir(View view) {
         //Cerramos app
         logout(this);
@@ -179,7 +371,6 @@ public class Menu extends AppCompatActivity {
 
     public static void redirectActivity(Activity activity, Class aClass, String tipo) {
         //Inicializamos el intento
-
         Intent intent = new Intent(activity, aClass);
         intent.putExtra("idUsuario", id);
         intent.putExtra("tipo", tipo);
@@ -350,6 +541,26 @@ public class Menu extends AppCompatActivity {
             }else {
                 Toast.makeText(this, "Ocurrio un error al modificar", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    @Override
+    public void processFinish(String output) {
+        this.token = output;
+        if(token != null || !token.equals("")){
+            paymentTV.setText("CONECTANDO CON EL SERVIDOR");
+            new CountDownTimer(1000, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+
+                }
+
+                public void onFinish() {
+                    paymentTV.setText("CONECTADO");
+                }
+            }.start();
+        }else{
+            paymentTV.setText("FALLO LA CONEXION CON EL SERVIDOR");
         }
     }
 }

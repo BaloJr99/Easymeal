@@ -1,34 +1,58 @@
 package com.example.easymeal;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.braintreepayments.api.dropin.DropInActivity;
+import com.braintreepayments.api.dropin.DropInRequest;
+import com.braintreepayments.api.dropin.DropInResult;
+import com.braintreepayments.api.models.PaymentMethodNonce;
 import com.example.easymeal.cl.model.bd.Preparaciones;
 import com.example.easymeal.cl.model.bd.Receta;
 import com.example.easymeal.cl.model.bd.RecetaPreparacion;
 import com.example.easymeal.cl.model.dao.PreparacionesDao;
 import com.example.easymeal.cl.model.dao.RecetaDao;
 import com.example.easymeal.cl.model.dao.RecetaPreparacionDao;
+import com.example.easymeal.cl.model.dao.daoUsuario;
+import com.example.easymeal.getToken.AsyncResponse;
+import com.example.easymeal.getToken.GetToken;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Horario extends AppCompatActivity implements View.OnClickListener {
+public class Horario extends AppCompatActivity implements View.OnClickListener, AsyncResponse {
     //Inicializamo variable
     DrawerLayout dl;
     ImageView fecha;
@@ -69,6 +93,21 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
             "AlmuerzoViernes", "ComidaViernes", "CenaViernes",
             "AlmuerzoSabado", "ComidaSabado", "CenaSabado",
             "AlmuerzoDomingo", "ComidaDomingo", "CenaDomingo"};
+
+    ImageButton paymentButton;
+    private TextView paymentTV;
+
+    Dialog dialog;
+
+    private static final int REQUEST_CODE = 1234;
+    final String API_GET_CHEKOUT = "http://192.168.0.10/braintree/checkout.php";
+
+    String token, amount;
+    HashMap<String, String> paramsHash;
+
+    static int id;
+
+    daoUsuario dao;
 
 
     @Override
@@ -134,6 +173,11 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
         fecha.setOnClickListener(this);
         llenarSpinners();
 
+        Bundle b = getIntent().getExtras();
+        id = b.getInt("idUsuario");
+
+        dao = new daoUsuario(this);
+
     }
 
     public void ClickMenu(View v){
@@ -191,11 +235,164 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
         Menu.logout(this);
     }
 
+    public void ClickNutricionista(View view) {
+        //Redireccionamos actividad a acerca de nosotros
+        String tipoCuenta = dao.plan(id);
+        if(tipoCuenta.equals("Gratis")){
+            dialog = new Dialog(this);
+            dialog.setContentView(R.layout.pop_up);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+        }else{
+
+            Menu.redirectActivity(this, VidaSaludable.class, "");
+        }
+    }
+
+    public void ClickCompraMensual(View view){
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.forma_pago);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+        amount = "10";
+
+        new GetToken(this, this, this).execute();
+
+        paymentButton = dialog.findViewById(R.id.btnPaypal);
+        paymentTV = dialog.findViewById(R.id.idTVStatus);
+
+        paymentButton.setOnClickListener(view1 -> {
+            DropInRequest dropInRequest = new DropInRequest().clientToken(token);
+            startActivityForResult(dropInRequest.getIntent(this), REQUEST_CODE);
+        });
+    }
+
+    public void ClickCompraAnual(View view){
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.forma_pago);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+        amount = "100";
+
+        new GetToken(this, this, this).execute();;
+
+        paymentButton = dialog.findViewById(R.id.btnPaypal);
+        paymentTV = dialog.findViewById(R.id.idTVStatus);
+
+        paymentButton.setOnClickListener(view1 -> {
+            DropInRequest dropInRequest = new DropInRequest().clientToken(token);
+            startActivityForResult(dropInRequest.getIntent(this), REQUEST_CODE);
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                DropInResult result = data.getParcelableExtra(DropInResult.EXTRA_DROP_IN_RESULT);
+                PaymentMethodNonce nonce = result.getPaymentMethodNonce();
+                String strNonce = nonce.getNonce();
+
+                paramsHash = new HashMap<>();
+                paramsHash.put("amount", amount);
+                paramsHash.put("nonce", strNonce);
+
+                sendPayment();
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "User cancelled", Toast.LENGTH_SHORT).show();
+            } else {
+                Exception error = (Exception) data.getSerializableExtra(DropInActivity.EXTRA_ERROR);
+                Log.d("EDMT_ERROR", error.toString());
+            }
+        }
+    }
+
+    private void sendPayment(){
+        RequestQueue queue = Volley.newRequestQueue(Horario.this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, API_GET_CHEKOUT,
+                response -> {
+                    if(response.contains("Successful")){
+                        Toast.makeText(Horario.this, "Transaction successfull!", Toast.LENGTH_SHORT).show();
+                        dao = new daoUsuario(Horario.this);
+                        Calendar cal = Calendar.getInstance();
+                        int dia = cal.get(Calendar.DAY_OF_MONTH);
+                        int mes;
+                        int anio;
+                        if(amount.equals("10")){
+                            mes = cal.get(Calendar.DAY_OF_MONTH) + 1;
+                        }else{
+                            mes = cal.get(Calendar.DAY_OF_MONTH);
+                        }
+                        if(amount.equals("100")){
+                            anio = cal.get(Calendar.YEAR) + 1;
+                        }else{
+                            anio = cal.get(Calendar.YEAR);
+                        }
+                        dao.compraMensual(id, "Premium", dia + "/" + mes + "/" + anio);
+
+                        Menu.redirectActivity(this, VidaSaludable.class, "");
+
+                    }else{
+                        Toast.makeText(Horario.this, "Transaction failed!", Toast.LENGTH_SHORT).show();
+                    }
+                    Log.d("EDMT_LOG", response);
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("EDMT_LOG", error.toString());
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                if(paramsHash == null) return null;
+                Map<String, String> params = new HashMap<>();
+                for(String key: paramsHash.keySet()){
+                    params.put(key, paramsHash.get(key));
+                }
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+
+        queue.add(stringRequest);
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
         //Cerramos Drawer
         Menu.closeDrawer(dl);
+    }
+
+    @Override
+    public void processFinish(String output) {
+        this.token = output;
+        if(token != null || !token.equals("")){
+            paymentTV.setText("CONECTANDO CON EL SERVIDOR");
+            new CountDownTimer(1000, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+
+                }
+
+                public void onFinish() {
+                    paymentTV.setText("CONECTADO");
+                }
+            }.start();
+        }else{
+            paymentTV.setText("FALLO LA CONEXION CON EL SERVIDOR");
+        }
     }
 
     @Override
@@ -221,6 +418,7 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
                                 View v1 = layout1.getChildAt(j);
                                 View v2 = layout1.getChildAt((j + 1));
                                 if (v1 instanceof Spinner) {
+                                    System.out.println("Spinner: " + spin);
                                     for(Object[] o: listapre){
                                         if(datos[spin].equals(o[0])){
                                             ((Spinner) v1).setSelection(Integer.parseInt(o[1].toString()));
@@ -230,7 +428,6 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
                                     spin++;
                                 }
                             }
-
                         }
                     }
                     btnModificar.setEnabled(true);
@@ -285,7 +482,6 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
                     if (v1 instanceof Spinner) {
                         if(((Spinner) v1).getSelectedItemPosition() != 0){
                             pre.setTipoComida(datos[flag]);
-                            flag ++;
 
                             pre.setfechaPreparacion(txtFecha.getText().toString());
                             int resultado = predao.insertarPreparacion(pre);
@@ -298,14 +494,14 @@ public class Horario extends AppCompatActivity implements View.OnClickListener {
                                     recpre.setCantidadAPreparar(1);
                                 }
                                 recpredao.insertarRecetaPreparacion(recpre);
-                                Toast.makeText(this,accion + " exitosamente",Toast.LENGTH_SHORT).show();
                             }
                         }
+                        flag ++;
                     }
                 }
-
             }
         }
+        Toast.makeText(this,accion + " exitosamente",Toast.LENGTH_SHORT).show();
         limpiarCampos();
     }
 
