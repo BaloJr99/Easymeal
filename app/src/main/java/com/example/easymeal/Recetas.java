@@ -401,9 +401,9 @@ public class Recetas extends AppCompatActivity implements AsyncResponse {
                         int mes;
                         int anio;
                         if(amount.equals("10")){
-                            mes = cal.get(Calendar.DAY_OF_MONTH) + 1;
+                            mes = cal.get(Calendar.MONTH) + 2;
                         }else{
-                            mes = cal.get(Calendar.DAY_OF_MONTH);
+                            mes = cal.get(Calendar.MONTH) + 1;
                         }
                         if(amount.equals("100")){
                             anio = cal.get(Calendar.YEAR) + 1;
