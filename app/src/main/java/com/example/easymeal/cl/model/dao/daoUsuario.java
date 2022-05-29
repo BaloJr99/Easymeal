@@ -16,6 +16,7 @@ public class daoUsuario {
     ArrayList<Usuario> lista;
     SQLiteDatabase sql;
     Cursor cr;
+    ContentValues cv;
 
     public daoUsuario(Context c) {
         this.c = c;
@@ -26,7 +27,7 @@ public class daoUsuario {
 
     public boolean insertUsuario(Usuario u){
         if(buscar(u.getUsername())==0){
-            ContentValues cv = new ContentValues();
+            cv = new ContentValues();
             cv.put("username", u.getUsername());
             cv.put("clave", u.getClave());
             cv.put("nombre", u.getNombre());
@@ -103,7 +104,7 @@ public class daoUsuario {
         return null;
     }
     public boolean updateUsuario(Usuario u){
-        ContentValues cv = new ContentValues();
+        cv = new ContentValues();
         cv.put("idUsuario",u.getIdUsuario());
         //cv.put("username", u.getUsername());
         cv.put("nombre", u.getNombre());
@@ -147,7 +148,7 @@ public class daoUsuario {
     }
 
     public void compraMensual(int id, String tipo, String fecha) {
-        ContentValues cv = new ContentValues();
+        cv = new ContentValues();
         cv.put("idUsuario",id);
         cv.put("vidaSaludable", tipo);
         cv.put("fechaVencimiento", fecha);
@@ -161,6 +162,31 @@ public class daoUsuario {
             if(cr.getString(1).equals("Premium")){
                 return cr.getString(0);
             }
+        }
+        return "";
+    }
+
+    public void asignarNutriologo(int nutriologo, int usuario) {
+        if(!tieneNutriologo(usuario)){
+            cv = new ContentValues();
+            cv.put("idNutriologo", nutriologo);
+            cv.put("idUsuario", usuario);
+            sql.insert("t_vidaSaludable",null,cv);
+        }
+    }
+
+    private boolean tieneNutriologo(int usuario){
+        cr = sql.rawQuery("SELECT * from t_vidaSaludable WHERE idUsuario="+usuario, null);
+        if(cr.moveToFirst()){
+            return true;
+        }
+        return false;
+    }
+
+    public String getNutriologo(int id) {
+        cr = sql.rawQuery("SELECT idNutriologo from t_vidaSaludable WHERE idUsuario="+id, null);
+        if(cr.moveToFirst()){
+            return cr.getString(0);
         }
         return "";
     }

@@ -1,5 +1,6 @@
 package com.example.easymeal;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,6 +56,9 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -116,6 +120,8 @@ public class Menu extends AppCompatActivity  implements AsyncResponse{
         id = b.getInt("idUsuario");
 
         dao = new daoUsuario(this);
+        u = dao.getUsuarioById(id);
+        nombreusuario.setText("Bienvenido " + u.getNombre());
         String fecha = dao.getFechaVencimiento(id);
         if(!fecha.equals("")){
             LocalDate dateBefore = LocalDate.now();
@@ -277,6 +283,30 @@ public class Menu extends AppCompatActivity  implements AsyncResponse{
         }
     }
 
+    private void obtenerNutriologo(){
+        String URL = "http://192.168.0.9/easymeal/asignarNutriologo.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, response -> {
+            if(!response.trim().isEmpty()){
+                dao = new daoUsuario(Menu.this);
+                dao.asignarNutriologo(Integer.parseInt(response), id);
+                Toast.makeText(Menu.this, "Se le asigno un nutriologo exitosamente", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(Menu.this, "Ocurrio un error al asignar nutriologo \npronto se le asignara uno", Toast.LENGTH_SHORT).show();
+            }
+        }, error -> Toast.makeText(Menu.this, error.toString(), Toast.LENGTH_SHORT).show()){
+            @NonNull
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("accion", "asignando");
+                return parametros;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
     private void sendPayment(){
         RequestQueue queue = Volley.newRequestQueue(Menu.this);
 
@@ -300,7 +330,7 @@ public class Menu extends AppCompatActivity  implements AsyncResponse{
                             anio = cal.get(Calendar.YEAR);
                         }
                         dao.compraMensual(id, "Premium", dia + "/" + mes + "/" + anio);
-
+                        obtenerNutriologo();
                         redirectActivity(this, VidaSaludable.class, "");
 
                     }else{

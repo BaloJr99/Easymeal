@@ -1,5 +1,6 @@
 package com.example.easymeal;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -309,6 +310,30 @@ public class Horario extends AppCompatActivity implements View.OnClickListener, 
             }
         }
     }
+    private void obtenerNutriologo(){
+        String URL = "http://192.168.0.9/easymeal/asignarNutriologo.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, response -> {
+            if(!response.trim().isEmpty()){
+                dao = new daoUsuario(this);
+                dao.asignarNutriologo(Integer.parseInt(response), id);
+                Toast.makeText(this, "Se le asigno un nutriologo exitosamente", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(this, "Ocurrio un error al asignar nutriologo \npronto se le asignara uno", Toast.LENGTH_SHORT).show();
+            }
+        }, error -> Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show()){
+            @NonNull
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("accion", "asignando");
+                return parametros;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
 
     private void sendPayment(){
         RequestQueue queue = Volley.newRequestQueue(Horario.this);
@@ -324,7 +349,7 @@ public class Horario extends AppCompatActivity implements View.OnClickListener, 
                         int anio;
                         if(amount.equals("10")){
                             mes = cal.get(Calendar.MONTH) + 2;
-                        }else{
+                        }else {
                             mes = cal.get(Calendar.MONTH) + 1;
                         }
                         if(amount.equals("100")){
@@ -333,7 +358,7 @@ public class Horario extends AppCompatActivity implements View.OnClickListener, 
                             anio = cal.get(Calendar.YEAR);
                         }
                         dao.compraMensual(id, "Premium", dia + "/" + mes + "/" + anio);
-
+                        obtenerNutriologo();
                         Menu.redirectActivity(this, VidaSaludable.class, "");
 
                     }else{
