@@ -1,14 +1,16 @@
 package com.example.easymeal;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +18,18 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.easymeal.cl.model.bd.Usuario;
 import com.example.easymeal.cl.model.dao.daoUsuario;
+import com.example.easymeal.mensajeria.AdapterMensaje;
+import com.example.easymeal.mensajeria.Mensaje;
+import com.example.easymeal.mensajeria.MensajeEnviar;
+import com.example.easymeal.mensajeria.MensajeRecibir;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,12 +41,18 @@ public class VidaSaludable extends AppCompatActivity {
 
     DrawerLayout dl;
     TextView tvTitulo, tvNombre;
-    LinearLayout tvChat;
+    RecyclerView tvChat;
+    private String nombre;
 
     daoUsuario dao;
+    Usuario u;
     EditText etMensaje;
 
     int id;
+
+    private AdapterMensaje adapterMensaje;
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +63,62 @@ public class VidaSaludable extends AppCompatActivity {
         tvNombre = findViewById(R.id.tvNombre);
         tvTitulo = findViewById(R.id.titulo);
         etMensaje = findViewById(R.id.etMensaje);
+
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("chat");
+
+        adapterMensaje = new AdapterMensaje(this);
+        LinearLayoutManager l = new LinearLayoutManager(this);
+        tvChat.setLayoutManager(l);
+        tvChat.setAdapter(adapterMensaje);
+
+        adapterMensaje.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                setScrollBar();
+            }
+        });
+
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                MensajeRecibir m = snapshot.getValue(MensajeRecibir.class);
+                adapterMensaje.addMensaje(m);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             id = bundle.getInt("idUsuario");
+            nombre = new daoUsuario(this).getUsuarioById(id).getNombre();
         }
         llenarDatosNutriologo();
 
+    }
+
+    private void setScrollBar(){
+        tvChat.scrollToPosition(adapterMensaje.getItemCount() - 1);
     }
 
     private void llenarDatosNutriologo() {
@@ -73,9 +142,11 @@ public class VidaSaludable extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> parametros = new HashMap<>();
-                parametros.put("accion", "buscando");
+                parametros.put("accion", "asignando");
+                parametros.put("idCliente", String.valueOf(id));
                 dao = new daoUsuario(VidaSaludable.this);
-                parametros.put("idNutriologo", dao.getNutriologo(id));
+                u = dao.getUsuarioById(id);
+                parametros.put("nombre", u.getNombre() + " " + u.getApellidoPaterno() + " " + u.getApellidoMaterno());
                 return parametros;
             }
         };
@@ -156,6 +227,7 @@ public class VidaSaludable extends AppCompatActivity {
     }
 
     public void ClickSend(View view) {
-
+        databaseReference.push().setValue(new MensajeEnviar(etMensaje.getText().toString(), nombre, "1", ServerValue.TIMESTAMP));
+        etMensaje.setText("");
     }
 }

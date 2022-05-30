@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "143507006507",
+    "firebase_url": "https://easymeal-7b75c-default-rtdb.firebaseio.com",
+    "project_id": "easymeal-7b75c",
+    "storage_bucket": "easymeal-7b75c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143507006507:android:a705b2b86359f967a8366e",
+        "android_client_info": {
+          "package_name": "com.example.easymeal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "143507006507-8njllokqtojua0jrln70t86fhn5a88cn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg3E6WWmeE3zsAS2Req_KtkXzq2OdMKik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "143507006507-8njllokqtojua0jrln70t86fhn5a88cn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

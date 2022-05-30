@@ -41,6 +41,7 @@ import com.braintreepayments.api.dropin.DropInRequest;
 import com.braintreepayments.api.dropin.DropInResult;
 import com.braintreepayments.api.models.PaymentMethodNonce;
 import com.example.easymeal.cl.model.bd.Ingrediente;
+import com.example.easymeal.cl.model.bd.Usuario;
 import com.example.easymeal.cl.model.dao.IngredienteDao;
 import com.example.easymeal.cl.model.dao.daoUsuario;
 import com.example.easymeal.getToken.AsyncResponse;
@@ -61,7 +62,7 @@ public class ListaMandado extends AppCompatActivity implements AsyncResponse {
     IngredienteDao ingDao;
     ArrayList<Ingrediente> listaIng;
     ArrayList<Integer> listaIngSeleccionados = new ArrayList<>();
-
+    Usuario u;
     TableLayout tling;
     TableRow tring;
 
@@ -266,6 +267,10 @@ public class ListaMandado extends AppCompatActivity implements AsyncResponse {
             protected Map<String, String> getParams() {
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("accion", "asignando");
+                parametros.put("idCliente", String.valueOf(id));
+                dao = new daoUsuario(ListaMandado.this);
+                u = dao.getUsuarioById(id);
+                parametros.put("nombre", u.getNombre() + " " + u.getApellidoPaterno() + " " + u.getApellidoMaterno());
                 return parametros;
             }
         };

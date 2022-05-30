@@ -32,6 +32,7 @@ import com.braintreepayments.api.dropin.DropInActivity;
 import com.braintreepayments.api.dropin.DropInRequest;
 import com.braintreepayments.api.dropin.DropInResult;
 import com.braintreepayments.api.models.PaymentMethodNonce;
+import com.example.easymeal.cl.model.bd.Usuario;
 import com.example.easymeal.cl.model.dao.daoUsuario;
 import com.example.easymeal.getToken.AsyncResponse;
 import com.example.easymeal.getToken.GetToken;
@@ -47,7 +48,7 @@ public class AcercaNosotros extends AppCompatActivity implements AsyncResponse {
     VideoView video;
     MediaController mc;
     int position = 0;
-
+    Usuario u;
     ImageButton paymentButton;
     private TextView paymentTV;
 
@@ -229,6 +230,7 @@ public class AcercaNosotros extends AppCompatActivity implements AsyncResponse {
             }
         }
     }
+
     private void obtenerNutriologo(){
         String URL = "http://192.168.0.9/easymeal/asignarNutriologo.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, response -> {
@@ -245,6 +247,10 @@ public class AcercaNosotros extends AppCompatActivity implements AsyncResponse {
             protected Map<String, String> getParams() {
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("accion", "asignando");
+                parametros.put("idCliente", String.valueOf(id));
+                dao = new daoUsuario(AcercaNosotros.this);
+                u = dao.getUsuarioById(id);
+                parametros.put("nombre", u.getNombre() + " " + u.getApellidoPaterno() + " " + u.getApellidoMaterno());
                 return parametros;
             }
         };

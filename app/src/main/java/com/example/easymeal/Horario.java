@@ -41,6 +41,7 @@ import com.braintreepayments.api.models.PaymentMethodNonce;
 import com.example.easymeal.cl.model.bd.Preparaciones;
 import com.example.easymeal.cl.model.bd.Receta;
 import com.example.easymeal.cl.model.bd.RecetaPreparacion;
+import com.example.easymeal.cl.model.bd.Usuario;
 import com.example.easymeal.cl.model.dao.PreparacionesDao;
 import com.example.easymeal.cl.model.dao.RecetaDao;
 import com.example.easymeal.cl.model.dao.RecetaPreparacionDao;
@@ -59,7 +60,7 @@ public class Horario extends AppCompatActivity implements View.OnClickListener, 
     ImageView fecha;
     TextView txtFecha;
     int dia,mes,anio;
-
+    Usuario u;
     Spinner lunes_alm,lunes_com,lun_cen,
             martes_alm,martes_com,martes_cen,
             miercoles_alm,miercoles_com, miercoles_cen,
@@ -326,6 +327,10 @@ public class Horario extends AppCompatActivity implements View.OnClickListener, 
             protected Map<String, String> getParams() {
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("accion", "asignando");
+                parametros.put("idCliente", String.valueOf(id));
+                dao = new daoUsuario(Horario.this);
+                u = dao.getUsuarioById(id);
+                parametros.put("nombre", u.getNombre() + " " + u.getApellidoPaterno() + " " + u.getApellidoMaterno());
                 return parametros;
             }
         };

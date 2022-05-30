@@ -29,6 +29,7 @@ import com.braintreepayments.api.dropin.DropInActivity;
 import com.braintreepayments.api.dropin.DropInRequest;
 import com.braintreepayments.api.dropin.DropInResult;
 import com.braintreepayments.api.models.PaymentMethodNonce;
+import com.example.easymeal.cl.model.bd.Usuario;
 import com.example.easymeal.cl.model.dao.PreparacionesDao;
 import com.example.easymeal.cl.model.dao.daoUsuario;
 import com.example.easymeal.getToken.AsyncResponse;
@@ -51,6 +52,7 @@ public class VistaHorario extends AppCompatActivity implements AsyncResponse {
             tvAlmuerzoSabado,tvComidaSabado,tvCenaSabado,
             tvAlmuerzoDomingo,tvComidaDomingo,tvCenaDomingo;
     PreparacionesDao predao;
+    Usuario u;
 
     ImageButton paymentButton;
     private TextView paymentTV;
@@ -328,6 +330,10 @@ public class VistaHorario extends AppCompatActivity implements AsyncResponse {
             protected Map<String, String> getParams() {
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("accion", "asignando");
+                parametros.put("idCliente", String.valueOf(id));
+                dao = new daoUsuario(VistaHorario.this);
+                u = dao.getUsuarioById(id);
+                parametros.put("nombre", u.getNombre() + " " + u.getApellidoPaterno() + " " + u.getApellidoMaterno());
                 return parametros;
             }
         };

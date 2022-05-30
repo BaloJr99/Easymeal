@@ -74,7 +74,7 @@
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_recetas.xml" value="0.25" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_registro.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_tablero.xml" value="0.25" />
-        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_vida_saludable.xml" value="0.33" />
+        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_vida_saludable.xml" value="0.2812006319115324" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/activity_vista_horario.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/emoji_text_view.xml" value="0.28986486486486485" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/forma_pago.xml" value="0.2234375" />
@@ -82,6 +82,7 @@
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/horario.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/main_nav_drawer.xml" value="0.25" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/main_toolbar.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/mensaje.xml" value="0.33" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/menu.xml" value="0.2401263823064771" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/pop_up.xml" value="0.25" />
         <entry key="..\:/Users/baloc/OneDrive/Documentos/AndroidProjects/Easymeal/app/src/main/res/layout/prueba.xml" value="0.203125" />

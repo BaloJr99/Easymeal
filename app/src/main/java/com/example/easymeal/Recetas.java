@@ -40,6 +40,7 @@ import com.example.easymeal.cl.model.bd.Ingrediente;
 import com.example.easymeal.cl.model.bd.IngredienteReceta;
 import com.example.easymeal.cl.model.bd.Receta;
 
+import com.example.easymeal.cl.model.bd.Usuario;
 import com.example.easymeal.cl.model.dao.IngredienteDao;
 import com.example.easymeal.cl.model.dao.RecetaDao;
 
@@ -66,6 +67,7 @@ public class Recetas extends AppCompatActivity implements AsyncResponse {
     ArrayList<Receta> busqueda;
     Spinner ing;
     Integer idReceta, idIngrediente;
+    Usuario u;
 
     ImageButton paymentButton;
     private TextView paymentTV;
@@ -404,6 +406,10 @@ public class Recetas extends AppCompatActivity implements AsyncResponse {
             protected Map<String, String> getParams() {
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("accion", "asignando");
+                parametros.put("idCliente", String.valueOf(id));
+                udao = new daoUsuario(Recetas.this);
+                u = udao.getUsuarioById(id);
+                parametros.put("nombre", u.getNombre() + " " + u.getApellidoPaterno() + " " + u.getApellidoMaterno());
                 return parametros;
             }
         };

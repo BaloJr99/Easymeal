@@ -58,6 +58,7 @@ public class MostrarU extends AppCompatActivity implements AsyncResponse {
     HashMap<String, String> paramsHash;
 
     static int id;
+    Usuario u;
 
     daoUsuario dao;
 
@@ -232,6 +233,10 @@ public class MostrarU extends AppCompatActivity implements AsyncResponse {
             protected Map<String, String> getParams() {
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("accion", "asignando");
+                parametros.put("idCliente", String.valueOf(id));
+                dao = new daoUsuario(MostrarU.this);
+                u = dao.getUsuarioById(id);
+                parametros.put("nombre", u.getNombre() + " " + u.getApellidoPaterno() + " " + u.getApellidoMaterno());
                 return parametros;
             }
         };
