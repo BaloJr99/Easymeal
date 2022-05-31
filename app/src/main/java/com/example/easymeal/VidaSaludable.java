@@ -125,7 +125,6 @@ public class VidaSaludable extends AppCompatActivity {
         String URL = "http://192.168.0.9/easymeal/asignarNutriologo.php";
         @SuppressLint("SetTextI18n") StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, response -> {
             if(!response.trim().isEmpty()){
-                System.out.println(response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     tvNombre.setText(jsonObject.getString("nombre") + " " + jsonObject.get("apellidoPaterno") + " " + jsonObject.get("apellidoMaterno"));
@@ -142,11 +141,9 @@ public class VidaSaludable extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> parametros = new HashMap<>();
-                parametros.put("accion", "asignando");
-                parametros.put("idCliente", String.valueOf(id));
+                parametros.put("accion", "buscando");
                 dao = new daoUsuario(VidaSaludable.this);
-                u = dao.getUsuarioById(id);
-                parametros.put("nombre", u.getNombre() + " " + u.getApellidoPaterno() + " " + u.getApellidoMaterno());
+                parametros.put("idNutriologo", dao.getNutriologo(id));
                 return parametros;
             }
         };

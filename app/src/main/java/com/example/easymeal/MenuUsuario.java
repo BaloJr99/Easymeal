@@ -49,7 +49,7 @@ public class MenuUsuario extends AppCompatActivity implements AsyncResponse {
     Dialog dialog;
 
     private static final int REQUEST_CODE = 1234;
-    final String API_GET_CHEKOUT = "http://192.168.0.10/braintree/checkout.php";
+    final String API_GET_CHEKOUT = "http://192.168.0.9/braintree/checkout.php";
 
     String token, amount;
     HashMap<String, String> paramsHash;
